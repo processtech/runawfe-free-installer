@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>ru.runa.wfe</groupId>
+  <artifactId>wfe-win-installer</artifactId>
+  <version>4.3.0</version>
+  <packaging>pom</packaging>
+  <name>RunaWFE application windows installer</name>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.github.stephenc.java-iso-tools</groupId>
+      <artifactId>iso9660-maven-plugin</artifactId>
+      <version>2.0.0</version>
+    </dependency>
+  </dependencies>
+
+  <properties>
+    <!-- Folder to locate zip files with different jboss versions -->
+    <zip.files.location>../../../..</zip.files.location>
+    <jdk.files.location>../../../../../jdk</jdk.files.location>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.7</version>
+        <executions>
+          <execution>
+            <id>create exe</id>
+            <phase>package</phase>
+            <configuration>
+              <target>
+
+                <mkdir dir="target/artifacts"/>
+
+                <ant antfile="ant_runtests.xml" target="test" inheritAll="false">
+                  <property name="appserver" value="jboss7"/>
+                  <property name="project.version" value="${project.version}"/>
+                  <property name="using.java.home" value="${java.home.7}"/>
+                </ant>
+                <ant antfile="ant_runtests.xml" target="test" inheritAll="false">
+                  <property name="appserver" value="wildfly"/>
+                  <property name="project.version" value="${project.version}"/>
+                  <property name="using.java.home" value="${java.home.8}"/>
+                </ant>
+
+                <ant antfile="ant_serverpack.xml" target="package" inheritAll="false">
+                  <property name="appserver" value="jboss7"/>
+                  <property name="project.version" value="${project.version}"/>
+                  <property name="using.java.home" value="${java.home.7}"/>
+                </ant>
+                <ant antfile="ant_serverpack.xml" target="package" inheritAll="false">
+                  <property name="appserver" value="wildfly"/>
+                  <property name="project.version" value="${project.version}"/>
+                  <property name="using.java.home" value="${java.home.8}"/>
+                </ant>
+
+                <exec executable="cmd" dir="../../gpd" failonerror="true">
+                  <arg line="/C ant -Dproject.version=${project.version}"/>
+                </exec>
+                <copy toDir="target/artifacts/gpd/32">
+                  <fileset dir="../../gpd/build">
+                    <include name="*.win32.x86.zip"/>
+                  </fileset>
+                </copy>
+                <copy toDir="target/artifacts/gpd/64">
+                  <fileset dir="../../gpd/build">
+                    <include name="*.win32.x86_64.zip"/>
+                  </fileset>
+                </copy>
+
+                <exec executable="cmd" dir="../../rtn" failonerror="true">
+                  <arg value="/C"/>
+                  <arg value="mvn clean package -Dappserver=jboss7 -Djboss.version=7 -Dproject.version=${project.version} -Dswt.artifactId=org.eclipse.swt.win32.win32.x86"/>
+                </exec>
+                <copy toDir="target/artifacts/rtn/32">
+                  <fileset dir="../../rtn/target">
+                    <include name="*.jar"/>
+                  </fileset>
+                  <fileset dir="../../rtn/src/main/assembly">
+                    <include name="*"/>
+                  </fileset>
+                </copy>
+
+                <exec executable="cmd" dir="../../rtn" failonerror="true">
+                  <arg value="/C"/>
+                  <arg value="mvn clean package -Dappserver=jboss7 -Djboss.version=7 -Dproject.version=${project.version} -Dswt.artifactId=org.eclipse.swt.win32.win32.x86_64"/>
+                </exec>
+                <copy toDir="target/artifacts/rtn/64">
+                  <fileset dir="../../rtn/target">
+                    <include name="*.jar"/>
+                  </fileset>
+                  <fileset dir="../../rtn/src/main/assembly">
+                    <include name="*"/>
+                  </fileset>
+                </copy>
+
+                <exec executable="cmd" dir="../../wfe/wfe-appserver" failonerror="true">
+                  <arg value="/C"/>
+                  <arg value="mvn clean"/>
+                </exec>
+                <exec executable="cmd" dir="../../wfe/wfe-app" failonerror="true">
+                  <arg value="/C"/>
+                  <arg value="mvn clean"/>
+                </exec>
+                <exec executable="cmd" dir="../../wfe/wfe-webservice-client" failonerror="true">
+                  <arg value="/C"/>
+                  <arg value="mvn clean -Dappserver=jboss7"/>
+                </exec>
+
+		<copy file="${jdk.files.location}\jre-7u80-windows-x64.exe" tofile="resources\jdk_setup.exe" overwrite="true"/>
+                <ant antfile="ant_buildinstaller.xml" target="makeInstaller" inheritAll="false">
+                  <property name="wfe.jdk.arch" value="64"/>
+                  <property name="appserver" value="jboss7"/>
+                  <property name="project.version" value="${project.version}"/>
+                  <property name="using.java.home" value="${java.home.7}"/>
+                </ant>
+
+		<copy file="${jdk.files.location}\jre-8u92-windows-x64.exe" tofile="resources\jdk_setup.exe" overwrite="true"/>
+                <ant antfile="ant_buildinstaller.xml" target="makeInstaller" inheritAll="false">
+                  <property name="wfe.jdk.arch" value="64"/>
+                  <property name="appserver" value="wildfly"/>
+                  <property name="project.version" value="${project.version}"/>
+                  <property name="using.java.home" value="${java.home.8}"/>
+                </ant>
+
+                <copy file="${jdk.files.location}\jre-7u80-windows-i586.exe" tofile="resources\jdk_setup.exe" overwrite="true"/>
+                <ant antfile="ant_buildinstaller.xml" target="makeInstaller" inheritAll="false">
+                  <property name="wfe.jdk.arch" value="32"/>
+                  <property name="appserver" value="jboss7"/>
+                  <property name="project.version" value="${project.version}"/>
+                  <property name="using.java.home" value="${java.home.7}"/>
+                </ant>
+
+                <copy file="${jdk.files.location}\jre-8u92-windows-i586.exe" tofile="resources\jdk_setup.exe" overwrite="true"/>
+                <ant antfile="ant_buildinstaller.xml" target="makeInstaller" inheritAll="false">
+                  <property name="wfe.jdk.arch" value="32"/>
+                  <property name="appserver" value="wildfly"/>
+                  <property name="project.version" value="${project.version}"/>
+                  <property name="using.java.home" value="${java.home.8}"/>
+                </ant>
+
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.7</version>
+        <executions>
+          <execution>
+            <id>add jdk files</id>
+            <phase>package</phase>
+            <configuration>
+              <target if="jdk.dir">
+                <copy todir="target/artifacts/Installer32/jboss7">
+                  <fileset dir="${jdk.dir}">
+                    <include name="jre-7*"/>
+                  </fileset>
+                </copy>
+                <replace file="target/artifacts/Installer32/jboss7/runawfe.ini"
+                  token="jdk-7u7-windows-i586.exe"
+                  value="jre-7u80-windows-i586.exe"
+                />
+                <replace file="target/artifacts/Installer32/jboss7/runawfe.ini"
+                  token="jdk-7u7-windows-x64.exe"
+                  value="jre-7u80-windows-x64.exe"
+                />
+
+                <copy todir="target/artifacts/Installer64/jboss7">
+                  <fileset dir="${jdk.dir}">
+                    <include name="jre-7*"/>
+                  </fileset>
+                </copy>
+                <delete file="target/artifacts/Installer64/jboss7/jre-7u80-windows-i586.exe"/>
+                <replace file="target/artifacts/Installer64/jboss7/runawfe.ini"
+                  token="jdk-7u7-windows-i586.exe"
+                  value="jre-7u80-windows-x64.exe"
+                />
+                <replace file="target/artifacts/Installer64/jboss7/runawfe.ini"
+                  token="jdk-7u7-windows-x64.exe"
+                  value="jre-7u80-windows-x64.exe"
+                />
+
+                <copy todir="target/artifacts/Installer32/wildfly">
+                  <fileset dir="${jdk.dir}">
+                    <include name="jre-8*"/>
+                  </fileset>
+                </copy>
+                <replace file="target/artifacts/Installer32/wildfly/runawfe.ini"
+                  token="jdk-7u7-windows-i586.exe"
+                  value="jre-8u92-windows-i586.exe"
+                />
+                <replace file="target/artifacts/Installer32/wildfly/runawfe.ini"
+                  token="jdk-7u7-windows-x64.exe"
+                  value="jre-8u92-windows-x64.exe"
+                />
+
+                <copy todir="target/artifacts/Installer64/wildfly">
+                  <fileset dir="${jdk.dir}">
+                    <include name="jre-8*"/>
+                  </fileset>
+                </copy>
+                <delete file="target/artifacts/Installer64/wildfly/jre-8u92-windows-i586.exe"/>
+                <replace file="target/artifacts/Installer64/wildfly/runawfe.ini"
+                  token="jdk-7u7-windows-i586.exe"
+                  value="jre-8u92-windows-x64.exe"
+                />
+                <replace file="target/artifacts/Installer64/wildfly/runawfe.ini"
+                  token="jdk-7u7-windows-x64.exe"
+                  value="jre-8u92-windows-x64.exe"
+                />
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>com.github.stephenc.java-iso-tools</groupId>
+        <artifactId>iso9660-maven-plugin</artifactId>
+        <version>2.0.0</version>
+        <executions>
+          <execution>
+            <id>generate-iso-jboss</id>
+            <goals>
+                <goal>iso</goal>
+            </goals>
+            <phase>package</phase>
+            <configuration>
+              <volumeId>RunaWFE ${project.version}</volumeId>
+              <finalName>installer-jboss-java7_32.iso</finalName>
+              <inputDirectory>target/artifacts/installer32/jboss7</inputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>com.github.stephenc.java-iso-tools</groupId>
+        <artifactId>iso9660-maven-plugin</artifactId>
+        <version>2.0.0</version>
+        <executions>
+          <execution>
+            <id>generate-iso-64-jboss</id>
+            <goals>
+                <goal>iso</goal>
+            </goals>
+            <phase>package</phase>
+            <configuration>
+              <volumeId>RunaWFE ${project.version}</volumeId>
+              <finalName>installer-jboss-java7_64.iso</finalName>
+              <inputDirectory>target/artifacts/installer64/jboss7</inputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>com.github.stephenc.java-iso-tools</groupId>
+        <artifactId>iso9660-maven-plugin</artifactId>
+        <version>2.0.0</version>
+        <executions>
+          <execution>
+            <id>generate-iso-wildfly</id>
+            <goals>
+                <goal>iso</goal>
+            </goals>
+            <phase>package</phase>
+            <configuration>
+              <volumeId>RunaWFE ${project.version}</volumeId>
+              <finalName>installer-wildfly-java8_32.iso</finalName>
+              <inputDirectory>target/artifacts/installer32/wildfly</inputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>com.github.stephenc.java-iso-tools</groupId>
+        <artifactId>iso9660-maven-plugin</artifactId>
+        <version>2.0.0</version>
+        <executions>
+          <execution>
+            <id>generate-iso-64-wildfly</id>
+            <goals>
+                <goal>iso</goal>
+            </goals>
+            <phase>package</phase>
+            <configuration>
+              <volumeId>RunaWFE ${project.version}</volumeId>
+              <finalName>installer-wildfly-java8_64.iso</finalName>
+              <inputDirectory>target/artifacts/installer64/wildfly</inputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

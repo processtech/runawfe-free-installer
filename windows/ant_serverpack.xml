@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<project name="Ant script for running tests (check is source code correct)">
+
+	<!-- This properties must be provided by calling code -->
+	<!-- Application server to test in -->
+	<property name="appserver" value=""/>
+	<!-- Project version -->
+	<property name="project.version" value=""/>
+	<!-- Java home, used to start application server -->
+	<property name="using.java.home" value=""/>
+
+    	<property name="work.dir" value="${basedir}/target"/>
+    	<property name="all.artifacts.dir" value="${work.dir}/artifacts"/>
+    	<property name="artifacts.dir" value="${all.artifacts.dir}/${appserver}"/>
+
+	<target name="package">
+                <mkdir dir="${work.dir}"/>
+                <mkdir dir="${all.artifacts.dir}"/>
+                <mkdir dir="${artifacts.dir}"/>
+
+                <exec executable="cmd" dir="${basedir}/../../wfe/wfe-appserver" failonerror="true">
+                  <arg value="/C"/>
+                  <arg value="mvn clean package -Dappserver=${appserver} -Dproject.version=${project.version} -Dmaven.test.skip=true"/>
+                  <env key="JAVA_HOME" value="${using.java.home}"/>
+                </exec>
+                <copy toDir="${artifacts.dir}/app-server">
+                  <fileset dir="../../wfe/wfe-appserver/target">
+                    <include name="*.zip"/>
+                  </fileset>
+                </copy>
+                <copy toDir="${artifacts.dir}/app-botstation">
+                  <fileset dir="../../wfe/wfe-appserver/target">
+                    <include name="*remotebots*.zip"/>
+                  </fileset>
+                </copy>
+
+                <exec executable="cmd" dir="../../wfe/wfe-appserver" failonerror="true">
+                  <arg value="/C"/>
+                  <arg value="mvn clean package -Dappserver=${appserver} -P simulation -Dproject.version=${project.version} -Dmaven.test.skip=true"/>
+                  <env key="JAVA_HOME" value="${using.java.home}"/>
+                </exec>
+                <copy toDir="${artifacts.dir}/app-simulation">
+                  <fileset dir="../../wfe/wfe-appserver/target">
+                    <include name="*.zip"/>
+                  </fileset>
+                </copy>
+
+                <unzip dest="${artifacts.dir}" overwrite="true">
+                  <fileset dir="${artifacts.dir}/app-server">
+                    <include name="wfe-appserver-full-*.zip"/>
+                  </fileset>
+                </unzip>
+                <copy toDir="${artifacts.dir}/jboss">
+                  <fileset dir="../simulation">
+                    <include name="*"/>
+                    <include name="**/*"/>
+                  </fileset>
+                </copy>
+		<exec executable="cmd" dir="${artifacts.dir}/jboss/bin" spawn="true">
+                  <arg line="/C standalone.bat" />
+                  <env key="NOPAUSE" value="yes"/>
+                  <env key="JAVA_HOME" value="${using.java.home}"/>
+		</exec>
+		<sleep seconds="60"/>
+                <exec executable="cmd" dir="../../wfe/wfe-webservice-client" failonerror="true">
+                  <arg value="/C"/>
+                  <arg value="mvn clean install -Dappserver=${appserver} -Dproject.version=${project.version}"/>
+                  <env key="JAVA_HOME" value="${using.java.home}"/>
+                </exec>
+                <get src="http://localhost:8080/wfe/login.do?login=Administrator&amp;password=wf&amp;forwardUrl=/admin_scripts.do?action=executeUploadedScript&amp;fileName=deploy-samples-script.xml" dest="${artifacts.dir}/jboss/tmp"/>
+
+		<exec executable="cmd" dir="${artifacts.dir}/jboss/bin" spawn="true">
+                  <arg value="/C" />
+                  <arg line="jboss-cli.bat --commands=connect,:shutdown" />
+                  <env key="NOPAUSE" value="yes"/>
+                  <env key="JAVA_HOME" value="${using.java.home}"/>
+		</exec>
+		<sleep seconds="180"/>
+
+                <copy toDir="${artifacts.dir}/simulation-data">
+                  <fileset dir="../simulation">
+                    <include name="*"/>
+                    <include name="**/*"/>
+                  </fileset>
+                  <fileset dir="${artifacts.dir}/jboss">
+                    <include name="standalone/data/h2/*.db"/>
+                  </fileset>
+                </copy>
+		<move file="${artifacts.dir}/simulation-data/standalone/data/h2" tofile="${artifacts.dir}/simulation-data/standalone/data/demo-db"/>
+
+		<delete dir="${artifacts.dir}/jboss"/>
+
+	</target>
+</project>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<project name="Ant script for running tests (check is source code correct)">
+
+	<!-- This properties must be provided by calling code -->
+	<!-- Application server to test in -->
+	<property name="appserver" value=""/>
+	<!-- Project version -->
+	<property name="project.version" value=""/>
+	<!-- Java home, used to start application server -->
+	<property name="using.java.home" value=""/>
+
+    	<property name="work.dir" value="${basedir}/target"/>
+    	<property name="all.results.dir" value="${work.dir}/test-result"/>
+    	<property name="results.dir" value="${all.results.dir}/${appserver}"/>
+
+	<target name="test">
+                <mkdir dir="${work.dir}"/>
+                <mkdir dir="${all.results.dir}"/>
+                <mkdir dir="${results.dir}"/>
+
+                <exec executable="cmd" dir="${basedir}/../../wfe/wfe-app" failonerror="false" resultproperty="testResult">
+                  <arg value="/C"/>
+                  <arg value="mvn clean integration-test -Dappserver=${appserver} -Dproject.version=${project.version}"/>
+                  <env key="JAVA_HOME" value="${using.java.home}"/>
+                </exec>
+                <exec executable="cmd" dir="${basedir}/../../wfe/wfe-cactus-it" failonerror="false">
+                  <arg value="/C"/>
+                  <arg value="mvn surefire-report:report-only"/>
+                </exec>
+                <copy toDir="${results.dir}">
+                  <fileset dir="${basedir}/../../wfe/wfe-cactus-it/target">
+                    <include name="site/*"/>
+                    <include name="surefire-reports/*"/>
+                  </fileset>
+                </copy>
+                <fail message="Build or testing is failed">
+                  <condition>
+                    <not>
+                      <matches string="${testResult}" pattern="0"/>
+                    </not>
+                  </condition>
+                </fail>		
+                <sleep seconds="30"/>
+
+	</target>
+</project>

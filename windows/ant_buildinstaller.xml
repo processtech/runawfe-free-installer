@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<project name="Ant script for creating windows installer">
+
+	<dirname property="Ant script for creating windows installer.basedir" file="${ant.file.Ant script for creating windows installer}"/>
+
+	<!-- This properties must be provided by calling code -->
+	<!-- JDK arch: 32 or 64 -->
+	<property name="wfe.jdk.arch" value="32"/>
+	<!-- Application server to test in -->
+	<property name="appserver" value=""/>
+	<!-- Project version -->
+	<property name="project.version" value="dev"/>
+	<!-- Java home, used to start application server -->
+	<property name="using.java.home" value=""/>
+
+	<property name="jboss.timeout" value="200"/>
+	<property name="IsWindows" value="true"/>
+
+	<property name="work.dir" value="${basedir}/target"/>
+	<property name="artifacts.dir" value="${basedir}/target/artifacts"/>
+	<property name="distr.root.dir" value="${basedir}/resources"/>
+	<property name="nsis.settings" value="${distr.root.dir}/NSIS7"/>
+	<property name="nsis.dir" value="${work.dir}/NSIS7"/>
+	<property name="nsis.src.dir" value="${nsis.dir}/src"/>
+	<property name="nsis.work.dir" value="${nsis.dir}/work"/>
+
+	<property name="nsis.docs" value="${basedir}/../../../docs/guides"/>
+
+	<condition property="wfe.jdk.arch32" value="true">
+		<equals arg1="${wfe.jdk.arch}" arg2="32"/>
+	</condition>
+	<condition property="wfe.jdk.arch64" value="true">
+		<equals arg1="${wfe.jdk.arch}" arg2="64"/>
+	</condition>
+
+	<condition property="wfe.min.jdk1.6" value="true">
+		<equals arg1="${appserver}" arg2="jboss7"/>
+	</condition>
+	<condition property="wfe.min.jdk1.8" value="true">
+		<equals arg1="${appserver}" arg2="wildfly"/>
+	</condition>
+
+	<target name="set.jdk.arch32" if="wfe.jdk.arch32">
+		<replace file="resources\NSIS7\JDKInstallSupport.nsh"
+			token="X64ONLY &quot;yes&quot;"
+			value="X64ONLY &quot;no&quot;"
+		/>
+	</target>
+
+	<target name="set.jdk.arch64" if="wfe.jdk.arch64">
+		<replace file="resources\NSIS7\JDKInstallSupport.nsh"
+			token="X64ONLY &quot;no&quot;"
+			value="X64ONLY &quot;yes&quot;"
+		/>
+	</target>
+
+	<target name="set.min.jdk1.6" if="wfe.min.jdk1.6">
+		<replace file="resources\NSIS7\JDKInstallSupport.nsh"
+			token="&quot;1.8.0&quot;"
+			value="&quot;1.6.0&quot;"
+		/>
+	</target>
+
+	<target name="set.min.jdk1.8" if="wfe.min.jdk1.8">
+		<replace file="resources\NSIS7\JDKInstallSupport.nsh"
+			token="&quot;1.6.0&quot;"
+			value="&quot;1.8.0&quot;"
+		/>
+	</target>
+
+	<target name="prepare.nsis" unless="skip.installer" depends="set.jdk.arch32,set.jdk.arch64,set.min.jdk1.6,set.min.jdk1.8">
+		<delete dir="${nsis.dir}"/>
+		<mkdir dir="${nsis.work.dir}"/>
+		<unzip dest="${nsis.src.dir}" overwrite="true">
+			<fileset dir="${artifacts.dir}/${appserver}/app-simulation">
+				<include name="wfe-appserver-diff-*.zip"/>
+			</fileset>
+		</unzip>
+		<copy todir="${nsis.src.dir}/wfe-simulator" overwrite="true">
+			<fileset dir="${nsis.src.dir}/jboss"/>
+			<fileset dir="${basedir}/../jboss7"/>
+			<fileset dir="${artifacts.dir}/${appserver}/simulation-data"/>
+		</copy>
+		<delete dir="${nsis.src.dir}/jboss"/>
+
+		<unzip dest="${nsis.src.dir}" overwrite="true">
+			<fileset dir="${artifacts.dir}/${appserver}/app-server">
+				<include name="wfe-appserver-diff-*.zip"/>
+			</fileset>
+		</unzip>
+		<copy todir="${nsis.src.dir}/wfe-server-config" overwrite="true">
+			<fileset dir="${nsis.src.dir}/jboss"/>
+		</copy>
+		<delete dir="${nsis.src.dir}/jboss"/>
+
+		<unzip dest="${nsis.src.dir}" overwrite="true">
+			<fileset dir="${artifacts.dir}/${appserver}/app-server">
+				<include name="wfe-appserver-base-*.zip"/>
+			</fileset>
+		</unzip>
+		<copy todir="${nsis.src.dir}/wfe-server-jboss" overwrite="true">
+			<fileset dir="${nsis.src.dir}/jboss"/>
+			<fileset dir="${basedir}/../jboss7"/>
+		</copy>
+		<delete dir="${nsis.src.dir}/jboss"/>
+
+		<unzip dest="${nsis.src.dir}" overwrite="true">
+			<fileset dir="${artifacts.dir}/${appserver}/app-botstation">
+				<include name="wfe-appserver-remotebots*.zip"/>
+			</fileset>
+		</unzip>
+		<copy todir="${nsis.src.dir}/wfe-botstation-config" overwrite="true">
+			<fileset dir="${nsis.src.dir}/jboss"/>
+		</copy>
+
+		<copy file="${distr.root.dir}/simulation.properties" tofile="${nsis.src.dir}/simulation.properties"/>
+		<copy file="${nsis.settings}/nircmd.exe" tofile="${nsis.src.dir}/wfe-simulator/bin/nircmd.exe"/>
+		<copy file="${nsis.settings}/sleep.exe" tofile="${nsis.src.dir}/wfe-simulator/bin/sleep.exe"/>
+		<unzip dest="${nsis.src.dir}/gpd/32/" overwrite="true">
+			<fileset dir="${artifacts.dir}/gpd/32" includes="*win32.win32.x86.zip"/>
+		</unzip>
+		<unzip dest="${nsis.src.dir}/gpd/64/" overwrite="true">
+			<fileset dir="${artifacts.dir}/gpd/64" includes="*win32.win32.x86_64.zip"/>
+		</unzip>
+		<move file="${nsis.src.dir}/gpd/32/gpd-${project.version}/workspace" tofile="${nsis.src.dir}/gpd/32/gpd-${project.version}/demo-workspace"/>
+		<move file="${nsis.src.dir}/gpd/64/gpd-${project.version}/workspace" tofile="${nsis.src.dir}/gpd/64/gpd-${project.version}/demo-workspace"/>
+
+		<copy todir="${nsis.src.dir}/rtn-${project.version}" overwrite="true">
+			<fileset dir="${artifacts.dir}/rtn"/>
+		</copy>
+		<unzip dest="${nsis.dir}" overwrite="true">
+			<fileset dir="${nsis.settings}" includes="nsis-2.46.zip"/>
+		</unzip>
+		<copy toDir="${nsis.src.dir}/Documentation" overwrite="true">
+			<fileset dir="${nsis.docs}"/>
+		</copy>
+		<copy toDir="${nsis.src.dir}/jboss-native" overwrite="true">
+			<fileset dir="${nsis.settings}/jboss-native/bin"/>
+		</copy>
+		<copy toDir="${nsis.src.dir}/Icons" overwrite="true">
+			<fileset dir="${distr.root.dir}/Icons" includes="*.ico"/>
+			<fileset dir="${distr.root.dir}/Icons" includes="*.bmp"/>
+		</copy>
+	</target>
+
+	<target name="build.nsis">	
+		<delete dir="${nsis.work.dir}/${nsis.name}"/>
+		<mkdir dir="${nsis.work.dir}/${nsis.name}"/>
+		<copy todir="${nsis.work.dir}/${nsis.name}" overwrite="true">
+			<fileset dir="${nsis.settings}">
+				<include name="*"/>
+				<exclude name="*.zip"/>
+				<exclude name="jboss-native"/>
+			</fileset>
+			<fileset dir="${nsis.settings}/..">
+				<include name="jdk*.exe"/>
+			</fileset>
+		</copy>
+		<replace dir="${nsis.work.dir}/${nsis.name}" token="%VERSION%" value="${project.version}">
+			<exclude name="**/*.exe"/>
+		</replace>
+		<replace dir="${nsis.work.dir}/${nsis.name}" token="%BUILD_ROOT%" value="${nsis.src.dir}">
+			<exclude name="**/*.exe"/>
+		</replace>
+		<exec executable="${nsis.dir}/nsis-2.46/makensis.exe" dir="${nsis.work.dir}/${nsis.name}" failonerror="true">
+			<arg value="${nsis.work.dir}/${nsis.name}/${nsis.name}.nsi"/>
+		</exec>
+		<copy file="${nsis.work.dir}/${nsis.name}/setup.exe" tofile="${artifacts.dir}/Installer/${appserver}/RunaWFE-${nsis.name}.exe" overwrite="true"/>
+	</target>
+
+	<target name="makeInstaller" depends="makeInstaller.nsis"/>
+
+	<target name="makeInstaller.nsis" depends="prepare.nsis" unless="skip.installer">
+		<antcall target="build.nsis">
+			<param name="nsis.name" value="Installer"/>
+		</antcall>
+		<copy todir="${artifacts.dir}/Installer/${appserver}">
+			<fileset dir="${distr.root.dir}/CDStartup">
+				<include name="*"/>
+			</fileset>
+		</copy>
+		<copy todir="target/artifacts/Installer${wfe.jdk.arch}/${appserver}">
+			<fileset dir="target/artifacts/Installer/${appserver}">
+				<include name="*"/>
+			</fileset>
+		</copy>
+		<sleep seconds="120"/>
+		<delete dir="target/artifacts/Installer"/>
+	</target>
+
+</project>
