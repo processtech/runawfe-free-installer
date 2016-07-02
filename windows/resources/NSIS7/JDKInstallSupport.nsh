@@ -199,8 +199,33 @@ FunctionEnd
 ; DetectJRE. Version requested is on the stack.
 ; Returns (on stack)	"0" on failure (java too old or not installed), otherwise path to java interpreter
 ; Stack value will be overwritten!
-
 Function DetectJava
+  Exch $0	; Get version requested
+		; Now the previous value of $0 is on the stack, and the asked for version of JDK is in $0
+  Push $0	; $1 = Java version string (ie 1.5.0)
+  StrCpy $JavaType "Java Development Kit"
+  Call DetectJavaImpl
+  Exch $0	; Get return value from stack
+  StrCmp $0 "0" SearchJRE
+  StrCmp $0 "-1" SearchJRE
+  GoTo DetectJavaEnd
+SearchJRE:
+  StrCpy $JavaType "Java Runtime Environment"
+  Call DetectJavaImpl
+
+DetectJavaEnd:
+  Exch
+  Pop $0
+FunctionEnd
+
+Var JavaType ; "Java Runtime Environment" or "Java Development Kit"
+
+; Returns: 0 - JRE not found. -1 - JRE found but too old. Otherwise - Path to JAVA EXE
+
+; DetectJRE. Version requested is on the stack.
+; Returns (on stack)	"0" on failure (java too old or not installed), otherwise path to java interpreter
+; Stack value will be overwritten!
+Function DetectJavaImpl
   Exch $0	; Get version requested
 		; Now the previous value of $0 is on the stack, and the asked for version of JDK is in $0
   Push $1	; $1 = Java version string (ie 1.5.0)
@@ -208,17 +233,9 @@ Function DetectJava
   Push $3	; $3 and $4 are used for checking the major/minor version of java
   Push $4
 
-  ReadRegStr $1 HKLM "SOFTWARE\JavaSoft\Java Development Kit" "CurrentVersion"
-  StrCmp $1 "" DetectTry2
-  ReadRegStr $2 HKLM "SOFTWARE\JavaSoft\Java Development Kit\$1" "JavaHome"
-  StrCmp $2 "" DetectTry2
-  Goto GetJava
-
-DetectTry2:
-  StrCmp "$IsJDKRequired$IsJDKRequiredSet" "yesyes" NoFound
-  ReadRegStr $1 HKLM "SOFTWARE\JavaSoft\Java Runtime Environment" "CurrentVersion"
+  ReadRegStr $1 HKLM "SOFTWARE\JavaSoft\${JavaType}" "CurrentVersion"
   StrCmp $1 "" NoFound
-  ReadRegStr $2 HKLM "SOFTWARE\JavaSoft\Java Runtime Environment\$1" "JavaHome"
+  ReadRegStr $2 HKLM "SOFTWARE\JavaSoft\${JavaType}\$1" "JavaHome"
   StrCmp $2 "" NoFound
 
 GetJava:
@@ -233,17 +250,17 @@ GetJava:
 
 NoFound:
   Push "0"
-  Goto DetectJavaEnd
+  Goto DetectJavaImplEnd
 
 FoundOld:
 ;  Push ${TEMP2}
   Push "-1"
-  Goto DetectJavaEnd
+  Goto DetectJavaImplEnd
 FoundNew:
 
   Push "$2"
-  Goto DetectJavaEnd
-DetectJavaEnd:
+  Goto DetectJavaImplEnd
+DetectJavaImplEnd:
 	; Top of stack is return value, then r4,r3,r2,r1
 	Exch	; => r4,rv,r3,r2,r1,r0
 	Pop $4	; => rv,r3,r2,r1r,r0
