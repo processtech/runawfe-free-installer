@@ -87,7 +87,6 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
   ${endif}
   FileWrite $0 "del /F /S /Q %TEMP%\runawfe$\r$\n"
   FileWrite $0 "rd /S /Q %TEMP%\runawfe$\r$\n"
-  FileWrite $0 "nircmd.exe exec hide runBots.bat $2 $\r$\n"
   FileWrite $0 "SET JBOSS_LOG_DIR=$\"%TEMP%\runawfe\jboss\log$\"$\r$\n"
   FileWrite $0 "call standalone.bat $\"-Djboss.server.log.dir=%TEMP%\runawfe\jboss\log$\" $\"-Djboss.server.temp.dir=%TEMP%\runawfe\jboss\tmp$\" $\"-Djboss.server.base.dir=%APPDATA%\runawfe\jboss$\"$\r$\n"
   FileClose $0
@@ -258,16 +257,6 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
   SetShellVarContext all
   !insertmacro Runa_SetOutPath "$INSTDIR\Simulation"
   File /r ${BuildRoot}\wfe-simulator\*
-  FileOpen $0 "$INSTDIR\Simulation\bin\runBots.bat" w
-  FileWrite $0 "@echo off$\r$\n"
-  FileWrite $0 "set DIRNAME=.\$\r$\n"
-  FileWrite $0 "if $\"%OS%$\" == $\"Windows_NT$\" set DIRNAME=%~dp0%$\r$\n"
-  FileWrite $0 "cd /D $\"%DIRNAME%$\"$\r$\n"
-  FileWrite $0 "sleep 90$\r$\n"
-  FileWrite $0 "cd ../adminkit$\r$\n"
-  FileWrite $0 "call bot-invoker.bat start$\r$\n"
-  FileWrite $0 "exit$\r$\n"
-  FileClose $0
   FileOpen $0 "$INSTDIR\Simulation\bin\runBatch.bat" w
   FileWrite $0 "@echo off$\r$\n"
   FileWrite $0 "set DIRNAME=.\$\r$\n"
