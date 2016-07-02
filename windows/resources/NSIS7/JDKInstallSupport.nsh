@@ -207,9 +207,9 @@ Function DetectJava
   StrCpy $JavaType "Java Development Kit"
   Call DetectJavaImpl
   Exch $0	; Get return value from stack
-  StrCmp $0 "0" SearchJRE
-  StrCmp $0 "-1" SearchJRE
-  GoTo DetectJavaEnd
+  StrCmp $0 "0" SearchJRE 0
+  StrCmp $0 "-1" SearchJRE DetectJavaEnd
+  Goto DetectJavaEnd
 SearchJRE:
   StrCpy $JavaType "Java Runtime Environment"
   Call DetectJavaImpl
@@ -232,9 +232,9 @@ Function DetectJavaImpl
   Push $3	; $3 and $4 are used for checking the major/minor version of java
   Push $4
 
-  ReadRegStr $1 HKLM "SOFTWARE\JavaSoft\${JavaType}" "CurrentVersion"
+  ReadRegStr $1 HKLM "SOFTWARE\JavaSoft\$JavaType" "CurrentVersion"
   StrCmp $1 "" NoFound
-  ReadRegStr $2 HKLM "SOFTWARE\JavaSoft\${JavaType}\$1" "JavaHome"
+  ReadRegStr $2 HKLM "SOFTWARE\JavaSoft\$JavaType\$1" "JavaHome"
   StrCmp $2 "" NoFound
 
 GetJava:
