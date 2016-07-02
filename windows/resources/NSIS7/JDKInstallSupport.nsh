@@ -13,6 +13,7 @@ Var JavaPath
 Var IsJDKRequired
 Var IsJDKRequiredSet
 Var JdkArch  ;"64" for 64 bit java
+Var JavaType ; "Java Runtime Environment" or "Java Development Kit"
 
 Var JdkInstaller
 
@@ -217,8 +218,6 @@ DetectJavaEnd:
   Exch
   Pop $0
 FunctionEnd
-
-Var JavaType ; "Java Runtime Environment" or "Java Development Kit"
 
 ; Returns: 0 - JRE not found. -1 - JRE found but too old. Otherwise - Path to JAVA EXE
 
