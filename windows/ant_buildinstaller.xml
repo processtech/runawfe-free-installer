@@ -34,7 +34,7 @@
 		<equals arg1="${wfe.jdk.arch}" arg2="64"/>
 	</condition>
 
-	<condition property="wfe.min.jdk1.6" value="true">
+	<condition property="wfe.min.jdk1.7" value="true">
 		<equals arg1="${appserver}" arg2="jboss7"/>
 	</condition>
 	<condition property="wfe.min.jdk1.8" value="true">
@@ -55,21 +55,21 @@
 		/>
 	</target>
 
-	<target name="set.min.jdk1.6" if="wfe.min.jdk1.6">
+	<target name="set.min.jdk1.7" if="wfe.min.jdk1.7">
 		<replace file="resources\NSIS7\JDKInstallSupport.nsh"
 			token="&quot;1.8.0&quot;"
-			value="&quot;1.6.0&quot;"
+			value="&quot;1.7.0&quot;"
 		/>
 	</target>
 
 	<target name="set.min.jdk1.8" if="wfe.min.jdk1.8">
 		<replace file="resources\NSIS7\JDKInstallSupport.nsh"
-			token="&quot;1.6.0&quot;"
+			token="&quot;1.7.0&quot;"
 			value="&quot;1.8.0&quot;"
 		/>
 	</target>
 
-	<target name="prepare.nsis" unless="skip.installer" depends="set.jdk.arch32,set.jdk.arch64,set.min.jdk1.6,set.min.jdk1.8">
+	<target name="prepare.nsis" unless="skip.installer" depends="set.jdk.arch32,set.jdk.arch64,set.min.jdk1.7,set.min.jdk1.8">
 		<delete dir="${nsis.dir}"/>
 		<mkdir dir="${nsis.work.dir}"/>
 		<unzip dest="${nsis.src.dir}" overwrite="true">
