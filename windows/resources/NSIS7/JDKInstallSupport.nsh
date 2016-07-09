@@ -208,7 +208,8 @@ Function DetectJava
   Call DetectJavaImpl
   Exch $0	; Get return value from stack
   StrCmp $0 "0" SearchJRE 0
-  StrCmp $0 "-1" SearchJRE DetectJavaEnd
+  StrCmp $0 "-1" SearchJRE 0
+  Exch $0	; Put return value to stack
   Goto DetectJavaEnd
 SearchJRE:
   StrCpy $JavaType "Java Runtime Environment"
