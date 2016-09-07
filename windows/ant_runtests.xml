@@ -41,7 +41,7 @@
                     </not>
                   </condition>
                 </fail>		
-                <sleep seconds="30"/>
+                <sleep seconds="180"/>
 
 	</target>
 </project>
