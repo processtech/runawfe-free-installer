@@ -59,16 +59,16 @@
                   <property name="using.java.home" value="${java.home.8}"/>
                 </ant>
 
-                <exec executable="cmd" dir="../../gpd" failonerror="true">
-                  <arg line="/C ant -Dproject.version=${project.version}"/>
+                <exec executable="cmd" dir="../../gpd/plugins" failonerror="true">
+                  <arg line="/C mvn clean package  -Dtycho.disableP2Mirrors=true"/>
                 </exec>
                 <copy toDir="target/artifacts/gpd/32">
-                  <fileset dir="../../gpd/build">
+                  <fileset dir="../../gpd/plugins/ru.runa.gpd.maven/target/products">
                     <include name="*.win32.x86.zip"/>
                   </fileset>
                 </copy>
                 <copy toDir="target/artifacts/gpd/64">
-                  <fileset dir="../../gpd/build">
+                  <fileset dir="../../gpd/plugins/ru.runa.gpd.maven/target/products">
                     <include name="*.win32.x86_64.zip"/>
                   </fileset>
                 </copy>

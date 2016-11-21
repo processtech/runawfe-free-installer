@@ -76,7 +76,7 @@
                   <env key="NOPAUSE" value="yes"/>
                   <env key="JAVA_HOME" value="${using.java.home}"/>
 		</exec>
-		<sleep seconds="180"/>
+		<sleep seconds="240"/>
 
                 <copy toDir="${artifacts.dir}/simulation-data">
                   <fileset dir="../simulation">
