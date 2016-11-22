@@ -26,7 +26,8 @@
                 </exec>
                 <copy toDir="${artifacts.dir}/app-server">
                   <fileset dir="../../wfe/wfe-appserver/target">
-                    <include name="*.zip"/>
+                    <include name="*-diff*.zip"/>
+                    <include name="*-base*.zip"/>
                   </fileset>
                 </copy>
                 <copy toDir="${artifacts.dir}/app-botstation">
@@ -42,12 +43,12 @@
                 </exec>
                 <copy toDir="${artifacts.dir}/app-simulation">
                   <fileset dir="../../wfe/wfe-appserver/target">
-                    <include name="*.zip"/>
+                    <include name="*-diff*.zip"/>
                   </fileset>
                 </copy>
 
                 <unzip dest="${artifacts.dir}" overwrite="true">
-                  <fileset dir="${artifacts.dir}/app-server">
+                  <fileset dir="../../wfe/wfe-appserver/target">
                     <include name="wfe-appserver-full-*.zip"/>
                   </fileset>
                 </unzip>
@@ -90,6 +91,5 @@
 		<move file="${artifacts.dir}/simulation-data/standalone/data/h2" tofile="${artifacts.dir}/simulation-data/standalone/data/demo-db"/>
 
 		<delete dir="${artifacts.dir}/jboss"/>
-
 	</target>
 </project>
