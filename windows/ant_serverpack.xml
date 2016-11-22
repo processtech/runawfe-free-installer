@@ -28,7 +28,6 @@
                   <fileset dir="../../wfe/wfe-appserver/target">
                     <include name="*-diff*.zip"/>
                     <include name="*-base*.zip"/>
-                    <include name="*-full*.zip"/>
                   </fileset>
                 </copy>
                 <copy toDir="${artifacts.dir}/app-botstation">
@@ -45,6 +44,7 @@
                 <copy toDir="${artifacts.dir}/app-simulation">
                   <fileset dir="../../wfe/wfe-appserver/target">
                     <include name="*-diff*.zip"/>
+                    <include name="*-full*.zip"/>
                   </fileset>
                 </copy>
 
