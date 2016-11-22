@@ -72,6 +72,11 @@
                     <include name="*.win32.x86_64.zip"/>
                   </fileset>
                 </copy>
+                <copy toDir="target/artifacts/gpd/all">
+                  <fileset dir="../../gpd/plugins/ru.runa.gpd.maven/target/products">
+                    <include name="*.zip"/>
+                  </fileset>
+                </copy>
                 <exec executable="cmd" dir="../../gpd/plugins" failonerror="true">
                   <arg line="/C mvn clean -Dtycho.disableP2Mirrors=true"/>
                 </exec>
