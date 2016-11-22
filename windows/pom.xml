@@ -72,6 +72,9 @@
                     <include name="*.win32.x86_64.zip"/>
                   </fileset>
                 </copy>
+                <exec executable="cmd" dir="../../gpd/plugins" failonerror="true">
+                  <arg line="/C mvn clean -Dtycho.disableP2Mirrors=true"/>
+                </exec>
 
                 <exec executable="cmd" dir="../../rtn" failonerror="true">
                   <arg value="/C"/>
