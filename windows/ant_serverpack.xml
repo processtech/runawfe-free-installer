@@ -70,7 +70,7 @@
                   <arg value="mvn clean install -Dappserver=${appserver} -Dproject.version=${project.version}"/>
                   <env key="JAVA_HOME" value="${using.java.home}"/>
                 </exec>
-                <get src="http://localhost:8080/wfe/login.do?login=Administrator&amp;password=wf&amp;forwardUrl=/admin_scripts.do?action=executeUploadedScript&amp;fileName=deploy-samples-script.xml" dest="${artifacts.dir}/jboss/tmp"/>
+                <get src="http://localhost:8080/wfe/login.do?login=Administrator&amp;password=wf&amp;forwardUrl=/admin_scripts.do?action=executeUploadedScript%26fileName=deploy-samples-script.xml" dest="${artifacts.dir}/jboss/tmp"/>
 
 		<exec executable="cmd" dir="${artifacts.dir}/jboss/bin" spawn="true">
                   <arg value="/C" />
