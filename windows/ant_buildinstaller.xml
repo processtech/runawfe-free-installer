@@ -92,6 +92,12 @@
 		<copy todir="${nsis.src.dir}/wfe-server-config" overwrite="true">
 			<fileset dir="${nsis.src.dir}/jboss"/>
 		</copy>
+                <copy todir="${nsis.src.dir}/${appserver}/app-server">
+                  <fileset dir="../simulation">
+                    <include name="*"/>
+                    <include name="**/*"/>
+                  </fileset>
+                </copy>
 		<delete dir="${nsis.src.dir}/jboss"/>
 
 		<unzip dest="${nsis.src.dir}" overwrite="true">

@@ -310,14 +310,14 @@ Function setJavaHomeLeave
   ${endif}
   WriteRegStr "${WriteEnvStr_RegRoot}" "${WriteEnvStr_RegKey}" "JAVA_HOME" $0
 
-  Push "PATH"
-  Push "A"
-  Push "HKLM"
-  Push "$0\bin"
-  Call EnvVarUpdate
-  Pop  "$0"
- 
-  SendMessage ${HWND_BROADCAST} ${WM_WININICHANGE} 0 "STR:Environment" /TIMEOUT=5000
+;  Push "PATH"
+;  Push "A"
+;  Push "HKLM"
+;  Push "$0\bin"
+;  Call EnvVarUpdate
+;  Pop  "$0"
+; 
+;  SendMessage ${HWND_BROADCAST} ${WM_WININICHANGE} 0 "STR:Environment" /TIMEOUT=5000
   goto JAVA_HOME_End
 JAVA_ReqError:
   MessageBox MB_OK "Can't set JAVA_HOME"
