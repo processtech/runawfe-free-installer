@@ -149,21 +149,21 @@
     <parameter name="Report date to" innerName="ReportDateTo" type="Date"/>
   </deployReport>
 
-  <addPermissionsOnDefinition executor="all">
+  <addPermissions executor="all">
     <namedIdentitySet name="allProcesses" type="ProcessDefinition"/>
-    <permission name="permission.read"/>
-    <permission name="permission.read_process"/>
-  </addPermissionsOnDefinition>
+    <permission name="READ"/>
+    <permission name="READ_PROCESS"/>
+  </addPermissions>
   
-  <addPermissionsOnDefinition executor="manager">
+  <addPermissions executor="manager">
     <namedIdentitySet name="managerProcesses" type="ProcessDefinition"/>
-    <permission name="permission.start_process"/>
-  </addPermissionsOnDefinition>
+    <permission name="START"/>
+  </addPermissions>
   
-  <addPermissionsOnDefinition executor="all">
+  <addPermissions executor="all">
     <namedIdentitySet name="genericProcesses" type="ProcessDefinition"/>
-    <permission name="permission.start_process"/>
-  </addPermissionsOnDefinition>
+    <permission name="START"/>
+  </addPermissions>
   
   <addExecutorsToGroup name="Administrators">
     <executor name="StopBot"/>
@@ -194,31 +194,19 @@
     <namedIdentitySet name="allActors" type="Executor"/>
   </addExecutorsToGroup>
   
-  <addPermissionsOnSystem executor="all">
-    <permission name="permission.read"/>
-    <permission name="permission.login_to_system"/>
-  </addPermissionsOnSystem> 
+  <addPermissions type="EXECUTORS" executor="all">
+    <permission name="LOGIN"/>
+  </addPermissions> 
   
-  <addPermissionsOnGroup executor="all">
+  <addPermissions executor="all">
     <namedIdentitySet name="allGroupsExceptALL" type="Executor"/>
-    <permission name="permission.read"/>
-    <permission name="permission.list_group"/>
-  </addPermissionsOnGroup>
+    <permission name="READ"/>
+  </addPermissions>
   
-  <addPermissionsOnActor executor="all">
+  <addPermissions executor="all">
     <namedIdentitySet name="allActors" type="Executor"/>
-    <permission name="permission.read"/>
-  </addPermissionsOnActor>
-  
-  <addPermissionsOnBotStations executor="UniversalBot">
-    <permission name="permission.read"/>
-  </addPermissionsOnBotStations>
-  <addPermissionsOnBotStations executor="StopBot">
-    <permission name="permission.read"/>
-  </addPermissionsOnBotStations>
-  <addPermissionsOnBotStations executor="WebServiceBot">
-    <permission name="permission.read"/>
-  </addPermissionsOnBotStations>
+    <permission name="READ"/>
+  </addPermissions>
   
   <createBotStation name="localbotstation" address="localhost:10099" />
   <createBot botStation="localbotstation" name="UniversalBot" password="321" startTimeout="200"/>
@@ -236,6 +224,16 @@
   <addConfigurationsToBot botStation="localbotstation" name="WebServiceBot">
     <botConfiguration name="Load whois information" handler="ru.runa.wf.logic.bot.WebServiceTaskHandler" configuration="soap-whois.xml"/>
   </addConfigurationsToBot>
+  
+  <addPermissions type="BOTSTATIONS" executor="UniversalBot">
+    <permission name="ALL"/>
+  </addPermissions>
+  <addPermissions type="BOTSTATIONS" executor="StopBot">
+    <permission name="ALL"/>
+  </addPermissions>
+  <addPermissions type="BOTSTATIONS" executor="WebServiceBot">
+    <permission name="ALL"/>
+  </addPermissions>
   
   <relation name="Boss">
     <left>
