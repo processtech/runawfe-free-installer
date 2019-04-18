@@ -153,7 +153,7 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
   SetShellVarContext all
   RMDir /r "$PROFILE\.eclipse"
   !insertmacro Runa_SetOutPath "$INSTDIR\Icons"
-  File "${BuildRoot}\Icons\e_20x20_256.ico"
+  File "${BuildRoot}\Icons\ds_20x20_256.ico"
   RMDir /r "$INSTDIR\gpd\configuration"
   !insertmacro Runa_SetOutPath "$INSTDIR\gpd"
   Call DetectJava64
@@ -167,7 +167,7 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
     File /r "${BuildRoot}\gpd\32\gpd-${AppVersion}\*"
   ${endif}
   !insertmacro CreateRunGPDBatchFile
-  !insertmacro createMenuShortcut "Process designer.lnk" "$INSTDIR\gpd\run.bat" "" "$INSTDIR\gpd" "$INSTDIR\Icons\E_20x20_256.ico" "$(ShortcutDesc_GPD)"
+  !insertmacro createMenuShortcut "Process designer.lnk" "$INSTDIR\gpd\run.bat" "" "$INSTDIR\gpd" "$INSTDIR\Icons\ds_20x20_256.ico" "$(ShortcutDesc_GPD)"
 !macroend
 
 !macro installRTNSeq
