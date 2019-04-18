@@ -19,6 +19,11 @@
                 <mkdir dir="${all.artifacts.dir}"/>
                 <mkdir dir="${artifacts.dir}"/>
 
+                <exec executable="cmd" dir="${basedir}/../../wfe/wfe-remotebots" failonerror="true">
+                  <arg value="/C"/>
+                  <arg value="mvn clean install -Dappserver=${appserver} -Dproject.version=${project.version} -Dmaven.test.skip=true"/>
+                  <env key="JAVA_HOME" value="${using.java.home}"/>
+                </exec>
                 <exec executable="cmd" dir="${basedir}/../../wfe/wfe-appserver" failonerror="true">
                   <arg value="/C"/>
                   <arg value="mvn clean package -Dappserver=${appserver} -Dproject.version=${project.version} -Dmaven.test.skip=true"/>

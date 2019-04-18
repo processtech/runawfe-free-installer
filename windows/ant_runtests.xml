@@ -21,7 +21,7 @@
 
                 <exec executable="cmd" dir="${basedir}/../../wfe/wfe-app" failonerror="false" resultproperty="testResult">
                   <arg value="/C"/>
-                  <arg value="mvn clean integration-test -Dappserver=${appserver} -Dproject.version=${project.version}"/>
+                  <arg value="mvn clean install integration-test -Dappserver=${appserver} -Dproject.version=${project.version}"/>
                   <env key="JAVA_HOME" value="${using.java.home}"/>
                 </exec>
                 <exec executable="cmd" dir="${basedir}/../../wfe/wfe-cactus-it" failonerror="false">
