@@ -167,13 +167,13 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
     File /r "${BuildRoot}\gpd\32\gpd-${AppVersion}\*"
   ${endif}
   !insertmacro CreateRunGPDBatchFile
-  !insertmacro createMenuShortcut "Process designer.lnk" "$INSTDIR\gpd\run.bat" "" "$INSTDIR\gpd" "$INSTDIR\Icons\E_20x20_256.ico" "$(ShortcutDesc_GPD)"
+  !insertmacro createMenuShortcut "Process designer.lnk" "$INSTDIR\gpd\run.bat" "" "$INSTDIR\gpd" "$INSTDIR\Icons\e_20x20_256.ico" "$(ShortcutDesc_GPD)"
 !macroend
 
 !macro installRTNSeq
   SetShellVarContext all
   !insertmacro Runa_SetOutPath "$INSTDIR\Icons"
-  File "${BuildRoot}\Icons\T_20x20_256.ico"
+  File "${BuildRoot}\Icons\t_20x20_256.ico"
   !insertmacro Runa_SetOutPath "$INSTDIR\rtn"
   ${if} ${RunningX64} 
     ${if} "$JdkArch" == "64"
@@ -234,7 +234,7 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
 ;  Push "$INSTDIR\rtn\run.bat"                  #file to replace in
 ;  Call AdvReplaceInFile                        #call find and replace function
 
-  !insertmacro createMenuShortcut "Task notifier.lnk" "$INSTDIR\rtn\run.bat" "" "$INSTDIR\rtn" "$INSTDIR\Icons\T_20x20_256.ico" "$(ShortcutDesc_RTN)"
+  !insertmacro createMenuShortcut "Task notifier.lnk" "$INSTDIR\rtn\run.bat" "" "$INSTDIR\rtn" "$INSTDIR\Icons\t_20x20_256.ico" "$(ShortcutDesc_RTN)"
 !macroend
 
 !macro installWebSeq
@@ -270,11 +270,11 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
 
   !insertmacro installJbossSeq Simulation
   !insertmacro Runa_SetOutPath "$INSTDIR\Icons"
-  File ${BuildRoot}\Icons\SI_20x20_256.ico
-  File ${BuildRoot}\Icons\CS_20x20_256.ico
+  File ${BuildRoot}\Icons\Si_20x20_256.ico
+  File ${BuildRoot}\Icons\Cs_20x20_256.ico
   !insertmacro createURL "Simulation web interface.URL" "http://localhost:8080/wfe" "$INSTDIR\Icons\Si_20x20_256.ico"
-  !insertmacro createMenuShortcut "Start Simulation.lnk" "$INSTDIR\Simulation\bin\runSimulation.bat" " " "$INSTDIR\Simulation\bin" "$INSTDIR\Icons\SI_20x20_256.ico" "$(ShortcutDesc_StartSim)"
-  !insertmacro createMenuShortcut "Stop Simulation.lnk" "$INSTDIR\Simulation\bin\nircmd.exe" "exec hide $\"$INSTDIR\Simulation\bin\jboss-cli.bat$\" --commands=connect,:shutdown" "$INSTDIR\Simulation\bin" "$INSTDIR\Icons\SI_20x20_256.ico" "$(ShortcutDesc_StopSim)"
+  !insertmacro createMenuShortcut "Start Simulation.lnk" "$INSTDIR\Simulation\bin\runSimulation.bat" " " "$INSTDIR\Simulation\bin" "$INSTDIR\Icons\Si_20x20_256.ico" "$(ShortcutDesc_StartSim)"
+  !insertmacro createMenuShortcut "Stop Simulation.lnk" "$INSTDIR\Simulation\bin\nircmd.exe" "exec hide $\"$INSTDIR\Simulation\bin\jboss-cli.bat$\" --commands=connect,:shutdown" "$INSTDIR\Simulation\bin" "$INSTDIR\Icons\Si_20x20_256.ico" "$(ShortcutDesc_StopSim)"
   !insertmacro Runa_SetOutPath "$INSTDIR\Simulation\standalone\wfe.custom"
   ${if} "$simulationWebLinks" == "1"
     ; Login links must be available

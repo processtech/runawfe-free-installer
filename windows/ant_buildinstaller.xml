@@ -24,6 +24,7 @@
 	<property name="nsis.dir" value="${work.dir}/NSIS7"/>
 	<property name="nsis.src.dir" value="${nsis.dir}/src"/>
 	<property name="nsis.work.dir" value="${nsis.dir}/work"/>
+	<property name="wfe.min.jdk1.8" value="true"/>
 
 	<property name="nsis.docs" value="${basedir}/../../../docs/guides"/>
 
@@ -32,13 +33,6 @@
 	</condition>
 	<condition property="wfe.jdk.arch64" value="true">
 		<equals arg1="${wfe.jdk.arch}" arg2="64"/>
-	</condition>
-
-	<condition property="wfe.min.jdk1.7" value="true">
-		<equals arg1="${appserver}" arg2="jboss7"/>
-	</condition>
-	<condition property="wfe.min.jdk1.8" value="true">
-		<equals arg1="${appserver}" arg2="wildfly"/>
 	</condition>
 
 	<target name="set.jdk.arch32" if="wfe.jdk.arch32">
@@ -79,7 +73,6 @@
 		</unzip>
 		<copy todir="${nsis.src.dir}/wfe-simulator" overwrite="true">
 			<fileset dir="${nsis.src.dir}/jboss"/>
-			<fileset dir="${basedir}/../jboss7"/>
 			<fileset dir="${artifacts.dir}/${appserver}/simulation-data"/>
 		</copy>
 		<delete dir="${nsis.src.dir}/jboss"/>
@@ -107,7 +100,6 @@
 		</unzip>
 		<copy todir="${nsis.src.dir}/wfe-server-jboss" overwrite="true">
 			<fileset dir="${nsis.src.dir}/jboss"/>
-			<fileset dir="${basedir}/../jboss7"/>
 		</copy>
 		<delete dir="${nsis.src.dir}/jboss"/>
 
