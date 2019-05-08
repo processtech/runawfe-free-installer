@@ -32,7 +32,6 @@
     <identity name="Report"/>
     <identity name="Vacation"/>
     <identity name="BotDemo"/>
-    <identity name="MSWordReport"/>
     <identity name="TextFileCreation"/>
     <identity name="WebService - who is"/>
     <identity name="officeDocx"/>	            
@@ -70,7 +69,6 @@
     <identity name="TimerDemo"/>	
     <identity name="Vacation"/>
     <identity name="BotDemo"/>
-    <identity name="MSWordReport"/>
     <identity name="TextFileCreation"/>
     <identity name="WebService - who is"/>
     <identity name="officeDocx"/>	            
@@ -121,7 +119,6 @@
   <deployProcessDefinition file="../samples/Report.par" type="Company"/>  
   <deployProcessDefinition file="../samples/Vacation.par" type="Company"/>  
   <deployProcessDefinition file="../samples/BotDemo.par" type="Bots"/>  
-  <deployProcessDefinition file="../samples/MSWordReport.par" type="Bots"/>  
   <deployProcessDefinition file="../samples/TextFileCreation.par" type="Bots"/>  
   <deployProcessDefinition file="../samples/WebService - who is.par" type="Bots"/>  
   <deployProcessDefinition file="../samples/officeDocx.par" type="Bots"/>  
@@ -215,7 +212,6 @@
   <addConfigurationsToBot botStation="localbotstation" name="UniversalBot">
     <botConfiguration name = "dbg" handler="ru.runa.wfe.extension.handler.DebugHandler" configuration="dbg.xml" />
     <botConfiguration name = "create text file" handler="ru.runa.wf.logic.bot.TextReportTaskHandler" configuration="text-report.xml" />
-    <botConfiguration name = "Generate MS Word Report" handler="ru.runa.wf.logic.bot.MSWordReportTaskHandler" configuration="msword-report.xml" />
     <botConfiguration name = "Generate DOCX" handler="ru.runa.wfe.office.doc.DocxHandler" configuration="docx-report.xml" />
   </addConfigurationsToBot>
   <addConfigurationsToBot botStation="localbotstation" name="StopBot">
