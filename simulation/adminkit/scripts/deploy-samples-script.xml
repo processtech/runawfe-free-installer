@@ -33,7 +33,7 @@
     <identity name="Vacation"/>
     <identity name="BotDemo"/>
     <identity name="TextFileCreation"/>
-    <identity name="WebService - who is"/>
+    <identity name="WebService - currency rates"/>
     <identity name="officeDocx"/>	            
     <identity name="InterProcessCommunication.Receiver"/>
     <identity name="InterProcessCommunication.Sender"/>
@@ -70,7 +70,7 @@
     <identity name="Vacation"/>
     <identity name="BotDemo"/>
     <identity name="TextFileCreation"/>
-    <identity name="WebService - who is"/>
+    <identity name="WebService - currency rates"/>
     <identity name="officeDocx"/>	            
     <identity name="InterProcessCommunication.Receiver"/>
     <identity name="InterProcessCommunication.Sender"/>
@@ -120,7 +120,7 @@
   <deployProcessDefinition file="../samples/Vacation.par" type="Company"/>  
   <deployProcessDefinition file="../samples/BotDemo.par" type="Bots"/>  
   <deployProcessDefinition file="../samples/TextFileCreation.par" type="Bots"/>  
-  <deployProcessDefinition file="../samples/WebService - who is.par" type="Bots"/>  
+  <deployProcessDefinition file="../samples/WebService - currency rates.par" type="Bots"/>  
   <deployProcessDefinition file="../samples/officeDocx.par" type="Bots"/>  
   <deployProcessDefinition file="../samples/InterProcessCommunication.Receiver.par" type="Messaging"/>
   <deployProcessDefinition file="../samples/InterProcessCommunication.Sender.par" type="Messaging"/>
