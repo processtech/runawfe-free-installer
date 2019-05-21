@@ -76,7 +76,6 @@ UninstPage instFiles
   call ${PREFIX}ComponentWEB${SUFFIX}
   call ${PREFIX}ComponentGPD${SUFFIX}
   call ${PREFIX}ComponentSIM${SUFFIX}
-  call ${PREFIX}ComponentDOC${SUFFIX}
   call ${PREFIX}ComponentSRV${SUFFIX}
 !macroend
 !macro AllSectionMacroCall MacroName
@@ -84,7 +83,6 @@ UninstPage instFiles
   !insertmacro "${MacroName}" "ComponentWEB"
   !insertmacro "${MacroName}" "ComponentGPD"
   !insertmacro "${MacroName}" "ComponentSIM"
-  !insertmacro "${MacroName}" "ComponentDOC"
   !insertmacro "${MacroName}" "ComponentSRV"
 !macroend
 
@@ -97,7 +95,6 @@ SectionEnd
 !insertmacro generateSection ComponentSIM installSimSeq defaultUninstallSeq uninstallSimSeq SimCustomizableMacro ${RUNA_CLIENT}
 !insertmacro generateOptionalSection ComponentRTN installRTNSeq defaultUninstallSeq defaultUninstallSeq RtnWebBotCustomizableMacro ${RUNA_CLIENT}
 !insertmacro generateOptionalSection ComponentWEB installWebSeq defaultUninstallSeq defaultUninstallSeq RtnWebBotCustomizableMacro ${RUNA_CLIENT}
-!insertmacro generateOptionalSection ComponentDOC installDocSeq defaultUninstallSeq defaultUninstallSeq DefaultCustomizableMacro ${RUNA_CLIENT}
 
 !insertmacro generateSection ComponentSRV installServerSeq uninstallServerSeq defaultUninstallSeq RtnWebBotCustomizableMacro ${RUNA_SERVER}
 
@@ -105,7 +102,6 @@ SectionEnd
   !insertmacro MUI_DESCRIPTION_TEXT "${${ID_PREFIX}ComponentGPD}" $(ComponentGPD_Desc)
   !insertmacro MUI_DESCRIPTION_TEXT "${${ID_PREFIX}ComponentRTN}" $(ComponentRTN_Desc)
   !insertmacro MUI_DESCRIPTION_TEXT "${${ID_PREFIX}ComponentWEB}" $(ComponentWEB_Desc)
-  !insertmacro MUI_DESCRIPTION_TEXT "${${ID_PREFIX}ComponentDOC}" $(ComponentDOC_Desc)
   !insertmacro MUI_DESCRIPTION_TEXT "${${ID_PREFIX}ComponentSIM}" $(ComponentSIM_Desc)
   !insertmacro MUI_DESCRIPTION_TEXT "${${ID_PREFIX}ComponentSRV}" $(ComponentSRV_Desc)
 !insertmacro MUI_FUNCTION_DESCRIPTION_END

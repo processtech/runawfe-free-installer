@@ -7,8 +7,8 @@
 LangString RunaWFE_VersionDiffer ${LANG_ENGLISH} "Your current RunaWFE version is differs from installing version. All components will be changed to new one. Continue?"
 LangString RunaWFE_VersionDiffer ${LANG_RUSSIAN} "Другая версия RunaWFE уже установлена на компьютере. Все установленные компоненты будут заменены на текущие. Продолжить?"
 
-LangString ClientDistr_Desc ${LANG_ENGLISH} "Install RunaWFE client applications. It contains Graphic process designer, Task notifier, Web link to main RunaWFE server, RunaWFE simulation server and documentation."
-LangString ClientDistr_Desc ${LANG_RUSSIAN} "Установить клиентские приложения RunaWFE. Клиенские приложения включают в себя Графический  редактор процессов, Оповещатель задач, тестовый RunaWFE сервер а так же документацию."
+LangString ClientDistr_Desc ${LANG_ENGLISH} "Install RunaWFE client applications. It contains Graphic process designer, Task notifier, Web link to main RunaWFE server and RunaWFE simulation server."
+LangString ClientDistr_Desc ${LANG_RUSSIAN} "Установить клиентские приложения RunaWFE. Клиенские приложения включают в себя Графический  редактор процессов, Оповещатель задач а также тестовый RunaWFE сервер."
 LangString ServerDistr_Desc ${LANG_ENGLISH} "Install main RunaWFE server."
 LangString ServerDistr_Desc ${LANG_RUSSIAN} "Установить основной RunaWFE сервер."
 
@@ -20,8 +20,6 @@ LangString ComponentGPD_Name ${LANG_ENGLISH} "Developer Studio"
 LangString ComponentGPD_Name ${LANG_RUSSIAN} "Среда разработки"
 LangString ComponentSIM_Name ${LANG_ENGLISH} "Simulation server"
 LangString ComponentSIM_Name ${LANG_RUSSIAN} "Сервер-симулятор"
-LangString ComponentDOC_Name ${LANG_ENGLISH} "Documentation"
-LangString ComponentDOC_Name ${LANG_RUSSIAN} "Документация"
 
 LangString ComponentSRV_Name ${LANG_ENGLISH} "Server"
 LangString ComponentSRV_Name ${LANG_RUSSIAN} "Сервер"
@@ -35,8 +33,6 @@ LangString ComponentRTN_Desc ${LANG_ENGLISH} "Task notifier is an application fo
 LangString ComponentRTN_Desc ${LANG_RUSSIAN} "Оповещатель задачи - приложение, предназначенное для автоматической проверки на новые задачи пользователя"
 LangString ComponentWEB_Desc ${LANG_ENGLISH} "Web link to main workflow server"
 LangString ComponentWEB_Desc ${LANG_RUSSIAN} "Ссылка на web интерфейс основного RunaWFE сервера"
-LangString ComponentDOC_Desc ${LANG_ENGLISH} "Documentation for RunaWFE (all components)"
-LangString ComponentDOC_Desc ${LANG_RUSSIAN} "Документация для всех компонентов RunaWFE"
 LangString ComponentSIM_Desc ${LANG_ENGLISH} "RunaWFE simulation server - used for testing purposes"
 LangString ComponentSIM_Desc ${LANG_RUSSIAN} "Тестовый RunaWFE сервер. Предназначен для тестирования процессов и т. п."
 
@@ -50,8 +46,6 @@ LangString ShortcutDesc_GPD ${LANG_ENGLISH} "Developer Studio is an application 
 LangString ShortcutDesc_GPD ${LANG_RUSSIAN} "Среда разработки - приложение, предназначенное для разработки процессов системы RunaWFE"
 LangString ShortcutDesc_RTN ${LANG_ENGLISH} "Task notifier is an application for automatic checks for new tasks"
 LangString ShortcutDesc_RTN ${LANG_RUSSIAN} "Оповещатель задачи - приложение, предназначенное для автоматической проверки на новые задачи пользователя"
-LangString ShortcutDesc_DOC ${LANG_ENGLISH} "Documantation for RunaWFE (all components)"
-LangString ShortcutDesc_DOC ${LANG_RUSSIAN} "Документация для всех компонентов RunaWFE"
 LangString ShortcutDesc_StartSim ${LANG_ENGLISH} "Start RunaWFE simulation server"
 LangString ShortcutDesc_StartSim ${LANG_RUSSIAN} "Запустить тестовый сервер RunaWFE"
 LangString ShortcutDesc_StopSim ${LANG_ENGLISH} "Stop RunaWFE simulation server"

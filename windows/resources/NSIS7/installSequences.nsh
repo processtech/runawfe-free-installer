@@ -244,15 +244,6 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
   !insertmacro createURL "Web interface RunaWFE.URL" "http://$WFEServerAddress:$WFEServerPort/wfe" "$INSTDIR\Icons\C_20x20_256.ico"
 !macroend
 
-!macro installDocSeq
-  SetShellVarContext all
-  !insertmacro Runa_SetOutPath "$INSTDIR\Icons"
-  File ${BuildRoot}\Icons\D_20x20_256.ico
-  !insertmacro Runa_SetOutPath "$INSTDIR\Documentation"
-  File /r ${BuildRoot}\Documentation\*
-  !insertmacro createMenuShortcut "Documentation.lnk" "$INSTDIR\Documentation" "" "$INSTDIR\Documentation" "$INSTDIR\Icons\D_20x20_256.ico" "$(ShortcutDesc_DOC)"
-!macroend
-
 !macro installSimSeq
   SetShellVarContext all
   !insertmacro Runa_SetOutPath "$INSTDIR\Simulation"

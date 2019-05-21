@@ -40,7 +40,6 @@ Function .onSelChange
     !insertmacro isSectionSelected "${${ID_PREFIX}ComponentRTN}" clientNextWndEnable 0
     !insertmacro isSectionSelected "${${ID_PREFIX}ComponentSIM}" clientNextWndEnable 0
     !insertmacro isSectionSelected "${${ID_PREFIX}ComponentWEB}" clientNextWndEnable 0
-    !insertmacro isSectionSelected "${${ID_PREFIX}ComponentDOC}" clientNextWndEnable 0
     EnableWindow $0 0
     return
 clientNextWndEnable:
