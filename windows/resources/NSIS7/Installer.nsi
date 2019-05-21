@@ -59,11 +59,11 @@ Page custom welcomePageInit welcomePageLeave
 page license                                                   ;Show license and set runawfe branding images at installer headers
 Page custom checkRunaVersion checkRunaVersionLeave             ;Check for RunaWFE version and notify on old RunaWFE installed
 Page custom selectInstallationType selectInstallationTypeLeave ;Let user choose installation type - server or client applications
-Page components                                                ;Let user choose components to install
+Page components selectComponents selectComponentsLeave         ;Let user choose components to install
 Page directory                                                 ;Let user choose directory to install
 Page custom installDesktopLinks installDesktopLinksLeave
 Page custom databaseSettings databaseSettingsLeave
-Page custom getHostAndPort getHostAndPortLeave                 ;Main wfe server port and host if selected rtn, web, botstation (and installing client components)
+Page custom getHostAndPort getHostAndPortLeave                 ;Main wfe server port and host if selected rtn, web (and installing client components)
 Page custom checkJDKinit_My checkAndInstallJDK                 ;Check for java and install java
 Page custom setJavaHomeInit_My setJavaHomeleave                ;Check for java_home and install java_home to jdk if necessary
 Page instfiles cleanAllDataFunc "" rebootIfNeeded                            ;Install files
@@ -78,7 +78,6 @@ UninstPage instFiles
   call ${PREFIX}ComponentSIM${SUFFIX}
   call ${PREFIX}ComponentDOC${SUFFIX}
   call ${PREFIX}ComponentSRV${SUFFIX}
-  call ${PREFIX}ComponentBOT${SUFFIX}
 !macroend
 !macro AllSectionMacroCall MacroName
   !insertmacro "${MacroName}" "ComponentRTN"
@@ -87,7 +86,6 @@ UninstPage instFiles
   !insertmacro "${MacroName}" "ComponentSIM"
   !insertmacro "${MacroName}" "ComponentDOC"
   !insertmacro "${MacroName}" "ComponentSRV"
-  !insertmacro "${MacroName}" "ComponentBOT"
 !macroend
 
 Section -FinishComponents
@@ -101,8 +99,7 @@ SectionEnd
 !insertmacro generateOptionalSection ComponentWEB installWebSeq defaultUninstallSeq defaultUninstallSeq RtnWebBotCustomizableMacro ${RUNA_CLIENT}
 !insertmacro generateOptionalSection ComponentDOC installDocSeq defaultUninstallSeq defaultUninstallSeq DefaultCustomizableMacro ${RUNA_CLIENT}
 
-!insertmacro generateSection ComponentSRV installServerSeq uninstallServerSeq defaultUninstallSeq DefaultCustomizableMacro ${RUNA_SERVER}
-!insertmacro generateOptionalSection ComponentBOT installBotstationSeq uninstallServerSeq defaultUninstallSeq RtnWebBotCustomizableMacro ${RUNA_SERVER}
+!insertmacro generateSection ComponentSRV installServerSeq uninstallServerSeq defaultUninstallSeq RtnWebBotCustomizableMacro ${RUNA_SERVER}
 
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
   !insertmacro MUI_DESCRIPTION_TEXT "${${ID_PREFIX}ComponentGPD}" $(ComponentGPD_Desc)
@@ -111,7 +108,6 @@ SectionEnd
   !insertmacro MUI_DESCRIPTION_TEXT "${${ID_PREFIX}ComponentDOC}" $(ComponentDOC_Desc)
   !insertmacro MUI_DESCRIPTION_TEXT "${${ID_PREFIX}ComponentSIM}" $(ComponentSIM_Desc)
   !insertmacro MUI_DESCRIPTION_TEXT "${${ID_PREFIX}ComponentSRV}" $(ComponentSRV_Desc)
-  !insertmacro MUI_DESCRIPTION_TEXT "${${ID_PREFIX}ComponentBOT}" $(ComponentBOT_Desc)
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
 Section "-Installation of ${AppName}" SecAppFiles
@@ -191,7 +187,7 @@ Function .onInit
   !insertmacro MUI_INSTALLOPTIONS_EXTRACT "WelcomePage.ini"
 FunctionEnd
 
-!insertmacro generateOnSelChange ComponentSRV ComponentBOT
+!insertmacro generateOnSelChange
 
 !macro generateInstallBrandingImage UNINSTALLER
 Function ${UNINSTALLER}installBrandingImage
@@ -257,28 +253,30 @@ Function selectInstallationTypeLeave
   !insertmacro MUI_INSTALLOPTIONS_READ $R0 "InstallationType.ini" "Field 1" "State"
   ${if} $R0 = 0
     StrCpy $installationType ${RUNA_SERVER}
-    !insertmacro initServerTypeSelection ComponentSRV ComponentBOT
   ${else}
     StrCpy $installationType ${RUNA_CLIENT}
   ${endif}
   !insertmacro AllSectionFunctionCall "showHideSection_" ""
-  ${if} $installationType == ${RUNA_SERVER}
-    !insertmacro isSectionInstalled "${ID_PREFIX}ComponentBOT" 0 +1
-    !insertmacro setSectionChecked "${${ID_PREFIX}ComponentSRV}"
-  ${endif}
   pop $R0
+FunctionEnd
+
+Function selectComponents
+  ${if} $installationType == ${RUNA_SERVER}
+    Abort
+  ${else}
+    !insertmacro setSectionUnChecked "${${ID_PREFIX}ComponentSRV}"
+  ${endif}
+FunctionEnd
+
+Function selectComponentsLeave
 FunctionEnd
 
 Function checkJDKinit_My
   !insertmacro isSectionSelected "${${ID_PREFIX}ComponentSIM}" installJava 0
   !insertmacro isSectionSelected "${${ID_PREFIX}ComponentSRV}" installJava 0
-  !insertmacro isSectionSelected "${${ID_PREFIX}ComponentBOT}" installJava 0
   !insertmacro isSectionSelected "${${ID_PREFIX}ComponentRTN}" installJava 0
   !insertmacro isSectionSelected "${${ID_PREFIX}ComponentGPD}" installJava 0
   Abort
-  installJDK:
-  StrCpy $IsJDKRequired "yes"
-  StrCpy $IsJDKRequiredSet "yes"
   installJava:
   call checkJDKinit
 FunctionEnd
@@ -286,7 +284,6 @@ FunctionEnd
 Function setJavaHomeInit_My
   !insertmacro isSectionSelected "${${ID_PREFIX}ComponentSIM}" installJAVAPATH 0
   !insertmacro isSectionSelected "${${ID_PREFIX}ComponentSRV}" installJAVAPATH 0
-  !insertmacro isSectionSelected "${${ID_PREFIX}ComponentBOT}" installJAVAPATH 0
   !insertmacro isSectionSelected "${${ID_PREFIX}ComponentRTN}" installJAVAPATH 0
   !insertmacro isSectionSelected "${${ID_PREFIX}ComponentGPD}" installJAVAPATH 0
   Abort
@@ -318,21 +315,11 @@ Function getHostAndPort
     pop $R0
   ${else}
     Push $R0
-    !insertmacro isSectionSelected ${${ID_PREFIX}ComponentBOT} showBotstation 0
-    !insertmacro isSectionSelected ${${ID_PREFIX}ComponentSRV} showServer 0
-    Abort
-    showServer:
     !insertmacro MUI_INSTALLOPTIONS_WRITE "ServerAddressPage.ini" "Field 1" "Text" $(TEXT_SERVERINFO_SERVER)
     !insertmacro MUI_INSTALLOPTIONS_WRITE "ServerAddressPage.ini" "Field 3" "State" "localhost"
     !insertmacro MUI_INSTALLOPTIONS_WRITE "ServerAddressPage.ini" "Field 3" "Flags" "DISABLED"
     !insertmacro MUI_INSTALLOPTIONS_WRITE "ServerAddressPage.ini" "Field 6" "Flags" "DISABLED"
     !insertmacro MUI_INSTALLOPTIONS_DISPLAY_RETURN "ServerAddressPage.ini"
-    goto endHostAndPort
-    showBotstation:
-    !insertmacro MUI_INSTALLOPTIONS_WRITE "ServerAddressPage.ini" "Field 1" "Text" $(TEXT_SERVERINFO_BOTSTATION)
-    !insertmacro MUI_INSTALLOPTIONS_WRITE "ServerAddressPage.ini" "Field 5" "Flags" "DISABLED"
-    !insertmacro MUI_INSTALLOPTIONS_DISPLAY_RETURN "ServerAddressPage.ini"
-    endHostAndPort:
     !insertmacro MUI_INSTALLOPTIONS_WRITE "ServerAddressPage.ini" "Field 3" "State" ""
     !insertmacro MUI_INSTALLOPTIONS_WRITE "ServerAddressPage.ini" "Field 5" "Flags" ""
     !insertmacro MUI_INSTALLOPTIONS_WRITE "ServerAddressPage.ini" "Field 3" "Flags" ""

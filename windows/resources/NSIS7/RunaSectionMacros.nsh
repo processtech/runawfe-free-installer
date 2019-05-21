@@ -32,23 +32,7 @@ var reinstallCustomizable
   CreateDirectory "${path}"
 !macroend
 
-!define SEL_BOTSTATION 1
-!define SEL_SERVER 2
-!define SEL_NONE 0
-var currentSelectedServerComponent
-
-!macro initServerTypeSelection serverSectionLangName botstationSectionLangName
-  !insertmacro isSectionInstalled "${ID_PREFIX}${serverSectionLangName}" "serverInstalled_${sectionLangName}" 0
-  !insertmacro isSectionInstalled "${ID_PREFIX}${botstationSectionLangName}" "botstationInstalled_${sectionLangName}" "serverInstalled_${sectionLangName}"
-  "serverInstalled_${sectionLangName}:"
-  StrCpy $currentSelectedServerComponent ${SEL_SERVER}
-  goto initServerTypeSelectionDone
-  "botstationInstalled_${sectionLangName}:"
-  StrCpy $currentSelectedServerComponent ${SEL_BOTSTATION}
-  initServerTypeSelectionDone:
-!macroend
-
-!macro generateOnSelChange serverSectionLangName botstationSectionLangName
+!macro generateOnSelChange
 Function .onSelChange
   GetDlgItem $0 $HWNDPARENT 1
   ${if} $installationType == ${RUNA_CLIENT}
@@ -63,31 +47,6 @@ clientNextWndEnable:
     EnableWindow $0 1
     return
   ${endif}
-  !insertmacro isSectionSelected "${${ID_PREFIX}ComponentSRV}" serverNextWndEnable 0
-  !insertmacro isSectionSelected "${${ID_PREFIX}ComponentBOT}" serverNextWndEnable 0
-  EnableWindow $0 0
-  goto +2
-serverNextWndEnable:
-  EnableWindow $0 1
-
-  ${if} $currentSelectedServerComponent == ${SEL_NONE}
-  ${elseif} $currentSelectedServerComponent == ${SEL_SERVER}
-    !insertmacro isSectionSelected "${${ID_PREFIX}${botstationSectionLangName}}" 0 onSelChangeupdateVar
-    !insertmacro setSectionUnChecked "${${ID_PREFIX}${serverSectionLangName}}"
-  ${elseif} $currentSelectedServerComponent == ${SEL_BOTSTATION}
-    !insertmacro isSectionSelected "${${ID_PREFIX}${serverSectionLangName}}" 0 onSelChangeupdateVar
-    !insertmacro setSectionUnChecked "${${ID_PREFIX}${botstationSectionLangName}}"
-  ${endif}
-  "onSelChangeupdateVar:"
-  !insertmacro isSectionSelected "${${ID_PREFIX}${serverSectionLangName}}" 0 onSelChangeBotCheck
-  StrCpy $currentSelectedServerComponent ${SEL_SERVER}
-  return
-  onSelChangeBotCheck:
-  !insertmacro isSectionSelected "${${ID_PREFIX}${botstationSectionLangName}}" 0 onSelChangeNoneCheck
-  StrCpy $currentSelectedServerComponent ${SEL_BOTSTATION}
-  return
-  onSelChangeNoneCheck:
-  StrCpy $currentSelectedServerComponent ${SEL_NONE}
 FunctionEnd
 !macroend
 

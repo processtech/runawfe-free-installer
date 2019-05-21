@@ -9,8 +9,8 @@ LangString RunaWFE_VersionDiffer ${LANG_RUSSIAN} "Другая версия RunaWFE уже уста
 
 LangString ClientDistr_Desc ${LANG_ENGLISH} "Install RunaWFE client applications. It contains Graphic process designer, Task notifier, Web link to main RunaWFE server, RunaWFE simulation server and documentation."
 LangString ClientDistr_Desc ${LANG_RUSSIAN} "Установить клиентские приложения RunaWFE. Клиенские приложения включают в себя Графический  редактор процессов, Оповещатель задач, тестовый RunaWFE сервер а так же документацию."
-LangString ServerDistr_Desc ${LANG_ENGLISH} "Install RunaWFE server applications. It contains main RunaWFE server and remote botstation."
-LangString ServerDistr_Desc ${LANG_RUSSIAN} "Установить серверные приложения RunaWFE. Серверные приложения включают в себя основной RunaWFE сервер и удаленную ботстанцию."
+LangString ServerDistr_Desc ${LANG_ENGLISH} "Install main RunaWFE server."
+LangString ServerDistr_Desc ${LANG_RUSSIAN} "Установить основной RunaWFE сервер."
 
 LangString ComponentRTN_Name ${LANG_ENGLISH} "Task notifier"
 LangString ComponentRTN_Name ${LANG_RUSSIAN} "Оповещатель задач"
@@ -25,8 +25,6 @@ LangString ComponentDOC_Name ${LANG_RUSSIAN} "Документация"
 
 LangString ComponentSRV_Name ${LANG_ENGLISH} "Server"
 LangString ComponentSRV_Name ${LANG_RUSSIAN} "Сервер"
-LangString ComponentBOT_Name ${LANG_ENGLISH} "Remote botstation"
-LangString ComponentBOT_Name ${LANG_RUSSIAN} "Удаленная ботстанция"
 
 LangString ComponentJBOSS_Name ${LANG_ENGLISH} ""
 LangString ComponentJBOSS_Name ${LANG_RUSSIAN} ""
@@ -44,8 +42,6 @@ LangString ComponentSIM_Desc ${LANG_RUSSIAN} "Тестовый RunaWFE сервер. Предназна
 
 LangString ComponentSRV_Desc ${LANG_ENGLISH} "RunaWFE server"
 LangString ComponentSRV_Desc ${LANG_RUSSIAN} "Сервер RunaWFE"
-LangString ComponentBOT_Desc ${LANG_ENGLISH} "RunaWFE remote botstation server"
-LangString ComponentBOT_Desc ${LANG_RUSSIAN} "Удаленный сервер RunaWFE для запуска ботов"
 
 LangString ComponentJBOSS_Desc ${LANG_ENGLISH} ""
 LangString ComponentJBOSS_Desc ${LANG_RUSSIAN} ""
@@ -81,8 +77,6 @@ LangString rebootIsRequired ${LANG_RUSSIAN} "Для корректной работы рекомендуется
   LangString TEXT_SERVERINFO ${LANG_RUSSIAN} "Некоторым из выбранных компонентов требуется адрес основного RunaWFE сервера. Введите имя сервера (в виде DNS имени или IP адреса) и web порт основного сервера RunaWFE"
   LangString TEXT_SERVERINFO_SERVER ${LANG_ENGLISH} "Select a port for RunaWFE web interface"
   LangString TEXT_SERVERINFO_SERVER ${LANG_RUSSIAN} "Выберите порт, на котором будет доступен Web интерфейс RunaWFE"
-  LangString TEXT_SERVERINFO_BOTSTATION ${LANG_ENGLISH} "Enter host name (in form DNS name or ip address) of main RunaWFE server"
-  LangString TEXT_SERVERINFO_BOTSTATION ${LANG_RUSSIAN} "Введите имя сервера (в виде DNS имени или IP адреса) RunaWFE"
   LangString TEXT_SERVERINFO_HOST ${LANG_ENGLISH} "Host:"
   LangString TEXT_SERVERINFO_HOST ${LANG_RUSSIAN} "Хост:"
   LangString TEXT_SERVERINFO_PORT ${LANG_ENGLISH} "Port:"
