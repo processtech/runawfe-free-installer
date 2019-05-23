@@ -274,23 +274,6 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
   ${endif}
 !macroend
 
-!macro installBotstationSeq
-  SetShellVarContext all
-  !insertmacro Runa_SetOutPath "$INSTDIR\WFEServer"
-  !insertmacro installJbossSeq WFEServer
-  !insertmacro Runa_SetOutPath_INSIDE_CURRENTLOG "$INSTDIR\WFEServer\standalone\deployments"
-  File /r "${BuildRoot}\wfe-botstation-config\standalone\deployments\runawfe.ear"
-  !insertmacro Runa_SetOutPath_INSIDE_CURRENTLOG "$INSTDIR\WFEServer\standalone\wfe.custom"
-  Push "wfe_server"                            #text to be replaced
-  Push $WFEServerAddress                       #replace with
-  Push "$INSTDIR\WFEServer\standalone\deployments\runawfe.ear\af_delegate.properties"   #file to replace in
-  Call AdvReplaceInFile                        #call find and replace function
-  !insertmacro Runa_SetOutPath_INSIDE_CURRENTLOG "$INSTDIR\WFEServer\bin"
-  ExecShell open "$INSTDIR\WFEServer\bin\service.bat" install SW_HIDE
-  Sleep 3000
-  SetRebootFlag true
-!macroend
-
 !macro installServerSeq
   SetShellVarContext all
   !insertmacro Runa_SetOutPath "$INSTDIR\WFEServer"

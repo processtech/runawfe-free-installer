@@ -258,9 +258,8 @@ FunctionEnd
 
 Function selectComponents
   ${if} $installationType == ${RUNA_SERVER}
+    !insertmacro setSectionChecked "${${ID_PREFIX}ComponentSRV}"
     Abort
-  ${else}
-    !insertmacro setSectionUnChecked "${${ID_PREFIX}ComponentSRV}"
   ${endif}
 FunctionEnd
 
