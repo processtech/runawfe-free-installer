@@ -209,7 +209,7 @@
     <botConfiguration name = "Generate DOCX" handler="ru.runa.wfe.office.doc.DocxHandler" configuration="docx-report.xml" />
   </addConfigurationsToBot>
   <addConfigurationsToBot botStation="localbotstation" name="WebServiceBot">
-    <botConfiguration name="Load whois information" handler="ru.runa.wf.logic.bot.WebServiceTaskHandler" configuration="soap-whois.xml"/>
+    <botConfiguration name="Load currency rates" handler="ru.runa.wf.logic.bot.WebServiceTaskHandler" configuration="Load currency rates.conf"/>
   </addConfigurationsToBot>
   
   <addPermissions type="BOTSTATIONS" executor="UniversalBot">
