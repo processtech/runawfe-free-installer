@@ -103,15 +103,6 @@
 		</copy>
 		<delete dir="${nsis.src.dir}/jboss"/>
 
-		<unzip dest="${nsis.src.dir}" overwrite="true">
-			<fileset dir="${artifacts.dir}/${appserver}/app-botstation">
-				<include name="wfe-appserver-remotebots*.zip"/>
-			</fileset>
-		</unzip>
-		<copy todir="${nsis.src.dir}/wfe-botstation-config" overwrite="true">
-			<fileset dir="${nsis.src.dir}/jboss"/>
-		</copy>
-
 		<copy file="${distr.root.dir}/simulation.properties" tofile="${nsis.src.dir}/simulation.properties"/>
 		<copy file="${nsis.settings}/nircmd.exe" tofile="${nsis.src.dir}/wfe-simulator/bin/nircmd.exe"/>
 		<copy file="${nsis.settings}/sleep.exe" tofile="${nsis.src.dir}/wfe-simulator/bin/sleep.exe"/>

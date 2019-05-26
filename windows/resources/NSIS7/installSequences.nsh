@@ -244,15 +244,6 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
   !insertmacro createURL "Web interface RunaWFE.URL" "http://$WFEServerAddress:$WFEServerPort/wfe" "$INSTDIR\Icons\C_20x20_256.ico"
 !macroend
 
-!macro installDocSeq
-  SetShellVarContext all
-  !insertmacro Runa_SetOutPath "$INSTDIR\Icons"
-  File ${BuildRoot}\Icons\D_20x20_256.ico
-  !insertmacro Runa_SetOutPath "$INSTDIR\Documentation"
-  File /r ${BuildRoot}\Documentation\*
-  !insertmacro createMenuShortcut "Documentation.lnk" "$INSTDIR\Documentation" "" "$INSTDIR\Documentation" "$INSTDIR\Icons\D_20x20_256.ico" "$(ShortcutDesc_DOC)"
-!macroend
-
 !macro installSimSeq
   SetShellVarContext all
   !insertmacro Runa_SetOutPath "$INSTDIR\Simulation"
@@ -281,23 +272,6 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
   ${else}
     File "${BuildRoot}\simulation.properties"
   ${endif}
-!macroend
-
-!macro installBotstationSeq
-  SetShellVarContext all
-  !insertmacro Runa_SetOutPath "$INSTDIR\WFEServer"
-  !insertmacro installJbossSeq WFEServer
-  !insertmacro Runa_SetOutPath_INSIDE_CURRENTLOG "$INSTDIR\WFEServer\standalone\deployments"
-  File /r "${BuildRoot}\wfe-botstation-config\standalone\deployments\runawfe.ear"
-  !insertmacro Runa_SetOutPath_INSIDE_CURRENTLOG "$INSTDIR\WFEServer\standalone\wfe.custom"
-  Push "wfe_server"                            #text to be replaced
-  Push $WFEServerAddress                       #replace with
-  Push "$INSTDIR\WFEServer\standalone\deployments\runawfe.ear\af_delegate.properties"   #file to replace in
-  Call AdvReplaceInFile                        #call find and replace function
-  !insertmacro Runa_SetOutPath_INSIDE_CURRENTLOG "$INSTDIR\WFEServer\bin"
-  ExecShell open "$INSTDIR\WFEServer\bin\service.bat" install SW_HIDE
-  Sleep 3000
-  SetRebootFlag true
 !macroend
 
 !macro installServerSeq
