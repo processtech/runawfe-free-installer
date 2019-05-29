@@ -16,7 +16,6 @@
   <createActor name="attila" fullName="Attila the King of Huns" password="123" />
   <createActor name="caligula" fullName="Gaius Iulius Germanicus" password="123" />
   <createActor name="UniversalBot" fullName="Bot for a Demo" password="321" />
-  <createActor name="StopBot" fullName="Bot for stopping old processes" password="321" />
   <createActor name="WebServiceBot" fullName="Bot for executing web service requests" password="321" />
   
   <!-- All processes defined in demo stand. All actors must has permission to read this processes. -->
@@ -33,7 +32,7 @@
     <identity name="Vacation"/>
     <identity name="BotDemo"/>
     <identity name="TextFileCreation"/>
-    <identity name="WebService - who is"/>
+    <identity name="WebService - currency rates"/>
     <identity name="officeDocx"/>	            
     <identity name="InterProcessCommunication.Receiver"/>
     <identity name="InterProcessCommunication.Sender"/>
@@ -70,7 +69,7 @@
     <identity name="Vacation"/>
     <identity name="BotDemo"/>
     <identity name="TextFileCreation"/>
-    <identity name="WebService - who is"/>
+    <identity name="WebService - currency rates"/>
     <identity name="officeDocx"/>	            
     <identity name="InterProcessCommunication.Receiver"/>
     <identity name="InterProcessCommunication.Sender"/>
@@ -120,7 +119,7 @@
   <deployProcessDefinition file="../samples/Vacation.par" type="Company"/>  
   <deployProcessDefinition file="../samples/BotDemo.par" type="Bots"/>  
   <deployProcessDefinition file="../samples/TextFileCreation.par" type="Bots"/>  
-  <deployProcessDefinition file="../samples/WebService - who is.par" type="Bots"/>  
+  <deployProcessDefinition file="../samples/WebService - currency rates.par" type="Bots"/>  
   <deployProcessDefinition file="../samples/officeDocx.par" type="Bots"/>  
   <deployProcessDefinition file="../samples/InterProcessCommunication.Receiver.par" type="Messaging"/>
   <deployProcessDefinition file="../samples/InterProcessCommunication.Sender.par" type="Messaging"/>
@@ -161,11 +160,7 @@
     <namedIdentitySet name="genericProcesses" type="ProcessDefinition"/>
     <permission name="START"/>
   </addPermissions>
-  
-  <addExecutorsToGroup name="Administrators">
-    <executor name="StopBot"/>
-  </addExecutorsToGroup>
-  
+    
   <addExecutorsToGroup name="manager">
     <executor name="julius"/>
     <executor name="nero"/>
@@ -207,24 +202,17 @@
   
   <createBotStation name="localbotstation" address="localhost:10099" />
   <createBot botStation="localbotstation" name="UniversalBot" password="321" startTimeout="200"/>
-  <createBot botStation="localbotstation" name="StopBot" password="321" startTimeout="200"/>
   <createBot botStation="localbotstation" name="WebServiceBot" password="321" startTimeout="200"/>
   <addConfigurationsToBot botStation="localbotstation" name="UniversalBot">
     <botConfiguration name = "dbg" handler="ru.runa.wfe.extension.handler.DebugHandler" configuration="dbg.xml" />
     <botConfiguration name = "create text file" handler="ru.runa.wf.logic.bot.TextReportTaskHandler" configuration="text-report.xml" />
     <botConfiguration name = "Generate DOCX" handler="ru.runa.wfe.office.doc.DocxHandler" configuration="docx-report.xml" />
   </addConfigurationsToBot>
-  <addConfigurationsToBot botStation="localbotstation" name="StopBot">
-    <botConfiguration name="state1" handler="ru.runa.wf.logic.bot.CancelOldProcesses" configuration=""/>
-  </addConfigurationsToBot>
   <addConfigurationsToBot botStation="localbotstation" name="WebServiceBot">
-    <botConfiguration name="Load whois information" handler="ru.runa.wf.logic.bot.WebServiceTaskHandler" configuration="soap-whois.xml"/>
+    <botConfiguration name="Load currency rates" handler="ru.runa.wf.logic.bot.WebServiceTaskHandler" configuration="Load currency rates.conf"/>
   </addConfigurationsToBot>
   
   <addPermissions type="BOTSTATIONS" executor="UniversalBot">
-    <permission name="ALL"/>
-  </addPermissions>
-  <addPermissions type="BOTSTATIONS" executor="StopBot">
     <permission name="ALL"/>
   </addPermissions>
   <addPermissions type="BOTSTATIONS" executor="WebServiceBot">
