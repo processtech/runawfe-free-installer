@@ -1,9 +1,9 @@
 !define AppName "RunaWFE"
-!define AppVersion "4.4.0"
+!define AppVersion "%VERSION%"
 !define ShortName "RunaWFE"
 !define Vendor "Runa"
 
-!define BuildRoot "C:\Runa\autobuild\build\source\projects\installer\windows/target/NSIS7/src"
+!define BuildRoot "%BUILD_ROOT%"
 !define MUI_ICON "${BuildRoot}\icons\wf_48x128.ico"
 !define MUI_UNICON "${BuildRoot}\icons\wf_48x128.ico"
 !define MUI_ABORTWARNING
@@ -50,7 +50,7 @@ ReserveFile "WelcomePage.ini"
 !insertmacro MUI_RESERVEFILE_INSTALLOPTIONS
 
 CRCCheck off
-BrandingText "RunaWFE Free 4.4.0"
+BrandingText "RunaWFE Free %VERSION%"
 AddBrandingImage left -10
 
 
@@ -128,11 +128,11 @@ Section "-Installation of ${AppName}" SecAppFiles
   CreateShortCut "$SMPROGRAMS\${AppName}\Uninstall.lnk" "$INSTDIR\uninstall.exe" "" "$INSTDIR\uninstall.exe" 0
 
   FileOpen $0 "$INSTDIR\version" w
-  FileWrite $0 "4.4.0"
+  FileWrite $0 "%VERSION%"
   FileClose $0
 
-  WriteRegStr HKLM ${INSTDIR_REG_KEY} "DisplayName" "RunaWFE Free 4.4.0"
-  WriteRegStr HKLM ${INSTDIR_REG_KEY} "Version" "4.4.0"
+  WriteRegStr HKLM ${INSTDIR_REG_KEY} "DisplayName" "RunaWFE Free %VERSION%"
+  WriteRegStr HKLM ${INSTDIR_REG_KEY} "Version" "%VERSION%"
   WriteRegStr HKLM ${INSTDIR_REG_KEY} "QuietUninstallString" "$\"$INSTDIR\uninstall.exe$\""
   WriteRegStr HKLM ${INSTDIR_REG_KEY} "UninstallString" "$\"$INSTDIR\uninstall.exe$\""
 SectionEnd
