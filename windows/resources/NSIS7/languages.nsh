@@ -4,8 +4,8 @@
 !insertmacro MUI_LANGUAGE "English"
 !insertmacro MUI_LANGUAGE "Russian"
 
-LangString RunaWFE_VersionDiffer ${LANG_ENGLISH} "Your current RunaWFE version is differs from installing version. All components will be changed to new one. Continue?"
-LangString RunaWFE_VersionDiffer ${LANG_RUSSIAN} "Другая версия RunaWFE уже установлена на компьютере. Все установленные компоненты будут заменены на текущие. Продолжить?"
+LangString RunaWFE_VersionDiffer ${LANG_ENGLISH} "Your current RunaWFE Free version is differs from installing version. All components will be changed to new one. Continue?"
+LangString RunaWFE_VersionDiffer ${LANG_RUSSIAN} "Другая версия RunaWFE Free уже установлена на компьютере. Все установленные компоненты будут заменены на текущие. Продолжить?"
 
 LangString ClientDistr_Desc ${LANG_ENGLISH} "Install RunaWFE Free client applications. It contains Graphic process designer, Task notifier, Web link to main RunaWFE Free server and RunaWFE Free simulation server."
 LangString ClientDistr_Desc ${LANG_RUSSIAN} "Установить клиентские приложения RunaWFE Free. Клиенские приложения включают в себя Графический  редактор процессов, Оповещатель задач а также тестовый RunaWFE Free сервер."
@@ -51,11 +51,11 @@ LangString ShortcutDesc_StartSim ${LANG_RUSSIAN} "Запустить тестовый сервер Runa
 LangString ShortcutDesc_StopSim ${LANG_ENGLISH} "Stop RunaWFE Free simulation server"
 LangString ShortcutDesc_StopSim ${LANG_RUSSIAN} "Остановить тестовый сервер RunaWFE Free"
 
-LangString DesctopLinks ${LANG_ENGLISH} "Install links to runawfe applications at desktop"
-LangString DesctopLinks ${LANG_RUSSIAN} "Добавить на рабочий стол ссылки приложений runawfe"
-LangString installNewDatabase ${LANG_ENGLISH} "Delete old runawfe database and install new database for simulation server (with demo processes)"
+LangString DesctopLinks ${LANG_ENGLISH} "Install links to runawfe free applications at desktop"
+LangString DesctopLinks ${LANG_RUSSIAN} "Добавить на рабочий стол ссылки приложений runawfe free"
+LangString installNewDatabase ${LANG_ENGLISH} "Delete old runawfe free database and install new database for simulation server (with demo processes)"
 LangString installNewDatabase ${LANG_RUSSIAN} "Удалить старую базу данных сервера-симулятора и поставить новую базу данных (с демонстрационными процессами)"
-LangString installNewWorkspace ${LANG_ENGLISH} "Delete old (from previous installations) runawfe demo processes and install new"
+LangString installNewWorkspace ${LANG_ENGLISH} "Delete old (from previous installations) runawfe free demo processes and install new"
 LangString installNewWorkspace ${LANG_RUSSIAN} "Удалить старые (оставшиеся после предыдущих установок) демонстрационные процессы и установить новые"
 LangString installSimulationLoginLinks ${LANG_ENGLISH} "Install web links to enter simulation as demo user"
 LangString installSimulationLoginLinks ${LANG_RUSSIAN} "Установить ссылки в web интерфейсе для входа в симулятор под демо пользователями"
@@ -68,7 +68,7 @@ LangString rebootIsRequired ${LANG_ENGLISH} "Reboot is required for correct serv
 LangString rebootIsRequired ${LANG_RUSSIAN} "Для корректной работы рекомендуется перезагрузить компьютер. Перезагрузить немедленно?"
 
   LangString TEXT_SERVERINFO ${LANG_ENGLISH} "Some of selected components need additional information. Type host name (in DNS notation or IP address) and port of main RunaWFE Free server."
-  LangString TEXT_SERVERINFO ${LANG_RUSSIAN} "Некоторым из выбранных компонентов требуется адрес основного RunaWFE сервера. Введите имя сервера (в виде DNS имени или IP адреса) и web порт основного сервера RunaWFE Free"
+  LangString TEXT_SERVERINFO ${LANG_RUSSIAN} "Некоторым из выбранных компонентов требуется адрес основного RunaWFE Free сервера. Введите имя сервера (в виде DNS имени или IP адреса) и web порт основного сервера RunaWFE Free"
   LangString TEXT_SERVERINFO_SERVER ${LANG_ENGLISH} "Select a port for RunaWFE Free web interface"
   LangString TEXT_SERVERINFO_SERVER ${LANG_RUSSIAN} "Выберите порт, на котором будет доступен Web интерфейс RunaWFE Free"
   LangString TEXT_SERVERINFO_HOST ${LANG_ENGLISH} "Host:"
@@ -82,8 +82,8 @@ LangString rebootIsRequired ${LANG_RUSSIAN} "Для корректной работы рекомендуется
 
   LangString TEXT_JAVAHOME_TITLE ${LANG_ENGLISH} "JAVA_HOME system variable installation"
   LangString TEXT_JAVAHOME_TITLE ${LANG_RUSSIAN} "Установка систмной переменной JAVA_HOME"
-  LangString TEXT_JAVAHOME_REASON ${LANG_ENGLISH} "It's strongly recomended to point system variable JAVA_HOME to Java Development Kit (not Java Runtime Environment) for correct working of RunaWFE server. Set checkbox to point JAVA_HOME to Java."
-  LangString TEXT_JAVAHOME_REASON ${LANG_RUSSIAN} "Для корректной работы сервера RunaWFE рекомендуется установить системную переменную JAVA_HOME на Java Development Kit. Установите флажок, чтобы создать JAVA_HOME"
+  LangString TEXT_JAVAHOME_REASON ${LANG_ENGLISH} "It's strongly recomended to point system variable JAVA_HOME to Java Development Kit (not Java Runtime Environment) for correct working of RunaWFE Free server. Set checkbox to point JAVA_HOME to Java."
+  LangString TEXT_JAVAHOME_REASON ${LANG_RUSSIAN} "Для корректной работы сервера RunaWFE Free рекомендуется установить системную переменную JAVA_HOME на Java Development Kit. Установите флажок, чтобы создать JAVA_HOME"
 
 LangString JDK_INSTALLREASON ${LANG_ENGLISH} "Some of your components need Java to work. JRE will be installed."
 LangString JDK_INSTALLREASON ${LANG_RUSSIAN} "Некоторым из выбранных компонентов для запуска требуется JRE. Установите JRE на следующем шаге."
@@ -105,8 +105,8 @@ LangString LINK_PROJECT_SITE ${LANG_RUSSIAN} "http://www.runawfe.org/rus"
 
 LangString TEXT_BEGIN_INSTALLATION ${LANG_ENGLISH} "Install"
 LangString TEXT_BEGIN_INSTALLATION ${LANG_RUSSIAN} "Установить"
-LangString TEXT_ANNOTATION_INSTALLATION ${LANG_ENGLISH} "Runa WFE is a free solution for enterprise business processes management. It is delivered under LGPL licence. RunaWFE consists of JBOSS-JBPM workflow core and a set of additional components. The main goal of these components is to provide convenience to the end-user.\n\nFor a first quick glimpse of the system it is recommended to install only client components. Client component $\"Simulation server$\" is a version of RunaWFE server adopted for a working station. Start $\"Simulation server$\" in order to start the system. This can be done from the menu option Start/Programs/RunaWFE/Start Simulation. Next step is to run web-interface by choosing Start/Programs/RunaWFE/Simulation Web Interface.\n\nAdministrator's default login is $\"Administrator$\", password is $\"wf$\"."
-LangString TEXT_ANNOTATION_INSTALLATION ${LANG_RUSSIAN} "RunaWFE - это свободное решение по управлению бизнес процессами предприятия. Распространяется под открытой лицензией LGPL. RunaWFE состоит из workflow ядра JBOSS-JBPM и набора дополнительных компонентов, задача которых - обеспечить удобную работу конечного пользователя.\n\nДля первого знакомства с системой рекомендуется установить на компьютер только  клиентские компоненты. Клиентский компонент $\"Сервер-симулятор$\" является адаптированной для рабочей станции версией RunaWFE сервера.\n\nДля начала работы с системой запустите $\"Сервер-симулятор$\". Это можно сделать командой меню Пуск/Программы/RunaWFE/Start Simulation. Далее запустите web-интерфейс симулятора - Пуск/Программы/RunaWFE/Simulation Web Interface.\n\nЛогин администратора по умолчанию – $\"Administrator$\", пароль– $\"wf$\"."
+LangString TEXT_ANNOTATION_INSTALLATION ${LANG_ENGLISH} "Runa WFE Free is a free solution for enterprise business processes management. It is delivered under LGPL licence.\n\nFor a first quick glimpse of the system it is recommended to install only client components. Client component $\"Simulation server$\" is a version of RunaWFE Free server adopted for a working station. Start $\"Simulation server$\" in order to start the system. This can be done from the menu option Start/Programs/RunaWFE Free/Start Simulation. Next step is to run web-interface by choosing Start/Programs/RunaWFE Free/Simulation Web Interface.\n\nAdministrator's default login is $\"Administrator$\", password is $\"wf$\"."
+LangString TEXT_ANNOTATION_INSTALLATION ${LANG_RUSSIAN} "RunaWFE Free - это свободное решение по управлению бизнес процессами предприятия. Распространяется под открытой лицензией LGPL.\n\nДля первого знакомства с системой рекомендуется установить на компьютер только  клиентские компоненты. Клиентский компонент $\"Сервер-симулятор$\" является адаптированной для рабочей станции версией RunaWFE Free сервера.\n\nДля начала работы с системой запустите $\"Сервер-симулятор$\". Это можно сделать командой меню Пуск/Программы/RunaWFE Free/Start Simulation. Далее запустите web-интерфейс симулятора - Пуск/Программы/RunaWFE Free/Simulation Web Interface.\n\nЛогин администратора по умолчанию – $\"Administrator$\", пароль– $\"wf$\"."
 
 LangString CloseBtn ${LANG_ENGLISH} "Close"
 LangString CloseBtn ${LANG_RUSSIAN} "Готово"

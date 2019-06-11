@@ -1,4 +1,4 @@
-!define AppName "RunaWFE"
+!define AppName "RunaWFE Free"
 !define AppVersion "%VERSION%"
 !define ShortName "RunaWFE"
 !define Vendor "Runa"
@@ -36,9 +36,9 @@
 !include "databaseSettings.nsh"
 !include x64.nsh
 
-Name "${AppName} Free"
+Name "${AppName}"
 OutFile "setup.exe"
-InstallDir "$PROGRAMFILES\${SHORTNAME}"
+InstallDir "$PROGRAMFILES\${AppName}"
 InstallDirRegKey HKLM "SOFTWARE\${Vendor}\${ShortName}" ""
 
 ReserveFile "InstallationType.ini"
@@ -150,7 +150,7 @@ Section "Uninstall"
 
   ; remove registry keys
   DeleteRegKey HKLM "${INSTDIR_REG_KEY}"
-  DeleteRegKey HKLM  "SOFTWARE\${Vendor}\${AppName}"
+  DeleteRegKey HKLM  "SOFTWARE\${Vendor}\${ShortName}"
   ; remove shortcuts, if any.
   RMDir /r "$SMPROGRAMS\${AppName}"
   ; remove files
