@@ -7,8 +7,8 @@
 LangString RunaWFE_VersionDiffer ${LANG_ENGLISH} "Your current RunaWFE version is differs from installing version. All components will be changed to new one. Continue?"
 LangString RunaWFE_VersionDiffer ${LANG_RUSSIAN} "Другая версия RunaWFE уже установлена на компьютере. Все установленные компоненты будут заменены на текущие. Продолжить?"
 
-LangString ClientDistr_Desc ${LANG_ENGLISH} "Install RunaWFE client applications. It contains Graphic process designer, Task notifier, Web link to main RunaWFE server and RunaWFE simulation server."
-LangString ClientDistr_Desc ${LANG_RUSSIAN} "Установить клиентские приложения RunaWFE. Клиенские приложения включают в себя Графический  редактор процессов, Оповещатель задач а также тестовый RunaWFE сервер."
+LangString ClientDistr_Desc ${LANG_ENGLISH} "Install RunaWFE client applications. It contains Developer Studio, Task notifier, Web link to main RunaWFE server and RunaWFE simulation server."
+LangString ClientDistr_Desc ${LANG_RUSSIAN} "Установить клиентские приложения RunaWFE. Клиенские приложения включают в себя Среду разработки, Оповещатель задач а также тестовый RunaWFE сервер."
 LangString ServerDistr_Desc ${LANG_ENGLISH} "Install main RunaWFE server."
 LangString ServerDistr_Desc ${LANG_RUSSIAN} "Установить основной RunaWFE сервер."
 
