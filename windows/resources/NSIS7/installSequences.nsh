@@ -278,7 +278,7 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
   SetShellVarContext all
   !insertmacro Runa_SetOutPath "$INSTDIR\WFEServer"
   !insertmacro installJbossSeq WFEServer
-  !insertmacro Runa_SetOutPath_INSIDE_CURRENTLOG "$INSTDIR\WFEServer\standalone\deployments"
+  !insertmacro Runa_SetOutPath_INSIDE_CURRENTLOG "$INSTDIR\WFEServer\standalone"
   File /r "${BuildRoot}\wfe-server-config\standalone\deployments" # TODO
 
   Push "8080"                               #text to be replaced
