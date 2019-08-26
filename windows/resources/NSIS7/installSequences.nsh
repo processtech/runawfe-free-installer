@@ -280,6 +280,7 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
   !insertmacro installJbossSeq WFEServer
   !insertmacro Runa_SetOutPath_INSIDE_CURRENTLOG "$INSTDIR\WFEServer\standalone"
   File /r "${BuildRoot}\wfe-server-config\standalone\deployments" # TODO
+  CopyFiles /SILENT "${BuildRoot}\wildfly\app-server\standalone\wfe.data-sources" "$INSTDIR\WFEServer\standalone"
 
   Push "8080"                               #text to be replaced
   Push $WFEServerPort                       #replace with
