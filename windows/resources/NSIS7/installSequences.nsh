@@ -66,9 +66,11 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
   FileWrite $0 "del /F /S /Q $\"%APPDATA%\runawfe\jboss\configuration$\"$\r$\n"
   FileWrite $0 "del /F /S /Q $\"%APPDATA%\runawfe\jboss\deployments$\"$\r$\n"
   FileWrite $0 "del /F /S /Q $\"%APPDATA%\runawfe\jboss\wfe.custom$\"$\r$\n"
+  FileWrite $0 "del /F /S /Q $\"%APPDATA%\runawfe\jboss\wfe.data-sources$\"$\r$\n"
   FileWrite $0 "xcopy ..\standalone\configuration $\"%APPDATA%\runawfe\jboss\configuration$\" /D /I /S /Y /R$\r$\n"
   FileWrite $0 "xcopy ..\standalone\deployments $\"%APPDATA%\runawfe\jboss\deployments$\" /D /I /S /Y /R$\r$\n"
   FileWrite $0 "xcopy ..\standalone\wfe.custom $\"%APPDATA%\runawfe\jboss\wfe.custom$\" /D /I /S /Y /R$\r$\n"
+  FileWrite $0 "xcopy ..\standalone\wfe.data-sources $\"%APPDATA%\runawfe\jboss\wfe.data-sources$\" /D /I /S /Y /R$\r$\n"
   ${if} "$newSimulationDatabase" == "1"
     FileWrite $0 "if not exist $\"%APPDATA%\runawfe\jboss\runawfe-ver-$2$\" ($\r$\n"
     FileWrite $0 "  del /F /S /Q $\"%APPDATA%\runawfe\jboss\data$\"$\r$\n"
@@ -280,7 +282,7 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
   !insertmacro installJbossSeq WFEServer
   !insertmacro Runa_SetOutPath_INSIDE_CURRENTLOG "$INSTDIR\WFEServer\standalone"
   File /r "${BuildRoot}\wfe-server-config\standalone\deployments" # TODO
-  CopyFiles /SILENT "${BuildRoot}\wildfly\app-server\standalone\wfe.data-sources" "$INSTDIR\WFEServer\standalone"
+  File /r "${BuildRoot}\wildfly\app-server\standalone\wfe.data-sources"
 
   Push "8080"                               #text to be replaced
   Push $WFEServerPort                       #replace with
@@ -400,11 +402,11 @@ StrCpy $1 '<datasource jndi-name="java:jboss/datasources/OracleDS" pool-name="Or
   File /r "${BuildRoot}\wfe-server-jboss\*"
   !insertmacro Runa_SetOutPath_INSIDE_CURRENTLOG "$INSTDIR\${rootDir}\bin"
   File /r "${BuildRoot}\jboss-native\*"
-  ${if} ${RunningX64} 
-    ${if} "$JdkArch" == "64"
-      CopyFiles /SILENT "$INSTDIR\${rootDir}\bin\64\*" "$INSTDIR\${rootDir}\bin"
-    ${endif}
-  ${endif}
+#  ${if} ${RunningX64} 
+#    ${if} "$JdkArch" == "64"
+#      CopyFiles /SILENT "$INSTDIR\${rootDir}\bin\64\*" "$INSTDIR\${rootDir}\bin"
+#    ${endif}
+#  ${endif}
 !macroend
 
 #======================================= uninstall macros =======================================
