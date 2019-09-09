@@ -1,4 +1,4 @@
-!define AppName "RunaWFE"
+!define AppName "RunaWFE Free"
 !define AppVersion "%VERSION%"
 !define ShortName "RunaWFE"
 !define Vendor "Runa"
@@ -38,7 +38,7 @@
 
 Name "${AppName}"
 OutFile "setup.exe"
-InstallDir "$PROGRAMFILES\${SHORTNAME}"
+InstallDir "$PROGRAMFILES\${AppName}"
 InstallDirRegKey HKLM "SOFTWARE\${Vendor}\${ShortName}" ""
 
 ReserveFile "InstallationType.ini"
@@ -50,7 +50,7 @@ ReserveFile "WelcomePage.ini"
 !insertmacro MUI_RESERVEFILE_INSTALLOPTIONS
 
 CRCCheck off
-BrandingText "RunaWFE %VERSION%"
+BrandingText "RunaWFE Free %VERSION%"
 AddBrandingImage left -10
 
 
@@ -131,7 +131,7 @@ Section "-Installation of ${AppName}" SecAppFiles
   FileWrite $0 "%VERSION%"
   FileClose $0
 
-  WriteRegStr HKLM ${INSTDIR_REG_KEY} "DisplayName" "RunaWFE %VERSION%"
+  WriteRegStr HKLM ${INSTDIR_REG_KEY} "DisplayName" "RunaWFE Free %VERSION%"
   WriteRegStr HKLM ${INSTDIR_REG_KEY} "Version" "%VERSION%"
   WriteRegStr HKLM ${INSTDIR_REG_KEY} "QuietUninstallString" "$\"$INSTDIR\uninstall.exe$\""
   WriteRegStr HKLM ${INSTDIR_REG_KEY} "UninstallString" "$\"$INSTDIR\uninstall.exe$\""
@@ -150,7 +150,7 @@ Section "Uninstall"
 
   ; remove registry keys
   DeleteRegKey HKLM "${INSTDIR_REG_KEY}"
-  DeleteRegKey HKLM  "SOFTWARE\${Vendor}\${AppName}"
+  DeleteRegKey HKLM  "SOFTWARE\${Vendor}\${ShortName}"
   ; remove shortcuts, if any.
   RMDir /r "$SMPROGRAMS\${AppName}"
   ; remove files
