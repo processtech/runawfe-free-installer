@@ -328,7 +328,7 @@ StrCpy $1 '<datasource jndi-name="java:jboss/datasources/PostgreDS" pool-name="P
       FileWrite $0 "hibernate.connection.datasource = java:/mssqlds$\r$\n"
 StrCpy $1 '<datasource jndi-name="java:/mssqlds" pool-name="java:/mssqlds_Pool" enabled="true" use-java-context="true">\
  <connection-url>jdbc:jtds:sqlserver://$DB_Host:$DB_Port;DatabaseName=$DB_Name</connection-url>\
- <driver>mssql</driver>\
+ <driver>sqlserver</driver>\
  <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>\
  <pool>\
   <min-pool-size>5</min-pool-size>\
@@ -339,9 +339,9 @@ StrCpy $1 '<datasource jndi-name="java:/mssqlds" pool-name="java:/mssqlds_Pool" 
   <password>$DB_Password</password>\
  </security>\
 </datasource>\
-<driver name="mssql" module="net.sourceforge.jtds">\
- <driver-class>net.sourceforge.jtds.jdbc.Driver</driver-class>\
- <xa-datasource-class>net.sourceforge.jtds.jdbcx.JtdsDataSource</xa-datasource-class>\
+<driver name="sqlserver" module="com.microsoft.sqlserver">\
+ <driver-class>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver-class>\
+ <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerXADataSource</xa-datasource-class>\
 </driver>'
       ${Break}
     ${Case} "$(DB_ORACLE)"
