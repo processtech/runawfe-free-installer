@@ -169,7 +169,7 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
     File /r "${BuildRoot}\gpd\32\gpd-${AppVersion}\*"
   ${endif}
   !insertmacro CreateRunGPDBatchFile
-  !insertmacro createMenuShortcut "Process designer.lnk" "$INSTDIR\gpd\run.bat" "" "$INSTDIR\gpd" "$INSTDIR\Icons\e_20x20_256.ico" "$(ShortcutDesc_GPD)"
+  !insertmacro createMenuShortcut "Developer Studio.lnk" "$INSTDIR\gpd\run.bat" "" "$INSTDIR\gpd" "$INSTDIR\Icons\e_20x20_256.ico" "$(ShortcutDesc_GPD)"
 !macroend
 
 !macro installRTNSeq
