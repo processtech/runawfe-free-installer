@@ -327,8 +327,8 @@ StrCpy $1 '<datasource jndi-name="java:jboss/datasources/PostgreDS" pool-name="P
       FileWrite $0 "hibernate.dialect = org.hibernate.dialect.SQLServerDialect$\r$\n"
       FileWrite $0 "hibernate.connection.datasource = java:/mssqlds$\r$\n"
 StrCpy $1 '<datasource jndi-name="java:/mssqlds" pool-name="java:/mssqlds_Pool" enabled="true" use-java-context="true">\
- <connection-url>jdbc:jtds:sqlserver://$DB_Host:$DB_Port;DatabaseName=$DB_Name</connection-url>\
- <driver>mssql</driver>\
+ <connection-url>jdbc:sqlserver://$DB_Host:$DB_Port;DatabaseName=$DB_Name</connection-url>\
+ <driver>sqlserver</driver>\
  <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>\
  <pool>\
   <min-pool-size>5</min-pool-size>\
@@ -339,9 +339,9 @@ StrCpy $1 '<datasource jndi-name="java:/mssqlds" pool-name="java:/mssqlds_Pool" 
   <password>$DB_Password</password>\
  </security>\
 </datasource>\
-<driver name="mssql" module="net.sourceforge.jtds">\
- <driver-class>net.sourceforge.jtds.jdbc.Driver</driver-class>\
- <xa-datasource-class>net.sourceforge.jtds.jdbcx.JtdsDataSource</xa-datasource-class>\
+<driver name="sqlserver" module="com.microsoft.sqlserver">\
+ <driver-class>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver-class>\
+ <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerXADataSource</xa-datasource-class>\
 </driver>'
       ${Break}
     ${Case} "$(DB_ORACLE)"
@@ -382,6 +382,17 @@ StrCpy $1 '<datasource jndi-name="java:jboss/datasources/OracleDS" pool-name="Or
     FileClose $0
     ${nsisXML->OpenXML} "$INSTDIR\WFEServer\standalone\configuration\standalone.xml"
     ${nsisXML->SetElementText} "/server/profile/subsystem/datasources" "SERVER_PROFILE_SUBSYSTEM_DATASOURCES"
+    ${Switch} "$DB_Type"
+      ${Case} "$(DB_POSTGRESQL)"
+        ${nsisXML->SetElementAttr} "/server/profile/subsystem/default-bindings" "datasource" "java:jboss/datasources/PostgreDS"
+        ${Break}
+      ${Case} "$(DB_MSSQL)"
+        ${nsisXML->SetElementAttr} "/server/profile/subsystem/default-bindings" "datasource" "java:/mssqlds"
+        ${Break}
+      ${Case} "$(DB_ORACLE)"
+        ${nsisXML->SetElementAttr} "/server/profile/subsystem/default-bindings" "datasource" "java:jboss/datasources/OracleDS"
+        ${Break}
+    ${EndSwitch}
     ${nsisXML->CloseXML}
     Push "SERVER_PROFILE_SUBSYSTEM_DATASOURCES"                                 #text to be replaced
     Push '$1'                                 #replace with
