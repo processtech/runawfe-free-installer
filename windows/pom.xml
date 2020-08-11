@@ -21,6 +21,7 @@
     <!-- Folder to locate zip files with different jboss versions -->
     <zip.files.location>../../../..</zip.files.location>
     <jdk.files.location>../../../../../jdk</jdk.files.location>
+    <wfe.edition></wfe.edition>
   </properties>
 
   <build>
@@ -116,6 +117,7 @@
                   <property name="appserver" value="wildfly"/>
                   <property name="project.version" value="${project.version}"/>
                   <property name="using.java.home" value="${java.home.8}"/>
+                  <property name="wfe.edition" value="${wfe.edition}"/>
                 </ant>
 
                 <copy file="${jdk.files.location}\jre-8u181-windows-i586.exe" tofile="resources\jdk_setup.exe" overwrite="true"/>
@@ -124,6 +126,7 @@
                   <property name="appserver" value="wildfly"/>
                   <property name="project.version" value="${project.version}"/>
                   <property name="using.java.home" value="${java.home.8}"/>
+                  <property name="wfe.edition" value="${wfe.edition}"/>
                 </ant>
 
               </target>

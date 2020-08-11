@@ -7,6 +7,27 @@
 LangString RunaWFE_VersionDiffer ${LANG_ENGLISH} "Your current RunaWFE version is differs from installing version. All components will be changed to new one. Continue?"
 LangString RunaWFE_VersionDiffer ${LANG_RUSSIAN} "Другая версия RunaWFE уже установлена на компьютере. Все установленные компоненты будут заменены на текущие. Продолжить?"
 
+LangString RunaWFE_VersionInstalled ${LANG_ENGLISH} "Current RunaWFE version is already installed."
+LangString RunaWFE_VersionInstalled ${LANG_RUSSIAN} "На компьютере уже установлена текущая версия RunaWFE."
+
+LangString RunaWFE_Path ${LANG_ENGLISH} "Path:"
+LangString RunaWFE_Path ${LANG_RUSSIAN} "Путь:"
+
+LangString RunaWFE_Continue ${LANG_ENGLISH} "Continue?"
+LangString RunaWFE_Continue ${LANG_RUSSIAN} "Continue?"
+
+LangString RunaWFE_CurrentlyInstalledEdition ${LANG_ENGLISH} "Currently installed RunaWFE"
+LangString RunaWFE_CurrentlyInstalledEdition ${LANG_RUSSIAN} "Установленная на компьютере редакция RunaWFE"
+
+LangString RunaWFE_EditionIncompatible ${LANG_ENGLISH} "is incompatible with RunaWFE Free. Aborting."
+LangString RunaWFE_EditionIncompatible ${LANG_RUSSIAN} "несовместима с устанавливаемой RunaWFE Free. Отмена установки."
+
+LangString RunaWFE_EditionInstalling ${LANG_ENGLISH} "You are installing RunaWFE"
+LangString RunaWFE_EditionInstalling ${LANG_RUSSIAN} "Вы устанавливаете редакцию RunaWFE"
+
+LangString RunaWFE_FreeIsIncompatible ${LANG_ENGLISH} "but installed RunaWFE Free is detected. You will not be able to use RunaWFE Free after installation completion."
+LangString RunaWFE_FreeIsIncompatible ${LANG_RUSSIAN} ", но на компьютере обнаружена RunaWFE Free. В будущем переход на Free будет невозможным."
+
 LangString ClientDistr_Desc ${LANG_ENGLISH} "Install RunaWFE client applications. It contains Developer Studio, Task notifier, Web link to main RunaWFE server and RunaWFE simulation server."
 LangString ClientDistr_Desc ${LANG_RUSSIAN} "Установить клиентские приложения RunaWFE. Клиенские приложения включают в себя Среду разработки, Оповещатель задач а также тестовый RunaWFE сервер."
 LangString ServerDistr_Desc ${LANG_ENGLISH} "Install main RunaWFE server."
