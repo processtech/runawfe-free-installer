@@ -236,25 +236,25 @@ Function checkRunaVersion
   ReadRegStr $R0 HKLM "${INSTDIR_REG_KEY}" "BuildHash"
   IfErrors "buildHashesCompared"
   StrCmp $R0 "${BuildHash}" 0 buildHashesCompared
-  MessageBox MB_YESNO "$(RunaWFE_VersionInstalled) $(RunaWFE_Path) ${R1} $(RunaWFE_Continue)" IDYES buildHashesCompared IDNO 0
+  MessageBox MB_YESNO "$(RunaWFE_VersionInstalled) $(RunaWFE_Path) $R1 $(RunaWFE_Continue)" IDYES buildHashesCompared IDNO 0
   Quit
   buildHashesCompared:
   ClearErrors
 
   ReadRegStr $R0 HKLM "${INSTDIR_REG_KEY}" "Edition"
-  IfErrors 0 +1
+  IfErrors +1 +2
   StrCpy $R0 "Free"
   ClearErrors
 
-  ${If} "${Edition}" == "Free"
+  ${If} "%EDITION%" == "Free"
     ${If} $R0 == "Industrial"
       ${OrIf} $R0 == "Professional"
-      MessageBox MB_OK "$(RunaWFE_CurrentlyInstalledEdition) ${R0} $(RunaWFE_EditionIncompatible)"
+      MessageBox MB_OK "$(RunaWFE_CurrentlyInstalledEdition) $R0 $(RunaWFE_EditionIncompatible)"
       Quit
     ${Endif}
   ${Else}
     ${If} $R0 == "Free"
-      MessageBox MB_OK "$(RunaWFE_EditionInstalling) ${Edition} $(RunaWFE_FreeIsIncompatible)"
+      MessageBox MB_OK "$(RunaWFE_EditionInstalling) %EDITION% $(RunaWFE_FreeIsIncompatible)"
     ${Endif}
   ${Endif}
 

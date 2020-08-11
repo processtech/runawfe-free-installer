@@ -14,7 +14,7 @@ LangString RunaWFE_Path ${LANG_ENGLISH} "Path:"
 LangString RunaWFE_Path ${LANG_RUSSIAN} "Путь:"
 
 LangString RunaWFE_Continue ${LANG_ENGLISH} "Continue?"
-LangString RunaWFE_Continue ${LANG_RUSSIAN} "Continue?"
+LangString RunaWFE_Continue ${LANG_RUSSIAN} "Продолжить?"
 
 LangString RunaWFE_CurrentlyInstalledEdition ${LANG_ENGLISH} "Currently installed RunaWFE"
 LangString RunaWFE_CurrentlyInstalledEdition ${LANG_RUSSIAN} "Установленная на компьютере редакция RunaWFE"
