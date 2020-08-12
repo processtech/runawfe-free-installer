@@ -268,6 +268,14 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
   !insertmacro createURL "Simulation web interface.URL" "http://localhost:8080/wfe" "$INSTDIR\Icons\Si_20x20_256.ico"
   !insertmacro createMenuShortcut "Start Simulation.lnk" "$INSTDIR\Simulation\bin\runSimulation.bat" " " "$INSTDIR\Simulation\bin" "$INSTDIR\Icons\Si_20x20_256.ico" "$(ShortcutDesc_StartSim)"
   !insertmacro createMenuShortcut "Stop Simulation.lnk" "$INSTDIR\Simulation\bin\nircmd.exe" "exec hide $\"$INSTDIR\Simulation\bin\jboss-cli.bat$\" --commands=connect,:shutdown" "$INSTDIR\Simulation\bin" "$INSTDIR\Icons\Si_20x20_256.ico" "$(ShortcutDesc_StopSim)"
+
+  IfFileExists "$APPDATA\runawfe\excelstorage\*.*" +2
+  CreateDirectory "$APPDATA\runawfe\excelstorage"
+  ${nsisXML->OpenXML} "$INSTDIR\Simulation\standalone\wfe.data-sources\InternalStorage.xml"
+  ${nsisXML->SetElementText} "filePath" "$APPDATA\runawfe\excelstorage"
+  ${nsisXML->CloseXML}
+  !insertmacro createMenuShortcut "Open Internal Storage.lnk" "$APPDATA\runawfe\excelstorage" " " "$INSTDIR\Simulation\bin" "$INSTDIR\Icons\Si_20x20_256.ico" "$(ShortcutDesc_OpenInternalStorage)"  
+
   !insertmacro Runa_SetOutPath "$INSTDIR\Simulation\standalone\wfe.custom"
   ${if} "$simulationWebLinks" == "1"
     ; Login links must be available
@@ -290,6 +298,13 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
   Call AdvReplaceInFile                     #call find and replace function
 
   CreateDirectory "$INSTDIR\WFEServer\standalone\wfe.custom"
+
+  IfFileExists "$INSTDIR\WFEServer\standalone\wfe.excelstorage\*.*" +2
+  CreateDirectory "$INSTDIR\WFEServer\standalone\wfe.excelstorage"
+  ${nsisXML->OpenXML} "$INSTDIR\WFEServer\standalone\wfe.data-sources\InternalStorage.xml"
+  ${nsisXML->SetElementText} "filePath" "$INSTDIR\WFEServer\standalone\wfe.excelstorage"
+  ${nsisXML->CloseXML}
+
 ${if} "$DB_Type" != "$(DB_H2_DEFAULT)"
   DetailPrint "Write database settings: $DB_Type ; Host $DB_Host:$DB_Port ; Auth $DB_Login/$DB_Password ; Database $DB_Name"
   Var /GLOBAL database_properties
