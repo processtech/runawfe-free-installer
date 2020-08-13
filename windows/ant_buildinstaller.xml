@@ -137,7 +137,7 @@
 		</copy>
 	</target>
 
-	<target name="build.nsis" depends="git.revision">	
+	<target name="build.nsis">	
 		<delete dir="${nsis.work.dir}/${nsis.name}"/>
 		<mkdir dir="${nsis.work.dir}/${nsis.name}"/>
 		<copy todir="${nsis.work.dir}/${nsis.name}" overwrite="true">

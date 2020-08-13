@@ -129,6 +129,7 @@
                   <property name="project.version" value="${project.version}"/>
                   <property name="using.java.home" value="${java.home.8}"/>
                   <property name="wfe.edition" value="${wfe.edition}"/>
+                  <property name="wfe.buildhash" value="${wfe.buildhash}"/>
                 </ant>
 
               </target>
