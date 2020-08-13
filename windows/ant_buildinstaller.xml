@@ -63,19 +63,6 @@
 		/>
 	</target>
 
-	<target name="git.revision" description="Store git revision in ${repository.version}">
-		<exec executable="git" outputproperty="git.revision" failifexecutionfails="true">
-			<arg value="rev-parse"/>
-			<arg value="HEAD"/>
-		</exec>
-		<condition property="repository.version" value="${git.revision}" else="unknown">
-			<and>
-				<isset property="git.revision"/>
-				<length string="${git.revision}" trim="yes" length="0" when="greater"/>
-			</and>
-		</condition>
-	</target>
-
 	<target name="prepare.nsis" unless="skip.installer" depends="set.jdk.arch32,set.jdk.arch64,set.min.jdk1.7,set.min.jdk1.8">
 		<delete dir="${nsis.dir}"/>
 		<mkdir dir="${nsis.work.dir}"/>
@@ -169,7 +156,7 @@
 		<replace dir="${nsis.work.dir}/${nsis.name}" token="%EDITION%" value="${wfe.edition}">
 			<exclude name="**/*.exe"/>
 		</replace>
-		<replace dir="${nsis.work.dir}/${nsis.name}" token="%BUILD_HASH%" value="${repository.version}">
+		<replace dir="${nsis.work.dir}/${nsis.name}" token="%BUILD_HASH%" value="${wfe.buildhash}">
 			<exclude name="**/*.exe"/>
 		</replace>
 		<replace dir="${nsis.work.dir}/${nsis.name}" token="%BUILD_ROOT%" value="${nsis.src.dir}">
