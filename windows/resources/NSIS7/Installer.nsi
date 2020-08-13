@@ -119,6 +119,7 @@ Section "-Installation of ${AppName}" SecAppFiles
   DeleteRegValue HKLM "${INSTDIR_REG_KEY}" "Version"
   DeleteRegValue HKLM "${INSTDIR_REG_KEY}" "Edition"
   DeleteRegValue HKLM "${INSTDIR_REG_KEY}" "BuildHash"
+  ClearErrors
   WriteRegStr HKLM "SOFTWARE\${Vendor}\${ShortName}" "" $INSTDIR
 
   WriteRegStr HKLM "${INSTDIR_REG_KEY}" "DisplayName" "${AppName}"
