@@ -50,8 +50,6 @@ LangString ShortcutDesc_StartSim ${LANG_ENGLISH} "Start RunaWFE Free simulation 
 LangString ShortcutDesc_StartSim ${LANG_RUSSIAN} "Запустить тестовый сервер RunaWFE Free"
 LangString ShortcutDesc_StopSim ${LANG_ENGLISH} "Stop RunaWFE Free simulation server"
 LangString ShortcutDesc_StopSim ${LANG_RUSSIAN} "Остановить тестовый сервер RunaWFE Free"
-LangString ShortcutDesc_OpenInternalStorage ${LANG_ENGLISH} "Open internal storage folder"
-LangString ShortcutDesc_OpenInternalStorage ${LANG_RUSSIAN} "Открыть папку внутреннего хранилища"
 
 LangString DesctopLinks ${LANG_ENGLISH} "Install links to runawfe free applications at desktop"
 LangString DesctopLinks ${LANG_RUSSIAN} "Добавить на рабочий стол ссылки приложений runawfe free"

@@ -274,7 +274,6 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
   ${nsisXML->OpenXML} "$INSTDIR\Simulation\standalone\wfe.data-sources\InternalStorage.xml"
   ${nsisXML->SetElementText} "filePath" "$APPDATA\runawfe\excelstorage"
   ${nsisXML->CloseXML}
-  !insertmacro createMenuShortcut "Open Internal Storage.lnk" "$APPDATA\runawfe\excelstorage" " " "$INSTDIR\Simulation\bin" "$INSTDIR\Icons\Si_20x20_256.ico" "$(ShortcutDesc_OpenInternalStorage)"  
 
   !insertmacro Runa_SetOutPath "$INSTDIR\Simulation\standalone\wfe.custom"
   ${if} "$simulationWebLinks" == "1"
