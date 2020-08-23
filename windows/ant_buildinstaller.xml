@@ -153,6 +153,12 @@
 		<replace dir="${nsis.work.dir}/${nsis.name}" token="%VERSION%" value="${project.version}">
 			<exclude name="**/*.exe"/>
 		</replace>
+		<replace dir="${nsis.work.dir}/${nsis.name}" token="%EDITION%" value="${wfe.edition}">
+			<exclude name="**/*.exe"/>
+		</replace>
+		<replace dir="${nsis.work.dir}/${nsis.name}" token="%BUILD_HASH%" value="${wfe.buildhash}">
+			<exclude name="**/*.exe"/>
+		</replace>
 		<replace dir="${nsis.work.dir}/${nsis.name}" token="%BUILD_ROOT%" value="${nsis.src.dir}">
 			<exclude name="**/*.exe"/>
 		</replace>

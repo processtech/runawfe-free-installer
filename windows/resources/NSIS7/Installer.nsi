@@ -2,6 +2,8 @@
 !define AppVersion "%VERSION%"
 !define ShortName "RunaWFE"
 !define Vendor "Runa"
+!define Edition "%EDITION%"
+!define BuildHash "%BUILD_HASH%"
 
 !define BuildRoot "%BUILD_ROOT%"
 !define MUI_ICON "${BuildRoot}\icons\wf_48x128.ico"
@@ -115,6 +117,9 @@ Section "-Installation of ${AppName}" SecAppFiles
   SetShellVarContext all
   CreateDirectory "$INSTDIR"
   DeleteRegValue HKLM "${INSTDIR_REG_KEY}" "Version"
+  DeleteRegValue HKLM "${INSTDIR_REG_KEY}" "Edition"
+  DeleteRegValue HKLM "${INSTDIR_REG_KEY}" "BuildHash"
+  ClearErrors
   WriteRegStr HKLM "SOFTWARE\${Vendor}\${ShortName}" "" $INSTDIR
 
   WriteRegStr HKLM "${INSTDIR_REG_KEY}" "DisplayName" "${AppName}"
@@ -133,6 +138,8 @@ Section "-Installation of ${AppName}" SecAppFiles
 
   WriteRegStr HKLM ${INSTDIR_REG_KEY} "DisplayName" "RunaWFE %VERSION%"
   WriteRegStr HKLM ${INSTDIR_REG_KEY} "Version" "%VERSION%"
+  WriteRegStr HKLM ${INSTDIR_REG_KEY} "Edition" "%EDITION%"
+  WriteRegStr HKLM ${INSTDIR_REG_KEY} "BuildHash" "%BUILD_HASH%"
   WriteRegStr HKLM ${INSTDIR_REG_KEY} "QuietUninstallString" "$\"$INSTDIR\uninstall.exe$\""
   WriteRegStr HKLM ${INSTDIR_REG_KEY} "UninstallString" "$\"$INSTDIR\uninstall.exe$\""
 SectionEnd
@@ -225,6 +232,33 @@ Function checkRunaVersion
   ReadRegStr $R0 HKLM "SOFTWARE\${Vendor}\${ShortName}" ""
   IfErrors "checkRunaVersionEnd"
   ClearErrors
+  StrCpy $R1 $R0
+
+  ReadRegStr $R0 HKLM "${INSTDIR_REG_KEY}" "BuildHash"
+  IfErrors "buildHashesCompared"
+  StrCmp $R0 "${BuildHash}" 0 buildHashesCompared
+  MessageBox MB_YESNO "$(RunaWFE_VersionInstalled) $(RunaWFE_Path) $R1 $(RunaWFE_Continue)" IDYES buildHashesCompared IDNO 0
+  Quit
+  buildHashesCompared:
+  ClearErrors
+
+  ReadRegStr $R0 HKLM "${INSTDIR_REG_KEY}" "Edition"
+  IfErrors +1 +2
+  StrCpy $R0 "Free"
+  ClearErrors
+
+  ${If} "%EDITION%" == "Free"
+    ${If} $R0 == "Industrial"
+      ${OrIf} $R0 == "Professional"
+      MessageBox MB_OK "$(RunaWFE_CurrentlyInstalledEdition) $R0 $(RunaWFE_EditionIncompatible)"
+      Quit
+    ${Endif}
+  ${Else}
+    ${If} $R0 == "Free"
+      MessageBox MB_OK "$(RunaWFE_EditionInstalling) %EDITION% $(RunaWFE_FreeIsIncompatible)"
+    ${Endif}
+  ${Endif}
+
   ReadRegStr $R0 HKLM "${INSTDIR_REG_KEY}" "Version"
   IfErrors +1
   StrCmp $R0 "${AppVersion}" checkRunaVersionEnd 0
