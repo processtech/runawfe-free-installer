@@ -21,6 +21,8 @@
     <!-- Folder to locate zip files with different jboss versions -->
     <zip.files.location>../../../..</zip.files.location>
     <jdk.files.location>../../../../../jdk</jdk.files.location>
+    <wfe.edition></wfe.edition>
+    <wfe.buildhash></wfe.buildhash>
   </properties>
 
   <build>
@@ -51,6 +53,24 @@
 
                 <exec executable="cmd" dir="../../gpd/plugins" failonerror="true">
                   <arg line="/C mvn clean package"/>
+                </exec>
+                <mkdir dir="../../gpd/plugins/ru.runa.gpd.maven/target/products/plugins"/>
+                <copy toDir="../../gpd/plugins/ru.runa.gpd.maven/target/products/plugins">
+                  <fileset dir="../gpdfix/plugins">
+                    <include name="*.jar"/>
+                  </fileset>
+                </copy>
+                <exec executable="cmd" dir="../../gpd/plugins/ru.runa.gpd.maven/target/products" failonerror="true">
+                  <arg line="/C jar -uf RunaWFE_DeveloperStudio-win32.win32.x86.zip plugins/*"/>
+                </exec>
+                <exec executable="cmd" dir="../../gpd/plugins/ru.runa.gpd.maven/target/products" failonerror="true">
+                  <arg line="/C jar -uf RunaWFE_DeveloperStudio-win32.win32.x86_64.zip plugins/*"/>
+                </exec>
+                <exec executable="cmd" dir="../../gpd/plugins/ru.runa.gpd.maven/target/products" failonerror="true">
+                  <arg line="/C jar -uf RunaWFE_DeveloperStudio-linux.gtk.x86.zip plugins/*"/>
+                </exec>
+                <exec executable="cmd" dir="../../gpd/plugins/ru.runa.gpd.maven/target/products" failonerror="true">
+                  <arg line="/C jar -uf RunaWFE_DeveloperStudio-linux.gtk.x86_64.zip plugins/*"/>
                 </exec>
                 <copy toDir="target/artifacts/gpd/32">
                   <fileset dir="../../gpd/plugins/ru.runa.gpd.maven/target/products">
@@ -116,6 +136,8 @@
                   <property name="appserver" value="wildfly"/>
                   <property name="project.version" value="${project.version}"/>
                   <property name="using.java.home" value="${java.home.8}"/>
+                  <property name="wfe.edition" value="${wfe.edition}"/>
+                  <property name="wfe.buildhash" value="${wfe.buildhash}"/>
                 </ant>
 
                 <copy file="${jdk.files.location}\jre-8u181-windows-i586.exe" tofile="resources\jdk_setup.exe" overwrite="true"/>
@@ -124,6 +146,8 @@
                   <property name="appserver" value="wildfly"/>
                   <property name="project.version" value="${project.version}"/>
                   <property name="using.java.home" value="${java.home.8}"/>
+                  <property name="wfe.edition" value="${wfe.edition}"/>
+                  <property name="wfe.buildhash" value="${wfe.buildhash}"/>
                 </ant>
 
               </target>

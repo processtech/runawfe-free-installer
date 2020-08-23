@@ -42,9 +42,9 @@
   !insertmacro isSectionSelected ${${ID_PREFIX}${SecIdName}} 0 "rmDoJob_${SecIdName}"
   ; check for RunaWFE version
   ClearErrors
-  ReadRegStr $R0 HKLM "${INSTDIR_REG_KEY}" "Version"
+  ReadRegStr $R0 HKLM "${INSTDIR_REG_KEY}" "BuildHash"
   IfErrors "rmDoJob_${SecIdName}"
-  StrCmp $R0 "${AppVersion}" "rmExit_${SecIdName}" 0
+  StrCmp $R0 "${BuildHash}" "rmExit_${SecIdName}" 0
   "rmDoJob_${SecIdName}:"
   call "RemoveComponent_${SecIdName}"
   !insertmacro SaveSectionStatus ${SecIdName} 0
