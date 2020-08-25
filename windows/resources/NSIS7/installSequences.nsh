@@ -187,41 +187,6 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
     File /r "${BuildRoot}\rtn-${AppVersion}\32\*"
   ${endif}
 
-  Push "wfe_server"                            #text to be replaced
-  Push $WFEServerAddress                       #replace with
-  Push "$INSTDIR\rtn\af_delegate.properties"   #file to replace in
-  Call AdvReplaceInFile                        #call find and replace function
-
-  Push "wfe_server"                            #text to be replaced
-  Push $WFEServerAddress                       #replace with
-  Push "$INSTDIR\rtn\application.properties"   #file to replace in
-  Call AdvReplaceInFile                        #call find and replace function
-
-  Push "port"                                  #text to be replaced
-  Push $WFEServerPort                          #replace with
-  Push "$INSTDIR\rtn\application.properties"   #file to replace in
-  Call AdvReplaceInFile                        #call find and replace function
-
-  Push "8080"                                  #text to be replaced
-  Push $WFEServerPort                          #replace with
-  Push "$INSTDIR\rtn\application.properties"   #file to replace in
-  Call AdvReplaceInFile                        #call find and replace function
-
-  Push "wfe_server"                            #text to be replaced
-  Push $WFEServerAddress                       #replace with
-  Push "$INSTDIR\rtn\application_ru.properties" #file to replace in
-  Call AdvReplaceInFile                        #call find and replace function
-
-  Push "port"                                  #text to be replaced
-  Push $WFEServerPort                          #replace with
-  Push "$INSTDIR\rtn\application_ru.properties" #file to replace in
-  Call AdvReplaceInFile                        #call find and replace function
-
-  Push "8080"                                  #text to be replaced
-  Push $WFEServerPort                          #replace with
-  Push "$INSTDIR\rtn\application_ru.properties" #file to replace in
-  Call AdvReplaceInFile                        #call find and replace function
-
 ;  Call DetectJava64
 ;  Push "swt-win32.jar"                         #text to be replaced
 ;  ${if} ${RunningX64} 
