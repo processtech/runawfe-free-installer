@@ -153,12 +153,12 @@
   
   <addPermissions executor="manager">
     <namedIdentitySet name="managerProcesses" type="ProcessDefinition"/>
-    <permission name="START"/>
+    <permission name="START_PROCESS"/>
   </addPermissions>
   
   <addPermissions executor="all">
     <namedIdentitySet name="genericProcesses" type="ProcessDefinition"/>
-    <permission name="START"/>
+    <permission name="START_PROCESS"/>
   </addPermissions>
     
   <addExecutorsToGroup name="manager">
@@ -186,7 +186,7 @@
     <namedIdentitySet name="allActors" type="Executor"/>
   </addExecutorsToGroup>
   
-  <addPermissions type="EXECUTORS" executor="all">
+  <addPermissions type="SYSTEM" executor="all">
     <permission name="LOGIN"/>
   </addPermissions> 
   
@@ -213,10 +213,10 @@
   </addConfigurationsToBot>
   
   <addPermissions type="BOTSTATIONS" executor="UniversalBot">
-    <permission name="ALL"/>
+    <permission name="READ"/>
   </addPermissions>
   <addPermissions type="BOTSTATIONS" executor="WebServiceBot">
-    <permission name="ALL"/>
+    <permission name="READ"/>
   </addPermissions>
   
   <relation name="Boss">
