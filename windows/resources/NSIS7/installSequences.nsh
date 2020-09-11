@@ -264,12 +264,6 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
 
   CreateDirectory "$INSTDIR\WFEServer\standalone\wfe.custom"
 
-  IfFileExists "$INSTDIR\WFEServer\standalone\wfe.excelstorage\*.*" +2
-  CreateDirectory "$INSTDIR\WFEServer\standalone\wfe.excelstorage"
-  ${nsisXML->OpenXML} "$INSTDIR\WFEServer\standalone\wfe.data-sources\InternalStorage.xml"
-  ${nsisXML->SetElementText} "filePath" "$INSTDIR\WFEServer\standalone\wfe.excelstorage"
-  ${nsisXML->CloseXML}
-
 ${if} "$DB_Type" != "$(DB_H2_DEFAULT)"
   DetailPrint "Write database settings: $DB_Type ; Host $DB_Host:$DB_Port ; Auth $DB_Login/$DB_Password ; Database $DB_Name"
   Var /GLOBAL database_properties
