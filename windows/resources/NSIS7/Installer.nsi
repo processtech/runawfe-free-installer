@@ -370,10 +370,10 @@ FunctionEnd
 
 Function installDesktopLinks
   ${if} $installationType == ${RUNA_SERVER}
-    StrCpy $installDesctopLinks "0"
+    StrCpy $installDesktopLinks "0"
     Abort
   ${endif}
-  !insertmacro MUI_INSTALLOPTIONS_WRITE "DesktopLinks.ini" "Field 1" "Text" $(DesctopLinks)
+  !insertmacro MUI_INSTALLOPTIONS_WRITE "DesktopLinks.ini" "Field 1" "Text" $(DesktopLinks)
   !insertmacro MUI_INSTALLOPTIONS_WRITE "DesktopLinks.ini" "Field 2" "Text" $(installNewDatabase)
   !insertmacro MUI_INSTALLOPTIONS_WRITE "DesktopLinks.ini" "Field 3" "Text" $(installNewWorkspace)
   !insertmacro MUI_INSTALLOPTIONS_WRITE "DesktopLinks.ini" "Field 4" "Text" $(installSimulationLoginLinks)
@@ -391,7 +391,7 @@ Function installDesktopLinks
   !insertmacro MUI_INSTALLOPTIONS_DISPLAY_RETURN "DesktopLinks.ini"
 FunctionEnd
 Function installDesktopLinksLeave
-  !insertmacro MUI_INSTALLOPTIONS_READ $installDesctopLinks "DesktopLinks.ini" "Field 1" "State"
+  !insertmacro MUI_INSTALLOPTIONS_READ $installDesktopLinks "DesktopLinks.ini" "Field 1" "State"
   !insertmacro MUI_INSTALLOPTIONS_READ $newSimulationDatabase "DesktopLinks.ini" "Field 2" "State"
   !insertmacro MUI_INSTALLOPTIONS_READ $newWorkspace "DesktopLinks.ini" "Field 3" "State"
   !insertmacro MUI_INSTALLOPTIONS_READ $simulationWebLinks "DesktopLinks.ini" "Field 4" "State"

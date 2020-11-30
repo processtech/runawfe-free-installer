@@ -104,7 +104,6 @@
 		<delete dir="${nsis.src.dir}/jboss"/>
 
 		<copy file="${distr.root.dir}/simulation.properties" tofile="${nsis.src.dir}/simulation.properties"/>
-		<copy file="${nsis.settings}/nircmd.exe" tofile="${nsis.src.dir}/wfe-simulator/bin/nircmd.exe"/>
 		<copy file="${nsis.settings}/sleep.exe" tofile="${nsis.src.dir}/wfe-simulator/bin/sleep.exe"/>
 		<unzip dest="${nsis.src.dir}/gpd/32/gpd-${project.version}/" overwrite="true">
 			<fileset dir="${artifacts.dir}/gpd/32" includes="*win32.win32.x86.zip"/>

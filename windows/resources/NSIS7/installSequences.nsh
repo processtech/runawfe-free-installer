@@ -8,7 +8,7 @@
 
 var WFEServerAddress
 var WFEServerPort
-var installDesctopLinks
+var installDesktopLinks
 var newSimulationDatabase
 var newWorkspace
 var simulationWebLinks
@@ -19,7 +19,7 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
   !insertmacro Runa_SetOutPath "$SMPROGRAMS\${AppName}"
   SetOutPath "$SMPROGRAMS\${AppName}"
   CreateShortCut "$SMPROGRAMS\${AppName}\${ShortcutName}" "${ShortcutTarget}" "${ShortcutParameters}" "${ShortcutIcon}" 0 "" "" "${ShortcutDesc}"
-  ${ifnot} "$installDesctopLinks" == "0"
+  ${ifnot} "$installDesktopLinks" == "0"
     !insertmacro Runa_SetOutPath "$Desktop"
     SetOutPath "$Desktop"  #${ShortcutDir}
     CreateShortCut "$Desktop\${ShortcutName}" "${ShortcutTarget}" "${ShortcutParameters}" "${ShortcutIcon}" 0 "" "" "${ShortcutDesc}"
@@ -31,7 +31,7 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
   WriteIniStr "$SMPROGRAMS\${AppName}\${URLName}" "InternetShortcut" "URL" "${URLTarget}"
   WriteIniStr "$SMPROGRAMS\${AppName}\${URLName}" "InternetShortcut" "IconIndex" "0"
   WriteIniStr "$SMPROGRAMS\${AppName}\${URLName}" "InternetShortcut" "IconFile" "${URLIcon}"
-  ${ifnot} "$installDesctopLinks" == "0"
+  ${ifnot} "$installDesktopLinks" == "0"
     !insertmacro Runa_SetOutPath "$Desktop"
     WriteIniStr "$Desktop\${URLName}" "InternetShortcut" "URL" "${URLTarget}"
     WriteIniStr "$Desktop\${URLName}" "InternetShortcut" "IconIndex" "0"
@@ -232,7 +232,7 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
   File ${BuildRoot}\Icons\Cs_20x20_256.ico
   !insertmacro createURL "Simulation web interface.URL" "http://localhost:8080/wfe" "$INSTDIR\Icons\Si_20x20_256.ico"
   !insertmacro createMenuShortcut "Start Simulation.lnk" "$INSTDIR\Simulation\bin\runSimulation.bat" " " "$INSTDIR\Simulation\bin" "$INSTDIR\Icons\Si_20x20_256.ico" "$(ShortcutDesc_StartSim)"
-  !insertmacro createMenuShortcut "Stop Simulation.lnk" "$INSTDIR\Simulation\bin\nircmd.exe" "exec hide $\"$INSTDIR\Simulation\bin\jboss-cli.bat$\" --commands=connect,:shutdown" "$INSTDIR\Simulation\bin" "$INSTDIR\Icons\Si_20x20_256.ico" "$(ShortcutDesc_StopSim)"
+  !insertmacro createMenuShortcut "Stop Simulation.lnk" "$INSTDIR\Simulation\bin\jboss-cli.bat" "$\"--commands=connect,:shutdown$\"" "$INSTDIR\Simulation\bin" "$INSTDIR\Icons\Si_20x20_256.ico" "$(ShortcutDesc_StopSim)"
   !insertmacro Runa_SetOutPath "$INSTDIR\Simulation\standalone\wfe.custom"
   ${if} "$simulationWebLinks" == "1"
     ; Login links must be available

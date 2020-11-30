@@ -72,8 +72,8 @@ LangString ShortcutDesc_StartSim ${LANG_RUSSIAN} "«апустить тестовый сервер Runa
 LangString ShortcutDesc_StopSim ${LANG_ENGLISH} "Stop RunaWFE simulation server"
 LangString ShortcutDesc_StopSim ${LANG_RUSSIAN} "ќстановить тестовый сервер RunaWFE"
 
-LangString DesctopLinks ${LANG_ENGLISH} "Install links to runawfe applications at desktop"
-LangString DesctopLinks ${LANG_RUSSIAN} "ƒобавить на рабочий стол ссылки приложений runawfe"
+LangString DesktopLinks ${LANG_ENGLISH} "Install links to runawfe applications at desktop"
+LangString DesktopLinks ${LANG_RUSSIAN} "ƒобавить на рабочий стол ссылки приложений runawfe"
 LangString installNewDatabase ${LANG_ENGLISH} "Delete old runawfe database and install new database for simulation server (with demo processes)"
 LangString installNewDatabase ${LANG_RUSSIAN} "”далить старую базу данных сервера-симул€тора и поставить новую базу данных (с демонстрационными процессами)"
 LangString installNewWorkspace ${LANG_ENGLISH} "Delete old (from previous installations) runawfe demo processes and install new"
