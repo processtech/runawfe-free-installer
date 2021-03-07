@@ -23,6 +23,8 @@
     <jdk.files.location>../../../../../jdk</jdk.files.location>
     <wfe.edition></wfe.edition>
     <wfe.buildhash></wfe.buildhash>
+    <statistic.report.url></statistic.report.url>
+    <statistic.report.days.after.error></statistic.report.days.after.error>
   </properties>
 
   <build>
@@ -130,7 +132,7 @@
                   <arg value="mvn clean -Dappserver=wildfly"/>
                 </exec>
 
-		<copy file="${jdk.files.location}\jre-8u181-windows-x64.exe" tofile="resources\jdk_setup.exe" overwrite="true"/>
+		        <copy file="${jdk.files.location}\jre-8u181-windows-x64.exe" tofile="resources\jdk_setup.exe" overwrite="true"/>
                 <ant antfile="ant_buildinstaller.xml" target="makeInstaller" inheritAll="false">
                   <property name="wfe.jdk.arch" value="64"/>
                   <property name="appserver" value="wildfly"/>
@@ -138,6 +140,8 @@
                   <property name="using.java.home" value="${java.home.8}"/>
                   <property name="wfe.edition" value="${wfe.edition}"/>
                   <property name="wfe.buildhash" value="${wfe.buildhash}"/>
+                  <property name="statistic.report.url" value="${statistic.report.url}"/>
+                  <property name="statistic.report.days.after.error" value="${statistic.report.days.after.error}"/>
                 </ant>
 
                 <copy file="${jdk.files.location}\jre-8u181-windows-i586.exe" tofile="resources\jdk_setup.exe" overwrite="true"/>
@@ -148,6 +152,8 @@
                   <property name="using.java.home" value="${java.home.8}"/>
                   <property name="wfe.edition" value="${wfe.edition}"/>
                   <property name="wfe.buildhash" value="${wfe.buildhash}"/>
+                  <property name="statistic.report.url" value="${statistic.report.url}"/>
+                  <property name="statistic.report.days.after.error" value="${statistic.report.days.after.error}"/>
                 </ant>
 
               </target>

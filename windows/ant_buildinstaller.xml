@@ -136,7 +136,7 @@
 		</copy>
 	</target>
 
-	<target name="build.nsis">	
+	<target name="build.nsis">
 		<delete dir="${nsis.work.dir}/${nsis.name}"/>
 		<mkdir dir="${nsis.work.dir}/${nsis.name}"/>
 		<copy todir="${nsis.work.dir}/${nsis.name}" overwrite="true">
@@ -159,6 +159,12 @@
 			<exclude name="**/*.exe"/>
 		</replace>
 		<replace dir="${nsis.work.dir}/${nsis.name}" token="%BUILD_ROOT%" value="${nsis.src.dir}">
+			<exclude name="**/*.exe"/>
+		</replace>
+		<replace dir="${nsis.work.dir}/${nsis.name}" token="%STATISTIC_REPORT_URL%" value="${statistic.report.url}">
+			<exclude name="**/*.exe"/>
+		</replace>
+		<replace dir="${nsis.work.dir}/${nsis.name}" token="%STATISTIC_REPORT_DAYS_AFTER_ERROR%" value="${statistic.report.days.after.error}">
 			<exclude name="**/*.exe"/>
 		</replace>
 		<exec executable="${nsis.dir}/nsis-2.46/makensis.exe" dir="${nsis.work.dir}/${nsis.name}" failonerror="true">

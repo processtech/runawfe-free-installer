@@ -12,6 +12,7 @@ var installDesktopLinks
 var newSimulationDatabase
 var newWorkspace
 var simulationWebLinks
+var allowStatisticReport
 var cleanAllOldData ; Remove all artifacts from old installation if exists
 
 #=======================================Macros for creating shortcuts and URLs (support create desktop icons)=======================================
@@ -93,6 +94,7 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
   FileWrite $0 "call standalone.bat $\"-Djboss.server.log.dir=%TEMP%\runawfe\jboss\log$\" $\"-Djboss.server.temp.dir=%TEMP%\runawfe\jboss\tmp$\" $\"-Djboss.server.base.dir=%APPDATA%\runawfe\jboss$\"$\r$\n"
   FileClose $0
 !macroend
+
 !macro CreateRunGPDBatchFile
   SetShellVarContext all
   GetTempFileName $0
@@ -133,6 +135,7 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
   FileWrite $0 "start /B /D$\"%DIRNAME%$\" runa-gpd.exe -data $\"%APPDATA%\runawfe\gpd\workspace$\"$\r$\n"
   FileClose $0
 !macroend
+
 !macro RtnWebBotCustomizableMacro sectionLangName
   SetShellVarContext all
   ${if} "$reinstallCustomizable" == "1"
@@ -140,12 +143,15 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
     !insertmacro SaveSectionStatus ${sectionLangName} 0
   ${endif}
 !macroend
+
 !macro DefaultCustomizableMacro sectionLangName
 !macroend
+
 !macro SimCustomizableMacro sectionLangName
   !insertmacro Runa_SetOutPath "$INSTDIR\Simulation\bin"
   !insertmacro CreateRunSimulationBatchFile
 !macroend
+
 !macro GpdCustomizableMacro sectionLangName
   !insertmacro Runa_SetOutPath "$INSTDIR\gpd"
   !insertmacro CreateRunGPDBatchFile
@@ -159,7 +165,7 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
   RMDir /r "$INSTDIR\gpd\configuration"
   !insertmacro Runa_SetOutPath "$INSTDIR\gpd"
   Call DetectJava64
-  ${if} ${RunningX64} 
+  ${if} ${RunningX64}
     ${if} "$JdkArch" == "64"
       File /r "${BuildRoot}\gpd\64\gpd-${AppVersion}\*"
     ${else}
@@ -177,7 +183,7 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
   !insertmacro Runa_SetOutPath "$INSTDIR\Icons"
   File "${BuildRoot}\Icons\t_20x20_256.ico"
   !insertmacro Runa_SetOutPath "$INSTDIR\rtn"
-  ${if} ${RunningX64} 
+  ${if} ${RunningX64}
     ${if} "$JdkArch" == "64"
       File /r "${BuildRoot}\rtn-${AppVersion}\64\*"
     ${else}
@@ -189,7 +195,7 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
 
 ;  Call DetectJava64
 ;  Push "swt-win32.jar"                         #text to be replaced
-;  ${if} ${RunningX64} 
+;  ${if} ${RunningX64}
 ;    ${if} "$JdkArch" == "64"
 ;      Push "swt-win64.jar"                     #replace with
 ;    ${else}
@@ -209,6 +215,24 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
   !insertmacro Runa_SetOutPath "$INSTDIR\Icons"
   File "${BuildRoot}\Icons\C_20x20_256.ico"
   !insertmacro createURL "Web interface RunaWFE.URL" "http://$WFEServerAddress:$WFEServerPort/wfe" "$INSTDIR\Icons\C_20x20_256.ico"
+!macroend
+
+!macro setupWfeStatisticReportConfiguration _installationPropsPath _systemPropsPath
+	FileOpen $0 "${_installationPropsPath}" w
+    FileWrite $0 "installation.uuid=$INSTALLATION_UUID$\r$\n"
+    FileWrite $0 "installation.date=$INSTALLATION_DATE$\r$\n"
+    FileWrite $0 "$INSTALLATION_REFERRER_URL$\r$\n"
+    ${if} "${StatisticReportUrl}" != ""
+      FileWrite $0 "statistic.report.url=${StatisticReportUrl}$\r$\n"
+    ${endif}
+    FileWrite $0 "statistic.report.days.after.error=${StatisticReportDaysAfterError}$\r$\n"
+    FileClose $0
+
+    ${if} "$allowStatisticReport" == "1"
+      FileOpen $0 "${_systemPropsPath}" w
+      FileWrite $0 "statistic.report.enabled=true$\r$\n"
+      FileClose $0
+    ${endif}
 !macroend
 
 !macro installSimSeq
@@ -239,6 +263,9 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
   ${else}
     File "${BuildRoot}\simulation.properties"
   ${endif}
+
+  !insertmacro setupWfeStatisticReportConfiguration "$INSTDIR\Simulation\standalone\wfe.custom\wfe.custom.installation.properties" "$INSTDIR\Simulation\standalone\wfe.custom\wfe.custom.system.properties"
+
 !macroend
 
 !macro installServerSeq
@@ -255,6 +282,7 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
   Call AdvReplaceInFile                     #call find and replace function
 
   CreateDirectory "$INSTDIR\WFEServer\standalone\wfe.custom"
+
 ${if} "$DB_Type" != "$(DB_H2_DEFAULT)"
   DetailPrint "Write database settings: $DB_Type ; Host $DB_Host:$DB_Port ; Auth $DB_Login/$DB_Password ; Database $DB_Name"
   Var /GLOBAL database_properties
@@ -363,8 +391,9 @@ StrCpy $1 '<datasource jndi-name="java:jboss/datasources/OracleDS" pool-name="Or
     Push '$1'                                 #replace with
     Push "$INSTDIR\WFEServer\standalone\configuration\standalone.xml"   #file to replace in
     Call AdvReplaceInFile                     #call find and replace function
-    
   ${endif}
+
+  !insertmacro setupWfeStatisticReportConfiguration "$INSTDIR\WFEServer\standalone\wfe.custom\wfe.custom.installation.properties" "$INSTDIR\WFEServer\standalone\wfe.custom\wfe.custom.system.properties"
 
   !insertmacro Runa_SetOutPath_INSIDE_CURRENTLOG "$INSTDIR\WFEServer\bin"
   ExecShell open "$INSTDIR\WFEServer\bin\service.bat" install SW_HIDE
@@ -378,7 +407,7 @@ StrCpy $1 '<datasource jndi-name="java:jboss/datasources/OracleDS" pool-name="Or
   File /r "${BuildRoot}\wfe-server-jboss\*"
   !insertmacro Runa_SetOutPath_INSIDE_CURRENTLOG "$INSTDIR\${rootDir}\bin"
   File /r "${BuildRoot}\jboss-native\*"
-#  ${if} ${RunningX64} 
+#  ${if} ${RunningX64}
 #    ${if} "$JdkArch" == "64"
 #      CopyFiles /SILENT "$INSTDIR\${rootDir}\bin\64\*" "$INSTDIR\${rootDir}\bin"
 #    ${endif}
@@ -491,5 +520,4 @@ Function AdvReplaceInFile
          Pop $3
          Pop $0
 FunctionEnd
-
 !endif
