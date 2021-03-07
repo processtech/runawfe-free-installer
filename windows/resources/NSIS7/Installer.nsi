@@ -6,10 +6,16 @@
 !define BuildHash "%BUILD_HASH%"
 
 !define BuildRoot "%BUILD_ROOT%"
+!define StatisticReportUrl "%STATISTIC_REPORT_URL%"
+!define StatisticReportDaysAfterError "%STATISTIC_REPORT_DAYS_AFTER_ERROR%"
 !define MUI_ICON "${BuildRoot}\icons\wf_48x128.ico"
 !define MUI_UNICON "${BuildRoot}\icons\wf_48x128.ico"
 !define MUI_ABORTWARNING
 !define MUI_UNINSTALLER
+
+Var INSTALLATION_UUID
+Var INSTALLATION_DATE
+Var INSTALLATION_REFERRER_URL
 
 ;Following two definitions required. Uninstall log will use these definitions.
 ;You may use these definitions also, when you want to set up the InstallDirRagKey,
@@ -28,6 +34,7 @@
 !define INSTDIR_REG_ROOT "HKLM"
 !define INSTDIR_REG_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${ShortName}"
 
+!include "FileFunc.nsh"
 !include "MUI.nsh"
 !include "Sections.nsh"
 !include "LogicLib.nsh"
@@ -45,6 +52,7 @@ InstallDirRegKey HKLM "SOFTWARE\${Vendor}\${ShortName}" ""
 
 ReserveFile "InstallationType.ini"
 ReserveFile "ServerAddressPage.ini"
+ReserveFile "ServerDesktopLinks.ini"
 ReserveFile "SetJavaHomePage.ini"
 ReserveFile "InstallJDKPage.ini"
 ReserveFile "DesktopLinks.ini"
@@ -55,7 +63,6 @@ CRCCheck off
 BrandingText "RunaWFE %VERSION%"
 AddBrandingImage left -10
 
-
 LicenseData "license.rtf"
 Page custom welcomePageInit welcomePageLeave
 page license                                                   ;Show license and set runawfe branding images at installer headers
@@ -64,11 +71,12 @@ Page custom selectInstallationType selectInstallationTypeLeave ;Let user choose 
 Page components selectComponents selectComponentsLeave         ;Let user choose components to install
 Page directory                                                 ;Let user choose directory to install
 Page custom installDesktopLinks installDesktopLinksLeave
+Page custom installServerDesktopLinks installServerDesktopLinksLeave
 Page custom databaseSettings databaseSettingsLeave
 Page custom getHostAndPort getHostAndPortLeave                 ;Main wfe server port and host if selected rtn, web (and installing client components)
 Page custom checkJDKinit_My checkAndInstallJDK                 ;Check for java and install java
 Page custom setJavaHomeInit_My setJavaHomeleave                ;Check for java_home and install java_home to jdk if necessary
-Page instfiles cleanAllDataFunc "" rebootIfNeeded                            ;Install files
+Page instfiles cleanAllDataFunc "" rebootIfNeeded              ;Install files
 
 UninstPage uninstconfirm un.installBrandingImage
 UninstPage instFiles
@@ -86,6 +94,24 @@ UninstPage instFiles
   !insertmacro "${MacroName}" "ComponentGPD"
   !insertmacro "${MacroName}" "ComponentSIM"
   !insertmacro "${MacroName}" "ComponentSRV"
+!macroend
+!macro _CreateGUID _RetVar
+    Call CreateGUID
+    !if ${_RetVar} != s
+        Pop ${_RetVar}
+    !endif
+!macroend
+!macro _GetReferrerUrl _RetVar
+    Call GetReferrerUrl
+    !if ${_RetVar} != s
+        Pop ${_RetVar}
+    !endif
+!macroend
+!macro _GetCurrentDate _RetVar
+    Call GetCurrentDate
+    !if ${_RetVar} != s
+        Pop ${_RetVar}
+    !endif
 !macroend
 
 Section -FinishComponents
@@ -109,7 +135,7 @@ SectionEnd
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
 Section "-Installation of ${AppName}" SecAppFiles
-  ${if} ${RunningX64} 
+  ${if} ${RunningX64}
     SetRegView 64
   ${else}
     SetRegView 32
@@ -142,10 +168,11 @@ Section "-Installation of ${AppName}" SecAppFiles
   WriteRegStr HKLM ${INSTDIR_REG_KEY} "BuildHash" "%BUILD_HASH%"
   WriteRegStr HKLM ${INSTDIR_REG_KEY} "QuietUninstallString" "$\"$INSTDIR\uninstall.exe$\""
   WriteRegStr HKLM ${INSTDIR_REG_KEY} "UninstallString" "$\"$INSTDIR\uninstall.exe$\""
+
 SectionEnd
 
 Section "Uninstall"
-  ${if} ${RunningX64} 
+  ${if} ${RunningX64}
     SetRegView 64
   ${else}
     SetRegView 32
@@ -176,7 +203,7 @@ FunctionEnd
   MiscButtonText "" "" "" $(CloseBtn)
 
 Function .onInit
-  ${if} ${RunningX64} 
+  ${if} ${RunningX64}
     SetRegView 64
   ${else}
     SetRegView 32
@@ -184,10 +211,14 @@ Function .onInit
   SetShellVarContext all
   !insertmacro MUI_INSTALLOPTIONS_EXTRACT "InstallationType.ini"
   !insertmacro MUI_INSTALLOPTIONS_EXTRACT "ServerAddressPage.ini"
+  !insertmacro MUI_INSTALLOPTIONS_EXTRACT "ServerDesktopLinks.ini"
   !insertmacro MUI_INSTALLOPTIONS_EXTRACT "InstallJDKPage.ini"
   !insertmacro MUI_INSTALLOPTIONS_EXTRACT "SetJavaHomePage.ini"
   !insertmacro MUI_INSTALLOPTIONS_EXTRACT "DesktopLinks.ini"
   !insertmacro MUI_INSTALLOPTIONS_EXTRACT "WelcomePage.ini"
+  !insertmacro _CreateGUID $INSTALLATION_UUID
+  !insertmacro _GetCurrentDate $INSTALLATION_DATE
+  !insertmacro _GetReferrerUrl $INSTALLATION_REFERRER_URL
 FunctionEnd
 
 !insertmacro generateOnSelChange
@@ -378,6 +409,7 @@ Function installDesktopLinks
   !insertmacro MUI_INSTALLOPTIONS_WRITE "DesktopLinks.ini" "Field 3" "Text" $(installNewWorkspace)
   !insertmacro MUI_INSTALLOPTIONS_WRITE "DesktopLinks.ini" "Field 4" "Text" $(installSimulationLoginLinks)
   !insertmacro MUI_INSTALLOPTIONS_WRITE "DesktopLinks.ini" "Field 5" "Text" $(installCleanAllOldData)
+  !insertmacro MUI_INSTALLOPTIONS_WRITE "DesktopLinks.ini" "Field 6" "Text" $(installAllowStatisticReport)
   !insertmacro isSectionSelected "${${ID_PREFIX}ComponentSIM}" +4 0
   !insertmacro MUI_INSTALLOPTIONS_WRITE "DesktopLinks.ini" "Field 2" "Flags" "DISABLED"
   !insertmacro MUI_INSTALLOPTIONS_WRITE "DesktopLinks.ini" "Field 4" "Flags" "DISABLED"
@@ -396,6 +428,19 @@ Function installDesktopLinksLeave
   !insertmacro MUI_INSTALLOPTIONS_READ $newWorkspace "DesktopLinks.ini" "Field 3" "State"
   !insertmacro MUI_INSTALLOPTIONS_READ $simulationWebLinks "DesktopLinks.ini" "Field 4" "State"
   !insertmacro MUI_INSTALLOPTIONS_READ $cleanAllOldData "DesktopLinks.ini" "Field 5" "State"
+  !insertmacro MUI_INSTALLOPTIONS_READ $allowStatisticReport "DesktopLinks.ini" "Field 6" "State"
+FunctionEnd
+
+Function installServerDesktopLinks
+  ${if} $installationType == ${RUNA_CLIENT}
+    Abort
+  ${endif}
+  !insertmacro MUI_INSTALLOPTIONS_WRITE "ServerDesktopLinks.ini" "Field 1" "Text" $(installAllowStatisticReport)
+  !insertmacro MUI_INSTALLOPTIONS_DISPLAY_RETURN "ServerDesktopLinks.ini"
+FunctionEnd
+
+Function installServerDesktopLinksLeave
+  !insertmacro MUI_INSTALLOPTIONS_READ $allowStatisticReport "ServerDesktopLinks.ini" "Field 1" "State"
 FunctionEnd
 
 Function cleanAllDataFunc
@@ -411,4 +456,85 @@ Function rebootIfNeeded
     Reboot
     noreboot:
   ${endif}
+FunctionEnd
+
+;https://xkln.net/blog/identifying-the-source-of-downloaded-files/
+Function GetReferrerUrl
+  nsExec::ExecToStack "powershell (Get-Content '$EXEDIR\$EXEFILE' -Stream Zone.Identifier -ErrorAction SilentlyContinue)[2]"
+  Pop $0
+  Pop $1
+  ${If} $0 != "0"
+    StrCpy $1 "ReferrerUrl="
+  ${EndIf}
+  Push $1
+FunctionEnd
+
+
+Function GetCurrentDate
+   pop $R0
+   !insertmacro GetTime
+   ${GetTime} "" "L" $0 $1 $2 $3 $4 $5 $6
+   StrCpy $R0 "$2-$1-$0 $4:$5"
+   push $R0
+FunctionEnd
+
+Function CreateGUID
+  ; GUID has 128 bit = 16 byte = 32 hex characters
+  Push $R0
+  Push $R1
+  Push $R2
+  Push $R3
+  Push $R4
+  ;allocate space for character array
+  System::Alloc 16
+  ;get pointer to new space
+  Pop $R1
+  StrCpy $R0 "" ; init
+  ;call the CoCreateGuid api in the ole32.dll
+  System::Call 'ole32::CoCreateGuid(i R1) i .R2'
+  ;if 0 then continue
+  IntCmp $R2 0 continue
+  ; set error flag
+  SetErrors
+  goto done
+continue:
+  ;byte counter = 0
+  StrCpy $R3 0
+loop:
+    System::Call "*$R1(&v$R3, &i1 .R2)"
+    ;now $R2 is byte at offset $R3
+    ;convert to hex
+    IntFmt $R4 "%X" $R2
+    StrCpy $R4 "00$R4"
+    StrLen $R2 $R4
+    IntOp $R2 $R2 - 2
+    StrCpy $R4 $R4 2 $R2
+    ;append to result
+    StrCpy $R0 "$R0$R4"
+    ;increment byte counter
+    IntOp $R3 $R3 + 1
+    ;if less than 16 then continue
+    IntCmp $R3 16 0 loop
+done:
+  ;cleanup
+   System::Free $R1
+  ; BEGIN format GUID
+  StrCpy $R1 "$R0"
+  StrCpy $R0 ""
+  StrCpy $R2 $R1 8
+  StrCpy $R0 "$R0$R2-"
+  StrCpy $R2 $R1 4 8
+  StrCpy $R0 "$R0$R2-"
+  StrCpy $R2 $R1 4 12
+  StrCpy $R0 "$R0$R2-"
+  StrCpy $R2 $R1 4 16
+  StrCpy $R0 "$R0$R2-"
+  StrCpy $R2 $R1 12 20
+  StrCpy $R0 "$R0$R2"
+  ; END format GUID
+  Pop $R4
+  Pop $R3
+  Pop $R2
+  Pop $R1
+  Exch $R0
 FunctionEnd
