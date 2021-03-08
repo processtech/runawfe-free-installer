@@ -72,8 +72,8 @@ LangString ShortcutDesc_StartSim ${LANG_RUSSIAN} "Запустить тестовый сервер Runa
 LangString ShortcutDesc_StopSim ${LANG_ENGLISH} "Stop RunaWFE Free simulation server"
 LangString ShortcutDesc_StopSim ${LANG_RUSSIAN} "Остановить тестовый сервер RunaWFE Free"
 
-LangString DesctopLinks ${LANG_ENGLISH} "Install links to runawfe free applications at desktop"
-LangString DesctopLinks ${LANG_RUSSIAN} "Добавить на рабочий стол ссылки приложений runawfe free"
+LangString DesktopLinks ${LANG_ENGLISH} "Install links to runawfe free applications at desktop"
+LangString DesktopLinks ${LANG_RUSSIAN} "Добавить на рабочий стол ссылки приложений runawfe free"
 LangString installNewDatabase ${LANG_ENGLISH} "Delete old runawfe free database and install new database for simulation server (with demo processes)"
 LangString installNewDatabase ${LANG_RUSSIAN} "Удалить старую базу данных сервера-симулятора и поставить новую базу данных (с демонстрационными процессами)"
 LangString installNewWorkspace ${LANG_ENGLISH} "Delete old (from previous installations) runawfe free demo processes and install new"
@@ -84,6 +84,8 @@ LangString applyToInstalledComponents ${LANG_ENGLISH} "Apply settings to install
 LangString applyToInstalledComponents ${LANG_RUSSIAN} "Применить настройки к установленным компонентам"
 LangString installCleanAllOldData ${LANG_ENGLISH} "Remove all data/artifacts from old installation (clean install)"
 LangString installCleanAllOldData ${LANG_RUSSIAN} "Удалить все данные и настройки, оставшиеся от предыдущей установки"
+LangString installAllowStatisticReport ${LANG_ENGLISH} "Allow reporting technical information about operation of a system. This data will help us to develop and improve the product."
+LangString installAllowStatisticReport ${LANG_RUSSIAN} "Сообщать техническую информацию о работе системы. Эти данные требуются нам для развития и улучшения системы."
 
 LangString rebootIsRequired ${LANG_ENGLISH} "Reboot is required for correct service start. Reboot now?"
 LangString rebootIsRequired ${LANG_RUSSIAN} "Для корректной работы рекомендуется перезагрузить компьютер. Перезагрузить немедленно?"
