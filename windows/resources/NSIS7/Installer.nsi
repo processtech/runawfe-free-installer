@@ -184,6 +184,7 @@ Section "Uninstall"
 
   ; remove registry keys
   DeleteRegKey HKLM "${INSTDIR_REG_KEY}"
+  DeleteRegValue HKLM "Software\Microsoft\Windows\CurrentVersion\Run" "RunaWfeTaskNotifier"
   DeleteRegKey HKLM  "SOFTWARE\${Vendor}\${ShortName}"
   ; remove shortcuts, if any.
   RMDir /r "$SMPROGRAMS\${AppName}"
@@ -209,6 +210,9 @@ Function .onInit
     SetRegView 32
   ${endif}
   SetShellVarContext all
+
+  DeleteRegValue HKLM "Software\Microsoft\Windows\CurrentVersion\Run" "RunaWfeTaskNotifier"
+
   !insertmacro MUI_INSTALLOPTIONS_EXTRACT "InstallationType.ini"
   !insertmacro MUI_INSTALLOPTIONS_EXTRACT "ServerAddressPage.ini"
   !insertmacro MUI_INSTALLOPTIONS_EXTRACT "ServerDesktopLinks.ini"
@@ -410,6 +414,7 @@ Function installDesktopLinks
   !insertmacro MUI_INSTALLOPTIONS_WRITE "DesktopLinks.ini" "Field 4" "Text" $(installSimulationLoginLinks)
   !insertmacro MUI_INSTALLOPTIONS_WRITE "DesktopLinks.ini" "Field 5" "Text" $(installCleanAllOldData)
   !insertmacro MUI_INSTALLOPTIONS_WRITE "DesktopLinks.ini" "Field 6" "Text" $(installAllowStatisticReport)
+  !insertmacro MUI_INSTALLOPTIONS_WRITE "DesktopLinks.ini" "Field 7" "Text" $(installRtnAutorunAtSystemStartup)
   !insertmacro isSectionSelected "${${ID_PREFIX}ComponentSIM}" +4 0
   !insertmacro MUI_INSTALLOPTIONS_WRITE "DesktopLinks.ini" "Field 2" "Flags" "DISABLED"
   !insertmacro MUI_INSTALLOPTIONS_WRITE "DesktopLinks.ini" "Field 4" "Flags" "DISABLED"
@@ -420,6 +425,10 @@ Function installDesktopLinks
   !insertmacro MUI_INSTALLOPTIONS_WRITE "DesktopLinks.ini" "Field 3" "Flags" "DISABLED"
   goto +2
   !insertmacro MUI_INSTALLOPTIONS_WRITE "DesktopLinks.ini" "Field 3" "Flags" ""
+  !insertmacro isSectionSelected "${${ID_PREFIX}ComponentRTN}" +3 0
+  !insertmacro MUI_INSTALLOPTIONS_WRITE "DesktopLinks.ini" "Field 7" "Flags" "DISABLED"
+  goto +2
+  !insertmacro MUI_INSTALLOPTIONS_WRITE "DesktopLinks.ini" "Field 7" "Flags" ""
   !insertmacro MUI_INSTALLOPTIONS_DISPLAY_RETURN "DesktopLinks.ini"
 FunctionEnd
 Function installDesktopLinksLeave
@@ -429,6 +438,7 @@ Function installDesktopLinksLeave
   !insertmacro MUI_INSTALLOPTIONS_READ $simulationWebLinks "DesktopLinks.ini" "Field 4" "State"
   !insertmacro MUI_INSTALLOPTIONS_READ $cleanAllOldData "DesktopLinks.ini" "Field 5" "State"
   !insertmacro MUI_INSTALLOPTIONS_READ $allowStatisticReport "DesktopLinks.ini" "Field 6" "State"
+  !insertmacro MUI_INSTALLOPTIONS_READ $rtnAutorunAtSystemStartup "DesktopLinks.ini" "Field 7" "State"
 FunctionEnd
 
 Function installServerDesktopLinks

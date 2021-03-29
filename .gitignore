@@ -1,0 +1,15 @@
+# Default ignored files
+target
+build
+windows/results/source
+windows/resources/jdk_setup.exe
+bin
+.idea
+.metadata
+.project
+.classpath
+logs
+workspace
+*.log
+*.iml
+

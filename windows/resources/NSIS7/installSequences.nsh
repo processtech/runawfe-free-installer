@@ -13,6 +13,7 @@ var newSimulationDatabase
 var newWorkspace
 var simulationWebLinks
 var allowStatisticReport
+var rtnAutorunAtSystemStartup
 var cleanAllOldData ; Remove all artifacts from old installation if exists
 
 #=======================================Macros for creating shortcuts and URLs (support create desktop icons)=======================================
@@ -207,6 +208,9 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
 ;  Call AdvReplaceInFile                        #call find and replace function
 
   !insertmacro createMenuShortcut "Task notifier.lnk" "$INSTDIR\rtn\run.bat" "" "$INSTDIR\rtn" "$INSTDIR\Icons\t_20x20_256.ico" "$(ShortcutDesc_RTN)"
+  ${if} "$rtnAutorunAtSystemStartup" == "1"
+    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Run" "RunaWfeTaskNotifier" '"$INSTDIR\rtn\run.bat" -s'
+  ${endif}
 !macroend
 
 !macro installWebSeq

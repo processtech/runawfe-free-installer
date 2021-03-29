@@ -86,6 +86,8 @@ LangString installCleanAllOldData ${LANG_ENGLISH} "Remove all data/artifacts fro
 LangString installCleanAllOldData ${LANG_RUSSIAN} "Удалить все данные и настройки, оставшиеся от предыдущей установки"
 LangString installAllowStatisticReport ${LANG_ENGLISH} "Allow reporting technical information about operation of a system. This data will help us to develop and improve the product."
 LangString installAllowStatisticReport ${LANG_RUSSIAN} "Сообщать техническую информацию о работе системы. Эти данные требуются нам для развития и улучшения системы."
+LangString installRtnAutorunAtSystemStartup ${LANG_ENGLISH} "Task-notification app run automatically at startup OS."
+LangString installRtnAutorunAtSystemStartup ${LANG_RUSSIAN} "Автоматически запускать нотификатор задач при старте системы."
 
 LangString rebootIsRequired ${LANG_ENGLISH} "Reboot is required for correct service start. Reboot now?"
 LangString rebootIsRequired ${LANG_RUSSIAN} "Для корректной работы рекомендуется перезагрузить компьютер. Перезагрузить немедленно?"
