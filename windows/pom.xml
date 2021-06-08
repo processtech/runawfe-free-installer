@@ -99,7 +99,7 @@
                 </exec>
                 <copy toDir="target/artifacts/rtn/32">
                   <fileset dir="../../rtn/target">
-                    <include name="*.jar"/>
+                    <include name="rtn.jar"/>
                   </fileset>
                   <fileset dir="../../rtn/src/main/assembly">
                     <include name="*"/>
@@ -112,7 +112,7 @@
                 </exec>
                 <copy toDir="target/artifacts/rtn/64">
                   <fileset dir="../../rtn/target">
-                    <include name="*.jar"/>
+                    <include name="rtn.jar"/>
                   </fileset>
                   <fileset dir="../../rtn/src/main/assembly">
                     <include name="*"/>
