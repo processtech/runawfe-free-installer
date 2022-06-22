@@ -329,7 +329,7 @@ StrCpy $1 '<datasource jndi-name="java:jboss/datasources/PostgreDS" pool-name="P
 </drivers>'
       ${Break}
     ${Case} "$(DB_MSSQL)"
-      FileWrite $0 "hibernate.dialect = org.hibernate.dialect.SQLServerDialect$\r$\n"
+      FileWrite $0 "hibernate.dialect = ru.runa.wfe.commons.hibernate.SqlServerUnicodeDialect$\r$\n"
       FileWrite $0 "hibernate.connection.datasource = java:/mssqlds$\r$\n"
 StrCpy $1 '<datasource jndi-name="java:/mssqlds" pool-name="java:/mssqlds_Pool" enabled="true" use-java-context="true">\
  <connection-url>jdbc:sqlserver://$DB_Host:$DB_Port;DatabaseName=$DB_Name</connection-url>\
