@@ -137,12 +137,12 @@
   <deployProcessDefinition file="../samples/MultiOnRelation.par" type="Subprocess"/>
   <deployProcessDefinition file="../samples/MultiOnRelationSub.par" type="Subprocess"/>
   
-  <deployReport file="../samples/reports/userTasks.jasper" 
-    name="userTasks" description="User tasks execution statistic"
+  <deployReport file="../samples/reports/userTasksSimple.jasper" 
+    name="userTasksSimple" description="User tasks execution statistic"
     type="user">
-    <parameter name="User login" innerName="UserName" type="String"/>
-    <parameter name="Report date from" innerName="ReportDateFrom" type="Date"/>
-    <parameter name="Report date to" innerName="ReportDateTo" type="Date"/>
+    <parameter name="User login" innerName="UserName" type="STRING"/>
+    <parameter name="Report date from" innerName="ReportDateFrom" type="DATE"/>
+    <parameter name="Report date to" innerName="ReportDateTo" type="DATE"/>
   </deployReport>
 
   <addPermissions executor="all">

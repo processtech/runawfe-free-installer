@@ -59,7 +59,7 @@
                   <env key="NOPAUSE" value="yes"/>
                   <env key="JAVA_HOME" value="${using.java.home}"/>
 		</exec>
-		<sleep seconds="60"/>
+		<sleep seconds="240"/>
                 <exec executable="cmd" dir="../../wfe/wfe-webservice-client" failonerror="true">
                   <arg value="/C"/>
                   <arg value="mvn clean install -Dappserver=${appserver} -Dproject.version=${project.version}"/>
