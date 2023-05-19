@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<dataSource name="InternalStorage" type="Excel">
-  <filePath>C:\</filePath>
-</dataSource>
