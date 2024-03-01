@@ -47,7 +47,7 @@ Var INSTALLATION_REFERRER_URL
 
 Name "${AppName}"
 OutFile "setup.exe"
-InstallDir "$PROGRAMFILES\${SHORTNAME}"
+InstallDir "$PROGRAMFILES64\${SHORTNAME}"
 InstallDirRegKey HKLM "SOFTWARE\${Vendor}\${ShortName}" ""
 
 ReserveFile "InstallationType.ini"
@@ -135,11 +135,6 @@ SectionEnd
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
 Section "-Installation of ${AppName}" SecAppFiles
-  ${if} ${RunningX64}
-    SetRegView 64
-  ${else}
-    SetRegView 32
-  ${endif}
   SetShellVarContext all
   CreateDirectory "$INSTDIR"
   DeleteRegValue HKLM "${INSTDIR_REG_KEY}" "Version"
@@ -172,11 +167,6 @@ Section "-Installation of ${AppName}" SecAppFiles
 SectionEnd
 
 Section "Uninstall"
-  ${if} ${RunningX64}
-    SetRegView 64
-  ${else}
-    SetRegView 32
-  ${endif}
   SetShellVarContext all
   ;First removes all optional components
   ;!insertmacro SectionList "RemoveSection"
@@ -204,11 +194,6 @@ FunctionEnd
   MiscButtonText "" "" "" $(CloseBtn)
 
 Function .onInit
-  ${if} ${RunningX64}
-    SetRegView 64
-  ${else}
-    SetRegView 32
-  ${endif}
   SetShellVarContext all
 
   DeleteRegValue HKLM "Software\Microsoft\Windows\CurrentVersion\Run" "RunaWfeTaskNotifier"
@@ -336,6 +321,10 @@ Function selectComponentsLeave
 FunctionEnd
 
 Function checkJDKinit_My
+  ${IfNot} ${RunningX64}
+  MessageBox MB_OK "Поддерживаетя только 64-битная архитектура ОС. Дальнейшая установка невозможна."
+  Quit
+  ${endif}
   !insertmacro isSectionSelected "${${ID_PREFIX}ComponentSIM}" installJava 0
   !insertmacro isSectionSelected "${${ID_PREFIX}ComponentSRV}" installJava 0
   !insertmacro isSectionSelected "${${ID_PREFIX}ComponentRTN}" installJava 0
@@ -436,7 +425,8 @@ Function installDesktopLinksLeave
   !insertmacro MUI_INSTALLOPTIONS_READ $newSimulationDatabase "DesktopLinks.ini" "Field 2" "State"
   !insertmacro MUI_INSTALLOPTIONS_READ $newWorkspace "DesktopLinks.ini" "Field 3" "State"
   !insertmacro MUI_INSTALLOPTIONS_READ $simulationWebLinks "DesktopLinks.ini" "Field 4" "State"
-  !insertmacro MUI_INSTALLOPTIONS_READ $cleanAllOldData "DesktopLinks.ini" "Field 5" "State"
+  ;!insertmacro MUI_INSTALLOPTIONS_READ $cleanAllOldData "DesktopLinks.ini" "Field 5" "State"
+    StrCpy $cleanAllOldData "1"
   !insertmacro MUI_INSTALLOPTIONS_READ $allowStatisticReport "DesktopLinks.ini" "Field 6" "State"
   !insertmacro MUI_INSTALLOPTIONS_READ $rtnAutorunAtSystemStartup "DesktopLinks.ini" "Field 7" "State"
 FunctionEnd
