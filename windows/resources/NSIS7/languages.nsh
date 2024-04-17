@@ -112,8 +112,6 @@ LangString rebootIsRequired ${LANG_RUSSIAN} "Для корректной работы рекомендуется
 
 LangString JDK_INSTALLREASON ${LANG_ENGLISH} "Some of your components need Java to work. JRE will be installed."
 LangString JDK_INSTALLREASON ${LANG_RUSSIAN} "Некоторым из выбранных компонентов для запуска требуется JRE. Установите JRE на следующем шаге."
-LangString JDK_INSTALLREASON_JDK ${LANG_ENGLISH} "Some of your components need Java to work. JRE will be installed."
-LangString JDK_INSTALLREASON_JDK ${LANG_RUSSIAN} "Некоторым из выбранных компонентов для запуска требуется JRE. Установите JRE на следующем шаге."
 
 LangString JDK_INSTALL_LABEL ${LANG_ENGLISH} "Install JRE"
 LangString JDK_INSTALL_LABEL ${LANG_RUSSIAN} "Установить"
@@ -124,9 +122,9 @@ LangString RUNA_LOGO_IMG ${LANG_ENGLISH} "logo_runa_en.bmp"
 LangString RUNA_LOGO_IMG ${LANG_RUSSIAN} "logo_runa_ru.bmp"
 
 LangString TEXT_PROJECT_SITE ${LANG_ENGLISH} "Project site: http://www.runawfe.org"
-LangString TEXT_PROJECT_SITE ${LANG_RUSSIAN} "Сайт проекта: http://www.runawfe.org/rus"
+LangString TEXT_PROJECT_SITE ${LANG_RUSSIAN} "Сайт проекта: https://runawfe.ru/RunaWFE"
 LangString LINK_PROJECT_SITE ${LANG_ENGLISH} "http://www.runawfe.org"
-LangString LINK_PROJECT_SITE ${LANG_RUSSIAN} "http://www.runawfe.org/rus"
+LangString LINK_PROJECT_SITE ${LANG_RUSSIAN} "https://runawfe.ru/RunaWFE"
 
 LangString TEXT_BEGIN_INSTALLATION ${LANG_ENGLISH} "Install"
 LangString TEXT_BEGIN_INSTALLATION ${LANG_RUSSIAN} "Установить"

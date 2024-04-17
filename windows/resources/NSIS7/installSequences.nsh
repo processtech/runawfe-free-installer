@@ -165,15 +165,7 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
   RMDir /r "$INSTDIR\gpd\configuration"
   !insertmacro Runa_SetOutPath "$INSTDIR\gpd"
   Call DetectJava64
-  ${if} ${RunningX64}
-    ${if} "$JdkArch" == "64"
-      File /r "${BuildRoot}\gpd\64\gpd-${AppVersion}\*"
-    ${else}
-      File /r "${BuildRoot}\gpd\32\gpd-${AppVersion}\*"
-    ${endif}
-  ${else}
-    File /r "${BuildRoot}\gpd\32\gpd-${AppVersion}\*"
-  ${endif}
+  File /r "${BuildRoot}\gpd\64\gpd-${AppVersion}\*"
   !insertmacro CreateRunGPDBatchFile
   !insertmacro createMenuShortcut "Developer Studio.lnk" "$INSTDIR\gpd\run.bat" "" "$INSTDIR\gpd" "$INSTDIR\Icons\e_20x20_256.ico" "$(ShortcutDesc_GPD)"
 !macroend
@@ -183,29 +175,8 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
   !insertmacro Runa_SetOutPath "$INSTDIR\Icons"
   File "${BuildRoot}\Icons\t_20x20_256.ico"
   !insertmacro Runa_SetOutPath "$INSTDIR\rtn"
-  ${if} ${RunningX64}
-    ${if} "$JdkArch" == "64"
       File /r "${BuildRoot}\rtn-${AppVersion}\64\*"
-    ${else}
-      File /r "${BuildRoot}\rtn-${AppVersion}\32\*"
-    ${endif}
-  ${else}
-    File /r "${BuildRoot}\rtn-${AppVersion}\32\*"
-  ${endif}
 
-;  Call DetectJava64
-;  Push "swt-win32.jar"                         #text to be replaced
-;  ${if} ${RunningX64}
-;    ${if} "$JdkArch" == "64"
-;      Push "swt-win64.jar"                     #replace with
-;    ${else}
-;      Push "swt-win32.jar"                     #replace with
-;    ${endif}
-;  ${else}
-;    Push "swt-win32.jar"                       #replace with
-;  ${endif}
-;  Push "$INSTDIR\rtn\run.bat"                  #file to replace in
-;  Call AdvReplaceInFile                        #call find and replace function
 
   !insertmacro createMenuShortcut "Task notifier.lnk" "$INSTDIR\rtn\run.bat" "" "$INSTDIR\rtn" "$INSTDIR\Icons\t_20x20_256.ico" "$(ShortcutDesc_RTN)"
   ${if} "$rtnAutorunAtSystemStartup" == "1"
@@ -217,8 +188,8 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
   SetShellVarContext all
   !insertmacro Runa_SetOutPath "$INSTDIR\Icons"
   File "${BuildRoot}\Icons\C_20x20_256.ico"
-  !insertmacro createURL "Web interface RunaWFE Free.URL" "http://$WFEServerAddress:$WFEServerPort/wfe" "$INSTDIR\Icons\C_20x20_256.ico"
-!macroend
+  Call CreateWebLink
+  !macroend
 
 !macro setupWfeStatisticReportConfiguration _installationPropsPath _systemPropsPath
 	FileOpen $0 "${_installationPropsPath}" w
@@ -257,7 +228,6 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
   !insertmacro Runa_SetOutPath "$INSTDIR\Icons"
   File ${BuildRoot}\Icons\Si_20x20_256.ico
   File ${BuildRoot}\Icons\Cs_20x20_256.ico
-  !insertmacro createURL "Simulation web interface.URL" "http://localhost:8080/wfe" "$INSTDIR\Icons\Si_20x20_256.ico"
   !insertmacro createMenuShortcut "Start Simulation.lnk" "$INSTDIR\Simulation\bin\runSimulation.bat" " " "$INSTDIR\Simulation\bin" "$INSTDIR\Icons\Si_20x20_256.ico" "$(ShortcutDesc_StartSim)"
   !insertmacro createMenuShortcut "Stop Simulation.lnk" "$INSTDIR\Simulation\bin\jboss-cli.bat" "$\"--commands=connect,:shutdown$\"" "$INSTDIR\Simulation\bin" "$INSTDIR\Icons\Si_20x20_256.ico" "$(ShortcutDesc_StopSim)"
 
@@ -291,6 +261,10 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
   Push "8080"                               #text to be replaced
   Push $WFEServerPort                       #replace with
   Push "$INSTDIR\WFEServer\standalone\configuration\standalone.xml"   #file to replace in
+  Call AdvReplaceInFile                     #call find and replace function
+  Push "8080"                               #text to be replaced
+  Push $WFEServerPort                       #replace with
+  Push "$INSTDIR\Simulation\standalone\configuration\standalone.xml"   #file to replace in
   Call AdvReplaceInFile                     #call find and replace function
 
   CreateDirectory "$INSTDIR\WFEServer\standalone\wfe.custom"
@@ -419,11 +393,6 @@ StrCpy $1 '<datasource jndi-name="java:jboss/datasources/OracleDS" pool-name="Or
   File /r "${BuildRoot}\wfe-server-jboss\*"
   !insertmacro Runa_SetOutPath_INSIDE_CURRENTLOG "$INSTDIR\${rootDir}\bin"
   File /r "${BuildRoot}\jboss-native\*"
-#  ${if} ${RunningX64}
-#    ${if} "$JdkArch" == "64"
-#      CopyFiles /SILENT "$INSTDIR\${rootDir}\bin\64\*" "$INSTDIR\${rootDir}\bin"
-#    ${endif}
-#  ${endif}
 !macroend
 
 #======================================= uninstall macros =======================================
@@ -533,3 +502,33 @@ Function AdvReplaceInFile
          Pop $0
 FunctionEnd
 !endif
+
+# Создание html файла открытия Web-интерфейса Runa и ссылки на него на рабочем столе.
+Function CreateWebLink
+    !insertmacro Runa_SetOutPath "$INSTDIR\web"
+  Delete "$INSTDIR\web\runawfe.html"
+  FileOpen $0 "$INSTDIR\web\runawfe.html" w
+  FileWrite $0 "<!DOCTYPE HTML PUBLIC $\"-//W3C//DTD XHTML 1.0 Transitional//EN$\" $\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd$\">$\r$\n"
+  FileWrite $0 "<html>$\r$\n"
+  FileWrite $0 "<head>$\r$\n"
+  FileWrite $0 "<meta http-equiv=$\"content-type$\" content=$\"text/html; charset=utf-8$\" />$\r$\n"
+  FileWrite $0 "<title>Сервер-симулятор Runa WFE</title>$\r$\n"
+  FileWrite $0 "$\r$\n"
+  FileWrite $0 "<script type=$\"text/javascript$\">$\r$\n"
+  FileWrite $0 "$\r$\n"
+  FileWrite $0 "window.onload = (event) => {$\r$\n"
+  FileWrite $0 "window.location.href = $\"http://$WFEServerAddress:$WFEServerPort/wfe/$\";$\r$\n"
+  FileWrite $0 "};$\r$\n"
+  FileWrite $0 "$\r$\n"
+  FileWrite $0 "</script>$\r$\n"
+  FileWrite $0 "</head>$\r$\n"
+  FileWrite $0 "<body>$\r$\n"
+  FileWrite $0 "</body>$\r$\n"
+  FileWrite $0 "</html>$\r$\n"
+  FileWrite $0 "$\r$\n"
+   FileClose $0
+     !insertmacro createURL "Web interface RunaWFE.URL" "$INSTDIR\web\runawfe.html" "$INSTDIR\Icons\C_20x20_256.ico"
+   
+
+
+FunctionEnd ; CreateWebLink

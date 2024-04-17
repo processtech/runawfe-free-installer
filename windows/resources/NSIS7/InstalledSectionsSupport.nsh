@@ -62,8 +62,4 @@
   "exit_${SecIdName}:"
   ClearErrors
 !macroend
-
-!macro RemoveSection SecIdName
-  call "un.RemoveComponent_${SecIdName}"
-!macroend
 !endif
