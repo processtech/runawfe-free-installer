@@ -68,6 +68,7 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
   FileWrite $0 "del /F /S /Q $\"%APPDATA%\runawfe\jboss\configuration$\"$\r$\n"
   FileWrite $0 "del /F /S /Q $\"%APPDATA%\runawfe\jboss\deployments$\"$\r$\n"
   FileWrite $0 "del /F /S /Q $\"%APPDATA%\runawfe\jboss\wfe.custom$\"$\r$\n"
+  FileWrite $0 "del /F /S /Q $\"%APPDATA%\runawfe\jboss\wfe.data-sources$\"$\r$\n"
   FileWrite $0 "xcopy ..\standalone\configuration $\"%APPDATA%\runawfe\jboss\configuration$\" /D /I /S /Y /R$\r$\n"
   FileWrite $0 "xcopy ..\standalone\deployments $\"%APPDATA%\runawfe\jboss\deployments$\" /D /I /S /Y /R$\r$\n"
   FileWrite $0 "xcopy ..\standalone\wfe.custom $\"%APPDATA%\runawfe\jboss\wfe.custom$\" /D /I /S /Y /R$\r$\n"
@@ -230,14 +231,6 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
   File ${BuildRoot}\Icons\Cs_20x20_256.ico
   !insertmacro createMenuShortcut "Start Simulation.lnk" "$INSTDIR\Simulation\bin\runSimulation.bat" " " "$INSTDIR\Simulation\bin" "$INSTDIR\Icons\Si_20x20_256.ico" "$(ShortcutDesc_StartSim)"
   !insertmacro createMenuShortcut "Stop Simulation.lnk" "$INSTDIR\Simulation\bin\jboss-cli.bat" "$\"--commands=connect,:shutdown$\"" "$INSTDIR\Simulation\bin" "$INSTDIR\Icons\Si_20x20_256.ico" "$(ShortcutDesc_StopSim)"
-
-  SetShellVarContext current
-  IfFileExists "$APPDATA\runawfe\excelstorage\*.*" +2
-  CreateDirectory "$APPDATA\runawfe\excelstorage"
-  ${nsisXML->OpenXML} "$INSTDIR\Simulation\standalone\wfe.data-sources\InternalStorage.xml"
-  ${nsisXML->SetElementText} "filePath" "$APPDATA\runawfe\excelstorage"
-  ${nsisXML->CloseXML}
-  SetShellVarContext all
 
   !insertmacro Runa_SetOutPath "$INSTDIR\Simulation\standalone\wfe.custom"
   ${if} "$simulationWebLinks" == "1"
