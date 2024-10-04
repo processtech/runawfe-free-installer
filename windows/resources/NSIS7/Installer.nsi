@@ -347,7 +347,6 @@ FunctionEnd
 Function getHostAndPort
   !insertmacro MUI_INSTALLOPTIONS_WRITE "ServerAddressPage.ini" "Field 2" "Text" $(TEXT_SERVERINFO_HOST)
   !insertmacro MUI_INSTALLOPTIONS_WRITE "ServerAddressPage.ini" "Field 4" "Text" $(TEXT_SERVERINFO_PORT)
-  !insertmacro MUI_INSTALLOPTIONS_WRITE "ServerAddressPage.ini" "Field 6" "Text" $(applyToInstalledComponents)
   ${if} $installationType == ${RUNA_CLIENT}
     Push $R0
     !insertmacro isSectionSelected ${${ID_PREFIX}ComponentWEB} show 0
@@ -371,7 +370,6 @@ Function getHostAndPort
     !insertmacro MUI_INSTALLOPTIONS_WRITE "ServerAddressPage.ini" "Field 1" "Text" $(TEXT_SERVERINFO_SERVER)
     !insertmacro MUI_INSTALLOPTIONS_WRITE "ServerAddressPage.ini" "Field 3" "State" "localhost"
     !insertmacro MUI_INSTALLOPTIONS_WRITE "ServerAddressPage.ini" "Field 3" "Flags" "DISABLED"
-    !insertmacro MUI_INSTALLOPTIONS_WRITE "ServerAddressPage.ini" "Field 6" "Flags" "DISABLED"
     !insertmacro MUI_INSTALLOPTIONS_DISPLAY_RETURN "ServerAddressPage.ini"
     !insertmacro MUI_INSTALLOPTIONS_WRITE "ServerAddressPage.ini" "Field 3" "State" ""
     !insertmacro MUI_INSTALLOPTIONS_WRITE "ServerAddressPage.ini" "Field 5" "Flags" ""
@@ -383,7 +381,6 @@ FunctionEnd
 Function getHostAndPortLeave
   !insertmacro INSTALLOPTIONS_READ $WFEServerAddress "ServerAddressPage.ini" "Field 3" "State"
   !insertmacro INSTALLOPTIONS_READ $WFEServerPort "ServerAddressPage.ini" "Field 5" "State"
-  !insertmacro INSTALLOPTIONS_READ $reinstallCustomizable "ServerAddressPage.ini" "Field 6" "State"
   ${if} "$WFEServerAddress" == ""
     MessageBox MB_OK $(TEXT_SERVERINFO_HOSTEMPTY)
     Abort
@@ -445,7 +442,29 @@ FunctionEnd
 
 Function cleanAllDataFunc
   ${if} "$cleanAllOldData" == "1"
-    RMDir /r "$INSTDIR"
+   StrCpy $0 "$INSTDIR"
+         StrCpy $1 "Java"
+         FindFirst $R0 $R1 "$0\*"
+
+         loop:
+           StrCmp $R1 "." skip
+           StrCmp $R1 ".." skip
+           StrCmp $R1 $1 skip
+
+           IfFileExists "$0\$R1\*.*" IsFolder
+           Delete "$0\$R1"
+           Goto skip
+
+           IsFolder:
+           RMDir /r "$0\$R1"
+
+           skip:
+           FindNext $R0 $R1
+           IfErrors done
+           Goto loop
+
+         done:
+         FindClose $R0
   ${endif}
 FunctionEnd
 
