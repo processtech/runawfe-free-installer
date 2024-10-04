@@ -80,8 +80,6 @@ LangString installNewWorkspace ${LANG_ENGLISH} "Delete old (from previous instal
 LangString installNewWorkspace ${LANG_RUSSIAN} "Удалить старые (оставшиеся после предыдущих установок) демонстрационные процессы и установить новые"
 LangString installSimulationLoginLinks ${LANG_ENGLISH} "Install web links to enter simulation as demo user"
 LangString installSimulationLoginLinks ${LANG_RUSSIAN} "Установить ссылки в web интерфейсе для входа в симулятор под демо пользователями"
-LangString applyToInstalledComponents ${LANG_ENGLISH} "Apply settings to installed components"
-LangString applyToInstalledComponents ${LANG_RUSSIAN} "Применить настройки к установленным компонентам"
 LangString installCleanAllOldData ${LANG_ENGLISH} "Remove all data/artifacts from old installation (clean install)"
 LangString installCleanAllOldData ${LANG_RUSSIAN} "Удалить все данные и настройки, оставшиеся от предыдущей установки"
 LangString installAllowStatisticReport ${LANG_ENGLISH} "Allow reporting technical information about operation of a system. This data will help us to develop and improve the product."

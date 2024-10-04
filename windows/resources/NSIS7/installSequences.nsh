@@ -139,10 +139,8 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
 
 !macro RtnWebBotCustomizableMacro sectionLangName
   SetShellVarContext all
-  ${if} "$reinstallCustomizable" == "1"
-    call "RemoveComponent_${sectionLangName}"
-    !insertmacro SaveSectionStatus ${sectionLangName} 0
-  ${endif}
+  call "RemoveComponent_${sectionLangName}"
+  !insertmacro SaveSectionStatus ${sectionLangName} 0
 !macroend
 
 !macro DefaultCustomizableMacro sectionLangName
