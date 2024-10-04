@@ -53,7 +53,7 @@ Function checkAndInstallJDK
 
   ; Unzip JDK
     ${SetSystemCursor} OCR_WAIT
-  nsisunz::Unzip $JdkInstaller "$PROGRAMFILES64\Java"
+  nsisunz::Unzip $JdkInstaller "$INSTDIR\Java"
   Pop $0								; Always check result on stack
   ${SetSystemCursor} OCR_NORMAL
 ; This check don't work on my VM Windows7/64. Why?
@@ -64,7 +64,7 @@ Function checkAndInstallJDK
 
   ; Check java path
   ClearErrors
-  FindFirst $0 $1 "$PROGRAMFILES64\Java\*"
+  FindFirst $0 $1 "$INSTDIR\Java\*"
 PathDirLoop:
   IfErrors PathDirEnd
   StrCmp $1 "." PathDirNext
@@ -75,8 +75,7 @@ PathDirNext:
   Goto PathDirLoop
 PathDirEnd:
 FindClose $0
-  StrCpy $1 "$PROGRAMFILES64\Java\$1\bin"
-
+  StrCpy $1 "$INSTDIR\Java\$1\bin"
   ; Append system Path
   Push "PATH"
   Push "P"

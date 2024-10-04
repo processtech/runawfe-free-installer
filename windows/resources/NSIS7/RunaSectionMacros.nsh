@@ -14,7 +14,6 @@
 !include "RemoveInstalledOnlySupport.nsh"
 
 var installationType
-var reinstallCustomizable
 
 !macro Runa_SetOutPath path
   !ifdef Runa_LoggingActive
