@@ -14,16 +14,18 @@
 !include "RemoveInstalledOnlySupport.nsh"
 
 var installationType
+var Runa_LoggingActive
 
 !macro Runa_SetOutPath path
-  !ifdef Runa_LoggingActive
-    !insertmacro UNINSTALL.LOG_CLOSE_INSTALL
-    !undef Runa_LoggingActive
-  !endif
-  SetOutPath "${path}"
-  !insertmacro UNINSTALL.LOG_OPEN_INSTALL
-  !define Runa_LoggingActive ""
-  CreateDirectory "${path}"
+    StrCpy $R0 "$Runa_LoggingActive"
+    ${If} $R0 == "1"
+        !insertmacro UNINSTALL.LOG_CLOSE_INSTALL
+        StrCpy $Runa_LoggingActive "0"
+    ${EndIf}
+    SetOutPath "${path}"
+    !insertmacro UNINSTALL.LOG_OPEN_INSTALL
+    CreateDirectory "${path}"
+    StrCpy $Runa_LoggingActive "1"
 !macroend
 
 !macro Runa_SetOutPath_INSIDE_CURRENTLOG path
@@ -84,17 +86,18 @@ FunctionEnd
     StrCpy $UNINST_DAT "${RUNA_UNINSTALL_LOG}_${sectionLangName}.dat"
     !insertmacro UNINSTALL.LOG_PREPARE_INSTALL "${RUNA_UNINSTALL_LOG}_${sectionLangName}.dat"
     !insertmacro ${sectionInstallMacro}
-    !ifdef Runa_LoggingActive
-      !insertmacro UNINSTALL.LOG_CLOSE_INSTALL
-      !undef Runa_LoggingActive
-    !endif
+    StrCpy $R0 "$Runa_LoggingActive"
+    ${If} $R0 == "1"
+        !insertmacro UNINSTALL.LOG_CLOSE_INSTALL
+        StrCpy $Runa_LoggingActive "0"
+    ${EndIf}
     !insertmacro UNINSTALL.LOG_UPDATE_INSTALL "${RUNA_UNINSTALL_LOG}_${sectionLangName}.dat"
     !insertmacro InstallSection ${sectionLangName}
     "installationComplette_${sectionLangName}:"
 !macroend
 
 !macro generateRemoveComponentFunctionBody sectionLangName sectionPreRemoveMacro sectionPostRemoveMacro
-  !insertmacro isSectionInstalled  "${ID_PREFIX}${sectionLangName}" 0 "removeComplette_${sectionLangName}"
+  !insertmacro isSectionInstalled "${ID_PREFIX}${sectionLangName}" 0 "removeComplette_${sectionLangName}"
   !insertmacro ${sectionPreRemoveMacro}
   !insertmacro UNINSTALL.LOG_UNINSTALL "${RUNA_UNINSTALL_LOG}_${sectionLangName}.dat"
   !insertmacro ${sectionPostRemoveMacro}

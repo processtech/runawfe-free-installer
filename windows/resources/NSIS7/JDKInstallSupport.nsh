@@ -6,8 +6,8 @@
 !include WinVer.nsh
 !include SetCursor.nsh
 !include "StrFunc.nsh"
-  !include "LogicLib.nsh"
-  !include "strExplode.nsh"
+!include "LogicLib.nsh"
+!include "strExplode.nsh"
 
 !define JAVA_VERSION "11.0.3"
 
@@ -56,11 +56,7 @@ Function checkAndInstallJDK
   nsisunz::Unzip $JdkInstaller "$INSTDIR\Java"
   Pop $0								; Always check result on stack
   ${SetSystemCursor} OCR_NORMAL
-; This check don't work on my VM Windows7/64. Why?
-;  StrCmp $0 "success" UnzipEnd
-;  Push $0
-;  Goto InstallJavaError
-;UnzipEnd:
+  Call FindSystemPropertiesWindow
 
   ; Check java path
   ClearErrors
@@ -348,3 +344,16 @@ JAVA_HOME_End:
 FunctionEnd
 
 !endif
+
+Function FindSystemPropertiesWindow
+    find:
+    nsProcessW::_FindProcess "SystemPropertiesAdvanced.exe"
+    Pop $R0
+    ${If} $R0 = 0
+        MessageBox MB_OK|MB_ICONEXCLAMATION $(ENV_VAR_WARN) /SD IDOK
+      Pop $R0
+
+      Sleep 500
+      Goto find
+    ${EndIf}
+FunctionEnd
