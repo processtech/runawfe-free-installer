@@ -119,12 +119,12 @@ Section -FinishComponents
   System::Call 'Shell32::SHChangeNotify(i 0x8000000, i 0, i 0, i 0)'
 SectionEnd
 
-!insertmacro generateSection ComponentGPD installGPDSeq defaultUninstallSeq defaultUninstallSeq GpdCustomizableMacro ${RUNA_CLIENT}
+!insertmacro generateSection ComponentGPD installGPDSeq defaultUninstallSeq uninstallGPDSeq GpdCustomizableMacro ${RUNA_CLIENT}
 !insertmacro generateSection ComponentSIM installSimSeq defaultUninstallSeq uninstallSimSeq SimCustomizableMacro ${RUNA_CLIENT}
-!insertmacro generateOptionalSection ComponentRTN installRTNSeq defaultUninstallSeq defaultUninstallSeq RtnWebBotCustomizableMacro ${RUNA_CLIENT}
-!insertmacro generateOptionalSection ComponentWEB installWebSeq defaultUninstallSeq defaultUninstallSeq RtnWebBotCustomizableMacro ${RUNA_CLIENT}
+!insertmacro generateOptionalSection ComponentRTN installRTNSeq defaultUninstallSeq uninstallRtnSeq RtnWebBotCustomizableMacro ${RUNA_CLIENT}
+!insertmacro generateOptionalSection ComponentWEB installWebSeq defaultUninstallSeq uninstallWebSeq RtnWebBotCustomizableMacro ${RUNA_CLIENT}
 
-!insertmacro generateSection ComponentSRV installServerSeq uninstallServerSeq defaultUninstallSeq RtnWebBotCustomizableMacro ${RUNA_SERVER}
+!insertmacro generateSection ComponentSRV installServerSeq defaultUninstallSeq uninstallServerSeq RtnWebBotCustomizableMacro ${RUNA_SERVER}
 
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
   !insertmacro MUI_DESCRIPTION_TEXT "${${ID_PREFIX}ComponentGPD}" $(ComponentGPD_Desc)
@@ -180,10 +180,26 @@ Section "Uninstall"
   RMDir /r "$SMPROGRAMS\${AppName}"
   ; remove files
   Delete "$INSTDIR\uninstall.exe"
+  IfFileExists "$INSTDIR\Java\*" 0 +2
+    RMDir /r "$INSTDIR\Java"
+  ReadEnvStr $0 "JAVA_HOME"
+  ${un.StrStr} $1 $0 "$INSTDIR\Java"
+  ${If} $1 == ""
+    ;Java is not in RunaWfe folder
+  ${Else}
+    ReadRegStr $2 HKLM "SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "JAVA_HOME"
+    DeleteRegValue HKLM "SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "JAVA_HOME"
+    DeleteRegValue HKCU "Environment" "JAVA_HOME"
+    ReadRegStr $1 HKLM "SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "Path"
+    ${un.StrRep} $0 $1 "$2\bin;" ""
+    WriteRegExpandStr HKLM "SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "Path" $0
+    SendMessage ${HWND_BROADCAST} ${WM_SETTINGCHANGE} 0 "STR:Environment"
+    System::Call 'Kernel32::SendMessageTimeout(i 0xFFFF, i ${WM_SETTINGCHANGE}, i 0, t "Environment", i 0x0, i 1000, *i .r0)'
+  ${EndIf}
   RMDir "$INSTDIR\Icons"
   Delete "$INSTDIR\version"
+  RMDir "$INSTDIR"
   DeleteRegKey HKLM ${INSTDIR_REG_KEY}
-;  RMDir /r "$INSTDIR"
 SectionEnd
 
 Function removeUnselected
@@ -322,7 +338,7 @@ FunctionEnd
 
 Function checkJDKinit_My
   ${IfNot} ${RunningX64}
-  MessageBox MB_OK "Поддерживаетя только 64-битная архитектура ОС. Дальнейшая установка невозможна."
+  MessageBox MB_OK "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ 64-пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ."
   Quit
   ${endif}
   !insertmacro isSectionSelected "${${ID_PREFIX}ComponentSIM}" installJava 0
@@ -422,8 +438,7 @@ Function installDesktopLinksLeave
   !insertmacro MUI_INSTALLOPTIONS_READ $newSimulationDatabase "DesktopLinks.ini" "Field 2" "State"
   !insertmacro MUI_INSTALLOPTIONS_READ $newWorkspace "DesktopLinks.ini" "Field 3" "State"
   !insertmacro MUI_INSTALLOPTIONS_READ $simulationWebLinks "DesktopLinks.ini" "Field 4" "State"
-  ;!insertmacro MUI_INSTALLOPTIONS_READ $cleanAllOldData "DesktopLinks.ini" "Field 5" "State"
-    StrCpy $cleanAllOldData "1"
+  !insertmacro MUI_INSTALLOPTIONS_READ $cleanAllOldData "DesktopLinks.ini" "Field 5" "State"
   !insertmacro MUI_INSTALLOPTIONS_READ $allowStatisticReport "DesktopLinks.ini" "Field 6" "State"
   !insertmacro MUI_INSTALLOPTIONS_READ $rtnAutorunAtSystemStartup "DesktopLinks.ini" "Field 7" "State"
 FunctionEnd

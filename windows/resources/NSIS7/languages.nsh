@@ -104,9 +104,11 @@ LangString rebootIsRequired ${LANG_RUSSIAN} "Для корректной работы рекомендуется
   LangString TEXT_SERVERINFO_TITLE ${LANG_RUSSIAN} "Необходима дополнительная информация"
 
   LangString TEXT_JAVAHOME_TITLE ${LANG_ENGLISH} "JAVA_HOME system variable installation"
-  LangString TEXT_JAVAHOME_TITLE ${LANG_RUSSIAN} "Установка систмной переменной JAVA_HOME"
+  LangString TEXT_JAVAHOME_TITLE ${LANG_RUSSIAN} "Установка системной переменной JAVA_HOME"
   LangString TEXT_JAVAHOME_REASON ${LANG_ENGLISH} "It's strongly recomended to point system variable JAVA_HOME to Java Development Kit (not Java Runtime Environment) for correct working of RunaWFE server. Set checkbox to point JAVA_HOME to Java."
   LangString TEXT_JAVAHOME_REASON ${LANG_RUSSIAN} "Для корректной работы сервера RunaWFE рекомендуется установить системную переменную JAVA_HOME на Java Development Kit. Установите флажок, чтобы создать JAVA_HOME"
+  LangString ENV_VAR_WARN ${LANG_ENGLISH} "The System Properties window is open. You should close it for correct operation."
+  LangString ENV_VAR_WARN ${LANG_RUSSIAN} "Окно Свойства системы открыто. Для корректной работы следует закрыть его."
 
 LangString JDK_INSTALLREASON ${LANG_ENGLISH} "Some of your components need Java to work. JRE will be installed."
 LangString JDK_INSTALLREASON ${LANG_RUSSIAN} "Некоторым из выбранных компонентов для запуска требуется JRE. Установите JRE на следующем шаге."
