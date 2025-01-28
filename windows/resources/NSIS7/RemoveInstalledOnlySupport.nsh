@@ -156,9 +156,6 @@
   !verbose pop
 !macroend
 
-
-!define uninstall.log_install "!insertmacro UNINSTALL.LOG_INSTALL"
-
 !macro UNINSTALL.LOG_INSTALL FileOpenWrite FileOpenRead TargetDir
   !verbose push
      !verbose ${UNINST_LOG_VERBOSE}
@@ -176,9 +173,6 @@
   !verbose pop
 !macroend
 
-
-!define uninstall.log_mergeID "!insertmacro UNINSTALL.LOG_MERGE"
-
 !macro UNINSTALL.LOG_MERGE UnlogPart
   !verbose push
      !verbose ${UNINST_LOG_VERBOSE}
@@ -192,11 +186,10 @@
 !macro UNINSTALL.LOG_OPEN_INSTALL
   !verbose push
      !verbose ${UNINST_LOG_VERBOSE}
-        ${uninstall.log_install} "${EXCLU_LIST}" "$UNINST_DAT" "$OUTDIR"
+        !insertmacro UNINSTALL.LOG_INSTALL "${EXCLU_LIST}" "$UNINST_DAT" "$OUTDIR"
         StrCpy $currentLogDir "$OUTDIR"
   !verbose pop
 !macroend
-
 
 !macro UNINSTALL.LOG_CLOSE_INSTALL
   !verbose push
@@ -204,8 +197,8 @@
 
    !define ID ${__LINE__}
 
-        ${uninstall.log_install} "${UNLOG_PART}${ID}" "${EXCLU_LIST}" "$currentLogDir"
-        ${uninstall.log_mergeID} "${UNLOG_PART}${ID}"
+        !insertmacro UNINSTALL.LOG_INSTALL "${UNLOG_PART}${ID}" "${EXCLU_LIST}" "$currentLogDir"
+        !insertmacro UNINSTALL.LOG_MERGE "${UNLOG_PART}${ID}"
 
    !undef ID
 

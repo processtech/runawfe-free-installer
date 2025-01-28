@@ -68,11 +68,12 @@ var cleanAllOldData ; Remove all artifacts from old installation if exists
   FileWrite $0 "del /F /S /Q $\"%APPDATA%\runawfe\jboss\configuration$\"$\r$\n"
   FileWrite $0 "del /F /S /Q $\"%APPDATA%\runawfe\jboss\deployments$\"$\r$\n"
   FileWrite $0 "del /F /S /Q $\"%APPDATA%\runawfe\jboss\wfe.custom$\"$\r$\n"
-  FileWrite $0 "del /F /S /Q $\"%APPDATA%\runawfe\jboss\wfe.data-sources$\"$\r$\n"
   FileWrite $0 "xcopy ..\standalone\configuration $\"%APPDATA%\runawfe\jboss\configuration$\" /D /I /S /Y /R$\r$\n"
   FileWrite $0 "xcopy ..\standalone\deployments $\"%APPDATA%\runawfe\jboss\deployments$\" /D /I /S /Y /R$\r$\n"
   FileWrite $0 "xcopy ..\standalone\wfe.custom $\"%APPDATA%\runawfe\jboss\wfe.custom$\" /D /I /S /Y /R$\r$\n"
-  FileWrite $0 "xcopy ..\standalone\wfe.data-sources $\"%APPDATA%\runawfe\jboss\wfe.data-sources$\" /D /I /S /Y /R$\r$\n"
+  FileWrite $0 "if not exist $\"%APPDATA%\runawfe\jboss\wfe.data-sources$\" ($\r$\n"
+  FileWrite $0 "    xcopy ..\standalone\wfe.data-sources $\"%APPDATA%\runawfe\jboss\wfe.data-sources$\" /D /I /S /Y /R$\r$\n"
+  FileWrite $0 ")$\r$\n"
   ${if} "$newSimulationDatabase" == "1"
     FileWrite $0 "if not exist $\"%APPDATA%\runawfe\jboss\runawfe-ver-$2$\" ($\r$\n"
     FileWrite $0 "  del /F /S /Q $\"%APPDATA%\runawfe\jboss\data$\"$\r$\n"
@@ -394,16 +395,45 @@ StrCpy $1 '<datasource jndi-name="java:jboss/datasources/OracleDS" pool-name="Or
   RMDir /r "$INSTDIR\Simulation\server\default\log"
   RMDir "$INSTDIR\Simulation\server\default"
   RMDir "$INSTDIR\Simulation\server"
+  Delete "$INSTDIR\Simulation\bin\runSimulation.bat"
+  RMDir "$INSTDIR\Simulation\bin"
+  Delete "$INSTDIR\Simulation\standalone\wfe.custom\bot\docx-template.docx"
+  RMDir "$INSTDIR\Simulation\standalone\wfe.custom\bot"
+  RMDir "$INSTDIR\Simulation\standalone\wfe.custom"
+  RMDir "$INSTDIR\Simulation\standalone"
   RMDir "$INSTDIR\Simulation"
+  ClearErrors
+!macroend
+
+!macro uninstallGPDSeq
+  SetShellVarContext all
+  Delete "$INSTDIR\gpd\run.bat"
+  RMDir "$INSTDIR\gpd"
+  ClearErrors
+!macroend
+
+!macro uninstallWebSeq
+  SetShellVarContext all
+  RMDir "$INSTDIR\web"
+  ClearErrors
+!macroend
+
+!macro uninstallRtnSeq
+  SetShellVarContext all
+  RMDir "$INSTDIR\rtn"
   ClearErrors
 !macroend
 
 !macro uninstallServerSeq
   SetShellVarContext all
+  nsExec::ExecToLog 'taskkill /F /IM jbosssvc.exe'
+  nsExec::ExecToLog 'taskkill /F /IM java.exe'
   ExecShell open "$INSTDIR\WFEServer\bin\shutdown.bat -s jnp://localhost:10099" -S SW_HIDE
   Sleep 5000
   ExecShell open "$INSTDIR\WFEServer\bin\service.bat" uninstall SW_HIDE
   Sleep 20000
+  RMDir /r "$INSTDIR\WFEServer"
+  ClearErrors
 !macroend
 
 #======================================= function to replace in file =======================================
@@ -519,7 +549,5 @@ Function CreateWebLink
   FileWrite $0 "$\r$\n"
    FileClose $0
      !insertmacro createURL "Web interface RunaWFE.URL" "$INSTDIR\web\runawfe.html" "$INSTDIR\Icons\C_20x20_256.ico"
-   
-
 
 FunctionEnd ; CreateWebLink
