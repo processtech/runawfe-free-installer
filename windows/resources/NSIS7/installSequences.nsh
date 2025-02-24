@@ -1,4 +1,4 @@
-!ifndef INSTALL_SEQUENCES_NSH
+﻿!ifndef INSTALL_SEQUENCES_NSH
 !define INSTALL_SEQUENCES_NSH
 
 !include "languages.nsh"

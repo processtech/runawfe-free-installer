@@ -1,4 +1,4 @@
-!define AppName "RunaWFE Free"
+﻿!define AppName "RunaWFE Free"
 !define AppVersion "%VERSION%"
 !define ShortName "RunaWFE"
 !define Vendor "Runa"
