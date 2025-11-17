@@ -26,6 +26,8 @@
         <langpack iso3="eng"/>
     </locale>
     <resources>
+        <res id="CustomLangPack.xml" src="CustomLangPack.xml"/>
+        <res id="CustomLangPack.xml_rus" src="CustomLangPack.xml_rus"/>
         <res id="userInputSpec.xml" src="xml_userInputSpec.xml"/>
     </resources>
     <panels>
