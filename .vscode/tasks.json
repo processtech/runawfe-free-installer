@@ -19,23 +19,15 @@
             },
             "problemMatcher": {
                 "owner": "izpack",
-                "fileLocation": ["relative", "${workspaceFolder}"],
-                "pattern": [
-                    {
-                        "regexp": "file:///(?:.*/|.*\\\\)([a-zA-Z0-9_\\-]+\\.xml).*?\\(Line\\s+(\\d+),\\s+Column\\s+(\\d+)\\)\\s*(.+)$",
-                        "file": 1,
-                        "line": 2,
-                        "column": 3,
-                        "message": 4
-                    },
-                    {
-                        "regexp": "Error in .*(?:\\\\|/)([a-zA-Z0-9_\\-]+\\.xml).*?at line\\s+(\\d+),\\s+column\\s+(\\d+)\\s*:\\s*(.+)$",
-                        "file": 1,
-                        "line": 2,
-                        "column": 3,
-                        "message": 4
-                    }
-                ]
+                "fileLocation": "relative",
+                "severity": "error",
+                "pattern": {
+                    "regexp": "file:///(?:.*/|.*\\\\)([^/\\\\]+\\.xml).*?\\(Line\\s+(\\d+),\\s+Column\\s+(\\d+)\\)\\s*([^\\r\\n]+)",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "message": 4
+                }
             },
             "detail": "Компилирует RunaWFE_installer.xml → install.jar"
         },
