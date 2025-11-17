@@ -15,7 +15,10 @@
         <run-privileged condition="izpack.windowsinstall.vista|izpack.windowsinstall.7"/>
     </info>
     <guiprefs height="480" resizable="no" width="640">
+        <modifier key="useButtonIcons" value="no"/>
+        <modifier key="useLabelIcons" value="no"/>
         <modifier key="useFlags" value="yes"/>
+        <modifier key="useFlags" value="no"/>
         <modifier key="langDisplayType" value="native"/>
     </guiprefs>
     <locale>
