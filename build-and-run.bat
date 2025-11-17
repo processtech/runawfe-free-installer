@@ -1,31 +1,32 @@
 @echo off
-REM chcp 65001 >nul
+chcp 65001 >nul
 echo.
-echo [IzPack Compiler] Запуск компиляции...
+echo [IzPack Compiler] ╨Ч╨░╨┐╤Г╤Б╨║ ╨║╨╛╨╝╨┐╨╕╨╗╤П╤Ж╨╕╨╕...
 echo.
 
-REM Путь к компилятору compile.bat
+REM ╨Я╤Г╤В╤М ╨║ ╨║╨╛╨╝╨┐╨╕╨╗╤П╤В╨╛╤А╤Г
 set COMPILER_PATH="C:\Program Files\IzPack\bin\compile.bat"
 
-REM Файл для компиляции
+REM ╨д╨░╨╣╨╗ ╨┤╨╗╤П ╨║╨╛╨╝╨┐╨╕╨╗╤П╤Ж╨╕╨╕
 set XML_FILE=RunaWFE_installer.xml
 
 if not exist %XML_FILE% (
-    echo ОШИБКА: Файл %XML_FILE% не найден!
+    echo ╨д╨░╨╣╨╗ %XML_FILE% ╨╜╨╡ ╨╜╨░╨╣╨┤╨╡╨╜!
     exit /b 1
 )
 
-REM Запускаем компилятор
+set IZPACK_OPTS=-Dfile.encoding=UTF-8
+
+REM ╨Ч╨░╨┐╤Г╤Б╨║╨░╨╡╨╝ ╨║╨╛╨╝╨┐╨╕╨╗╤П╤В╨╛╤А ╨╕ ╨┐╨╡╤А╨╡╨┤╨░╤С╨╝ ╨░╤А╨│╤Г╨╝╨╡╨╜╤В╤Л
 call %COMPILER_PATH% %XML_FILE%
 
 if %errorlevel% == 0 (
     echo.
-    echo SUCCESS: Компиляция завершена. Запускаю install.jar...
+    echo SUCCESS: ╨Ъ╨╛╨╝╨┐╨╕╨╗╤П╤Ж╨╕╤П ╨╖╨░╨▓╨╡╤А╤И╨╡╨╜╨░. ╨Ч╨░╨┐╤Г╤Б╨║╨░╤О install.jar...
     echo.
     start java -jar install.jar
 ) else (
     echo.
-    echo ERROR: Ошибка компиляции. См. лог выше.
+    echo ERROR: ╨Ю╤И╨╕╨▒╨║╨░ ╨║╨╛╨╝╨┐╨╕╨╗╤П╤Ж╨╕╨╕. ╨б╨╝. ╨╗╨╛╨│ ╨▓╤Л╤И╨╡.
     echo.
-    pause
 )
