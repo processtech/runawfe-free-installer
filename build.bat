@@ -1,13 +1,11 @@
 @echo off
 chcp 65001 >nul
+
 echo.
 echo [IzPack Compiler] Запуск компиляции...
 echo.
 
-REM Путь к компилятору
 set COMPILER_PATH="C:\Program Files\IzPack\bin\compile.bat"
-
-REM Файл для компиляции
 set XML_FILE=RunaWFE_installer.xml
 
 if not exist %XML_FILE% (
@@ -17,16 +15,18 @@ if not exist %XML_FILE% (
 
 set IZPACK_OPTS=-Dfile.encoding=UTF-8
 
-REM Запускаем компилятор и передаём аргументы
+echo Компилирую %XML_FILE%...
 call %COMPILER_PATH% %XML_FILE%
 
 if %errorlevel% == 0 (
     echo.
-    echo SUCCESS: Компиляция завершена. Запускаю install.jar...
+    echo SUCCESS: Компиляция завершена. Файл install.jar создан.
     echo.
-    start java -jar install.jar
+    exit /b 0
 ) else (
     echo.
-    echo ERROR: Ошибка компиляции. См. лог выше.
+    echo ERROR: Компиляция не удалась. Проверьте лог выше.
     echo.
+    pause
+    exit /b 1
 )

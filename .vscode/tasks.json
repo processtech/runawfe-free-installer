@@ -2,13 +2,10 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "IzPack: Build & Run Installer",
+            "label": "IzPack: Build",
             "type": "shell",
-            "command": ".\\build-and-run.bat",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
+            "command": "build.bat",
+            "group": "build",
             "presentation": {
                 "echo": true,
                 "reveal": "always",
@@ -22,13 +19,9 @@
             },
             "problemMatcher": {
                 "owner": "izpack",
-                "fileLocation": [
-                    "relative",
-                    "${workspaceFolder}"
-                ],
+                "fileLocation": ["relative", "${workspaceFolder}"],
                 "pattern": [
                     {
-                        // Ловим: file:///.../file.xml (Line 17, Column 12) cvc-...: ...
                         "regexp": "file:///(?:.*/|.*\\\\)([a-zA-Z0-9_\\-]+\\.xml).*?\\(Line\\s+(\\d+),\\s+Column\\s+(\\d+)\\)\\s*(.+)$",
                         "file": 1,
                         "line": 2,
@@ -36,7 +29,6 @@
                         "message": 4
                     },
                     {
-                        // Ловим: Error in C:\...\file.xml at line 17, column 12 : ...
                         "regexp": "Error in .*(?:\\\\|/)([a-zA-Z0-9_\\-]+\\.xml).*?at line\\s+(\\d+),\\s+column\\s+(\\d+)\\s*:\\s*(.+)$",
                         "file": 1,
                         "line": 2,
@@ -45,10 +37,25 @@
                     }
                 ]
             },
-            "detail": "Компилирует RunaWFE_installer.xml → install.jar и запускает его",
-            "runOptions": {
-                "reevaluateOnRerun": true
-            }
+            "detail": "Компилирует RunaWFE_installer.xml → install.jar"
+        },
+        {
+            "label": "IzPack: Run Installer",
+            "type": "shell",
+            "command": "run-installer.bat",
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "detail": "Запускает install.jar (если файл существует)"
         }
     ]
 }
