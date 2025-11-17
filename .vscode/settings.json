@@ -1,0 +1,7 @@
+{
+    "taskExplorer.settingsVersion": 4,
+    "taskAutoDetect": "on",
+    "extensions.experimental.affinity": {
+        "spmeesseman.vscode-taskexplorer": 1
+    }
+}

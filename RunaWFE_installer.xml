@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes"?>
+<izpack:installation version="5.0"
+                     xmlns:izpack="http://izpack.org/schema/installation"
+                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                     xsi:schemaLocation="http://izpack.org/schema/installation http://izpack.org/schema/5.0/izpack-installation-5.0.xsd">
+    <info>
+        <appname>Runa WFE</appname>
+        <appversion>Free</appversion>
+        <authors>
+            <author email="" name="&#x41e;&#x41e;&#x41e; &quot;&#x41f;&#x440;&#x43e;&#x446;&#x435;&#x441;&#x441;&#x43d;&#x44b;&#x435; &#x442;&#x435;&#x445;&#x43d;&#x43e;&#x43b;&#x43e;&#x433;&#x438;&#x438;&quot;"/>
+        </authors>
+        <uninstaller name="Uninstaller.jar" write="yes"/>
+        <requiresjdk>no</requiresjdk>
+        <writeinstallationinformation>yes</writeinstallationinformation>
+        <run-privileged condition="izpack.windowsinstall.vista|izpack.windowsinstall.7"/>
+    </info>
+    <guiprefs height="480" resizable="no" width="640">
+        <modifier key="useFlags" value="yes"/>
+        <modifier key="langDisplayType" value="native"/>
+    </guiprefs>
+    <locale>
+        <langpack iso3="rus"/>
+        <langpack iso3="eng"/>
+    </locale>
+    <resources>
+        <res id="userInputSpec.xml" src="xml_userInputSpec.xml"/>
+    </resources>
+    <panels>
+        <panel classname="CheckedHelloPanel"/>
+        <panel classname="UserInputPanel" id="panel1"/>
+        <panel classname="TreePacksPanel"/>
+        <panel classname="TargetPanel"/>
+        <panel classname="InstallPanel"/>
+        <panel classname="FinishPanel"/>
+    </panels>
+    <packs>
+        <pack name="‘¥à¢¥à"
+            preselected="no" required="no">
+            <os family="windows"/>
+            <description/>
+            <file override="update"
+                src="C:\runawfe-professional-autobuild\results\bin\server" targetdir="$INSTALL_PATH/">
+                <os family="windows"/>
+            </file>
+        </pack>
+    </packs>
+</izpack:installation>

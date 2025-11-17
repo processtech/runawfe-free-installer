@@ -1,0 +1,12 @@
+<izpack:userinput version="5.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:izpack="http://izpack.org/schema/userinput" xsi:schemaLocation="http://izpack.org/schema/userinput http://izpack.org/schema/5.0/izpack-userinput-5.0.xsd">
+  <panel id="panel1">
+        <field size="2" txt="Тип установки" type="title"/>
+        <field type="combo" variable="TypeOfUser">
+            <spec txt="Выберите тип установки:">
+                <choice set="true" txt="Администратор" value="Administrator"/>
+                <choice txt="Пользователь" value="User"/>
+                <choice txt="Аналитик" value="Analyst"/>
+            </spec>
+        </field>
+  </panel>
+</izpack:userinput>
