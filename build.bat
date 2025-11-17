@@ -2,7 +2,7 @@
 chcp 65001 >nul
 
 echo.
-echo [IzPack Compiler] Запуск компиляции...
+powershell -Command "Write-Host '[IzPack Compiler] Запуск компиляции...' -ForegroundColor Cyan"
 echo.
 
 set COMPILER_PATH="C:\Program Files\IzPack\bin\compile.bat"
@@ -15,18 +15,17 @@ if not exist %XML_FILE% (
 
 set IZPACK_OPTS=-Dfile.encoding=UTF-8
 
-echo Компилирую %XML_FILE%...
+powershell -Command "Write-Host 'Компилирую %XML_FILE%...' -ForegroundColor Cyan"
 call %COMPILER_PATH% %XML_FILE%
 
 if %errorlevel% == 0 (
     echo.
-    echo SUCCESS: Компиляция завершена. Файл install.jar создан.
+    powershell -Command "Write-Host 'SUCCESS: Компиляция завершена. Файл install.jar создан.' -ForegroundColor Green"
     echo.
     exit /b 0
 ) else (
     echo.
-    echo ERROR: Компиляция не удалась. Проверьте лог выше.
+    powershell -Command "Write-Host 'ERROR: Компиляция не удалась. Проверьте лог выше.' -ForegroundColor Red"
     echo.
-    pause
     exit /b 1
 )
