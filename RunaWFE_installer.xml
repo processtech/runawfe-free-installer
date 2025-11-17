@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="iso-8859-1" standalone="yes"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <izpack:installation version="5.0"
                      xmlns:izpack="http://izpack.org/schema/installation"
                      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -7,7 +7,7 @@
         <appname>Runa WFE</appname>
         <appversion>Free</appversion>
         <authors>
-            <author email="" name="&#x41e;&#x41e;&#x41e; &quot;&#x41f;&#x440;&#x43e;&#x446;&#x435;&#x441;&#x441;&#x43d;&#x44b;&#x435; &#x442;&#x435;&#x445;&#x43d;&#x43e;&#x43b;&#x43e;&#x433;&#x438;&#x438;&quot;"/>
+            <author email="" name='ООО "Процессные технологии"'/>
         </authors>
         <uninstaller name="Uninstaller.jar" write="yes"/>
         <requiresjdk>no</requiresjdk>
@@ -34,7 +34,7 @@
         <panel classname="FinishPanel"/>
     </panels>
     <packs>
-        <pack name="��ࢥ�"
+        <pack name="Сервер"
             preselected="no" required="no">
             <os family="windows"/>
             <description/>
