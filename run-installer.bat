@@ -16,5 +16,5 @@ if not exist install.jar (
 
 powershell -Command "Write-Host 'Запускаю install.jar...' -ForegroundColor Cyan"
 echo.
-start java -jar install.jar
-exit /b 0
+java -Dfile.encoding=UTF-8 -jar install.jar
+exit /b %errorlevel%
