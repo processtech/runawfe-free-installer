@@ -40,10 +40,6 @@
             preselected="no" required="no">
             <os family="windows"/>
             <description/>
-            <file override="update"
-                src="C:\runawfe-professional-autobuild\results\bin\server" targetdir="$INSTALL_PATH/">
-                <os family="windows"/>
-            </file>
         </pack>
     </packs>
 </izpack:installation>
