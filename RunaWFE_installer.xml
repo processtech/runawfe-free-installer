@@ -17,13 +17,10 @@
     <guiprefs height="480" resizable="no" width="640">
         <modifier key="useButtonIcons" value="no"/>
         <modifier key="useLabelIcons" value="no"/>
-        <modifier key="useFlags" value="yes"/>
         <modifier key="useFlags" value="no"/>
-        <modifier key="langDisplayType" value="native"/>
     </guiprefs>
     <locale>
         <langpack iso3="rus"/>
-        <langpack iso3="eng"/>
     </locale>
     <resources>
         <res id="CustomLangPack.xml" src="CustomLangPack.xml"/>
