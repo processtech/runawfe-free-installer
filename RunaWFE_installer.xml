@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <izpack:installation version="5.0"
-                     xmlns:izpack="http://izpack.org/schema/installation"
-                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                     xsi:schemaLocation="http://izpack.org/schema/installation http://izpack.org/schema/5.0/izpack-installation-5.0.xsd">
+    xmlns:izpack="http://izpack.org/schema/installation"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://izpack.org/schema/installation http://izpack.org/schema/5.0/izpack-installation-5.0.xsd">
     <info>
         <appname>Runa WFE</appname>
         <appversion>Free</appversion>
@@ -25,21 +25,52 @@
     <resources>
         <res id="CustomLangPack.xml" src="CustomLangPack.xml"/>
         <res id="CustomLangPack.xml_rus" src="CustomLangPack.xml_rus"/>
-        <res id="userInputSpec.xml" src="xml_userInputSpec.xml"/>
     </resources>
     <panels>
         <panel classname="CheckedHelloPanel"/>
-        <panel classname="UserInputPanel" id="panel1"/>
+        <panel classname="InstallationGroupPanel"/>
         <panel classname="TreePacksPanel"/>
         <panel classname="TargetPanel"/>
         <panel classname="InstallPanel"/>
-        <panel classname="FinishPanel"/>
+        <panel classname="SimpleFinishPanel"/>
     </panels>
     <packs>
         <pack name="Сервер"
-            preselected="no" required="no">
+            required="no" preselected="no">
             <os family="windows"/>
             <description/>
+        </pack>
+        <pack name="Автозапуск сервера" required="no" preselected="no" parent="Сервер"
+            installGroups="Администратор">
+            <description>Запускать сервер автоматически при загрузке системы</description>
+            <os family="windows"/>
+        </pack>
+        <pack name="Демо-пользователи" required="no" preselected="no" parent="Сервер"
+            installGroups="Администратор">
+            <description></description>
+            <os family="windows"/>
+        </pack>
+        <pack name="Демо-процессы" required="no" preselected="no" parent="Сервер"
+            installGroups="Администратор">
+            <description></description>
+            <os family="windows"/>
+        </pack>
+        <pack name="Среда разработки" required="no" preselected="no"
+            installGroups="Пользователь,Аналитик">
+            <description></description>
+        </pack>
+        <pack name="Оповещаетель задач" required="no" preselected="no"
+            installGroups="Пользователь,Аналитик">
+            <description></description>
+        </pack>
+        <pack name="Автозапуск оповещателя" required="no" preselected="no" parent="Оповещаетель задач"
+            installGroups="Администратор">
+            <description>Запускать оповещатель задач автоматически при загрузке системы</description>
+            <os family="windows"/>
+        </pack>
+        <pack name="Ярлыки на рабочий стол" required="no" preselected="no"
+            installGroups="Администратор,Пользователь,Аналитик">
+            <description></description>
         </pack>
     </packs>
 </izpack:installation>
