@@ -23,11 +23,18 @@
         <langpack iso3="rus"/>
     </locale>
     <resources>
-        <res id="CustomLangPack.xml" src="CustomLangPack.xml"/>
+        <res id="packsLang.xml" src="CustomLangPack.xml"/>
         <res id="CustomLangPack.xml_rus" src="CustomLangPack.xml_rus"/>
+        <res id="HTMLLicencePanel.license" src="resources/License.html"/>
     </resources>
     <panels>
         <panel classname="CheckedHelloPanel"/>
+        <panel classname="HTMLLicencePanel" id="license">
+            <configuration>
+                <param name="console-text-paging" value="true"/>
+                <param name="console-text-wordwrap" value="true"/>
+            </configuration>
+        </panel>
         <panel classname="InstallationGroupPanel"/>
         <panel classname="TreePacksPanel"/>
         <panel classname="TargetPanel"/>
@@ -63,7 +70,8 @@
             installGroups="Пользователь,Аналитик">
             <description></description>
         </pack>
-        <pack name="Автозапуск оповещателя" required="no" preselected="no" parent="Оповещаетель задач"
+        <pack name="Автозапуск оповещателя" required="no" preselected="no"
+            parent="Оповещаетель задач"
             installGroups="Администратор">
             <description>Запускать оповещатель задач автоматически при загрузке системы</description>
             <os family="windows"/>
