@@ -6,7 +6,7 @@
     <defaultCurrentUser/>
     <lateShortcutInstall/>
 
-    <programGroup defaultName="$APP_NAME $APP_VER"/>
+    <programGroup defaultName="$APP_NAME"/>
 
     <shortcut name="$APP_NAME сервер" target="$INSTALL_PATH\cmd.exe" desktop="true" startup="true">
         <createForPack name="Сервер"/>

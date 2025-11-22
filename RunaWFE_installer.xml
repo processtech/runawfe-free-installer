@@ -8,8 +8,8 @@
         <native type="izpack" name="ShellLink_x64.dll"/>
     </natives>
     <info>
-        <appname>RunaWFE</appname>
-        <appversion>Free</appversion>
+        <appname>RunaWFE @{ENV[WFE_EDITION]}</appname>
+        <appversion>@{ENV[WFE_VERSION]}</appversion>
         <authors>
             <author email="" name='ООО "Процессные технологии"'/>
         </authors>
@@ -22,6 +22,9 @@
         <modifier key="useButtonIcons" value="no"/>
         <modifier key="useLabelIcons" value="no"/>
         <modifier key="useFlags" value="no"/>
+        <modifier key="useHeadingPanel" value="yes"/>
+        <modifier key="headingImageOnLeft" value="yes"/>
+        <modifier key="headingBackgroundColor" value="0x00ffffff"/>
     </guiprefs>
     <locale>
         <langpack iso3="rus"/>
@@ -31,6 +34,8 @@
         <res id="CustomLangPack.xml_rus" src="CustomLangPack.xml_rus"/>
         <res id="HTMLLicencePanel.license" src="resources/License.html"/>
         <res id="shortcutSpec.xml" src="shortcutSpec.xml"/>
+        <res id="Heading.image"
+            src="resources\images\@{ENV[WFE_EDITION]}\big_logo.bmp"/>
     </resources>
     <panels>
         <panel classname="CheckedHelloPanel"/>
@@ -51,7 +56,7 @@
         <pack name="Сервер"
             required="no" preselected="no">
             <os family="windows"/>
-            <description/>            
+            <description/>
         </pack>
         <pack name="Демо-пользователи" required="no" preselected="no" parent="Сервер"
             installGroups="Администратор">

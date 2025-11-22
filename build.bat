@@ -5,6 +5,19 @@ echo.
 powershell -Command "Write-Host '[IzPack Compiler] Запуск компиляции...' -ForegroundColor Cyan"
 echo.
 
+@REM  Проверяем обязательные аргументы
+if "%~1"=="" (
+    echo ОШИБКА: Не указана редакция. Например: Free, Professional.
+    goto print_usage
+)
+
+if "%~2"=="" (
+    echo ОШИБКА: Не указана версия. Например, 4.7.
+    goto print_usage
+)
+
+set WFE_EDITION=%~1
+set WFE_VERSION=%~2
 set COMPILER_PATH="C:\Program Files\IzPack\bin\compile.bat"
 set XML_FILE=RunaWFE_installer.xml
 
@@ -29,3 +42,10 @@ if %errorlevel% == 0 (
     echo.
     exit /b 1
 )
+
+:print_usage
+echo.
+echo Использование: build.bat ^<edition^> ^<version^>
+echo Пример:    build.bat Free 4.7
+echo           build.bat Enterprise 4.8
+exit /b 1

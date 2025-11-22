@@ -5,6 +5,10 @@
             "label": "IzPack: Build",
             "type": "shell",
             "command": "build.bat",
+            "args": [
+                "Free",
+                "4.7"
+            ],
             "group": "build",
             "presentation": {
                 "echo": true,

@@ -12,4 +12,17 @@
     <str id="ShortcutPanel.regular.userIntro" txt="для пользователей:"/>
     <str id="ShortcutPanel.regular.default" txt="Вернуть группу по умолчанию"/>
 
+    <!-- Heading strings -->
+    <str id="CheckedHelloPanel.headline" txt=""/>
+    <str id="CompilePanel.headline" txt="Compile Java Sources"/>
+    <str id="FinishPanel.headline" txt="Installation Finished"/>
+    <str id="HTMLLicencePanel.headline" txt=""/>
+    <str id="InstallPanel.headline" txt=""/>
+    <str id="InstallationGroupPanel.headline" txt=""/>
+    <str id="ProcessPanel.headline" txt=""/>
+    <str id="ShortcutPanel.headline" txt=""/>
+    <str id="SimpleFinishPanel.headline" txt=""/>
+    <str id="TargetPanel.headline" txt=""/>
+    <str id="TreePacksPanel.headline" txt=""/>
+
 </izpack:langpack>
