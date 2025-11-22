@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<izpack:shortcuts version="5.0"
+    xmlns:izpack="http://izpack.org/schema/shortcuts"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://izpack.org/schema/shortcuts http://izpack.org/schema/5.0/izpack-shortcuts-5.0.xsd">
+    <defaultCurrentUser/>
+    <lateShortcutInstall/>
+
+    <programGroup defaultName="$APP_NAME $APP_VER"/>
+
+    <shortcut name="$APP_NAME сервер" target="$INSTALL_PATH\cmd.exe" desktop="true" startup="true">
+        <createForPack name="Сервер"/>
+    </shortcut>
+
+    <shortcut name="Среда разработки" target="$INSTALL_PATH\cmd.exe" desktop="true">
+        <createForPack name="Среда разработки"/>
+    </shortcut>
+
+    <shortcut name="Оповещаетель задач" target="$INSTALL_PATH\cmd.exe" desktop="true" startup="true">
+        <createForPack name="Оповещаетель задач"/>
+    </shortcut>
+
+</izpack:shortcuts>

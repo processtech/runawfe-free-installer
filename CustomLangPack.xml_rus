@@ -6,5 +6,10 @@
     <str id="HTMLLicencePanel.info" txt="Перед установкой ознакомьтесь с лицензионным соглашением:"/>
     <str id="LicencePanel.agree" txt="Я принимаю условия соглашения"/>
     <str id="LicencePanel.notagree" txt="Я не принимаю условия соглашения"/>
+    <str id="ShortcutPanel.regular.create" txt="Создать ярлыки в главном меню"/>
+    <str id="ShortcutPanel.regular.startup" txt="Запускать при старте компьютера"/>
+    <str id="ShortcutPanel.regular.list" txt="Группа для создания ярлыков:"/>
+    <str id="ShortcutPanel.regular.userIntro" txt="для пользователей:"/>
+    <str id="ShortcutPanel.regular.default" txt="Вернуть группу по умолчанию"/>
 
 </izpack:langpack>
