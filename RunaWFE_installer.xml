@@ -47,9 +47,9 @@
         </panel>
         <panel classname="InstallationGroupPanel"/>
         <panel classname="TreePacksPanel"/>
-        <panel classname="ShortcutPanel"/>
         <panel classname="TargetPanel"/>
         <panel classname="InstallPanel"/>
+        <panel classname="ShortcutPanel"/>
         <panel classname="SimpleFinishPanel"/>
     </panels>
     <packs>
@@ -58,13 +58,18 @@
             <os family="windows"/>
             <description/>
         </pack>
+        <pack name="RunaWFE сервер" required="no" preselected="yes" parent="Сервер"
+            installGroups="Администратор,Аналитик">
+            <description></description>
+            <os family="windows"/>
+        </pack>
         <pack name="Демо-пользователи" required="no" preselected="no" parent="Сервер"
-            installGroups="Администратор">
+            installGroups="Администратор,Аналитик">
             <description></description>
             <os family="windows"/>
         </pack>
         <pack name="Демо-процессы" required="no" preselected="no" parent="Сервер"
-            installGroups="Администратор">
+            installGroups="Администратор,Аналитик">
             <description></description>
             <os family="windows"/>
         </pack>
