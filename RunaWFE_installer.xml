@@ -10,9 +10,7 @@
     <info>
         <appname>RunaWFE @{ENV[WFE_EDITION]}</appname>
         <appversion>@{ENV[WFE_VERSION]}</appversion>
-        <authors>
-            <author email="" name='ООО "Процессные технологии"'/>
-        </authors>
+        <url>https://runawfe.ru/RunaWFE</url>
         <uninstaller name="Uninstaller.jar" write="yes"/>
         <requiresjdk>no</requiresjdk>
         <writeinstallationinformation>yes</writeinstallationinformation>

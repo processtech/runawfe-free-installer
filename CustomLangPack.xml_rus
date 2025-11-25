@@ -1,8 +1,10 @@
-
-<izpack:langpack version="5.0" xmlns:izpack="http://izpack.org/schema/langpack" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://izpack.org/schema/langpack http://izpack.org/schema/5.0/izpack-langpack-5.0.xsd">
+<izpack:langpack version="5.0" xmlns:izpack="http://izpack.org/schema/langpack"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://izpack.org/schema/langpack http://izpack.org/schema/5.0/izpack-langpack-5.0.xsd">
 
     <str id="installer.reversetitle" txt="Установка $APP_NAME $APP_VER"/>
     <str id="installer.madewith" txt=""/>
+    <str id="HelloPanel.url" txt="Сайт проекта: "/>
     <str id="HTMLLicencePanel.info" txt="Перед установкой ознакомьтесь с лицензионным соглашением:"/>
     <str id="LicencePanel.agree" txt="Я принимаю условия соглашения"/>
     <str id="LicencePanel.notagree" txt="Я не принимаю условия соглашения"/>
