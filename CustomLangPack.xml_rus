@@ -8,6 +8,11 @@
     <str id="HTMLLicencePanel.info" txt="Перед установкой ознакомьтесь с лицензионным соглашением:"/>
     <str id="LicencePanel.agree" txt="Я принимаю условия соглашения"/>
     <str id="LicencePanel.notagree" txt="Я не принимаю условия соглашения"/>
+    <str id="InstallationGroupPanel.colNameSelected" txt="Выберите тип установки"/>
+    <str id="InstallationGroupPanel.colNameSize" txt="Размер файлов"/>
+    <str id="InstallationGroupPanel.description.Администратор" txt="Установка выделенного сервера для использования по сети"/>
+    <str id="InstallationGroupPanel.description.Аналитик" txt="Установка на данную рабочую станцию сервера и клиентских приложений"/>
+    <str id="InstallationGroupPanel.description.Пользователь" txt="Установка только клиентских приложений"/>
     <str id="ShortcutPanel.regular.create" txt="Создать ярлыки в главном меню"/>
     <str id="ShortcutPanel.regular.startup" txt="Запускать при старте компьютера"/>
     <str id="ShortcutPanel.regular.list" txt="Группа для создания ярлыков:"/>
