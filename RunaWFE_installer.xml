@@ -31,9 +31,9 @@
         <res id="packsLang.xml" src="CustomLangPack.xml"/>
         <res id="CustomLangPack.xml_rus" src="CustomLangPack.xml_rus"/>
         <res id="HTMLLicencePanel.license" src="resources/License.html"/>
-        <res id="shortcutSpec.xml" src="shortcutSpec.xml"/>
+        <res id="Win_shortcutSpec.xml" src="win_shortcutSpec.xml"/>
         <res id="Heading.image"
-            src="resources\images\@{ENV[WFE_EDITION]}\big_logo.bmp"/>
+            src="resources\images\big_logo.bmp"/>
     </resources>
     <panels>
         <panel classname="CheckedHelloPanel"/>
@@ -58,25 +58,28 @@
         </pack>
         <pack name="RunaWFE сервер" required="no" preselected="yes" parent="Сервер"
             installGroups="Администратор,Аналитик">
+            <file os="windows" src="resources\images\Cs_20x20_256.ico" targetdir="$INSTALL_PATH/images">
+            </file>
             <description></description>
-            <os family="windows"/>
         </pack>
         <pack name="Демо-пользователи" required="no" preselected="no" parent="Сервер"
             installGroups="Администратор,Аналитик">
             <description></description>
-            <os family="windows"/>
         </pack>
         <pack name="Демо-процессы" required="no" preselected="no" parent="Сервер"
             installGroups="Администратор,Аналитик">
             <description></description>
-            <os family="windows"/>
         </pack>
         <pack name="Среда разработки" required="no" preselected="no"
             installGroups="Пользователь,Аналитик">
+            <file os="windows" src="resources\images\e_20x20_256.ico" targetdir="$INSTALL_PATH/images">
+            </file>
             <description></description>
         </pack>
-        <pack name="Оповещаетель задач" required="no" preselected="no"
+        <pack name="Оповещаетель задач" required="no" preselected="no" 
             installGroups="Пользователь,Аналитик">
+            <file os="windows" src="resources\images\t_20x20_256.ico" targetdir="$INSTALL_PATH/images">
+            </file>
             <description></description>
         </pack>
     </packs>

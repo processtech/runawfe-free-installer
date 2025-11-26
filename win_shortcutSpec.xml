@@ -8,15 +8,15 @@
 
     <programGroup defaultName="$APP_NAME $APP_VER"/>
 
-    <shortcut name="$APP_NAME сервер" target="$INSTALL_PATH\cmd.exe" programGroup="true" desktop="true" startup="true">
+    <shortcut name="$APP_NAME сервер" target="$INSTALL_PATH\cmd.exe" programGroup="true" desktop="true" startup="true" iconFile="$INSTALL_PATH\images\Cs_20x20_256.ico">
         <createForPack name="RunaWFE сервер"/>
     </shortcut>
 
-    <shortcut name="Среда разработки" target="$INSTALL_PATH\powershell.exe" programGroup="true" desktop="true">
+    <shortcut name="Среда разработки" target="$INSTALL_PATH\powershell.exe" programGroup="true" desktop="true" iconFile="$INSTALL_PATH\images\e_20x20_256.ico">
         <createForPack name="Среда разработки"/>
     </shortcut>
 
-    <shortcut name="Оповещаетель задач" target="$INSTALL_PATH\7zip.exe" programGroup="true" desktop="true" startup="true">
+    <shortcut name="Оповещаетель задач" target="$INSTALL_PATH\7zip.exe" programGroup="true" desktop="true" startup="true" iconFile="$INSTALL_PATH\images\t_20x20_256.ico">
         <createForPack name="Оповещаетель задач"/>
     </shortcut>
 
