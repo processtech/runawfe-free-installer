@@ -7,7 +7,7 @@ echo.
 
 @REM  Проверяем обязательные аргументы
 if "%~1"=="" (
-    echo ОШИБКА: Не указана редакция. Например: Free, Professional.
+    echo ОШИБКА: Не указана редакция. Например: Free.
     goto print_usage
 )
 
@@ -47,5 +47,4 @@ if %errorlevel% == 0 (
 echo.
 echo Использование: build.bat ^<edition^> ^<version^>
 echo Пример:    build.bat Free 4.7
-echo           build.bat Enterprise 4.8
 exit /b 1
