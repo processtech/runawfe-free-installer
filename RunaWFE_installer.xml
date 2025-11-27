@@ -3,18 +3,34 @@
     xmlns:izpack="http://izpack.org/schema/installation"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://izpack.org/schema/installation http://izpack.org/schema/5.0/izpack-installation-5.0.xsd">
+    
     <natives>
         <native type="izpack" name="ShellLink.dll"/>
         <native type="izpack" name="ShellLink_x64.dll"/>
+        <native type="3rdparty" name="COIOSHelper.dll" stage="both">
+            <os family="windows"/>
+        </native>
+        <native type="3rdparty" name="COIOSHelper_x64.dll" stage="both">
+            <os family="windows"/>
+        </native>
     </natives>
+
+    <listeners>
+        <listener classname="RegistryInstallerListener" stage="install">
+            <os family="windows"/>
+        </listener>
+        <listener classname="RegistryUninstallerListener" stage="uninstall">
+            <os family="windows"/>
+        </listener>
+    </listeners>
+
     <info>
         <appname>RunaWFE @{ENV[WFE_EDITION]}</appname>
         <appversion>@{ENV[WFE_VERSION]}</appversion>
         <url>https://runawfe.ru/RunaWFE</url>
-        <uninstaller name="Uninstaller.jar" write="yes"/>
         <requiresjdk>no</requiresjdk>
         <writeinstallationinformation>yes</writeinstallationinformation>
-        <run-privileged condition="izpack.windowsinstall.vista|izpack.windowsinstall.7"/>
+        <run-privileged/>
     </info>
     <guiprefs height="480" resizable="no" width="640">
         <modifier key="useButtonIcons" value="no"/>
@@ -58,7 +74,8 @@
         </pack>
         <pack name="RunaWFE сервер" required="no" preselected="yes" parent="Сервер"
             installGroups="Администратор,Аналитик">
-            <file os="windows" src="resources\images\Cs_20x20_256.ico" targetdir="$INSTALL_PATH/images">
+            <file os="windows" src="resources\images\Cs_20x20_256.ico"
+                targetdir="$INSTALL_PATH/images">
             </file>
             <description></description>
         </pack>
@@ -72,13 +89,15 @@
         </pack>
         <pack name="Среда разработки" required="no" preselected="no"
             installGroups="Пользователь,Аналитик">
-            <file os="windows" src="resources\images\e_20x20_256.ico" targetdir="$INSTALL_PATH/images">
+            <file os="windows" src="resources\images\e_20x20_256.ico"
+                targetdir="$INSTALL_PATH/images">
             </file>
             <description></description>
         </pack>
-        <pack name="Оповещаетель задач" required="no" preselected="no" 
+        <pack name="Оповещаетель задач" required="no" preselected="no"
             installGroups="Пользователь,Аналитик">
-            <file os="windows" src="resources\images\t_20x20_256.ico" targetdir="$INSTALL_PATH/images">
+            <file os="windows" src="resources\images\t_20x20_256.ico"
+                targetdir="$INSTALL_PATH/images">
             </file>
             <description></description>
         </pack>
