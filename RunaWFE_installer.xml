@@ -30,7 +30,7 @@
         <url>https://runawfe.ru/RunaWFE</url>
         <requiresjdk>no</requiresjdk>
         <writeinstallationinformation>yes</writeinstallationinformation>
-        <run-privileged/>
+        <run-privileged uninstaller="yes"/>
     </info>
     <guiprefs height="480" resizable="no" width="640">
         <modifier key="useButtonIcons" value="no"/>
