@@ -4,20 +4,26 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://izpack.org/schema/shortcuts http://izpack.org/schema/5.0/izpack-shortcuts-5.0.xsd">
     <defaultCurrentUser/>
-    <!-- <lateShortcutInstall/> -->
 
     <programGroup defaultName="$APP_NAME $APP_VER"/>
 
-    <shortcut name="$APP_NAME сервер" target="$INSTALL_PATH\cmd.exe" programGroup="true" desktop="true" startup="true" iconFile="$INSTALL_PATH\images\Cs_20x20_256.ico">
+    <shortcut name="$APP_NAME сервер" target="$INSTALL_PATH\cmd.exe" programGroup="true"
+        desktop="true" startup="true" iconFile="$INSTALL_PATH\images\Cs_20x20_256.ico">
         <createForPack name="RunaWFE сервер"/>
     </shortcut>
 
-    <shortcut name="Среда разработки" target="$INSTALL_PATH\powershell.exe" programGroup="true" desktop="true" iconFile="$INSTALL_PATH\images\e_20x20_256.ico">
+    <shortcut name="Среда разработки" target="$INSTALL_PATH\powershell.exe" programGroup="true"
+        desktop="true" iconFile="$INSTALL_PATH\images\e_20x20_256.ico">
         <createForPack name="Среда разработки"/>
     </shortcut>
 
-    <shortcut name="Оповещаетель задач" target="$INSTALL_PATH\7zip.exe" programGroup="true" desktop="true" startup="true" iconFile="$INSTALL_PATH\images\t_20x20_256.ico">
+    <shortcut name="Оповещаетель задач" target="$INSTALL_PATH\7zip.exe" programGroup="true"
+        desktop="true" startup="true" iconFile="$INSTALL_PATH\images\t_20x20_256.ico">
         <createForPack name="Оповещаетель задач"/>
+    </shortcut>
+
+    <shortcut name="Uninstall" target="javaw.exe" commandLine="-jar $INSTALL_PATH\\Uninstaller\uninstaller.jar" programGroup="true"
+        iconFile="$INSTALL_PATH\images\wf_48x128.ico">
     </shortcut>
 
 </izpack:shortcuts>

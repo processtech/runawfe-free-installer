@@ -3,7 +3,7 @@
     xmlns:izpack="http://izpack.org/schema/installation"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://izpack.org/schema/installation http://izpack.org/schema/5.0/izpack-installation-5.0.xsd">
-    
+
     <natives>
         <native type="izpack" name="ShellLink.dll"/>
         <native type="izpack" name="ShellLink_x64.dll"/>
@@ -97,6 +97,12 @@
         <pack name="Оповещаетель задач" required="no" preselected="no"
             installGroups="Пользователь,Аналитик">
             <file os="windows" src="resources\images\t_20x20_256.ico"
+                targetdir="$INSTALL_PATH/images">
+            </file>
+            <description></description>
+        </pack>
+        <pack name="Core" hidden="true" required="yes">
+            <file os="windows" src="resources\images\wf_48x128.ico"
                 targetdir="$INSTALL_PATH/images">
             </file>
             <description></description>
