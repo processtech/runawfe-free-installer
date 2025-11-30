@@ -25,8 +25,8 @@
     </listeners>
 
     <info>
-        <appname>RunaWFE @{ENV[WFE_EDITION]}</appname>
-        <appversion>@{ENV[WFE_VERSION]}</appversion>
+        <appname>Runa</appname>
+        <appversion>@{ENV[WFE_EDITION]}</appversion>
         <url>https://runawfe.ru/RunaWFE</url>
         <requiresjdk>no</requiresjdk>
         <writeinstallationinformation>yes</writeinstallationinformation>
@@ -78,14 +78,17 @@
                 targetdir="$INSTALL_PATH/images">
             </file>
             <description></description>
+            <updatecheck/>
         </pack>
         <pack name="Демо-пользователи" required="no" preselected="no" parent="Сервер"
             installGroups="Администратор,Аналитик">
             <description></description>
+            <updatecheck/>
         </pack>
         <pack name="Демо-процессы" required="no" preselected="no" parent="Сервер"
             installGroups="Администратор,Аналитик">
             <description></description>
+            <updatecheck/>
         </pack>
         <pack name="Среда разработки" required="no" preselected="no"
             installGroups="Пользователь,Аналитик">
@@ -93,6 +96,7 @@
                 targetdir="$INSTALL_PATH/images">
             </file>
             <description></description>
+            <updatecheck/>
         </pack>
         <pack name="Оповещаетель задач" required="no" preselected="no"
             installGroups="Пользователь,Аналитик">
@@ -100,6 +104,7 @@
                 targetdir="$INSTALL_PATH/images">
             </file>
             <description></description>
+            <updatecheck/>
         </pack>
         <pack name="Core" hidden="true" required="yes">
             <file os="windows" src="resources\images\wf_48x128.ico"
