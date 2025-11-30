@@ -22,7 +22,7 @@
         <createForPack name="Оповещаетель задач"/>
     </shortcut>
 
-    <shortcut name="Uninstall" target="javaw.exe" commandLine="-jar $INSTALL_PATH\\Uninstaller\uninstaller.jar" programGroup="true"
+    <shortcut name="Uninstall" target="javaw.exe" commandLine="-jar &quot;$INSTALL_PATH\Uninstaller\uninstaller.jar&quot;" programGroup="true"
         iconFile="$INSTALL_PATH\images\wf_48x128.ico">
     </shortcut>
 
