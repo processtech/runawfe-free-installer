@@ -20,7 +20,7 @@
     <str id="ShortcutPanel.regular.default" txt="Вернуть группу по умолчанию"/>
 
     <!-- Heading strings -->
-    <str id="CheckedHelloPanel.headline" txt=""/>
+    <str id="HelloPanel.headline" txt=""/>
     <str id="CompilePanel.headline" txt="Compile Java Sources"/>
     <str id="FinishPanel.headline" txt="Installation Finished"/>
     <str id="HTMLLicencePanel.headline" txt=""/>
