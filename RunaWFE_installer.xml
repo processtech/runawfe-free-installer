@@ -52,7 +52,7 @@
             src="resources\images\big_logo.bmp"/>
     </resources>
     <panels>
-        <panel classname="CheckedHelloPanel"/>
+        <panel classname="HelloPanel"/>
         <panel classname="HTMLLicencePanel" id="license">
             <configuration>
                 <param name="console-text-paging" value="true"/>
