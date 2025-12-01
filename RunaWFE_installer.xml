@@ -43,6 +43,7 @@
     <locale>
         <langpack iso3="rus"/>
     </locale>
+
     <resources>
         <res id="packsLang.xml" src="CustomLangPack.xml"/>
         <res id="CustomLangPack.xml_rus" src="CustomLangPack.xml_rus"/>
@@ -50,7 +51,10 @@
         <res id="Win_shortcutSpec.xml" src="win_shortcutSpec.xml"/>
         <res id="Heading.image"
             src="resources\images\big_logo.bmp"/>
+        <res id="JFrameIcon" src="resources/images/Installer_16.png"/>
+        <res id="customicons.xml" src="customicons.xml"/>
     </resources>
+
     <panels>
         <panel classname="HelloPanel"/>
         <panel classname="HTMLLicencePanel" id="license">
