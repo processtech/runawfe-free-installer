@@ -5,28 +5,26 @@ echo.
 powershell -Command "Write-Host '[IzPack Compiler] Запуск компиляции...' -ForegroundColor Cyan"
 echo.
 
+call setenv.bat
+
 @REM  Проверяем обязательные аргументы
-if "%~1"=="" (
+if "%WFE_EDITION%"=="" (
     echo ОШИБКА: Не указана редакция. Например: Free.
     goto print_usage
 )
 
-if "%~2"=="" (
+if "%WFE_VERSION%"=="" (
     echo ОШИБКА: Не указана версия. Например, 4.7.
     goto print_usage
 )
 
-set WFE_EDITION=%~1
-set WFE_VERSION=%~2
-set COMPILER_PATH="C:\Program Files\IzPack\bin\compile.bat"
-set XML_FILE=RunaWFE_installer.xml
+echo Редакция: %WFE_EDITION%
+echo Версия:   %WFE_VERSION%
 
 if not exist %XML_FILE% (
     echo Файл %XML_FILE% не найден!
     exit /b 1
 )
-
-set IZPACK_OPTS=-Dfile.encoding=UTF-8
 
 powershell -Command "Write-Host 'Компилирую %XML_FILE%...' -ForegroundColor Cyan"
 call %COMPILER_PATH% %XML_FILE%
