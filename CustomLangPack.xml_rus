@@ -31,5 +31,6 @@
     <str id="SimpleFinishPanel.headline" txt=""/>
     <str id="TargetPanel.headline" txt=""/>
     <str id="TreePacksPanel.headline" txt=""/>
+    <str id="UserInputPanel.headline" txt=""/>
 
 </izpack:langpack>

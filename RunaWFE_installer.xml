@@ -32,6 +32,7 @@
         <writeinstallationinformation>yes</writeinstallationinformation>
         <run-privileged uninstaller="yes"/>
     </info>
+
     <guiprefs height="480" resizable="no" width="640">
         <modifier key="useButtonIcons" value="no"/>
         <modifier key="useLabelIcons" value="no"/>
@@ -40,6 +41,7 @@
         <modifier key="headingImageOnLeft" value="yes"/>
         <modifier key="headingBackgroundColor" value="0x00ffffff"/>
     </guiprefs>
+
     <locale>
         <langpack iso3="rus"/>
     </locale>
@@ -53,7 +55,27 @@
             src="resources\images\big_logo.bmp"/>
         <res id="JFrameIcon" src="resources/images/Installer_16.png"/>
         <res id="customicons.xml" src="customicons.xml"/>
+        <res id="userInputSpec.xml" src="userInputSpec.xml"/>
     </resources>
+
+    <conditions>
+        <condition type="variable" id="DBMS.H2">
+            <name>DBMS.type</name>
+            <value>H2</value>
+        </condition>
+        <condition type="variable" id="DBMS.PostgreSQL">
+            <name>DBMS.type</name>
+            <value>PostgreSQL</value>
+        </condition>
+        <condition type="variable" id="DBMS.MSSQL">
+            <name>DBMS.type</name>
+            <value>MSSQL</value>
+        </condition>
+        <condition type="variable" id="DBMS.Oracle">
+            <name>DBMS.type</name>
+            <value>Oracle</value>
+        </condition>
+    </conditions>
 
     <panels>
         <panel classname="HelloPanel"/>
@@ -65,14 +87,16 @@
         </panel>
         <panel classname="InstallationGroupPanel"/>
         <panel classname="TreePacksPanel"/>
+        <panel classname="UserInputPanel" id="panel.database.connection"/>
         <panel classname="TargetPanel"/>
         <panel classname="InstallPanel"/>
         <panel classname="ShortcutPanel"/>
         <panel classname="SimpleFinishPanel"/>
     </panels>
+
     <packs>
         <pack name="Сервер"
-            required="no" preselected="no">
+            required="no" installGroups="Администратор,Аналитик">
             <os family="windows"/>
             <description/>
         </pack>
@@ -117,4 +141,5 @@
             <description></description>
         </pack>
     </packs>
+
 </izpack:installation>

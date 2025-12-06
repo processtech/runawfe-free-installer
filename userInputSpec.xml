@@ -1,0 +1,108 @@
+<izpack:userinput version="5.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:izpack="http://izpack.org/schema/userinput"
+    xsi:schemaLocation="http://izpack.org/schema/userinput http://izpack.org/schema/5.0/izpack-userinput-5.0.xsd">
+
+    <panel id="panel.database.connection">
+        <createForPack name="RunaWFE сервер"/>
+        <field type="staticText" txt="Параметры подключения к базе данных"/>
+        <field type="space"/>
+
+        <field type="combo" variable="DBMS.type">
+            <spec txt="SQL сервер">
+                <choice txt="H2" value="H2" set="true"/>
+                <choice txt="PostgreSQL" value="PostgreSQL"/>
+                <choice txt="MS SQL" value="MSSQL"/>
+                <choice txt="Oracle" value="Oracle"/>
+            </spec>
+        </field>
+
+        <field type="space"/>
+
+        <field type="text" variable="DBMS.host" conditionid="!DBMS.H2">
+            <spec size="30" txt="Хост" set="localhost"/>
+            <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
+                txt="Имя хоста не может быть пустым"/>
+        </field>
+
+        <field type="space"/>
+
+        <field type="rule" variable="DBMS.PostgreSQL.port" conditionid="DBMS.PostgreSQL">
+            <spec layout="N:5:5" txt="Порт:" default="5432">
+            </spec>
+            <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
+                txt="Порт не может быть пустым."/>
+            <validator class="com.izforge.izpack.panels.userinput.validator.IsPortValidator"
+                txt="Порт не существует. Порт должен иметь значение в интервале от 0 до 65535."/>
+            <validator class="com.izforge.izpack.panels.userinput.validator.PortValidator"
+                txt="Порт занят или недоступен. Пожалуйста, освободите его или укажите другой, например 5433, 5434."/>
+        </field>
+        <field type="rule" variable="DBMS.MSSQL.port" conditionid="DBMS.MSSQL">
+            <spec layout="N:5:5" txt="Порт:" default="1433">
+            </spec>
+            <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
+                txt="Порт не может быть пустым."/>
+            <validator class="com.izforge.izpack.panels.userinput.validator.IsPortValidator"
+                txt="Порт не существует. Порт должен иметь значение в интервале от 0 до 65535."/>
+            <validator class="com.izforge.izpack.panels.userinput.validator.PortValidator"
+                txt="Порт занят или недоступен. Пожалуйста, освободите его или укажите другой."/>
+        </field>
+        <field type="rule" variable="DBMS.Oracle.port" conditionid="DBMS.Oracle">
+            <spec layout="N:5:5" txt="Порт:" default="1521">
+            </spec>
+            <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
+                txt="Порт не может быть пустым."/>
+            <validator class="com.izforge.izpack.panels.userinput.validator.IsPortValidator"
+                txt="Порт не существует. Порт должен иметь значение в интервале от 0 до 65535."/>
+            <validator class="com.izforge.izpack.panels.userinput.validator.PortValidator"
+                txt="Порт занят или недоступен. Пожалуйста, освободите его или укажите другой. "/>
+        </field>
+
+
+        <field type="space"/>
+
+        <field type="rule" variable="DBMS.dbname" conditionid="!DBMS.H2">
+            <spec txt="Название базы данных:" layout="O:29:30"/>
+            <validator
+                class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
+                txt="Введите Название базы данных."/>
+            <validator
+                class="com.izforge.izpack.panels.userinput.validator.RegularExpressionValidator"
+                txt="Недопустимое имя базы данных. Допустимые символы: буквы и цифры латинского алфавита, подчеркивание.">
+                <param name="pattern" value="^[a-zA-Z][a-zA-Z0-9_]+$"/>
+            </validator>
+        </field>
+
+        <field type="space"/>
+
+        <field type="rule" variable="DBMS.user" conditionid="!DBMS.H2">
+            <spec txt="Имя пользователя для СУБД:" layout="O:29:30"/>
+            <validator
+                class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
+                txt="Введите имя пользователя для управления СУБД."/>
+            <validator
+                class="com.izforge.izpack.panels.userinput.validator.RegularExpressionValidator"
+                txt="Недопустимое имя пользователя. Допустимые символы: буквы и цифры латинского алфавита, подчеркивание.">
+                <param name="pattern" value="^[a-zA-Z][a-zA-Z0-9_]+$"/>
+            </validator>
+        </field>
+
+        <field type="space"/>
+        <field type="divider" conditionid="!DBMS.H2"/>
+        <field type="space"/>
+
+        <field type="password" variable="DBMS.password" conditionid="!DBMS.H2">
+            <spec>
+                <pwd txt="Пароль:" size="30"/>
+                <pwd txt="Повторите пароль:" size="30"/>
+            </spec>
+            <validator
+                class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
+                txt="Пароль не может быть пустым."/>
+            <validator
+                class="com.izforge.izpack.panels.userinput.validator.PasswordEqualityValidator"
+                txt="Введенные пароли не совпадают."/>
+
+        </field>
+    </panel>
+
+</izpack:userinput>
