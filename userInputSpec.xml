@@ -2,7 +2,7 @@
     xmlns:izpack="http://izpack.org/schema/userinput"
     xsi:schemaLocation="http://izpack.org/schema/userinput http://izpack.org/schema/5.0/izpack-userinput-5.0.xsd">
 
-    <panel id="panel.database.connection">
+    <panel id="panel.database.connection" topBuffer="0">
         <createForPack name="RunaWFE сервер"/>
         <field type="staticText" txt="Параметры подключения к базе данных"/>
         <field type="space"/>
