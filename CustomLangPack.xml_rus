@@ -33,4 +33,8 @@
     <str id="TreePacksPanel.headline" txt=""/>
     <str id="UserInputPanel.headline" txt=""/>
 
+    <!-- PacksPanel strings -->
+    <str id="PacksPanel.info" txt="Выберите компоненты для установки"/>
+    <str id="PacksPanel.tip" txt="Установленные ранее, но невыбранные компоненты будут удалены"/>
+
 </izpack:langpack>
