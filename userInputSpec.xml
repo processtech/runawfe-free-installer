@@ -26,42 +26,45 @@
 
         <field type="space"/>
 
-        <field type="rule" variable="DBMS.PostgreSQL.port" conditionid="DBMS.PostgreSQL">
-            <spec layout="N:5:5" txt="Порт:" default="5432">
+        <field type="rule" variable="DBMS.p1" conditionid="DBMS.PostgreSQL">
+            <spec layout="N:5:5" txt="${port}" default="5432">
+                <processor class="com.izforge.izpack.panels.userinput.processor.PortProcessor"
+                    toVariable="DBMS.PostgreSQL.port"/>
             </spec>
-            <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
-                txt="Порт не может быть пустым."/>
+            <validator
+                class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
+                txt="${port}: ${port.empty}"/>
             <validator class="com.izforge.izpack.panels.userinput.validator.IsPortValidator"
-                txt="Порт не существует. Порт должен иметь значение в интервале от 0 до 65535."/>
-            <validator class="com.izforge.izpack.panels.userinput.validator.PortValidator"
-                txt="Порт занят или недоступен. Пожалуйста, освободите его или укажите другой, например 5433, 5434."/>
+                txt="${port}: ${port.invalid}"/>
         </field>
-        <field type="rule" variable="DBMS.MSSQL.port" conditionid="DBMS.MSSQL">
-            <spec layout="N:5:5" txt="Порт:" default="1433">
+        <field type="rule" variable="DBMS.p2" conditionid="DBMS.MSSQL">
+            <spec layout="N:5:5" txt="${port}" default="1433">
+                <processor class="com.izforge.izpack.panels.userinput.processor.PortProcessor"
+                    toVariable="DBMS.MSSQL.port"/>
             </spec>
-            <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
-                txt="Порт не может быть пустым."/>
+            <validator
+                class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
+                txt="${port}: ${port.empty}"/>
             <validator class="com.izforge.izpack.panels.userinput.validator.IsPortValidator"
-                txt="Порт не существует. Порт должен иметь значение в интервале от 0 до 65535."/>
-            <validator class="com.izforge.izpack.panels.userinput.validator.PortValidator"
-                txt="Порт занят или недоступен. Пожалуйста, освободите его или укажите другой."/>
+                txt="${port}: ${port.invalid}"/>
         </field>
-        <field type="rule" variable="DBMS.Oracle.port" conditionid="DBMS.Oracle">
-            <spec layout="N:5:5" txt="Порт:" default="1521">
+        <field type="rule" variable="DBMS.p3" conditionid="DBMS.Oracle">
+            <spec layout="N:5:5" txt="${port}" default="1521">
+                <processor class="com.izforge.izpack.panels.userinput.processor.PortProcessor"
+                    toVariable="DBMS.Oracle.port"/>
             </spec>
-            <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
-                txt="Порт не может быть пустым."/>
+            <validator
+                class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
+                txt="${port}: ${port.empty}"/>
             <validator class="com.izforge.izpack.panels.userinput.validator.IsPortValidator"
-                txt="Порт не существует. Порт должен иметь значение в интервале от 0 до 65535."/>
-            <validator class="com.izforge.izpack.panels.userinput.validator.PortValidator"
-                txt="Порт занят или недоступен. Пожалуйста, освободите его или укажите другой. "/>
+                txt="${port}: ${port.invalid}"/>
         </field>
 
 
         <field type="space"/>
 
         <field type="rule" variable="DBMS.dbname" conditionid="!DBMS.H2">
-            <spec txt="Название базы данных:" layout="O:29:30"/>
+            <spec txt="Название базы данных" layout="O:29:30"/>
             <validator
                 class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
                 txt="Введите Название базы данных."/>
@@ -75,7 +78,7 @@
         <field type="space"/>
 
         <field type="rule" variable="DBMS.user" conditionid="!DBMS.H2">
-            <spec txt="Имя пользователя для СУБД:" layout="O:29:30"/>
+            <spec txt="Имя пользователя для СУБД" layout="O:29:30"/>
             <validator
                 class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
                 txt="Введите имя пользователя для управления СУБД."/>
@@ -92,8 +95,8 @@
 
         <field type="password" variable="DBMS.password" conditionid="!DBMS.H2">
             <spec>
-                <pwd txt="Пароль:" size="30"/>
-                <pwd txt="Повторите пароль:" size="30"/>
+                <pwd txt="Пароль" size="30"/>
+                <pwd txt="Повторите пароль" size="30"/>
             </spec>
             <validator
                 class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
@@ -103,6 +106,120 @@
                 txt="Введенные пароли не совпадают."/>
 
         </field>
+    </panel>
+
+    <panel id="panel.wildfly.connection">
+        <createForPack name="RunaWFE сервер"/>
+        <field type="staticText" txt="Настройки сервера приложений Wildfly"/>
+
+        <field type="rule" variable="wildfly.p1">
+            <spec txt="${management.http.port}" default="9990" layout="N:5:5">
+                <processor class="com.izforge.izpack.panels.userinput.processor.PortProcessor"
+                    toVariable="jboss.management.http.port"/>
+            </spec>
+            <validator
+                class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
+                txt="${management.http.port}: ${port.empty}"/>
+            <validator class="com.izforge.izpack.panels.userinput.validator.IsPortValidator"
+                txt="${management.http.port}: ${port.invalid}"/>
+        </field>
+
+        <field type="rule" variable="wildfly.p2">
+            <spec txt="${management.https.port}" default="9993" layout="N:5:5">
+                <processor class="com.izforge.izpack.panels.userinput.processor.PortProcessor"
+                    toVariable="jboss.management.https.port"/>
+            </spec>
+            <validator
+                class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
+                txt="${management.https.port}: ${port.empty}"/>
+            <validator class="com.izforge.izpack.panels.userinput.validator.IsPortValidator"
+                txt="${management.https.port}: ${port.invalid}"/>
+        </field>
+
+        <field type="rule" variable="wildfly.p3">
+            <spec txt="${ajp.port}" default="8009" layout="N:5:5">
+                <processor class="com.izforge.izpack.panels.userinput.processor.PortProcessor"
+                    toVariable="jboss.ajp.port"/>
+            </spec>
+            <validator
+                class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
+                txt="${ajp.port}: ${port.empty}"/>
+            <validator class="com.izforge.izpack.panels.userinput.validator.IsPortValidator"
+                txt="${ajp.port}: ${port.invalid}"/>
+        </field>
+
+        <field type="rule" variable="wildfly.p4">
+            <spec txt="${http.port}" default="8080" layout="N:5:5">
+                <processor class="com.izforge.izpack.panels.userinput.processor.PortProcessor"
+                    toVariable="jboss.http.port"/>
+            </spec>
+            <validator
+                class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
+                txt="${http.port}: ${port.empty}"/>
+            <validator class="com.izforge.izpack.panels.userinput.validator.IsPortValidator"
+                txt="${http.port}: ${port.invalid}"/>
+        </field>
+
+        <field type="rule" variable="wildfly.p5">
+            <spec txt="${https.port}" default="8443" layout="N:5:5">
+                <processor class="com.izforge.izpack.panels.userinput.processor.PortProcessor"
+                    toVariable="jboss.https.port"/>
+            </spec>
+            <validator
+                class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
+                txt="${https.port}: ${port.empty}"/>
+            <validator class="com.izforge.izpack.panels.userinput.validator.IsPortValidator"
+                txt="${https.port}: ${port.invalid}"/>
+        </field>
+
+        <field type="rule" variable="wildfly.p6">
+            <spec txt="${iiop.port}" default="3528" layout="N:5:5">
+                <processor class="com.izforge.izpack.panels.userinput.processor.PortProcessor"
+                    toVariable="jboss.iiop.port"/>
+            </spec>
+            <validator
+                class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
+                txt="${iiop.port}: ${port.empty}"/>
+            <validator class="com.izforge.izpack.panels.userinput.validator.IsPortValidator"
+                txt="${iiop.port}: ${port.invalid}"/>
+        </field>
+
+        <field type="rule" variable="wildfly.p7">
+            <spec txt="${iiop-ssl.port}" default="3529" layout="N:5:5">
+                <processor class="com.izforge.izpack.panels.userinput.processor.PortProcessor"
+                    toVariable="jboss.iiop-ssl.port"/>
+            </spec>
+            <validator
+                class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
+                txt="${iiop-ssl.port}: ${port.empty}"/>
+            <validator class="com.izforge.izpack.panels.userinput.validator.IsPortValidator"
+                txt="${iiop-ssl.port}: ${port.invalid}"/>
+        </field>
+
+        <field type="rule" variable="wildfly.p8">
+            <spec txt="${txn-recovery-environment.port}" default="4712" layout="N:5:5">
+                <processor class="com.izforge.izpack.panels.userinput.processor.PortProcessor"
+                    toVariable="jboss.txn-recovery-environment.port"/>
+            </spec>
+            <validator
+                class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
+                txt="${txn-recovery-environment.port}: ${port.empty}"/>
+            <validator class="com.izforge.izpack.panels.userinput.validator.IsPortValidator"
+                txt="${txn-recovery-environment.port}: ${port.invalid}"/>
+        </field>
+
+        <field type="rule" variable="wildfly.p9">
+            <spec txt="${txn-status-manager.port}" default="4713" layout="N:5:5">
+                <processor class="com.izforge.izpack.panels.userinput.processor.PortProcessor"
+                    toVariable="jboss.txn-status-manager.port"/>
+            </spec>
+            <validator
+                class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
+                txt="${txn-status-manager.port}: ${port.empty}"/>
+            <validator class="com.izforge.izpack.panels.userinput.validator.IsPortValidator"
+                txt="${txn-status-manager.port}: ${port.invalid}"/>
+        </field>
+
     </panel>
 
 </izpack:userinput>

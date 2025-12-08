@@ -58,6 +58,22 @@
         <res id="userInputSpec.xml" src="userInputSpec.xml"/>
     </resources>
 
+    <variables>
+        <variable name="port.empty" value="значение не может быть пустым."/>
+        <variable name="port.invalid"
+            value="указанный адрес не существует. Значение долнжно быть в интервале от 0 до 65535."/>
+        <variable name="port" value="Порт"/>
+        <variable name="management.http.port" value="Порт HTTP‑управления"/>
+        <variable name="management.https.port" value="Порт HTTPS‑управления"/>
+        <variable name="ajp.port" value="Порт AJP‑подключения"/>
+        <variable name="http.port" value="Основной HTTP‑порт"/>
+        <variable name="https.port" value="Основной HTTPS‑порт"/>
+        <variable name="iiop.port" value="Порт IIOP (незащищённый)"/>
+        <variable name="iiop-ssl.port" value="Порт IIOP с SSL"/>
+        <variable name="txn-recovery-environment.port" value="Порт восстановления транзакций"/>
+        <variable name="txn-status-manager.port" value="Порт статуса транзакций"/>
+    </variables>
+
     <conditions>
         <condition type="variable" id="DBMS.H2">
             <name>DBMS.type</name>
@@ -97,6 +113,7 @@
         <panel classname="InstallationGroupPanel"/>
         <panel classname="TreePacksPanel"/>
         <panel classname="UserInputPanel" id="panel.database.connection"/>
+        <panel classname="UserInputPanel" id="panel.wildfly.connection"/>
         <panel classname="TargetPanel"/>
         <panel classname="InstallPanel"/>
         <panel classname="ShortcutPanel"/>
