@@ -185,7 +185,7 @@
         </field>
 
         <field type="rule" variable="wildfly.p7">
-            <spec txt="${iiop-ssl.port}" default="3529" layout="N:5:5">
+            <spec txt="${iiop-ssl.port}" default="3533" layout="N:5:5">
                 <processor class="com.izforge.izpack.panels.userinput.processor.PortProcessor"
                     toVariable="jboss.iiop-ssl.port"/>
             </spec>
@@ -209,7 +209,7 @@
         </field>
 
         <field type="rule" variable="wildfly.p9">
-            <spec txt="${txn-status-manager.port}" default="4713" layout="N:5:5">
+            <spec txt="${txn-status-manager.port}" default="4717" layout="N:5:5">
                 <processor class="com.izforge.izpack.panels.userinput.processor.PortProcessor"
                     toVariable="jboss.txn-status-manager.port"/>
             </spec>
