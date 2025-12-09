@@ -4,6 +4,11 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://izpack.org/schema/installation http://izpack.org/schema/5.0/izpack-installation-5.0.xsd">
 
+    <installerrequirements>
+        <installerrequirement condition="!is.downgrade"
+            message="На данном компьютере уже установлена более поздняя версия приложения. Если вы хотите установить более раннюю версию, удалите полностью текущую."/>
+    </installerrequirements>
+
     <natives>
         <native type="izpack" name="ShellLink.dll"/>
         <native type="izpack" name="ShellLink_x64.dll"/>
@@ -59,6 +64,7 @@
     </resources>
 
     <variables>
+        <variable name="WFE.version" value="@{ENV[WFE_VERSION]}"/>
         <variable name="port.empty" value="значение не может быть пустым."/>
         <variable name="port.invalid"
             value="указанный адрес не существует. Значение долнжно быть в интервале от 0 до 65535."/>
@@ -74,7 +80,20 @@
         <variable name="txn-status-manager.port" value="Порт статуса транзакций"/>
     </variables>
 
+
+    <dynamicvariables>
+        <variable name="installed.version" checkonce="true"
+            file="${DEFAULT_INSTALL_PATH}/properties"
+            key="WFE.version"/>
+    </dynamicvariables>
+
     <conditions>
+        <condition type="compareversions" id="is.downgrade">
+            <arg1>${installed.version}</arg1>
+            <arg2>${WFE.version}</arg2>
+            <operator>gt</operator>
+        </condition>
+
         <condition type="variable" id="DBMS.H2">
             <name>DBMS.type</name>
             <value>H2</value>
@@ -165,6 +184,8 @@
             <file os="windows" src="resources\images\wf_48x128.ico"
                 targetdir="$INSTALL_PATH/images">
             </file>
+            <file src="properties" targetdir="$INSTALL_PATH"/>
+            <parsable targetfile="$INSTALL_PATH/properties"/>
             <description></description>
         </pack>
     </packs>
