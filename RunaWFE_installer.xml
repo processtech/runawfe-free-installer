@@ -121,12 +121,12 @@
     </panels>
 
     <packs>
-        <pack name="Сервер"
+        <pack name="Серверные компоненты"
             required="no" installGroups="Администратор,Аналитик" condition="!Usertype.User">
             <os family="windows"/>
             <description/>
         </pack>
-        <pack name="RunaWFE сервер" required="no" parent="Сервер"
+        <pack name="RunaWFE сервер" required="no" parent="Серверные компоненты"
             installGroups="Администратор,Аналитик" condition="!Usertype.User">
             <file os="windows" src="resources\images\Cs_20x20_256.ico"
                 targetdir="$INSTALL_PATH/images">
@@ -134,12 +134,12 @@
             <description></description>
             <updatecheck/>
         </pack>
-        <pack name="Демо-пользователи" required="no" preselected="no" parent="Сервер"
+        <pack name="Демо-пользователи" required="no" preselected="no" parent="Серверные компоненты"
             installGroups="Администратор,Аналитик" condition="!Usertype.User">
             <description></description>
             <updatecheck/>
         </pack>
-        <pack name="Демо-процессы" required="no" preselected="no" parent="Сервер"
+        <pack name="Демо-процессы" required="no" preselected="no" parent="Серверные компоненты"
             installGroups="Администратор,Аналитик" condition="!Usertype.User">
             <description></description>
             <updatecheck/>
@@ -160,7 +160,7 @@
             <description></description>
             <updatecheck/>
         </pack>
-        <pack name="Core" hidden="true" required="yes">
+        <pack name="Обязательные компоненты" hidden="true" required="yes">
             <file os="windows" src="resources\images\wf_48x128.ico"
                 targetdir="$INSTALL_PATH/images">
             </file>
