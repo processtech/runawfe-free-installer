@@ -143,7 +143,6 @@
     <packs>
         <pack name="Серверные компоненты"
             required="no" installGroups="Администратор,Аналитик" condition="!Usertype.User">
-            <os family="windows"/>
             <description/>
         </pack>
         <pack name="RunaWFE сервер" required="no" parent="Серверные компоненты"
