@@ -85,13 +85,26 @@
         <variable name="installed.version" checkonce="true"
             file="${DEFAULT_INSTALL_PATH}/properties"
             key="WFE.version"/>
+        <variable name="installed.version" condition="install.path.set"
+            file="${INSTALL_PATH}/properties"
+            key="WFE.version"/>
     </dynamicvariables>
 
     <conditions>
+        <condition type="exists" id="install.path.set">
+            <variable>
+                INSTALL_PATH
+            </variable>
+        </condition>
+
         <condition type="compareversions" id="is.downgrade">
             <arg1>${installed.version}</arg1>
             <arg2>${WFE.version}</arg2>
             <operator>gt</operator>
+        </condition>
+
+        <condition type="not" id="conditionvalidator.not.downgrade">
+            <condition type="ref" refid="is.downgrade"/>
         </condition>
 
         <condition type="variable" id="DBMS.H2">
@@ -134,7 +147,9 @@
         <panel classname="UserInputPanel" id="panel.database.connection"/>
         <panel classname="UserInputPanel" id="panel.wildfly.connection"/>
         <panel classname="UserInputPanel" id="panel.feedback"/>
-        <panel classname="TargetPanel"/>
+        <panel classname="TargetPanel">
+            <validator classname="com.izforge.izpack.installer.validator.ConditionValidator"/>
+        </panel>
         <panel classname="InstallPanel"/>
         <panel classname="ShortcutPanel"/>
         <panel classname="SimpleFinishPanel"/>
