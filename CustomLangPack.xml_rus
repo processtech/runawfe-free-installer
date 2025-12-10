@@ -43,5 +43,6 @@
 
     <str id="data.validation.error.title" txt="Проблема"/>
     <str id="conditionvalidator.not.downgrade.error.message" txt="В даной папке обнаружена более поздняя версия приложения. Если вы хотите установить более раннюю версию, удалите полностью текущую."/>
+    <str id="conditionvalidator.components.selected.error.message" txt="Выберите компоненты для установки."/>
 
 </izpack:langpack>
