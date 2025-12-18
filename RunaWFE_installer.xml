@@ -143,6 +143,10 @@
             <name>INSTALL_GROUP</name>
             <value>Пользователь</value>
         </condition>
+        <condition type="variable" id="Usertype.Analyst">
+            <name>INSTALL_GROUP</name>
+            <value>Аналитик</value>
+        </condition>
     </conditions>
 
     <panels>
@@ -182,12 +186,12 @@
             <updatecheck/>
         </pack>
         <pack name="Демо-пользователи" required="no" preselected="no" parent="Серверные компоненты"
-            installGroups="Администратор,Аналитик" condition="!Usertype.User">
+            installGroups="Аналитик" condition="Usertype.Analyst">
             <description></description>
             <updatecheck/>
         </pack>
         <pack name="Демо-процессы" required="no" preselected="no" parent="Серверные компоненты"
-            installGroups="Администратор,Аналитик" condition="!Usertype.User">
+            installGroups="Аналитик" condition="Usertype.Analyst">
             <description></description>
             <updatecheck/>
         </pack>
