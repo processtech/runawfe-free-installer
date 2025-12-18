@@ -173,24 +173,32 @@
     </panels>
 
     <packs>
-        <pack name="Серверные компоненты"
-            required="no" installGroups="Администратор,Аналитик" condition="!Usertype.User">
+        <pack name="Серверные компоненты" preselected="no"
+            required="no" >
             <description/>
         </pack>
         <pack name="RunaWFE сервер" required="no" parent="Серверные компоненты"
-            installGroups="Администратор,Аналитик" condition="!Usertype.User">
+            installGroups="Администратор" condition="Usertype.Administrator" >
             <file os="windows" src="resources\images\Cs_20x20_256.ico"
                 targetdir="$INSTALL_PATH/images">
             </file>
-            <description></description>
+            <description>Основной сервер, предназначенный для многопользовательской работы</description>
             <updatecheck/>
         </pack>
-        <pack name="Демо-пользователи" required="no" preselected="no" parent="Серверные компоненты"
+        <pack name="RunaWFE симулятор" required="no" parent="Серверные компоненты"
+            installGroups="Аналитик" condition="Usertype.Analyst">
+            <file os="windows" src="resources\images\Si_20x20_256.ico"
+                targetdir="$INSTALL_PATH/images">
+            </file>
+            <description>Сервер-симулятор - адаптированная для для рабочей станции версия RunaWFE сервера. Предназначена для знакомства с системой и работы одного пользователя.</description>
+            <updatecheck/>
+        </pack>
+        <pack name="Демо-пользователи" required="no" parent="Серверные компоненты"
             installGroups="Аналитик" condition="Usertype.Analyst">
             <description></description>
             <updatecheck/>
         </pack>
-        <pack name="Демо-процессы" required="no" preselected="no" parent="Серверные компоненты"
+        <pack name="Демо-процессы" required="no" parent="Серверные компоненты"
             installGroups="Аналитик" condition="Usertype.Analyst">
             <description></description>
             <updatecheck/>
