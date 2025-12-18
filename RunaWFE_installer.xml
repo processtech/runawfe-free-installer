@@ -78,6 +78,9 @@
         <variable name="iiop-ssl.port" value="Порт IIOP с SSL"/>
         <variable name="txn-recovery-environment.port" value="Порт восстановления транзакций"/>
         <variable name="txn-status-manager.port" value="Порт статуса транзакций"/>
+        <variable name="InstallationGroupPanel.sortKey.Аналитик" value="A"/>
+        <variable name="InstallationGroupPanel.sortKey.Администратор" value="B"/>
+        <variable name="InstallationGroupPanel.sortKey.Пользователь" value="C"/>
     </variables>
 
 
