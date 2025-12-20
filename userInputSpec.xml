@@ -29,7 +29,7 @@
         <field type="text" variable="DBMS.host" conditionid="!DBMS.H2">
             <spec size="30" txt="Хост" set="localhost"/>
             <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
-                txt="Имя хоста не может быть пустым"/>
+                txt="${host}: ${empty}"/>
         </field>
 
         <field type="space"/>
@@ -41,7 +41,7 @@
             </spec>
             <validator
                 class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
-                txt="${port}: ${port.empty}"/>
+                txt="${port}: ${empty}"/>
             <validator class="com.izforge.izpack.panels.userinput.validator.IsPortValidator"
                 txt="${port}: ${port.invalid}"/>
         </field>
@@ -52,7 +52,7 @@
             </spec>
             <validator
                 class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
-                txt="${port}: ${port.empty}"/>
+                txt="${port}: ${empty}"/>
             <validator class="com.izforge.izpack.panels.userinput.validator.IsPortValidator"
                 txt="${port}: ${port.invalid}"/>
         </field>
@@ -63,7 +63,7 @@
             </spec>
             <validator
                 class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
-                txt="${port}: ${port.empty}"/>
+                txt="${port}: ${empty}"/>
             <validator class="com.izforge.izpack.panels.userinput.validator.IsPortValidator"
                 txt="${port}: ${port.invalid}"/>
         </field>
@@ -127,7 +127,7 @@
             </spec>
             <validator
                 class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
-                txt="${management.http.port}: ${port.empty}"/>
+                txt="${management.http.port}: ${empty}"/>
             <validator class="com.izforge.izpack.panels.userinput.validator.IsPortValidator"
                 txt="${management.http.port}: ${port.invalid}"/>
         </field>
@@ -139,7 +139,7 @@
             </spec>
             <validator
                 class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
-                txt="${management.https.port}: ${port.empty}"/>
+                txt="${management.https.port}: ${empty}"/>
             <validator class="com.izforge.izpack.panels.userinput.validator.IsPortValidator"
                 txt="${management.https.port}: ${port.invalid}"/>
         </field>
@@ -151,7 +151,7 @@
             </spec>
             <validator
                 class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
-                txt="${ajp.port}: ${port.empty}"/>
+                txt="${ajp.port}: ${empty}"/>
             <validator class="com.izforge.izpack.panels.userinput.validator.IsPortValidator"
                 txt="${ajp.port}: ${port.invalid}"/>
         </field>
@@ -163,7 +163,7 @@
             </spec>
             <validator
                 class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
-                txt="${http.port}: ${port.empty}"/>
+                txt="${http.port}: ${empty}"/>
             <validator class="com.izforge.izpack.panels.userinput.validator.IsPortValidator"
                 txt="${http.port}: ${port.invalid}"/>
         </field>
@@ -175,7 +175,7 @@
             </spec>
             <validator
                 class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
-                txt="${https.port}: ${port.empty}"/>
+                txt="${https.port}: ${empty}"/>
             <validator class="com.izforge.izpack.panels.userinput.validator.IsPortValidator"
                 txt="${https.port}: ${port.invalid}"/>
         </field>
@@ -187,7 +187,7 @@
             </spec>
             <validator
                 class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
-                txt="${iiop.port}: ${port.empty}"/>
+                txt="${iiop.port}: ${empty}"/>
             <validator class="com.izforge.izpack.panels.userinput.validator.IsPortValidator"
                 txt="${iiop.port}: ${port.invalid}"/>
         </field>
@@ -199,7 +199,7 @@
             </spec>
             <validator
                 class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
-                txt="${iiop-ssl.port}: ${port.empty}"/>
+                txt="${iiop-ssl.port}: ${empty}"/>
             <validator class="com.izforge.izpack.panels.userinput.validator.IsPortValidator"
                 txt="${iiop-ssl.port}: ${port.invalid}"/>
         </field>
@@ -211,7 +211,7 @@
             </spec>
             <validator
                 class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
-                txt="${txn-recovery-environment.port}: ${port.empty}"/>
+                txt="${txn-recovery-environment.port}: ${empty}"/>
             <validator class="com.izforge.izpack.panels.userinput.validator.IsPortValidator"
                 txt="${txn-recovery-environment.port}: ${port.invalid}"/>
         </field>
@@ -223,11 +223,35 @@
             </spec>
             <validator
                 class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
-                txt="${txn-status-manager.port}: ${port.empty}"/>
+                txt="${txn-status-manager.port}: ${empty}"/>
             <validator class="com.izforge.izpack.panels.userinput.validator.IsPortValidator"
                 txt="${txn-status-manager.port}: ${port.invalid}"/>
         </field>
 
+    </panel>
+
+    <panel id="panel.server.web.interface">
+        <field type="staticText" txt="Адрес основного RunaWFE сервера"/>
+
+        <field type="space"/>
+
+        <field type="text" variable="server.host">
+            <spec size="30" txt="Хост"/>
+            <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
+                txt="${host}: ${empty}"/>
+        </field>
+
+        <field type="space"/>
+
+        <field type="rule" variable="server.web.port">
+            <spec layout="N:5:5" txt="${port}" default="8080">
+            </spec>
+            <validator
+                class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
+                txt="${port}: ${empty}"/>
+            <validator class="com.izforge.izpack.panels.userinput.validator.IsPortValidator"
+                txt="${port}: ${port.invalid}"/>
+        </field>
     </panel>
 
     <panel id="panel.feedback">
@@ -236,5 +260,7 @@
             <description txt="Эти данные требуются нам для развития и улучшения системы:"/>
         </field>
     </panel>
+
+
 
 </izpack:userinput>

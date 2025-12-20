@@ -65,9 +65,10 @@
 
     <variables>
         <variable name="WFE.version" value="@{ENV[WFE_VERSION]}"/>
-        <variable name="port.empty" value="значение не может быть пустым."/>
+        <variable name="empty" value="значение не может быть пустым."/>
         <variable name="port.invalid"
             value="указанный адрес не существует. Значение долнжно быть в интервале от 0 до 65535."/>
+        <variable name="host" value="Хост"/>
         <variable name="port" value="Порт"/>
         <variable name="management.http.port" value="Порт HTTP‑управления"/>
         <variable name="management.https.port" value="Порт HTTPS‑управления"/>
@@ -164,6 +165,7 @@
         </panel>
         <panel classname="UserInputPanel" id="panel.database.connection"/>
         <panel classname="UserInputPanel" id="panel.wildfly.connection"/>
+        <panel classname="UserInputPanel" id="panel.server.web.interface"/>
         <panel classname="UserInputPanel" id="panel.feedback"/>
         <panel classname="TargetPanel">
             <validator classname="com.izforge.izpack.installer.validator.ConditionValidator"/>
@@ -175,11 +177,11 @@
 
     <packs>
         <pack name="Серверные компоненты" preselected="no"
-            required="no" >
+            required="no">
             <description/>
         </pack>
         <pack name="RunaWFE сервер" required="no" parent="Серверные компоненты"
-            installGroups="Администратор" condition="Usertype.Administrator" >
+            installGroups="Администратор" condition="Usertype.Administrator">
             <file os="windows" src="resources\images\Cs_20x20_256.ico"
                 targetdir="$INSTALL_PATH/images">
             </file>
