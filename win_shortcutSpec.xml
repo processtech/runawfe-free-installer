@@ -22,7 +22,13 @@
         <createForPack name="Оповещаетель задач"/>
     </shortcut>
 
-    <shortcut name="Uninstall" target="javaw.exe" commandLine="-jar &quot;$INSTALL_PATH\Uninstaller\uninstaller.jar&quot;" programGroup="true"
+    <shortcut name="Web interface RunaWFE" target="$INSTALL_PATH/web/runawfe.html" programGroup="true"
+        desktop="true" iconFile="$INSTALL_PATH\images\C_20x20_256.ico">
+        <createForPack name="Ярлык веб-интерфейса RunaWFE сервера"/>
+    </shortcut>
+
+    <shortcut name="Uninstall" target="javaw.exe"
+        commandLine="-jar &quot;$INSTALL_PATH\Uninstaller\uninstaller.jar&quot;" programGroup="true"
         iconFile="$INSTALL_PATH\images\wf_48x128.ico" runAsAdministrator="true">
     </shortcut>
 

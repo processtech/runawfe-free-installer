@@ -118,6 +118,7 @@
             <condition type="ref" refid="izpack.selected.Демо-процессы"/>
             <condition type="ref" refid="izpack.selected.Среда разработки"/>
             <condition type="ref" refid="izpack.selected.Оповещаетель задач"/>
+            <condition type="ref" refid="izpack.selected.Ярлык веб-интерфейса RunaWFE сервера"/>
         </condition>
 
         <condition type="variable" id="DBMS.H2">
@@ -227,6 +228,10 @@
             <file os="windows" src="resources\images\C_20x20_256.ico"
                 targetdir="$INSTALL_PATH/images">
             </file>
+            <file os="windows" src="resources\runawfe.html"
+                targetdir="$INSTALL_PATH/web">
+            </file>
+            <parsable targetfile="$INSTALL_PATH/web/runawfe.html"/>
             <description>Ссылка на веб-интерфейс основного RunaWFE сервера. Далее можно будет выбрать создание ярлыка на рабочем столе и в главном меню.</description>
             <updatecheck/>
         </pack>
