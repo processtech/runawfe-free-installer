@@ -206,12 +206,12 @@
             <updatecheck/>
         </pack>
         <pack name="Демо-пользователи" required="no" parent="Серверные компоненты" preselected="no"
-            installGroups="Аналитик" condition="Usertype.Analyst">
+            installGroups="Аналитик" condition="Usertype.Analyst+izpack.selected.RunaWFE симулятор">
             <description></description>
             <updatecheck/>
         </pack>
         <pack name="Демо-процессы" required="no" parent="Серверные компоненты" preselected="no"
-            installGroups="Аналитик" condition="Usertype.Analyst">
+            installGroups="Аналитик" condition="Usertype.Analyst+izpack.selected.RunaWFE симулятор">
             <description></description>
             <updatecheck/>
         </pack>
