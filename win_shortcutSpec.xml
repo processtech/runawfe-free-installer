@@ -8,28 +8,29 @@
     <programGroup defaultName="$APP_NAME $APP_VER"/>
 
     <shortcut name="$APP_NAME сервер" target="$INSTALL_PATH\cmd.exe" programGroup="true"
-        desktop="true" startup="true" iconFile="$INSTALL_PATH\images\Cs_20x20_256.ico">
+        desktop="true" startup="true" iconFile="$INSTALL_PATH\$images.subpath\Cs_20x20_256.ico">
         <createForPack name="RunaWFE сервер"/>
     </shortcut>
 
     <shortcut name="Среда разработки" target="$INSTALL_PATH\powershell.exe" programGroup="true"
-        desktop="true" iconFile="$INSTALL_PATH\images\e_20x20_256.ico">
+        desktop="true" iconFile="$INSTALL_PATH\$images.subpath\e_20x20_256.ico">
         <createForPack name="Среда разработки"/>
     </shortcut>
 
     <shortcut name="Оповещаетель задач" target="$INSTALL_PATH\7zip.exe" programGroup="true"
-        desktop="true" startup="true" iconFile="$INSTALL_PATH\images\t_20x20_256.ico">
+        desktop="true" startup="true" iconFile="$INSTALL_PATH\$images.subpath\t_20x20_256.ico">
         <createForPack name="Оповещаетель задач"/>
     </shortcut>
 
-    <shortcut name="Web interface RunaWFE" target="$INSTALL_PATH/web/runawfe.html" programGroup="true"
-        desktop="true" iconFile="$INSTALL_PATH\images\C_20x20_256.ico">
+    <shortcut name="Server web interface" target="$INSTALL_PATH/$web.interface.subpath/runawfe.html"
+        programGroup="true"
+        desktop="true" iconFile="$INSTALL_PATH\$images.subpath\C_20x20_256.ico">
         <createForPack name="Ярлык веб-интерфейса RunaWFE сервера"/>
     </shortcut>
 
     <shortcut name="Uninstall" target="javaw.exe"
         commandLine="-jar &quot;$INSTALL_PATH\Uninstaller\uninstaller.jar&quot;" programGroup="true"
-        iconFile="$INSTALL_PATH\images\wf_48x128.ico" runAsAdministrator="true">
+        iconFile="$INSTALL_PATH\$images.subpath\wf_48x128.ico" runAsAdministrator="true">
     </shortcut>
 
 </izpack:shortcuts>

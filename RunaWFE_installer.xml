@@ -82,6 +82,9 @@
         <variable name="InstallationGroupPanel.sortKey.Аналитик" value="A"/>
         <variable name="InstallationGroupPanel.sortKey.Администратор" value="B"/>
         <variable name="InstallationGroupPanel.sortKey.Пользователь" value="C"/>
+        <variable name="images.subpath" value="images"/>
+        <variable name="web.interface.subpath" value="web"/>
+        <variable name="simulator.subpath" value="simulator"/>
     </variables>
 
 
@@ -185,7 +188,7 @@
         <pack name="RunaWFE сервер" required="yes" parent="Серверные компоненты" preselected="yes"
             installGroups="Администратор" condition="Usertype.Administrator">
             <file os="windows" src="resources\images\Cs_20x20_256.ico"
-                targetdir="$INSTALL_PATH/images">
+                targetdir="$INSTALL_PATH/$images.subpath">
             </file>
             <description>Основной сервер, предназначенный для многопользовательской работы</description>
             <updatecheck/>
@@ -211,7 +214,7 @@
         <pack name="Среда разработки" required="no" preselected="yes"
             installGroups="Аналитик" condition="Usertype.Analyst">
             <file os="windows" src="resources\images\e_20x20_256.ico"
-                targetdir="$INSTALL_PATH/images">
+                targetdir="$INSTALL_PATH/$images.subpath">
             </file>
             <description>Приложение, предназначенное для разработки процессов</description>
             <updatecheck/>
@@ -219,7 +222,7 @@
         <pack name="Оповещаетель задач" required="no"
             installGroups="Пользователь,Аналитик" condition="!Usertype.Administrator">
             <file os="windows" src="resources\images\t_20x20_256.ico"
-                targetdir="$INSTALL_PATH/images">
+                targetdir="$INSTALL_PATH/$images.subpath">
             </file>
             <description>Приложение, предназначенное для проверки новых задач пользователей</description>
             <updatecheck/>
@@ -227,18 +230,18 @@
         <pack name="Ярлык веб-интерфейса RunaWFE сервера" required="no"
             installGroups="Пользователь,Аналитик" condition="!Usertype.Administrator">
             <file os="windows" src="resources\images\C_20x20_256.ico"
-                targetdir="$INSTALL_PATH/images">
+                targetdir="$INSTALL_PATH/$images.subpath">
             </file>
             <file os="windows" src="resources\runawfe.html"
-                targetdir="$INSTALL_PATH/web">
+                targetdir="$INSTALL_PATH/$web.interface.subpath">
             </file>
-            <parsable targetfile="$INSTALL_PATH/web/runawfe.html"/>
+            <parsable targetfile="$INSTALL_PATH/$web.interface.subpath/runawfe.html"/>
             <description>Ссылка на веб-интерфейс основного RunaWFE сервера. Далее можно будет выбрать создание ярлыка на рабочем столе и в главном меню.</description>
             <updatecheck/>
         </pack>
         <pack name="Обязательные компоненты" hidden="true" required="yes">
             <file os="windows" src="resources\images\wf_48x128.ico"
-                targetdir="$INSTALL_PATH/images">
+                targetdir="$INSTALL_PATH/$images.subpath">
             </file>
             <file src="properties" targetdir="$INSTALL_PATH"/>
             <parsable targetfile="$INSTALL_PATH/properties"/>
