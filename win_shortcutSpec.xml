@@ -28,6 +28,12 @@
         <createForPack name="Ярлык веб-интерфейса RunaWFE сервера"/>
     </shortcut>
 
+    <shortcut name="Simulator web interface" target="$INSTALL_PATH/${simulator.subpath}/simulator.html"
+        programGroup="true"
+        desktop="true" iconFile="$INSTALL_PATH\$images.subpath\Si_20x20_256.ico">
+        <createForPack name="RunaWFE симулятор"/>
+    </shortcut>
+
     <shortcut name="Uninstall" target="javaw.exe"
         commandLine="-jar &quot;$INSTALL_PATH\Uninstaller\uninstaller.jar&quot;" programGroup="true"
         iconFile="$INSTALL_PATH\$images.subpath\wf_48x128.ico" runAsAdministrator="true">

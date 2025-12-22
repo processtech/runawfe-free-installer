@@ -196,8 +196,12 @@
         <pack name="RunaWFE симулятор" required="no" parent="Серверные компоненты" preselected="no"
             installGroups="Аналитик" condition="Usertype.Analyst">
             <file os="windows" src="resources\images\Si_20x20_256.ico"
-                targetdir="$INSTALL_PATH/images">
+                targetdir="$INSTALL_PATH/$images.subpath">
             </file>
+            <file os="windows" src="resources\simulator.html"
+                targetdir="$INSTALL_PATH/$simulator.subpath">
+            </file>
+            <parsable targetfile="$INSTALL_PATH/$simulator.subpath/simulator.html"/>
             <description>Сервер-симулятор - адаптированная для для рабочей станции версия RunaWFE сервера. Предназначена для знакомства с системой, тестироваия и работы одного пользователя.</description>
             <updatecheck/>
         </pack>
