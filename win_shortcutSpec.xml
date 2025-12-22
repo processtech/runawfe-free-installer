@@ -28,9 +28,27 @@
         <createForPack name="Ярлык веб-интерфейса RunaWFE сервера"/>
     </shortcut>
 
-    <shortcut name="Simulator web interface" target="$INSTALL_PATH/${simulator.subpath}/simulator.html"
+    <shortcut name="Simulator web interface"
+        target="$INSTALL_PATH/${simulator.subpath}/simulator.html"
         programGroup="true"
         desktop="true" iconFile="$INSTALL_PATH\$images.subpath\Si_20x20_256.ico">
+        <createForPack name="RunaWFE симулятор"/>
+    </shortcut>
+
+    <shortcut name="Start simulation"
+        target="$INSTALL_PATH/${simulator.subpath}/runSimulation.bat"
+        programGroup="true"
+        desktop="true" iconFile="$INSTALL_PATH\$images.subpath\Si_20x20_256.ico"
+        description="Запустить тестовый сервер RunaWFE">
+        <createForPack name="RunaWFE симулятор"/>
+    </shortcut>
+
+    <shortcut name="Stop simulation"
+        target="$INSTALL_PATH/${simulator.subpath}/bin/jboss-cli.bat"
+        commandLine="--commands=connect,:shutdown"
+        programGroup="true"
+        desktop="true" iconFile="$INSTALL_PATH\$images.subpath\Si_20x20_256.ico"
+        description="Остановить тестовый сервер RunaWFE">
         <createForPack name="RunaWFE симулятор"/>
     </shortcut>
 
