@@ -7,19 +7,19 @@
 
     <programGroup defaultName="$APP_NAME $APP_VER"/>
 
-    <shortcut name="$APP_NAME сервер" target="$INSTALL_PATH\cmd.exe" programGroup="true"
+    <shortcut name="$APP_NAME server" target="$INSTALL_PATH\cmd.exe" programGroup="true"
         desktop="true" startup="true" iconFile="$INSTALL_PATH\$images.subpath\Cs_20x20_256.ico"
         description="Основной RunaWFE сервер">
         <createForPack name="RunaWFE сервер"/>
     </shortcut>
 
-    <shortcut name="Среда разработки" target="$INSTALL_PATH\powershell.exe" programGroup="true"
+    <shortcut name="Developer studio" target="$INSTALL_PATH\powershell.exe" programGroup="true"
         desktop="true" iconFile="$INSTALL_PATH\$images.subpath\e_20x20_256.ico"
         description="Среда разработки - приложение, предназначенное для разработки процессов системы RunaWFE Free">
         <createForPack name="Среда разработки"/>
     </shortcut>
 
-    <shortcut name="Оповещаетель задач" target="$INSTALL_PATH\7zip.exe" programGroup="true"
+    <shortcut name="Task notifier" target="$INSTALL_PATH\7zip.exe" programGroup="true"
         desktop="true" startup="true" iconFile="$INSTALL_PATH\$images.subpath\t_20x20_256.ico"
         description="Оповещатель задачи - приложение, предназначенное для автоматической проверки новых задач пользователя">
         <createForPack name="Оповещаетель задач"/>
