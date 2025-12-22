@@ -4,6 +4,7 @@
 
     <panel id="panel.database.connection" topBuffer="0">
         <createForPack name="RunaWFE сервер"/>
+        <createForPack name="RunaWFE симулятор"/>
         <field type="staticText" txt="Параметры подключения к базе данных"/>
         <field type="space"/>
 
@@ -118,6 +119,7 @@
 
     <panel id="panel.wildfly.connection">
         <createForPack name="RunaWFE сервер"/>
+        <createForPack name="RunaWFE симулятор"/>
         <field type="staticText" txt="Настройки сервера приложений Wildfly"/>
 
         <field type="rule" variable="wildfly.p1">
