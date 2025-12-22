@@ -8,30 +8,35 @@
     <programGroup defaultName="$APP_NAME $APP_VER"/>
 
     <shortcut name="$APP_NAME сервер" target="$INSTALL_PATH\cmd.exe" programGroup="true"
-        desktop="true" startup="true" iconFile="$INSTALL_PATH\$images.subpath\Cs_20x20_256.ico">
+        desktop="true" startup="true" iconFile="$INSTALL_PATH\$images.subpath\Cs_20x20_256.ico"
+        description="Основной RunaWFE сервер">
         <createForPack name="RunaWFE сервер"/>
     </shortcut>
 
     <shortcut name="Среда разработки" target="$INSTALL_PATH\powershell.exe" programGroup="true"
-        desktop="true" iconFile="$INSTALL_PATH\$images.subpath\e_20x20_256.ico">
+        desktop="true" iconFile="$INSTALL_PATH\$images.subpath\e_20x20_256.ico"
+        description="Среда разработки - приложение, предназначенное для разработки процессов системы RunaWFE Free">
         <createForPack name="Среда разработки"/>
     </shortcut>
 
     <shortcut name="Оповещаетель задач" target="$INSTALL_PATH\7zip.exe" programGroup="true"
-        desktop="true" startup="true" iconFile="$INSTALL_PATH\$images.subpath\t_20x20_256.ico">
+        desktop="true" startup="true" iconFile="$INSTALL_PATH\$images.subpath\t_20x20_256.ico"
+        description="Оповещатель задачи - приложение, предназначенное для автоматической проверки новых задач пользователя">
         <createForPack name="Оповещаетель задач"/>
     </shortcut>
 
     <shortcut name="Server web interface" target="$INSTALL_PATH/$web.interface.subpath/runawfe.html"
         programGroup="true"
-        desktop="true" iconFile="$INSTALL_PATH\$images.subpath\C_20x20_256.ico">
+        desktop="true" iconFile="$INSTALL_PATH\$images.subpath\C_20x20_256.ico"
+        description="Запуск веб-интерфейса основного RunaWFE сервера">
         <createForPack name="Ярлык веб-интерфейса RunaWFE сервера"/>
     </shortcut>
 
     <shortcut name="Simulator web interface"
         target="$INSTALL_PATH/${simulator.subpath}/simulator.html"
         programGroup="true"
-        desktop="true" iconFile="$INSTALL_PATH\$images.subpath\Si_20x20_256.ico">
+        desktop="true" iconFile="$INSTALL_PATH\$images.subpath\Si_20x20_256.ico"
+        description="Запуск веб-интерфейса сервера-симулятора">
         <createForPack name="RunaWFE симулятор"/>
     </shortcut>
 
@@ -39,7 +44,7 @@
         target="$INSTALL_PATH/${simulator.subpath}/runSimulation.bat"
         programGroup="true"
         desktop="true" iconFile="$INSTALL_PATH\$images.subpath\Si_20x20_256.ico"
-        description="Запустить тестовый сервер RunaWFE">
+        description="Запуск тестового сервера-симулятора RunaWFE">
         <createForPack name="RunaWFE симулятор"/>
     </shortcut>
 
@@ -48,13 +53,14 @@
         commandLine="--commands=connect,:shutdown"
         programGroup="true"
         desktop="true" iconFile="$INSTALL_PATH\$images.subpath\Si_20x20_256.ico"
-        description="Остановить тестовый сервер RunaWFE">
+        description="Остановка тестового сервера-симулятора RunaWFE">
         <createForPack name="RunaWFE симулятор"/>
     </shortcut>
 
     <shortcut name="Uninstall" target="javaw.exe"
         commandLine="-jar &quot;$INSTALL_PATH\Uninstaller\uninstaller.jar&quot;" programGroup="true"
-        iconFile="$INSTALL_PATH\$images.subpath\wf_48x128.ico" runAsAdministrator="true">
+        iconFile="$INSTALL_PATH\$images.subpath\wf_48x128.ico" runAsAdministrator="true"
+        description="Деинсталляция продуктов RunaWFE">
     </shortcut>
 
 </izpack:shortcuts>
