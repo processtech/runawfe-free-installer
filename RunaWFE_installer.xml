@@ -30,7 +30,7 @@
     </listeners>
 
     <info>
-        <appname>Runa</appname>
+        <appname>RunaWFE_test</appname>
         <appversion>@{ENV[WFE_EDITION]}</appversion>
         <url>https://runawfe.ru/RunaWFE</url>
         <requiresjdk>no</requiresjdk>
