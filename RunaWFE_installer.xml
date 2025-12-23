@@ -85,6 +85,7 @@
         <variable name="images.subpath" value="images"/>
         <variable name="web.interface.subpath" value="web"/>
         <variable name="simulator.subpath" value="simulator"/>
+        <variable name="gpd.subpath" value="gpd"/>
     </variables>
 
 
@@ -181,10 +182,12 @@
     </panels>
 
     <packs>
+
         <pack name="Серверные компоненты" preselected="no"
             required="no" installGroups="Администратор,Аналитик" condition="!Usertype.User">
             <description/>
         </pack>
+
         <pack name="RunaWFE сервер" required="yes" parent="Серверные компоненты" preselected="yes"
             installGroups="Администратор" condition="Usertype.Administrator">
             <file os="windows" src="resources\images\Cs_20x20_256.ico"
@@ -193,6 +196,7 @@
             <description>Основной сервер, предназначенный для многопользовательской работы</description>
             <updatecheck/>
         </pack>
+
         <pack name="RunaWFE симулятор" required="no" parent="Серверные компоненты" preselected="no"
             installGroups="Аналитик" condition="Usertype.Analyst">
             <file os="windows" src="resources\images\Si_20x20_256.ico"
@@ -205,24 +209,40 @@
             <description>Сервер-симулятор - адаптированная для для рабочей станции версия RunaWFE сервера. Предназначена для знакомства с системой, тестироваия и работы одного пользователя.</description>
             <updatecheck/>
         </pack>
+
         <pack name="Демо-пользователи" required="no" parent="Серверные компоненты" preselected="no"
             installGroups="Аналитик" condition="Usertype.Analyst+izpack.selected.RunaWFE симулятор">
             <description></description>
             <updatecheck/>
         </pack>
+
         <pack name="Демо-процессы" required="no" parent="Серверные компоненты" preselected="no"
             installGroups="Аналитик" condition="Usertype.Analyst+izpack.selected.RunaWFE симулятор">
             <description></description>
             <updatecheck/>
         </pack>
+
         <pack name="Среда разработки" required="no" preselected="yes"
             installGroups="Аналитик" condition="Usertype.Analyst">
             <file os="windows" src="resources\images\e_20x20_256.ico"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
+            <file os="windows" src="runnable\delete_eclipse_userdir.bat"
+                targetdir="$INSTALL_PATH/$gpd.subpath">
+            </file>
+            <executable targetfile="$INSTALL_PATH/$gpd.subpath/delete_eclipse_userdir.bat"
+                type="bin" stage="postinstall">
+                <os family="windows"/>
+            </executable>
+            <fileset dir="@{ENV[BUILD_ROOT]}\gpd\64\gpd-${WFE.version}" override="true"
+                targetdir="$INSTALL_PATH/$gpd.subpath">
+                <!-- Не устанавливаем демо-процессы в студию -->
+                <exclude name="demo-workspace/**"/>
+            </fileset>
             <description>Приложение, предназначенное для разработки процессов</description>
             <updatecheck/>
         </pack>
+
         <pack name="Оповещаетель задач" required="no"
             installGroups="Пользователь,Аналитик" condition="!Usertype.Administrator">
             <file os="windows" src="resources\images\t_20x20_256.ico"
@@ -231,6 +251,7 @@
             <description>Приложение, предназначенное для проверки новых задач пользователей</description>
             <updatecheck/>
         </pack>
+
         <pack name="Ярлык веб-интерфейса RunaWFE сервера" required="no"
             installGroups="Пользователь,Аналитик" condition="!Usertype.Administrator">
             <file os="windows" src="resources\images\C_20x20_256.ico"
@@ -243,6 +264,7 @@
             <description>Ссылка на веб-интерфейс основного RunaWFE сервера. Далее можно будет выбрать создание ярлыка на рабочем столе и в главном меню.</description>
             <updatecheck/>
         </pack>
+
         <pack name="Обязательные компоненты" hidden="true" required="yes">
             <file os="windows" src="resources\images\wf_48x128.ico"
                 targetdir="$INSTALL_PATH/$images.subpath">
@@ -251,6 +273,7 @@
             <parsable targetfile="$INSTALL_PATH/properties"/>
             <description></description>
         </pack>
+
     </packs>
 
 </izpack:installation>
