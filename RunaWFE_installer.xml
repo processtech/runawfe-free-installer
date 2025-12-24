@@ -96,10 +96,16 @@
         <variable name="installed.version" condition="install.path.set"
             file="${INSTALL_PATH}/properties"
             key="WFE.version"/>
-        <variable name="appdata" condition="izpack.windowsinstall" environment="APPDATA"
+        <variable name="appdata" condition="izpack.windowsinstall"
+            environment="APPDATA"
             checkonce="true"/>
-        <variable name="appdata" condition="izpack.linuxinstall" environment="XDG_DATA_HOME"
+        <variable name="appdata" condition="izpack.linuxinstall"
+            environment="XDG_DATA_HOME"
             checkonce="true"/>
+        <variable name="delete.gpd" condition="izpack.selected.Среда разработки"
+            value="false"/>
+        <variable name="delete.gpd" condition="!izpack.selected.Среда разработки"
+            value="true"/>
     </dynamicvariables>
 
     <conditions>
@@ -275,6 +281,16 @@
             </file>
             <file src="properties" targetdir="$INSTALL_PATH"/>
             <parsable targetfile="$INSTALL_PATH/properties"/>
+            <file os="windows" src="runnable\cleanup_update.bat"
+                targetdir="$INSTALL_PATH">
+            </file>
+            <parsable targetfile="$INSTALL_PATH\cleanup_update.bat">
+                <os family="windows"/>
+            </parsable>
+            <executable targetfile="$INSTALL_PATH\cleanup_update.bat"
+                type="bin" stage="postinstall">
+                <os family="windows"/>
+            </executable>
             <description></description>
         </pack>
 
