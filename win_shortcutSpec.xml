@@ -13,7 +13,10 @@
         <createForPack name="RunaWFE сервер"/>
     </shortcut>
 
-    <shortcut name="Developer studio" target="$INSTALL_PATH\powershell.exe" programGroup="true"
+    <shortcut name="Developer studio" target="$INSTALL_PATH\$gpd.subpath\runa-gpd.exe"
+        workingDirectory="$INSTALL_PATH\$gpd.subpath"
+        commandLine="-data $appdata\$APP_NAME\$gpd.subpath\workspace"
+        programGroup="true"
         desktop="true" iconFile="$INSTALL_PATH\$images.subpath\e_20x20_256.ico"
         description="Среда разработки - приложение, предназначенное для разработки процессов системы RunaWFE Free">
         <createForPack name="Среда разработки"/>

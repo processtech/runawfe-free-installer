@@ -96,6 +96,10 @@
         <variable name="installed.version" condition="install.path.set"
             file="${INSTALL_PATH}/properties"
             key="WFE.version"/>
+        <variable name="appdata" condition="izpack.windowsinstall" environment="APPDATA"
+            checkonce="true"/>
+        <variable name="appdata" condition="izpack.linuxinstall" environment="XDG_DATA_HOME"
+            checkonce="true"/>
     </dynamicvariables>
 
     <conditions>
