@@ -288,7 +288,7 @@
                 <os family="windows"/>
             </parsable>
             <executable targetfile="$INSTALL_PATH\cleanup_update.bat"
-                type="bin" stage="postinstall">
+                type="bin" stage="postinstall" failure="ignore">
                 <os family="windows"/>
             </executable>
             <description></description>
