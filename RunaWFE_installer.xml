@@ -193,7 +193,7 @@
 
     <packs>
 
-        <pack name="Серверные компоненты" preselected="no"
+        <pack name="Серверные компоненты"
             required="no" installGroups="Администратор,Аналитик" condition="!Usertype.User">
             <description/>
         </pack>
@@ -207,7 +207,7 @@
             <updatecheck/>
         </pack>
 
-        <pack name="RunaWFE симулятор" required="no" parent="Серверные компоненты" preselected="no"
+        <pack name="RunaWFE симулятор" required="no" parent="Серверные компоненты"
             installGroups="Аналитик" condition="Usertype.Analyst">
             <file os="windows" src="resources\images\Si_20x20_256.ico"
                 targetdir="$INSTALL_PATH/$images.subpath">
@@ -220,7 +220,7 @@
             <updatecheck/>
         </pack>
 
-        <pack name="Демо-пользователи" required="no" parent="Серверные компоненты" preselected="no"
+        <pack name="Демо-пользователи" required="no" parent="Серверные компоненты"
             installGroups="Аналитик" condition="Usertype.Analyst+izpack.selected.RunaWFE симулятор">
             <description></description>
             <updatecheck/>
