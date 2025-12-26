@@ -217,6 +217,9 @@
             <file os="windows" src="resources\images\Si_20x20_256.ico"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
+            <fileset dir="@{ENV[BUILD_ROOT]}\wfe-simulator" override="true"
+                targetdir="$INSTALL_PATH/$simulator.subpath">
+            </fileset>
             <file os="windows" src="resources\simulator.html"
                 targetdir="$INSTALL_PATH/$simulator.subpath">
             </file>
