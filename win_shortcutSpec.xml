@@ -22,7 +22,9 @@
         <createForPack name="Среда разработки"/>
     </shortcut>
 
-    <shortcut name="Task notifier" target="$INSTALL_PATH\7zip.exe" programGroup="true"
+    <shortcut name="Task notifier" target="$INSTALL_PATH\$rtn.subpath\rtn.bat"
+        workingDirectory="$INSTALL_PATH\$rtn.subpath"
+        programGroup="true"
         desktop="true" startup="true" iconFile="$INSTALL_PATH\$images.subpath\t_20x20_256.ico"
         description="Оповещатель задачи - приложение, предназначенное для автоматической проверки новых задач пользователя">
         <createForPack name="Оповещаетель задач"/>
