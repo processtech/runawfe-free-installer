@@ -107,6 +107,10 @@
             value="false"/>
         <variable name="delete.gpd" condition="!izpack.selected.Среда разработки"
             value="true"/>
+        <variable name="delete.rtn" condition="izpack.selected.Оповещаетель задач"
+            value="false"/>
+        <variable name="delete.rtn" condition="!izpack.selected.Оповещаетель задач"
+            value="true"/>
     </dynamicvariables>
 
     <conditions>
