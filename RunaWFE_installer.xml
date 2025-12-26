@@ -86,6 +86,7 @@
         <variable name="web.interface.subpath" value="web"/>
         <variable name="simulator.subpath" value="simulator"/>
         <variable name="gpd.subpath" value="gpd"/>
+        <variable name="rtn.subpath" value="rtn"/>
     </variables>
 
 
@@ -258,6 +259,10 @@
             <file os="windows" src="resources\images\t_20x20_256.ico"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
+            <fileset dir="@{ENV[BUILD_ROOT]}\rtn-${WFE.version}\64" override="true"
+                targetdir="$INSTALL_PATH/$rtn.subpath">
+                <!-- <exclude name="demo-workspace/**"/> -->
+            </fileset>
             <description>Приложение, предназначенное для проверки новых задач пользователей</description>
             <updatecheck/>
         </pack>
