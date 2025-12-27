@@ -217,6 +217,16 @@
             <file os="windows" src="resources\images\Si_20x20_256.ico"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
+            <file os="windows" src="runnable\delete_activemq_cache.bat"
+                targetdir="$INSTALL_PATH/$simulator.subpath">
+            </file>
+            <parsable
+                targetfile="$INSTALL_PATH/$simulator.subpath/delete_activemq_cache.bat"/>
+            <executable
+                targetfile="$INSTALL_PATH/$simulator.subpath/delete_activemq_cache.bat"
+                type="bin" stage="postinstall">
+                <os family="windows"/>
+            </executable>
             <fileset dir="@{ENV[BUILD_ROOT]}\wfe-simulator" override="true"
                 targetdir="$INSTALL_PATH/$simulator.subpath">
             </fileset>
