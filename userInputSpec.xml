@@ -233,6 +233,7 @@
     </panel>
 
     <panel id="panel.server.web.interface">
+        <createForPack name="Оповещаетель задач"/>
         <createForPack name="Ярлык веб-интерфейса RunaWFE сервера"/>
         <field type="staticText" txt="Адрес основного RunaWFE сервера"/>
 
