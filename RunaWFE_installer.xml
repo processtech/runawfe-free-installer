@@ -111,6 +111,8 @@
             value="false"/>
         <variable name="delete.rtn" condition="!izpack.selected.Оповещаетель задач"
             value="true"/>
+        <variable name="appserver.subpath" condition="izpack.selected.RunaWFE симулятор"
+            value="$simulator.subpath"/>
     </dynamicvariables>
 
     <conditions>
@@ -238,6 +240,17 @@
                 Сервер-симулятор - адаптированная для для рабочей станции версия RunaWFE сервера. Предназначена для знакомства с системой, тестироваия и работы одного пользователя.
             </description>
             <updatecheck/>
+        </pack>
+
+        <pack name="Сервер приложений" parent="Серверные компоненты" hidden="true"
+            condition="izpack.selected.RunaWFE симулятор">
+            <fileset dir="@{ENV[BUILD_ROOT]}\wfe-server-jboss" override="true"
+                targetdir="$INSTALL_PATH/$appserver.subpath">
+            </fileset>
+            <fileset dir="@{ENV[BUILD_ROOT]}\jboss-native" override="true"
+                targetdir="$INSTALL_PATH/$appserver.subpath/bin">
+            </fileset>
+            <description></description>
         </pack>
 
         <pack name="Демо-пользователи" required="no" parent="Серверные компоненты"
