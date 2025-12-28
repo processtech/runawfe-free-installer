@@ -234,7 +234,9 @@
                 targetdir="$INSTALL_PATH/$simulator.subpath">
             </file>
             <parsable targetfile="$INSTALL_PATH/$simulator.subpath/simulator.html"/>
-            <description>Сервер-симулятор - адаптированная для для рабочей станции версия RunaWFE сервера. Предназначена для знакомства с системой, тестироваия и работы одного пользователя.</description>
+            <description>
+                Сервер-симулятор - адаптированная для для рабочей станции версия RunaWFE сервера. Предназначена для знакомства с системой, тестироваия и работы одного пользователя.
+            </description>
             <updatecheck/>
         </pack>
 
@@ -291,7 +293,9 @@
             </singlefile>
             <parsable targetfile="$USER_HOME\config.properties" type="javaprop">
             </parsable>
-            <description>Приложение, предназначенное для проверки новых задач пользователей</description>
+            <description>
+                Приложение, предназначенное для проверки новых задач пользователей. Для установки этого компонента вам потребуется адрес основного RunaWFE сервера (хост и порт). Возьмите его у вашего системного администратора, прежде чем продолжать установку.
+            </description>
             <updatecheck/>
         </pack>
 
@@ -304,7 +308,9 @@
                 targetdir="$INSTALL_PATH/$web.interface.subpath">
             </file>
             <parsable targetfile="$INSTALL_PATH/$web.interface.subpath/runawfe.html"/>
-            <description>Ссылка на веб-интерфейс основного RunaWFE сервера. Далее можно будет выбрать создание ярлыка на рабочем столе и в главном меню.</description>
+            <description>
+                Ссылка на веб-интерфейс основного RunaWFE сервера. Для установки этого компонента вам потребуется адрес основного RunaWFE сервера (хост и порт). Возьмите его у вашего системного администратора, прежде чем продолжать установку. Далее можно будет выбрать создание ярлыка на рабочем столе и в главном меню.
+            </description>
             <updatecheck/>
         </pack>
 
