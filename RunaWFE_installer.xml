@@ -111,6 +111,10 @@
             value="false"/>
         <variable name="delete.rtn" condition="!izpack.selected.Оповещаетель задач"
             value="true"/>
+        <variable name="delete.simulator" condition="izpack.selected.RunaWFE симулятор"
+            value="false"/>
+        <variable name="delete.simulator" condition="!izpack.selected.RunaWFE симулятор"
+            value="true"/>
         <variable name="appserver.subpath" condition="izpack.selected.RunaWFE симулятор"
             value="$simulator.subpath"/>
     </dynamicvariables>
