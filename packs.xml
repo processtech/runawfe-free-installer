@@ -25,14 +25,14 @@
             <file os="windows" src="resources\images\Si_20x20_256.ico"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
-            <file os="windows" src="runnable\delete_activemq_cache.bat"
+            <file os="windows" src="runnable\simulator_install_cleanup.bat"
                 targetdir="$INSTALL_PATH/$simulator.subpath">
             </file>
             <parsable
-                targetfile="$INSTALL_PATH/$simulator.subpath/delete_activemq_cache.bat"/>
+                targetfile="$INSTALL_PATH/$simulator.subpath/simulator_install_cleanup.bat"/>
             <executable
-                targetfile="$INSTALL_PATH/$simulator.subpath/delete_activemq_cache.bat"
-                type="bin" stage="postinstall">
+                targetfile="$INSTALL_PATH/$simulator.subpath/simulator_install_cleanup.bat"
+                type="bin" stage="postinstall" failure="ignore">
                 <os family="windows"/>
             </executable>
             <fileset dir="@{ENV[BUILD_ROOT]}\wfe-simulator" override="true"
