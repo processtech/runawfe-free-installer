@@ -36,7 +36,20 @@
                 <os family="windows"/>
             </executable>
             <fileset dir="@{ENV[BUILD_ROOT]}\wfe-simulator" override="true"
+                excludes="standalone\wfe.custom\**,standalone\deployments\**,standalone\wfe.data-sources\**"
                 targetdir="$INSTALL_PATH/$simulator.subpath">
+            </fileset>
+            <fileset dir="@{ENV[BUILD_ROOT]}\wfe-simulator\standalone\wfe.custom"
+                override="true"
+                targetdir="$appdata\$APP_NAME\jboss\wfe.custom">
+            </fileset>
+            <fileset dir="@{ENV[BUILD_ROOT]}\wfe-simulator\standalone\deployments"
+                override="true"
+                targetdir="$appdata\$APP_NAME\jboss\deployments">
+            </fileset>
+            <fileset dir="@{ENV[BUILD_ROOT]}\wfe-simulator\standalone\wfe.data-sources"
+                override="true"
+                targetdir="$appdata\$APP_NAME\jboss\wfe.data-sources">
             </fileset>
             <file os="windows" src="resources\simulator.html"
                 targetdir="$INSTALL_PATH/$simulator.subpath">
@@ -51,7 +64,16 @@
         <pack name="Сервер приложений" parent="Серверные компоненты" hidden="true"
             condition="izpack.selected.RunaWFE симулятор">
             <fileset dir="@{ENV[BUILD_ROOT]}\wfe-server-jboss" override="true"
+                excludes="standalone\configuration\**,standalone\deployments\**"
                 targetdir="$INSTALL_PATH/$appserver.subpath">
+            </fileset>
+            <fileset dir="@{ENV[BUILD_ROOT]}\wfe-server-jboss\standalone\configuration"
+                override="true"
+                targetdir="$appdata\$APP_NAME\jboss\configuration">
+            </fileset>
+            <fileset dir="@{ENV[BUILD_ROOT]}\wfe-server-jboss\standalone\deployments"
+                override="true"
+                targetdir="$appdata\$APP_NAME\jboss\deployments">
             </fileset>
             <fileset dir="@{ENV[BUILD_ROOT]}\jboss-native" override="true"
                 targetdir="$INSTALL_PATH/$appserver.subpath/bin">
