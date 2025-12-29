@@ -98,11 +98,11 @@
             <file os="windows" src="resources\images\e_20x20_256.ico"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
-            <file os="windows" src="runnable\delete_eclipse_userdir.bat"
+            <file os="windows" src="runnable\studio_install_cleanup.bat"
                 targetdir="$INSTALL_PATH/$gpd.subpath">
             </file>
-            <executable targetfile="$INSTALL_PATH/$gpd.subpath/delete_eclipse_userdir.bat"
-                type="bin" stage="postinstall">
+            <executable targetfile="$INSTALL_PATH/$gpd.subpath/studio_install_cleanup.bat"
+                type="bin" stage="postinstall" failure="ignore">
                 <os family="windows"/>
             </executable>
             <fileset dir="@{ENV[BUILD_ROOT]}\gpd\64\gpd-${WFE.version}" override="true"
@@ -161,13 +161,13 @@
             </file>
             <file src="properties" targetdir="$INSTALL_PATH"/>
             <parsable targetfile="$INSTALL_PATH/properties"/>
-            <file os="windows" src="runnable\cleanup_update.bat"
+            <file os="windows" src="runnable\update_cleanup.bat"
                 targetdir="$INSTALL_PATH">
             </file>
-            <parsable targetfile="$INSTALL_PATH\cleanup_update.bat">
+            <parsable targetfile="$INSTALL_PATH\update_cleanup.bat">
                 <os family="windows"/>
             </parsable>
-            <executable targetfile="$INSTALL_PATH\cleanup_update.bat"
+            <executable targetfile="$INSTALL_PATH\update_cleanup.bat"
                 type="bin" stage="postinstall" failure="ignore">
                 <os family="windows"/>
             </executable>
