@@ -4,18 +4,9 @@
 
     <panel id="panel.database.connection" topBuffer="0">
         <createForPack name="RunaWFE сервер"/>
-        <createForPack name="RunaWFE симулятор"/>
         <field type="staticText" txt="Параметры подключения к базе данных"/>
         <field type="space"/>
 
-        <field type="combo" variable="DBMS.type" conditionid="!Usertype.Administrator">
-            <spec txt="SQL сервер">
-                <choice txt="H2" value="H2" set="true"/>
-                <choice txt="PostgreSQL" value="PostgreSQL"/>
-                <choice txt="MS SQL" value="MSSQL"/>
-                <choice txt="Oracle" value="Oracle"/>
-            </spec>
-        </field>
         <field type="combo" variable="DBMS.type" conditionid="Usertype.Administrator">
             <spec txt="SQL сервер">
                 <choice txt="PostgreSQL" value="PostgreSQL" set="true"/>
