@@ -51,7 +51,7 @@
                 override="true"
                 targetdir="$appdata\$APP_NAME\jboss\wfe.data-sources">
             </fileset>
-            <file os="windows" src="resources\simulator.html"
+            <file os="windows" src="resources\simulator.html" override="true"
                 targetdir="$INSTALL_PATH/$simulator.subpath">
             </file>
             <parsable targetfile="$INSTALL_PATH/$simulator.subpath/simulator.html"/>
@@ -73,8 +73,13 @@
             </fileset>
             <fileset dir="@{ENV[BUILD_ROOT]}\wfe-server-jboss\standalone\configuration"
                 override="true"
+                excludes="standalone.xml"
                 targetdir="$appdata\$APP_NAME\jboss\configuration">
             </fileset>
+            <file src="resources\standalone.xml" override="true"
+                targetdir="$appdata\$APP_NAME\jboss\configuration">
+            </file>
+            <parsable targetfile="$appdata\$APP_NAME\jboss\configuration\standalone.xml" type="ant"/>
             <fileset dir="@{ENV[BUILD_ROOT]}\wfe-server-jboss\standalone\deployments"
                 override="true"
                 targetdir="$appdata\$APP_NAME\jboss\deployments">
@@ -82,7 +87,7 @@
             <fileset dir="@{ENV[BUILD_ROOT]}\jboss-native" override="true"
                 targetdir="$INSTALL_PATH/$appserver.subpath/bin">
             </fileset>
-            <description></description>
+            <description/>
         </pack>
 
         <pack name="Демо-пользователи" required="no" parent="Серверные компоненты"
