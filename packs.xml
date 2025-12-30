@@ -55,6 +55,10 @@
                 targetdir="$INSTALL_PATH/$simulator.subpath">
             </file>
             <parsable targetfile="$INSTALL_PATH/$simulator.subpath/simulator.html"/>
+            <file os="windows" src="runnable\run_simulaton.bat"
+                targetdir="$INSTALL_PATH/$simulator.subpath/bin">
+            </file>
+            <parsable targetfile="$INSTALL_PATH/$simulator.subpath/bin/run_simulaton.bat"/>
             <description>
                 Сервер-симулятор - адаптированная для для рабочей станции версия RunaWFE сервера. Предназначена для знакомства с системой, тестироваия и работы одного пользователя.
             </description>
