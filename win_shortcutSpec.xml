@@ -46,7 +46,8 @@
     </shortcut>
 
     <shortcut name="Start simulation"
-        target="$INSTALL_PATH/${simulator.subpath}/runSimulation.bat"
+        target="$INSTALL_PATH\$simulator.subpath\bin\run_simulaton.bat"
+        workingDirectory="$INSTALL_PATH\$simulator.subpath\bin"
         programGroup="true"
         desktop="true" iconFile="$INSTALL_PATH\$images.subpath\Si_20x20_256.ico"
         description="Запуск тестового сервера-симулятора RunaWFE">
