@@ -36,7 +36,7 @@
                 <os family="windows"/>
             </executable>
             <fileset dir="@{ENV[BUILD_ROOT]}\wfe-simulator" override="true"
-                excludes="standalone\wfe.custom\**,standalone\deployments\**,standalone\wfe.data-sources\**"
+                excludes="standalone\**"
                 targetdir="$INSTALL_PATH/$simulator.subpath">
             </fileset>
             <fileset dir="@{ENV[BUILD_ROOT]}\wfe-simulator\standalone\wfe.custom"
@@ -68,7 +68,7 @@
         <pack name="Сервер приложений" parent="Серверные компоненты" hidden="true"
             condition="izpack.selected.RunaWFE симулятор">
             <fileset dir="@{ENV[BUILD_ROOT]}\wfe-server-jboss" override="true"
-                excludes="standalone\configuration\**,standalone\deployments\**"
+                excludes="standalone\**"
                 targetdir="$INSTALL_PATH/$appserver.subpath">
             </fileset>
             <fileset dir="@{ENV[BUILD_ROOT]}\wfe-server-jboss\standalone\configuration"
