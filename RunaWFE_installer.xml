@@ -176,6 +176,9 @@
             <condition type="ref" refid="!Usertype.Administrator"/>
             <condition type="ref" refid="!Usertype.User"/>
         </condition>
+        <condition type="exists" id="simulator.db.exists">
+            <file>$appdata\$APP_NAME\jboss\data\h2\localDB.mv.db</file>
+        </condition>
     </conditions>
 
     <panels>

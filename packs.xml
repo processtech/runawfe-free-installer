@@ -91,8 +91,12 @@
         </pack>
 
         <pack name="Демо-пользователи" required="no" parent="Серверные компоненты"
-            installGroups="Аналитик" condition="Usertype.Analyst+izpack.selected.RunaWFE симулятор">
-            <description></description>
+            installGroups="Аналитик" condition="Usertype.Analyst+izpack.selected.RunaWFE симулятор+!simulator.db.exists">
+            <fileset dir="@{ENV[BUILD_ROOT]}\wfe-simulator\standalone\data\demo-db"
+                override="true"
+                targetdir="$appdata\$APP_NAME\jboss\data\h2">
+            </fileset>
+            <description>База данных с демонстрационными пользователями. Недоступна для установки, если база данных уже существует.</description>
             <updatecheck/>
         </pack>
 
