@@ -139,8 +139,7 @@
         <condition type="or" id="conditionvalidator.components.selected">
             <condition type="ref" refid="izpack.selected.RunaWFE сервер"/>
             <condition type="ref" refid="izpack.selected.RunaWFE симулятор"/>
-            <condition type="ref" refid="izpack.selected.Демо-пользователи"/>
-            <condition type="ref" refid="izpack.selected.Демо-процессы"/>
+            <condition type="ref" refid="izpack.selected.Демо-конфигурация"/>
             <condition type="ref" refid="izpack.selected.Среда разработки"/>
             <condition type="ref" refid="izpack.selected.Оповещаетель задач"/>
             <condition type="ref" refid="izpack.selected.Ярлык веб-интерфейса RunaWFE сервера"/>
