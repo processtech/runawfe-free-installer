@@ -124,6 +124,18 @@
             value="$appdata\$APP_NAME\jboss"/>
         <variable name="standalone.path" condition="izpack.selected.RunaWFE сервер"
             value="$INSTALL_PATH\$server.subpath\standalone"/>
+        <variable name="hibernate.dialect" condition="DBMS.PostgreSQL"
+            value="org.hibernate.dialect.PostgreSQLDialect"/>
+        <variable name="hibernate.dialect" condition="DBMS.MSSQL"
+            value="ru.runa.wfe.commons.hibernate.SqlServerUnicodeDialect"/>
+        <variable name="hibernate.dialect" condition="DBMS.Oracle"
+            value="org.hibernate.dialect.OracleDialect"/>
+        <variable name="hibernate.connection.datasource" condition="DBMS.PostgreSQL"
+            value="jboss/datasources/PostgreDS"/>
+        <variable name="hibernate.connection.datasource" condition="DBMS.MSSQL"
+            value="java:/mssqlds"/>
+        <variable name="hibernate.connection.datasource" condition="DBMS.Oracle"
+            value="jboss/datasources/OracleDS"/>
     </dynamicvariables>
 
     <conditions>
