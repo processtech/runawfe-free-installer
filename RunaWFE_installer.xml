@@ -87,6 +87,7 @@
         <variable name="simulator.subpath" value="simulator"/>
         <variable name="gpd.subpath" value="gpd"/>
         <variable name="rtn.subpath" value="rtn"/>
+        <variable name="server.subpath" value="server"/>
     </variables>
 
 
@@ -117,6 +118,12 @@
             value="true"/>
         <variable name="appserver.subpath" condition="izpack.selected.RunaWFE симулятор"
             value="$simulator.subpath"/>
+        <variable name="appserver.subpath" condition="izpack.selected.RunaWFE сервер"
+            value="$server.subpath"/>
+        <variable name="standalone.path" condition="izpack.selected.RunaWFE симулятор"
+            value="$appdata\$APP_NAME\jboss"/>
+        <variable name="standalone.path" condition="izpack.selected.RunaWFE сервер"
+            value="$INSTALL_PATH\$server.subpath\standalone"/>
     </dynamicvariables>
 
     <conditions>

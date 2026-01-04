@@ -2,8 +2,8 @@
 <izpack:installation version="5.0"
     xmlns:izpack="http://izpack.org/schema/installation"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://izpack.org/schema/installation http://izpack.org/schema/5.0/izpack-installation-5.0.xsd">    
-    
+    xsi:schemaLocation="http://izpack.org/schema/installation http://izpack.org/schema/5.0/izpack-installation-5.0.xsd">
+
     <packs>
 
         <pack name="Серверные компоненты"
@@ -16,6 +16,14 @@
             <file os="windows" src="resources\images\Cs_20x20_256.ico"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
+            <fileset dir="@{ENV[BUILD_ROOT]}\wfe-server-config\standalone\deployments"
+                override="true"
+                targetdir="$INSTALL_PATH\$server.subpath\standalone\deployments">
+            </fileset>
+            <fileset dir="@{ENV[BUILD_ROOT]}\wildfly\app-server\standalone\wfe.data-sources"
+                override="true"
+                targetdir="$INSTALL_PATH\$server.subpath\standalone\wfe.data-sources">
+            </fileset>
             <description>Основной сервер, предназначенный для многопользовательской работы</description>
             <updatecheck/>
         </pack>
@@ -66,32 +74,34 @@
         </pack>
 
         <pack name="Сервер приложений" parent="Серверные компоненты" hidden="true"
-            condition="izpack.selected.RunaWFE симулятор">
+            condition="izpack.selected.RunaWFE симулятор|izpack.selected.RunaWFE сервер">
             <fileset dir="@{ENV[BUILD_ROOT]}\wfe-server-jboss" override="true"
                 excludes="standalone\**"
                 targetdir="$INSTALL_PATH/$appserver.subpath">
             </fileset>
-            <fileset dir="@{ENV[BUILD_ROOT]}\wfe-server-jboss\standalone\configuration"
-                override="true"
-                excludes="standalone.xml"
-                targetdir="$appdata\$APP_NAME\jboss\configuration">
-            </fileset>
-            <file src="resources\standalone.xml" override="true"
-                targetdir="$appdata\$APP_NAME\jboss\configuration">
-            </file>
-            <parsable targetfile="$appdata\$APP_NAME\jboss\configuration\standalone.xml" type="ant"/>
-            <fileset dir="@{ENV[BUILD_ROOT]}\wfe-server-jboss\standalone\deployments"
-                override="true"
-                targetdir="$appdata\$APP_NAME\jboss\deployments">
-            </fileset>
             <fileset dir="@{ENV[BUILD_ROOT]}\jboss-native" override="true"
                 targetdir="$INSTALL_PATH/$appserver.subpath/bin">
             </fileset>
+            <fileset dir="@{ENV[BUILD_ROOT]}\wfe-server-jboss\standalone\configuration"
+                override="true"
+                excludes="standalone.xml"
+                targetdir="$standalone.path\configuration">
+            </fileset>
+            <file src="resources\standalone.xml" override="true"
+                targetdir="$standalone.path\configuration">
+            </file>
+            <parsable targetfile="$standalone.path\configuration\standalone.xml" type="ant"/>
+            <fileset dir="@{ENV[BUILD_ROOT]}\wfe-server-jboss\standalone\deployments"
+                override="true"
+                targetdir="$standalone.path\deployments">
+            </fileset>
+
             <description/>
         </pack>
 
         <pack name="Демо-конфигурация" required="no" parent="Серверные компоненты"
-            installGroups="Аналитик" condition="Usertype.Analyst+izpack.selected.RunaWFE симулятор+!simulator.db.exists">
+            installGroups="Аналитик"
+            condition="Usertype.Analyst+izpack.selected.RunaWFE симулятор+!simulator.db.exists">
             <fileset dir="@{ENV[BUILD_ROOT]}\wfe-simulator\standalone\data\demo-db"
                 override="true"
                 targetdir="$appdata\$APP_NAME\jboss\data\h2">
@@ -182,5 +192,5 @@
         </pack>
 
     </packs>
-    
+
 </izpack:installation>
