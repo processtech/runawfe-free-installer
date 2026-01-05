@@ -26,10 +26,10 @@
 
         <field type="space"/>
 
-        <field type="rule" variable="DBMS.p1" conditionid="DBMS.PostgreSQL">
+        <field type="rule" variable="DBMS.p" conditionid="DBMS.PostgreSQL">
             <spec layout="N:5:5" txt="${port}" default="5432">
                 <processor class="com.izforge.izpack.panels.userinput.processor.PortProcessor"
-                    toVariable="DBMS.PostgreSQL.port"/>
+                    toVariable="DBMS.port"/>
             </spec>
             <validator
                 class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
@@ -37,10 +37,10 @@
             <validator class="com.izforge.izpack.panels.userinput.validator.IsPortValidator"
                 txt="${port}: ${port.invalid}"/>
         </field>
-        <field type="rule" variable="DBMS.p2" conditionid="DBMS.MSSQL">
+        <field type="rule" variable="DBMS.p" conditionid="DBMS.MSSQL">
             <spec layout="N:5:5" txt="${port}" default="1433">
                 <processor class="com.izforge.izpack.panels.userinput.processor.PortProcessor"
-                    toVariable="DBMS.MSSQL.port"/>
+                    toVariable="DBMS.port"/>
             </spec>
             <validator
                 class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
@@ -48,10 +48,10 @@
             <validator class="com.izforge.izpack.panels.userinput.validator.IsPortValidator"
                 txt="${port}: ${port.invalid}"/>
         </field>
-        <field type="rule" variable="DBMS.p3" conditionid="DBMS.Oracle">
+        <field type="rule" variable="DBMS.p" conditionid="DBMS.Oracle">
             <spec layout="N:5:5" txt="${port}" default="1521">
                 <processor class="com.izforge.izpack.panels.userinput.processor.PortProcessor"
-                    toVariable="DBMS.Oracle.port"/>
+                    toVariable="DBMS.port"/>
             </spec>
             <validator
                 class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
