@@ -104,6 +104,8 @@
         <variable name="appdata" condition="izpack.linuxinstall"
             environment="XDG_DATA_HOME"
             checkonce="true"/>
+        <variable name="DBMS.type" 
+            value="H2"/>
         <variable name="delete.gpd" condition="izpack.selected.Среда разработки"
             value="false"/>
         <variable name="delete.gpd" condition="!izpack.selected.Среда разработки"
@@ -130,12 +132,95 @@
             value="ru.runa.wfe.commons.hibernate.SqlServerUnicodeDialect"/>
         <variable name="hibernate.dialect" condition="DBMS.Oracle"
             value="org.hibernate.dialect.OracleDialect"/>
-        <variable name="hibernate.connection.datasource" condition="DBMS.PostgreSQL"
-            value="jboss/datasources/PostgreDS"/>
-        <variable name="hibernate.connection.datasource" condition="DBMS.MSSQL"
+        <variable name="datasource" condition="DBMS.H2"
+            value="ExampleDS"/>
+        <variable name="datasource" condition="DBMS.PostgreSQL"
+            value="PostgreDS"/>
+        <variable name="datasource" condition="DBMS.MSSQL"
             value="java:/mssqlds"/>
-        <variable name="hibernate.connection.datasource" condition="DBMS.Oracle"
-            value="jboss/datasources/OracleDS"/>
+        <variable name="datasource" condition="DBMS.Oracle"
+            value="OracleDS"/>
+        <variable name="jndi.name" condition="!DBMS.MSSQL"
+            value="java:jboss/datasources/$datasource"/>
+        <variable name="jndi.name" condition="DBMS.MSSQL"
+            value="$datasource"/>
+        <variable name="pool.name" condition="!DBMS.MSSQL"
+            value="$datasource"/>
+        <variable name="pool.name" condition="DBMS.MSSQL"
+            value="${datasource}_Pool"/>
+        <variable name="driver.name" condition="DBMS.H2"
+            value="h2"/>
+        <variable name="driver.name" condition="DBMS.PostgreSQL"
+            value="postgresql"/>
+        <variable name="driver.name" condition="DBMS.MSSQL"
+            value="sqlserver"/>
+        <variable name="driver.name" condition="DBMS.Oracle"
+            value="oracle"/>
+        <variable name="connection.url" condition="DBMS.H2"
+            value="$driver.name:${jboss.server.data.dir}/h2/localDB;DB_CLOSE_DELAY=-1;mvcc=true;DB_CLOSE_ON_EXIT=FALSE"/>
+        <!-- Здесь ${jboss.server.data.dir} - переменная, которую подставляет сам jboss -->
+        <variable name="connection.url" condition="DBMS.PostgreSQL"
+            value="$driver.name://$DBMS.host:$DBMS.port/$DBMS.dbname"/>
+        <variable name="connection.url" condition="DBMS.MSSQL"
+            value="$driver.name://$DBMS.host:$DBMS.port;DatabaseName=$DBMS.dbname"/>
+        <variable name="connection.url" condition="DBMS.Oracle"
+            value="$driver.name:thin:@$DBMS.host:$DBMS.port:$DBMS.dbname"/>
+        <variable name="min.pool.size" condition="DBMS.H2"
+            value="0"/>
+        <variable name="min.pool.size" condition="DBMS.PostgreSQL|DBMS.Oracle"
+            value="10"/>
+        <variable name="min.pool.size" condition="DBMS.MSSQL"
+            value="5"/>
+        <variable name="max.pool.size" condition="DBMS.H2"
+            value="20"/>
+        <variable name="max.pool.size" condition="DBMS.PostgreSQL|DBMS.Oracle"
+            value="100"/>
+        <variable name="max.pool.size" condition="DBMS.MSSQL"
+            value="30"/>
+        <variable name="prefill" condition="DBMS.PostgreSQL|DBMS.Oracle"
+            value="true"/>
+        <variable name="prefill" condition="DBMS.H2|DBMS.MSSQL"
+            value="false"/>
+        <variable name="DBMS.user" condition="DBMS.H2"
+            value="sa"/>
+        <variable name="DBMS.password" condition="DBMS.H2"
+            value="sa"/>
+        <variable name="prepared.statement.cache.size" condition="!DBMS.H2"
+            value="32"/>
+        <variable name="prepared.statement.cache.size" condition="DBMS.H2"
+            value="10"/>
+        <variable name="share.prepared.statements" condition="DBMS.PostgreSQL|DBMS.Oracle"
+            value="true"/>
+        <variable name="share.prepared.statements" condition="DBMS.H2|DBMS.MSSQL"
+            value="false"/>
+        <variable name="validation" condition="!DBMS.Oracle"
+            value=""/>
+        <variable name="validation" condition="DBMS.Oracle"
+            value="&lt;exception-sorter class-name=&quot;org.jboss.resource.adapter.jdbc.vendor.OracleExceptionSorter&quot;/&gt;"/>
+        <variable name="blocking.timeout.millis" condition="!DBMS.Oracle"
+            value="30000"/>
+        <variable name="blocking.timeout.millis" condition="DBMS.Oracle"
+            value="5000"/>
+        <variable name="idle.timeout.minutes" condition="!DBMS.Oracle"
+            value="15"/>
+        <variable name="idle.timeout.minutes" condition="DBMS.Oracle"
+            value="5"/>
+        <variable name="module" condition="DBMS.H2"
+            value="com.h2database.h2"/>
+        <variable name="module" condition="DBMS.PostgreSQL"
+            value="org.postgresql"/>
+        <variable name="module" condition="DBMS.MSSQL"
+            value="com.microsoft.sqlserver"/>
+        <variable name="module" condition="DBMS.Oracle"
+            value="com.oraclejdbc"/>
+        <variable name="xa.datasource.class" condition="DBMS.H2"
+            value="org.h2.jdbcx.JdbcDataSource"/>
+        <variable name="xa.datasource.class" condition="DBMS.PostgreSQL"
+            value="org.postgresql.xa.PGXADataSource"/>
+        <variable name="xa.datasource.class" condition="DBMS.MSSQL"
+            value="com.microsoft.sqlserver.jdbc.SQLServerXADataSource"/>
+        <variable name="xa.datasource.class" condition="DBMS.Oracle"
+            value="oracle.jdbc.driver.OracleDriver"/>
     </dynamicvariables>
 
     <conditions>
