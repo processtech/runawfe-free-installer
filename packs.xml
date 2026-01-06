@@ -99,7 +99,15 @@
                 override="true"
                 targetdir="$standalone.path\deployments">
             </fileset>
-
+            <executable
+                targetfile="$INSTALL_PATH\$server.subpath\bin\service.bat"
+                condition="izpack.selected.RunaWFE сервер"
+                type="bin" stage="postinstall" failure="warn">
+                <args>
+                    <arg value="install"/>
+                </args>
+                <os family="windows"/>
+            </executable>
             <description/>
         </pack>
 
