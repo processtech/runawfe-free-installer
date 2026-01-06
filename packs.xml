@@ -24,10 +24,13 @@
                 override="true"
                 targetdir="$INSTALL_PATH\$server.subpath\standalone\wfe.data-sources">
             </fileset>
-            <file src="resources\wfe.custom.database.properties" targetdir="$INSTALL_PATH\$server.subpath\standalone\wfe.custom"
+            <file src="resources\wfe.custom.database.properties"
+                targetdir="$INSTALL_PATH\$server.subpath\standalone\wfe.custom"
                 override="true">
             </file>
-            <parsable targetfile="$INSTALL_PATH\$server.subpath\standalone\wfe.custom\wfe.custom.database.properties" type="javaprop"/>
+            <parsable
+                targetfile="$INSTALL_PATH\$server.subpath\standalone\wfe.custom\wfe.custom.database.properties"
+                type="javaprop"/>
             <description>Основной сервер, предназначенный для многопользовательской работы</description>
             <updatecheck/>
         </pack>
