@@ -104,7 +104,7 @@
         <variable name="appdata" condition="izpack.linuxinstall"
             environment="XDG_DATA_HOME"
             checkonce="true"/>
-        <variable name="DBMS.type" 
+        <variable name="DBMS.type"
             value="H2"/>
         <variable name="delete.gpd" condition="izpack.selected.Среда разработки"
             value="false"/>
@@ -126,6 +126,8 @@
             value="$appdata\$APP_NAME\jboss"/>
         <variable name="standalone.path" condition="izpack.selected.RunaWFE сервер"
             value="$INSTALL_PATH\$server.subpath\standalone"/>
+        <variable name="hibernate.dialect" condition="DBMS.H2"
+            value="org.hibernate.dialect.H2Dialect"/>
         <variable name="hibernate.dialect" condition="DBMS.PostgreSQL"
             value="org.hibernate.dialect.PostgreSQLDialect"/>
         <variable name="hibernate.dialect" condition="DBMS.MSSQL"
