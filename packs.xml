@@ -104,7 +104,7 @@
             </fileset>
             <executable
                 targetfile="$INSTALL_PATH\$server.subpath\bin\service.bat"
-                condition="izpack.selected.RunaWFE сервер"
+                condition="izpack.selected.RunaWFE сервер" keep="true"
                 type="bin" stage="postinstall" failure="warn">
                 <args>
                     <arg value="install"/>
