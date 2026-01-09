@@ -104,7 +104,7 @@
         <variable name="appdata" condition="izpack.linuxinstall"
             environment="XDG_DATA_HOME"
             checkonce="true"/>
-        <variable name="DBMS.type"
+        <variable name="DBMS.type" condition="izpack.selected.RunaWFE симулятор"
             value="H2"/>
         <variable name="delete.gpd" condition="izpack.selected.Среда разработки"
             value="false"/>
@@ -187,6 +187,10 @@
             value="sa"/>
         <variable name="DBMS.password" condition="DBMS.H2"
             value="sa"/>
+        <variable name="DBMS.user" condition="!DBMS.H2"
+            value=""/>
+        <variable name="DBMS.password" condition="!DBMS.H2"
+            value=""/>
         <variable name="prepared.statement.cache.size" condition="!DBMS.H2"
             value="32"/>
         <variable name="prepared.statement.cache.size" condition="DBMS.H2"
