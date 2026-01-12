@@ -88,6 +88,7 @@
         <variable name="gpd.subpath" value="gpd"/>
         <variable name="rtn.subpath" value="rtn"/>
         <variable name="server.subpath" value="server"/>
+        <variable name="jboss.servicename" value="@{ENV[SVCNAME]}"/>
     </variables>
 
 

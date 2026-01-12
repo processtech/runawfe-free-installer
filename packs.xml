@@ -31,6 +31,17 @@
             <parsable
                 targetfile="$INSTALL_PATH\$server.subpath\standalone\wfe.custom\wfe.custom.database.properties"
                 type="javaprop"/>
+            <file src="runnable\remove_server_service.bat" override="true"
+                targetdir="$INSTALL_PATH\$server.subpath">
+            </file>
+            <parsable
+                targetfile="$INSTALL_PATH\$server.subpath\remove_server_service.bat"
+                type="plain"/>
+            <executable
+                targetfile="$INSTALL_PATH\$server.subpath\remove_server_service.bat"
+                type="bin" stage="uninstall" failure="ignore">
+                <os family="windows"/>
+            </executable>
             <description>Основной сервер, предназначенный для многопользовательской работы</description>
             <updatecheck/>
         </pack>
