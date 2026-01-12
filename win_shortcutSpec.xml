@@ -50,7 +50,7 @@
 
     <shortcut name="Stop simulation"
         target="$INSTALL_PATH/${simulator.subpath}/bin/jboss-cli.bat"
-        commandLine="--commands=connect,:shutdown"
+        commandLine="--commands=connect --controller=localhost:$jboss.management.http.port :shutdown"
         programGroup="true"
         desktop="true" iconFile="$INSTALL_PATH\$images.subpath\Si_20x20_256.ico"
         description="Остановка тестового сервера-симулятора RunaWFE">
