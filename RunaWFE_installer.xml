@@ -91,6 +91,8 @@
         <variable name="server.subpath" value="server"/>
         <variable name="jboss.servicename" value="@{ENV[SVCNAME]}"/>
         <variable name="XInfoPanel.font" value="Arial"/>
+        <variable name="statistic.report.url" value="@{ENV[STATISTIC_REPORT_URL]}"/>
+        <variable name="statistic.report.days.after.error" value="@{ENV[STATISTIC_REPORT_DAYS_AFTER_ERROR]}"/>
     </variables>
 
 
@@ -308,7 +310,6 @@
         <panel classname="UserInputPanel" id="panel.database.connection"/>
         <panel classname="UserInputPanel" id="panel.wildfly.connection"/>
         <panel classname="UserInputPanel" id="panel.server.web.interface"/>
-        <panel classname="UserInputPanel" id="panel.feedback"/>
         <panel classname="TargetPanel">
             <validator classname="com.izforge.izpack.installer.validator.ConditionValidator"/>
         </panel>

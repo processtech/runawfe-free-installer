@@ -136,6 +136,28 @@
             <updatecheck/>
         </pack>
 
+        <pack name="Отправка статистики" required="no" parent="Серверные компоненты"
+            condition="izpack.selected.RunaWFE симулятор|izpack.selected.RunaWFE сервер">
+            <file
+                src="runnable\create_installation_props.ps1"
+                targetdir="$INSTALL_PATH\$appserver.subpath\standalone\wfe.custom"/>
+            <parsable
+                targetfile="$INSTALL_PATH\$appserver.subpath\standalone\wfe.custom\create_installation_props.ps1"
+                type="shell"/>
+            <file
+                src="runnable\create_installation_props.cmd"
+                targetdir="$INSTALL_PATH\$appserver.subpath\standalone\wfe.custom"/>
+            <executable
+                targetfile="$INSTALL_PATH\$appserver.subpath\standalone\wfe.custom\create_installation_props.cmd"
+                stage="postinstall"
+                os="windows">
+            </executable>
+            <file
+                src="resources\wfe.custom.system.properties"
+                targetdir="$INSTALL_PATH\$appserver.subpath\standalone\wfe.custom"/>
+            <description>Сообщать техническую информацию о работе системы. Эти данные требуются нам для развития и улучшения системы.</description>
+        </pack>
+
         <pack name="Среда разработки" required="no" preselected="yes"
             installGroups="Аналитик" condition="Usertype.Analyst">
             <file os="windows" src="resources\images\e_20x20_256.ico"

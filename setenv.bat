@@ -5,3 +5,5 @@ set XML_FILE=RunaWFE_installer.xml
 set IZPACK_OPTS=-Dfile.encoding=UTF-8
 set BUILD_ROOT=C:\runawfe-professional-autobuild\build\source\projects\installer\windows\target\NSIS7\src
 set SVCNAME=JBAS50SVC
+set STATISTIC_REPORT_URL=https://usagereport.runawfe.org
+set STATISTIC_REPORT_DAYS_AFTER_ERROR=11

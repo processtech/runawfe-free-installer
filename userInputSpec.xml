@@ -249,12 +249,5 @@
         </field>
     </panel>
 
-    <panel id="panel.feedback">
-        <field type="check" variable="feedback">
-            <spec txt="Сообщать техническую информацию о работе системы" default="true"/>
-            <description txt="Эти данные требуются нам для развития и улучшения системы:"/>
-        </field>
-    </panel>
-
 
 </izpack:userinput>
