@@ -48,6 +48,44 @@
                 "cwd": "${workspaceFolder}"
             },
             "detail": "Запускает install.jar (если файл существует)"
+        },
+        {
+            "label": "IzPack: Convert to EXE",
+            "type": "shell",
+            "command": "cmd",
+            "args": [
+                "/c",
+                "wrappers\\build_exe.cmd"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "dedicated",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "detail": "Конвертирует jar в exe"
+        },
+        {
+            "label": "IzPack: Run EXE Installer",
+            "type": "shell",
+            "command": "run-exe-installer.cmd",
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "detail": "Запускает EXE установщик"
         }
     ]
 }
