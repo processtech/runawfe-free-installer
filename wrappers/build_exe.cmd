@@ -18,7 +18,8 @@ python izpack2exe.py ^
   --file="%INSTALL_JAR%" ^
   --output="%PROJECT_ROOT%\%INSTALLER_EXE%" ^
   --with-7z="%IZPACK_WRAPPER%\7za.exe" ^
-  --no-upx
+  --no-upx ^
+  --with-jdk=%LAUNCHER_JRE%
 
 if %errorlevel% == 0 (
     echo.

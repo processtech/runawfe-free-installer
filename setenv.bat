@@ -9,3 +9,4 @@ set BUILD_ROOT=C:\runawfe-professional-autobuild\build\source\projects\installer
 set SVCNAME=JBAS50SVC
 set STATISTIC_REPORT_URL=https://usagereport.runawfe.org
 set STATISTIC_REPORT_DAYS_AFTER_ERROR=11
+set LAUNCHER_JRE=%~dp0resources\launch_jre
