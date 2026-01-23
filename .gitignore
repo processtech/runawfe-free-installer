@@ -1,5 +1,5 @@
 install.jar
 *.exe
 
-!minimal-jre/**
-!tools/**
+!minimal-jre/
+!minimal-jre/**/*
