@@ -89,10 +89,12 @@
         <variable name="gpd.subpath" value="gpd"/>
         <variable name="rtn.subpath" value="rtn"/>
         <variable name="server.subpath" value="server"/>
+        <variable name="java.subpath" value="java"/>
         <variable name="jboss.servicename" value="@{ENV[SVCNAME]}"/>
         <variable name="XInfoPanel.font" value="Arial"/>
         <variable name="statistic.report.url" value="@{ENV[STATISTIC_REPORT_URL]}"/>
-        <variable name="statistic.report.days.after.error" value="@{ENV[STATISTIC_REPORT_DAYS_AFTER_ERROR]}"/>
+        <variable name="statistic.report.days.after.error"
+            value="@{ENV[STATISTIC_REPORT_DAYS_AFTER_ERROR]}"/>
     </variables>
 
 
@@ -258,6 +260,13 @@
             <condition type="ref" refid="izpack.selected.Среда разработки"/>
             <condition type="ref" refid="izpack.selected.Оповещаетель задач"/>
             <condition type="ref" refid="izpack.selected.Ярлык веб-интерфейса RunaWFE сервера"/>
+        </condition>
+
+        <condition type="or" id="need.Java.install">
+            <condition type="ref" refid="izpack.selected.RunaWFE сервер"/>
+            <condition type="ref" refid="izpack.selected.RunaWFE симулятор"/>
+            <condition type="ref" refid="izpack.selected.Среда разработки"/>
+            <condition type="ref" refid="izpack.selected.Оповещаетель задач"/>
         </condition>
 
         <condition type="variable" id="DBMS.H2">

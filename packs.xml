@@ -239,6 +239,13 @@
             <description></description>
         </pack>
 
+        <pack name="Java" hidden="true" required="yes" condition="need.Java.install">
+            <fileset dir="@{ENV[WFE_JRE]}" override="true"
+                targetdir="$INSTALL_PATH\$java.subpath">
+            </fileset>
+            <description/>
+        </pack>
+
     </packs>
 
 </izpack:installation>
