@@ -262,13 +262,6 @@
             <condition type="ref" refid="izpack.selected.Ярлык веб-интерфейса RunaWFE сервера"/>
         </condition>
 
-        <condition type="or" id="need.Java.install">
-            <condition type="ref" refid="izpack.selected.RunaWFE сервер"/>
-            <condition type="ref" refid="izpack.selected.RunaWFE симулятор"/>
-            <condition type="ref" refid="izpack.selected.Среда разработки"/>
-            <condition type="ref" refid="izpack.selected.Оповещаетель задач"/>
-        </condition>
-
         <condition type="variable" id="DBMS.H2">
             <name>DBMS.type</name>
             <value>H2</value>

@@ -245,7 +245,7 @@
             <description></description>
         </pack>
 
-        <pack name="Java" hidden="true" required="yes" condition="need.Java.install"
+        <pack name="Java" hidden="true" required="yes"
             uninstall="false">
             <fileset dir="@{ENV[WFE_JRE]}" override="true"
                 targetdir="$appdata\$APP_NAME\$java.subpath">
