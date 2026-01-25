@@ -239,10 +239,25 @@
             <description></description>
         </pack>
 
-        <pack name="Java" hidden="true" required="yes" condition="need.Java.install">
+        <pack name="Java" hidden="true" required="yes" condition="need.Java.install"
+            uninstall="false">
             <fileset dir="@{ENV[WFE_JRE]}" override="true"
-                targetdir="$INSTALL_PATH\$java.subpath">
+                targetdir="$appdata\$APP_NAME\$java.subpath">
             </fileset>
+            <file
+                src="runnable\add_java_path.ps1"
+                targetdir="$appdata\$APP_NAME\$java.subpath"/>
+            <parsable
+                targetfile="$appdata\$APP_NAME\$java.subpath\add_java_path.ps1"
+                type="shell"/>
+            <file
+                src="runnable\add_java_path.cmd"
+                targetdir="$appdata\$APP_NAME\$java.subpath"/>
+            <executable
+                targetfile="$appdata\$APP_NAME\$java.subpath\add_java_path.cmd"
+                stage="postinstall"
+                os="windows">
+            </executable>
             <description/>
         </pack>
 
