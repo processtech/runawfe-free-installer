@@ -236,6 +236,12 @@
                 type="bin" stage="postinstall" failure="ignore">
                 <os family="windows"/>
             </executable>
+            <file os="windows" src="runnable\uninstall.bat" override="true"
+                targetdir="$INSTALL_PATH\Uninstaller">
+            </file>
+            <parsable targetfile="$INSTALL_PATH\Uninstaller\uninstall.bat">
+                <os family="windows"/>
+            </parsable>
             <description></description>
         </pack>
 

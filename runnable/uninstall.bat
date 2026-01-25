@@ -1,0 +1,1 @@
+javaw.exe -jar "$INSTALL_PATH\Uninstaller\uninstaller.jar"
