@@ -1,4 +1,4 @@
-﻿$JavaBinPath = "%{appdata}\%{APP_NAME}\%{java.subpath}\bin"
+﻿$JavaBinPath = "%{appdata.install.path}\%{java.subpath}\bin"
 
 $currentPath = [Environment]::GetEnvironmentVariable('PATH', 'User')
 $updatedPath = $currentPath
