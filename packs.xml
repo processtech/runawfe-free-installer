@@ -195,7 +195,7 @@
                 <os family="windows"/>
             </parsable>
             <singlefile src="resources\rtn.properties" target="$USER_HOME\config.properties"
-                override="true">
+                override="askfalse">
             </singlefile>
             <parsable targetfile="$USER_HOME\config.properties" type="javaprop">
             </parsable>
