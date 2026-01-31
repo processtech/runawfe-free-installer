@@ -62,20 +62,8 @@
                 <os family="windows"/>
             </executable>
             <fileset dir="@{ENV[BUILD_ROOT]}\wfe-simulator" override="true"
-                excludes="standalone\**"
+                excludes="standalone\data\demo-db\**"
                 targetdir="$INSTALL_PATH/$simulator.subpath">
-            </fileset>
-            <fileset dir="@{ENV[BUILD_ROOT]}\wfe-simulator\standalone\wfe.custom"
-                override="true"
-                targetdir="$appdata.install.path\jboss\wfe.custom">
-            </fileset>
-            <fileset dir="@{ENV[BUILD_ROOT]}\wfe-simulator\standalone\deployments"
-                override="true"
-                targetdir="$appdata.install.path\jboss\deployments">
-            </fileset>
-            <fileset dir="@{ENV[BUILD_ROOT]}\wfe-simulator\standalone\wfe.data-sources"
-                override="true"
-                targetdir="$appdata.install.path\jboss\wfe.data-sources">
             </fileset>
             <file os="windows" src="resources\simulator.html" override="true"
                 targetdir="$INSTALL_PATH/$simulator.subpath">
@@ -130,7 +118,7 @@
             condition="Usertype.Analyst+izpack.selected.RunaWFE симулятор+!simulator.db.exists">
             <fileset dir="@{ENV[BUILD_ROOT]}\wfe-simulator\standalone\data\demo-db"
                 override="true"
-                targetdir="$appdata.install.path\jboss\data\h2">
+                targetdir="$standalone.path\data\demo-db">
             </fileset>
             <description>База данных с демонстрационными пользователями и процессами. Недоступна для установки, если база данных уже существует.</description>
             <updatecheck/>

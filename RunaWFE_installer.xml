@@ -133,7 +133,7 @@
         <variable name="appserver.subpath" condition="izpack.selected.RunaWFE сервер"
             value="$server.subpath"/>
         <variable name="standalone.path" condition="izpack.selected.RunaWFE симулятор"
-            value="$appdata.install.path\jboss"/>
+            value="$INSTALL_PATH\$simulator.subpath\standalone"/>
         <variable name="standalone.path" condition="izpack.selected.RunaWFE сервер"
             value="$INSTALL_PATH\$server.subpath\standalone"/>
         <variable name="hibernate.dialect" condition="DBMS.H2"
