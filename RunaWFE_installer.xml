@@ -237,6 +237,7 @@
             value="com.microsoft.sqlserver.jdbc.SQLServerXADataSource"/>
         <variable name="xa.datasource.class" condition="DBMS.Oracle"
             value="oracle.jdbc.driver.OracleDriver"/>
+        <variable name="java.path" value="$INSTALL_PATH\$java.subpath"/>
     </dynamicvariables>
 
     <conditions>

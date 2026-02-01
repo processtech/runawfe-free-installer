@@ -48,8 +48,8 @@
     </shortcut>
 
     <shortcut name="Stop simulation"
-        target="$INSTALL_PATH/${simulator.subpath}/bin/jboss-cli.bat"
-        commandLine="--connect --controller=localhost:$jboss.management.http.port --command=:shutdown"
+        target="$INSTALL_PATH/${simulator.subpath}/bin/stop_simulation.bat"
+        workingDirectory="$INSTALL_PATH\$simulator.subpath\bin"
         initialState="noShow"
         programGroup="true"
         desktop="true" iconFile="$INSTALL_PATH\$images.subpath\Si_20x20_256.ico"

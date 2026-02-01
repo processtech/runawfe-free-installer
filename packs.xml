@@ -73,6 +73,10 @@
                 targetdir="$INSTALL_PATH/$simulator.subpath/bin">
             </file>
             <parsable targetfile="$INSTALL_PATH/$simulator.subpath/bin/run_simulaton.bat"/>
+            <file os="windows" src="runnable\stop_simulation.bat"
+                targetdir="$INSTALL_PATH/$simulator.subpath/bin">
+            </file>
+            <parsable targetfile="$INSTALL_PATH/$simulator.subpath/bin/stop_simulation.bat"/>
             <description>
                 Сервер-симулятор - адаптированная для для рабочей станции версия RunaWFE сервера. Предназначена для знакомства с системой, тестироваия и работы одного пользователя. Логин администратора по умолчанию - "Administrator", пароль - "wf".
             </description>
@@ -236,7 +240,7 @@
         <pack name="Java" hidden="true" required="yes"
             uninstall="false">
             <fileset dir="@{ENV[WFE_JRE]}" override="true"
-                targetdir="$INSTALL_PATH\$java.subpath">
+                targetdir="$java.path">
             </fileset>
             <description/>
         </pack>

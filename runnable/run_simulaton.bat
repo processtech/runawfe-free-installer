@@ -1,5 +1,6 @@
 @echo off
-SET JBOSS_LOG_DIR="%TEMP%\$APP_NAME\jboss\log"
+set JBOSS_LOG_DIR="%TEMP%\$APP_NAME\jboss\log"
+set JAVA_HOME=$java.path
 
 del /F /S /Q "$appdata.install.path\jboss\configuration"
 del /F /S /Q "$appdata.install.path\jboss\deployments"
