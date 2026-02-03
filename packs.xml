@@ -166,7 +166,12 @@
                 targetdir="$INSTALL_PATH/$gpd.subpath">
                 <!-- Не устанавливаем демо-процессы в студию -->
                 <exclude name="demo-workspace/**"/>
+                <exclude name="runa-gpd.ini"/>
             </fileset>
+            <file src="resources\runa-gpd.ini"
+                targetdir="$INSTALL_PATH/$gpd.subpath" override="true">
+            </file>
+            <parsable targetfile="$INSTALL_PATH/$gpd.subpath/runa-gpd.ini"/>
             <description>Приложение, предназначенное для разработки процессов</description>
             <updatecheck/>
         </pack>
