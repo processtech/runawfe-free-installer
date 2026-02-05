@@ -54,6 +54,9 @@ def parse_options():
     parser.add_option("--prompt", action="store_true", dest="prompt",
                       default=False,
                       help="Prompt the user before extraction?")
+    parser.add_option("--jvm-args", action="store", dest="jvm_args",
+                  default="-Dfile.encoding=UTF-8",
+                  help="JVM arguments (e.g. -Dfile.encoding=UTF-8)")
     (options, args) = parser.parse_args()
     if (options.file is None):
         parser.error("no installer file has been given")
@@ -94,12 +97,12 @@ def create_exe(settings):
     config.write('Progress="yes"\n')
     
     if settings.launch == '':
-        config.write('ExecuteFile="' + jdk +'"\n') # who is going to run my installer.jar?
-        config.write('ExecuteParameters="-jar \\\"%s\\\"' % filename)
+        config.write('ExecuteFile="%s"\n' % jdk)
+        jar_part = '\\"%s\\"' % filename
+        params = '%s -jar %s' % (settings.jvm_args, jar_part)
         if settings.launchargs != '':
-            config.write(' %s"\n' % settings.launchargs)
-        else:
-            config.write('"\n') 
+            params += ' %s' % settings.launchargs
+        config.write('ExecuteParameters="%s"\n' % params)
     else:
         config.write('ExecuteFile="%s"\n' % settings.launch)
         if settings.launchargs != '':
