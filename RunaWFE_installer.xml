@@ -61,7 +61,7 @@
         <res id="JFrameIcon" src="resources/images/Installer_16.png"/>
         <res id="customicons.xml" src="customicons.xml"/>
         <res id="userInputSpec.xml" src="userInputSpec.xml"/>
-        <res id="XInfoPanel.info" src="resources\need_reboot.txt"/>
+        <res id="InfoPanel.info" src="resources\need_reboot.txt"/>
     </resources>
 
     <variables>
@@ -93,7 +93,7 @@
         <variable name="server.subpath" value="server"/>
         <variable name="java.subpath" value="java"/>
         <variable name="jboss.servicename" value="@{ENV[SVCNAME]}"/>
-        <variable name="XInfoPanel.font" value="Arial"/>
+        <variable name="InfoPanel.font" value="Arial"/>
         <variable name="statistic.report.url" value="@{ENV[STATISTIC_REPORT_URL]}"/>
         <variable name="statistic.report.days.after.error"
             value="@{ENV[STATISTIC_REPORT_DAYS_AFTER_ERROR]}"/>
@@ -321,7 +321,7 @@
         </panel>
         <panel classname="InstallPanel"/>
         <panel classname="ShortcutPanel"/>
-        <panel classname="XInfoPanel" condition="izpack.selected.RunaWFE сервер" allowClose="false"/>
+        <panel classname="InfoPanel" condition="izpack.selected.RunaWFE сервер" allowClose="false"/>
         <panel classname="SimpleFinishPanel"/>
     </panels>
 

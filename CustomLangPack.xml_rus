@@ -32,14 +32,14 @@
     <str id="TargetPanel.headline" txt=""/>
     <str id="TreePacksPanel.headline" txt=""/>
     <str id="UserInputPanel.headline" txt=""/>
+    <str id="InfoPanel.headline" txt=""/>
 
     <!-- PacksPanel strings -->
     <str id="PacksPanel.info" txt="Выберите компоненты для установки"/>
     <str id="PacksPanel.tip" txt="Установленные ранее, но невыбранные компоненты будут удалены"/>
 
     <!-- InfoPanel strings -->
-    <str id="XInfoPanel.info" txt="Внимание:"/>
-
+    <str id="InfoPanel.info" txt="Внимание:"/>
 
     <!-- General installer strings -->
     <str id="installer.error" txt="Ошибка"/>
