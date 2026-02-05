@@ -86,7 +86,7 @@
         <pack name="Сервер приложений" parent="Серверные компоненты" hidden="true"
             condition="izpack.selected.RunaWFE симулятор|izpack.selected.RunaWFE сервер">
             <fileset dir="@{ENV[BUILD_ROOT]}\wfe-server-jboss" override="true"
-                excludes="standalone\**"
+                excludes="standalone\** bin\standalone.conf.bat"
                 targetdir="$INSTALL_PATH/$appserver.subpath">
             </fileset>
             <fileset dir="@{ENV[BUILD_ROOT]}\jboss-native" override="true"
@@ -105,6 +105,10 @@
                 override="true"
                 targetdir="$standalone.path\deployments">
             </fileset>
+            <file src="resources\standalone.conf.bat" override="true"
+                targetdir="$INSTALL_PATH/$appserver.subpath/bin">
+            </file>
+            <parsable targetfile="$INSTALL_PATH/$appserver.subpath/bin/standalone.conf.bat" type="ant"/>
             <executable
                 targetfile="$INSTALL_PATH\$server.subpath\bin\service.bat"
                 condition="izpack.selected.RunaWFE сервер" keep="true"

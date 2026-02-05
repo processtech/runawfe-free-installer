@@ -32,7 +32,7 @@ rem # Specify the location of the Java home directory (it is recommended that
 rem # this always be set). If set, then "%JAVA_HOME%\bin\java" will be used as
 rem # the Java VM executable; otherwise, "%JAVA%" will be used (see below).
 rem #
-rem set "JAVA_HOME=C:\opt\jdk1.6.0_23"
+set "JAVA_HOME=@java.path@"
 
 rem #
 rem # Specify the exact Java VM executable to use - only used if JAVA_HOME is

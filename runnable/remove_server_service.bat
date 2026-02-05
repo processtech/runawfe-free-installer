@@ -3,6 +3,7 @@ chcp 65001 >nul
 
 setlocal
 
+set JAVA_HOME=$java.path
 set "NOPAUSE=1"
 set "LOGFILE=%TEMP%\runawfe_uninstall.log"
 
