@@ -238,6 +238,7 @@
         <variable name="xa.datasource.class" condition="DBMS.Oracle"
             value="oracle.jdbc.driver.OracleDriver"/>
         <variable name="java.path" value="$INSTALL_PATH\$java.subpath"/>
+        <variable name="jboss.http.port" value="8080"/>
     </dynamicvariables>
 
     <conditions>
