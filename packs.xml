@@ -43,7 +43,11 @@
                 <os family="windows"/>
             </executable>
             <description>Основной сервер, предназначенный для многопользовательской работы</description>
-            <updatecheck/>
+            <updatecheck>
+                <include name="$server.subpath\standalone\wfe.custom\wfe.custom.installation.properties"/>
+                <include name="$server.subpath\standalone\wfe.custom\wfe.custom.system.properties"/>
+                <!-- При апдейте не удаляем ничего из папки wfe.custom, кроме свойств отправки статистики, если они не устанавливаются -->
+            </updatecheck>
         </pack>
 
         <pack name="RunaWFE симулятор" required="no" parent="Серверные компоненты"
