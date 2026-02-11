@@ -13,7 +13,7 @@
 
         <pack name="RunaWFE сервер" required="yes" parent="Серверные компоненты" preselected="yes"
             installGroups="Администратор" condition="Usertype.Administrator">
-            <file os="windows" src="resources\images\Cs_20x20_256.ico"
+            <file os="windows" src="resources\images\windows\Cs_20x20_256.ico"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
             <fileset dir="@{ENV[BUILD_ROOT]}\wfe-server-config\standalone\deployments"
@@ -52,7 +52,7 @@
 
         <pack name="RunaWFE симулятор" required="no" parent="Серверные компоненты"
             installGroups="Аналитик" condition="Usertype.Analyst">
-            <file os="windows" src="resources\images\Si_20x20_256.ico"
+            <file os="windows" src="resources\images\windows\Si_20x20_256.ico"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
             <file os="windows" src="runnable\simulator_install_cleanup.bat" override="true"
@@ -160,7 +160,7 @@
 
         <pack name="Среда разработки" required="no" preselected="yes"
             installGroups="Аналитик" condition="Usertype.Analyst">
-            <file os="windows" src="resources\images\e_20x20_256.ico"
+            <file os="windows" src="resources\images\windows\e_20x20_256.ico"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
             <file os="windows" src="runnable\studio_install_cleanup.bat"
@@ -186,7 +186,7 @@
 
         <pack name="Оповещаетель задач" required="no" preselected="no"
             installGroups="Пользователь,Аналитик" condition="!Usertype.Administrator">
-            <file os="windows" src="resources\images\t_20x20_256.ico"
+            <file os="windows" src="resources\images\windows\t_20x20_256.ico"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
             <fileset dir="@{ENV[BUILD_ROOT]}\rtn-${WFE.version}\64" override="true"
@@ -212,7 +212,7 @@
 
         <pack name="Ярлык веб-интерфейса RunaWFE сервера" required="no" preselected="no"
             installGroups="Пользователь,Аналитик" condition="!Usertype.Administrator">
-            <file os="windows" src="resources\images\C_20x20_256.ico"
+            <file os="windows" src="resources\images\windows\C_20x20_256.ico"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
             <file os="windows" src="resources\runawfe.html" override="true"
@@ -226,7 +226,7 @@
         </pack>
 
         <pack name="Обязательные компоненты" hidden="true" required="yes">
-            <file os="windows" src="resources\images\wf_48x128.ico"
+            <file os="windows" src="resources\images\windows\wf_48x128.ico"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
             <file src="properties" targetdir="$INSTALL_PATH" override="true"/>

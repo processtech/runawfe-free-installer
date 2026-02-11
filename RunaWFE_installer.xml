@@ -57,7 +57,7 @@
         <res id="HTMLLicencePanel.license" src="resources/License.html"/>
         <res id="Win_shortcutSpec.xml" src="win_shortcutSpec.xml"/>
         <res id="Heading.image"
-            src="resources\images\big_logo.bmp"/>
+            src="resources\images\windows\big_logo.bmp"/>
         <res id="JFrameIcon" src="resources/images/Installer_16.png"/>
         <res id="customicons.xml" src="customicons.xml"/>
         <res id="userInputSpec.xml" src="userInputSpec.xml"/>
