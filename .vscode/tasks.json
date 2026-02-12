@@ -32,7 +32,7 @@
             "detail": "Компилирует RunaWFE_installer.xml → install.jar"
         },
         {
-            "label": "IzPack: Run Installer",
+            "label": "IzPack: Run jar Windows",
             "type": "shell",
             "command": "run-installer.bat",
             "group": "test",
@@ -47,7 +47,7 @@
             "options": {
                 "cwd": "${workspaceFolder}"
             },
-            "detail": "Запускает install.jar (если файл существует)"
+            "detail": "Запускает install.jar под Windows"
         },
         {
             "label": "IzPack: Convert to EXE",
@@ -86,6 +86,63 @@
                 "cwd": "${workspaceFolder}"
             },
             "detail": "Запускает EXE установщик"
+        },
+        {
+            "label": "IzPack: Create image with Ubuntu and Java",
+            "type": "shell",
+            "command": "docker",
+            "args": [
+                "build",
+                "-f",
+                "docker/Dockerfile.ubuntu-java",
+                "-t",
+                "linux-for-izpack",
+                "."
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "dedicated",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "detail": "Создает docker образ с Ubuntu и Java"
+        },
+        {
+            "label": "IzPack: Run jar Linux console",
+            "type": "shell",
+            "command": "docker",
+            "args": [
+                "run",
+                "--rm",
+                "-it",
+                "-v",
+                "${workspaceFolder}/install.jar:/installer/install.jar:ro",
+                "linux-for-izpack",
+                "java",
+                "-Dfile.encoding=UTF-8",
+                "-jar",
+                "/installer/install.jar"
+            ],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "dedicated",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "detail": "Запускает install.jar в контейнере с Linux в консольном режиме",
+            "problemMatcher": []
         }
     ]
 }
