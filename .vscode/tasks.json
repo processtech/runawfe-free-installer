@@ -143,6 +143,78 @@
             },
             "detail": "Запускает install.jar в контейнере с Linux в консольном режиме",
             "problemMatcher": []
+        },
+        {
+            "label": "Create docker image for Linux GUI",
+            "type": "shell",
+            "command": "docker",
+            "args": [
+                "build",
+                "-f",
+                "docker/Dockerfile.ubuntu-java-wsl",
+                "-t",
+                "linux-for-izpack-wsl",
+                "."
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "dedicated",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Run jar Linux GUI",
+            "dependsOn": "Allow X11 Access for docker",
+            "type": "shell",
+            "command": "wsl",
+            "args": [
+                "docker",
+                "run",
+                "--rm",
+                "-it",
+                "-v",
+                "/tmp/.X11-unix:/tmp/.X11-unix",
+                "-v",
+                "/mnt/wslg:/mnt/wslg",
+                "-e",
+                "DISPLAY=:0",
+                "-e",
+                "WAYLAND_DISPLAY=wayland-0",
+                "-e",
+                "XDG_RUNTIME_DIR=/mnt/wslg/runtime-dir",
+                "-e",
+                "QT_X11_NO_MITSHM=1",
+                "-v",
+                "$(wslpath '${workspaceFolder}')/install.jar:/installer/install.jar:ro",
+                "linux-for-izpack-wsl",
+                "java",
+                "-jar",
+                "/installer/install.jar"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Allow X11 Access for docker",
+            "type": "shell",
+            "command": "wsl",
+            "args": [
+                "xhost",
+                "+local:docker"
+            ],
+            "presentation": {
+                "reveal": "silent", // Не открывать терминал, если всё ок
+                "close": true
+            }
         }
     ]
 }
