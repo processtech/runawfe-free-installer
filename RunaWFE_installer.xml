@@ -55,6 +55,7 @@
         <res id="packsLang.xml" src="CustomLangPack.xml"/>
         <res id="CustomLangPack.xml_rus" src="CustomLangPack.xml_rus"/>
         <res id="HTMLLicencePanel.license" src="resources/License.html"/>
+        <res id="LicencePanel.license_txt" src="resources/License.txt"/>
         <res id="Win_shortcutSpec.xml" src="win_shortcutSpec.xml"/>
         <res id="Heading.image"
             src="resources/images/big_logo.png"/>
@@ -304,7 +305,8 @@
 
     <panels>
         <panel classname="HelloPanel"/>
-        <panel classname="HTMLLicencePanel" id="license">
+        <panel classname="HTMLLicencePanel" id="license" condition="izpack.gui.installer"/>
+        <panel classname="LicencePanel" id="license_txt" condition="izpack.console.installer">
             <configuration>
                 <param name="console-text-paging" value="true"/>
                 <param name="console-text-wordwrap" value="true"/>
