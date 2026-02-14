@@ -308,7 +308,6 @@
         <panel classname="HTMLLicencePanel" id="license" condition="izpack.gui.installer"/>
         <panel classname="LicencePanel" id="license_txt" condition="izpack.console.installer">
             <configuration>
-                <param name="console-text-paging" value="true"/>
                 <param name="console-text-wordwrap" value="true"/>
             </configuration>
         </panel>
