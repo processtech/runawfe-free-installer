@@ -28,11 +28,10 @@
                     "column": 3,
                     "message": 4
                 }
-            },
-            "detail": "Компилирует RunaWFE_installer.xml → install.jar"
+            }
         },
         {
-            "label": "IzPack: Run jar Windows",
+            "label": "Run jar in Windows",
             "type": "shell",
             "command": "run-installer.bat",
             "group": "test",
@@ -46,11 +45,10 @@
             },
             "options": {
                 "cwd": "${workspaceFolder}"
-            },
-            "detail": "Запускает install.jar под Windows"
+            }
         },
         {
-            "label": "IzPack: Convert to EXE",
+            "label": "Convert to EXE",
             "type": "shell",
             "command": "cmd",
             "args": [
@@ -68,11 +66,10 @@
             },
             "options": {
                 "cwd": "${workspaceFolder}"
-            },
-            "detail": "Конвертирует jar в exe"
+            }
         },
         {
-            "label": "IzPack: Run EXE Installer",
+            "label": "Run EXE Installer",
             "type": "shell",
             "command": "run-exe-installer.cmd",
             "group": "test",
@@ -84,11 +81,10 @@
             },
             "options": {
                 "cwd": "${workspaceFolder}"
-            },
-            "detail": "Запускает EXE установщик"
+            }
         },
         {
-            "label": "IzPack: Create image with Ubuntu and Java",
+            "label": "Create docker image for Linux console",
             "type": "shell",
             "command": "docker",
             "args": [
@@ -110,11 +106,10 @@
             },
             "options": {
                 "cwd": "${workspaceFolder}"
-            },
-            "detail": "Создает docker образ с Ubuntu и Java"
+            }
         },
         {
-            "label": "IzPack: Run jar Linux console",
+            "label": "Run jar in Linux console",
             "type": "shell",
             "command": "docker",
             "args": [
@@ -141,7 +136,6 @@
             "options": {
                 "cwd": "${workspaceFolder}"
             },
-            "detail": "Запускает install.jar в контейнере с Linux в консольном режиме",
             "problemMatcher": []
         },
         {
@@ -170,7 +164,7 @@
             }
         },
         {
-            "label": "Run jar Linux GUI",
+            "label": "Run jar in Linux GUI",
             "dependsOn": "Allow X11 Access for docker",
             "type": "shell",
             "command": "wsl",
