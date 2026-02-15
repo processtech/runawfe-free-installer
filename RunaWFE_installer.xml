@@ -7,6 +7,8 @@
     <installerrequirements>
         <installerrequirement condition="!is.downgrade"
             message="На данном компьютере уже установлена более поздняя версия приложения. Если вы хотите установить более раннюю версию, удалите полностью текущую."/>
+            <installerrequirement condition="x86_64|amd64|aarch64"
+            message="Установка возможна только на компьютеры с 64-битной архитектурой"/>
     </installerrequirements>
 
     <natives>
@@ -240,6 +242,7 @@
             value="oracle.jdbc.driver.OracleDriver"/>
         <variable name="java.path" value="$INSTALL_PATH\$java.subpath"/>
         <variable name="jboss.http.port" value="8080"/>
+        <variable name="platform" value="${SYSTEM[os.arch]}" checkonce="true"/>
     </dynamicvariables>
 
     <conditions>
@@ -300,6 +303,19 @@
         </condition>
         <condition type="exists" id="simulator.db.exists">
             <file>$appdata.install.path\jboss\data\h2\localDB.mv.db</file>
+        </condition>
+
+        <condition type="variable" id="x86_64">
+            <name>platform</name>
+            <value>x86_64</value>
+        </condition>
+        <condition type="variable" id="amd64">
+            <name>platform</name>
+            <value>amd64</value>
+        </condition>
+        <condition type="variable" id="aarch64">
+            <name>platform</name>
+            <value>aarch64</value>
         </condition>
     </conditions>
 
