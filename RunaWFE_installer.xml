@@ -243,6 +243,15 @@
         <variable name="java.path" value="$INSTALL_PATH\$java.subpath"/>
         <variable name="jboss.http.port" value="8080"/>
         <variable name="platform" value="${SYSTEM[os.arch]}" checkonce="true"/>
+        <variable name="webkit.installed" checkonce="true"
+                  executable="/sbin/ldconfig"
+                  type="process"
+                  condition="izpack.linuxinstall">
+            <arg>-p</arg>
+            <filters>
+                <regex regexp=".*libwebkit2gtk-4.0\.so\.37.*" select="true" defaultvalue="false"/>
+            </filters>
+        </variable>
     </dynamicvariables>
 
     <conditions>
@@ -317,6 +326,10 @@
             <name>platform</name>
             <value>aarch64</value>
         </condition>
+        <condition type="variable" id="webkit.installed">
+            <name>webkit.installed</name>
+            <value>true</value>
+        </condition>
     </conditions>
 
     <panels>
@@ -331,6 +344,7 @@
         <panel classname="TreePacksPanel">
             <validator classname="com.izforge.izpack.installer.validator.ConditionValidator"/>
         </panel>
+        <panel classname="UserInputPanel" id="panel.webkit.warn" condition="izpack.linuxinstall+!webkit.installed"/>
         <panel classname="UserInputPanel" id="panel.database.connection"/>
         <panel classname="UserInputPanel" id="panel.wildfly.connection"/>
         <panel classname="UserInputPanel" id="panel.server.web.interface"/>

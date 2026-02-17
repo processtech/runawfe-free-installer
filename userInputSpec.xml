@@ -249,5 +249,13 @@
         </field>
     </panel>
 
+    <panel id="panel.webkit.warn">
+        <createForPack name="Среда разработки"/>
+        <createForPack name="Оповещаетель задач"/>
+        <field type="title" txt="Предупреждение" bold="true"/>
+        <field type="staticText" txt="Библиотека libwebkit2gtk-4.0.so.37 не найдена."/>
+        <field type="staticText" txt="Она необходима для работы устанавливаемых компонентов."/>
+        <field type="staticText" txt="Установите её до запуска Среды разработки или Нотификатора задач."/>
+    </panel>
 
 </izpack:userinput>
