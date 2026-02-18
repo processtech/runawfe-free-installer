@@ -1,0 +1,17 @@
+FROM registry.astralinux.ru/library/astra/ubi18:latest
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y \
+    openjdk-17-jre \
+    libx11-6 \
+    libxext6 \
+    libxrender1 \
+    libxtst6 \
+    libxi6 \
+    libfreetype6 \
+    fontconfig \
+    libwebkit2gtk-4.1-0 \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /installer
