@@ -139,65 +139,6 @@
             "problemMatcher": []
         },
         {
-            "label": "Create docker image for Linux GUI",
-            "type": "shell",
-            "command": "docker",
-            "args": [
-                "build",
-                "-f",
-                "docker/Dockerfile.ubuntu-java-wsl",
-                "-t",
-                "linux-for-izpack-wsl",
-                "."
-            ],
-            "group": "build",
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": true,
-                "panel": "dedicated",
-                "showReuseMessage": true,
-                "clear": true
-            },
-            "options": {
-                "cwd": "${workspaceFolder}"
-            }
-        },
-        {
-            "label": "Run jar in Linux GUI",
-            "dependsOn": "Allow X11 Access for docker",
-            "type": "shell",
-            "command": "wsl",
-            "args": [
-                "docker",
-                "run",
-                "--rm",
-                "-it",
-                "-v",
-                "/tmp/.X11-unix:/tmp/.X11-unix",
-                "-v",
-                "/mnt/wslg:/mnt/wslg",
-                "-e",
-                "DISPLAY=:0",
-                "-e",
-                "WAYLAND_DISPLAY=wayland-0",
-                "-e",
-                "XDG_RUNTIME_DIR=/mnt/wslg/runtime-dir",
-                "-e",
-                "QT_X11_NO_MITSHM=1",
-                "-v",
-                "$(wslpath '${workspaceFolder}')/install.jar:/installer/install.jar:ro",
-                "linux-for-izpack-wsl",
-                "java",
-                "-jar",
-                "/installer/install.jar"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "problemMatcher": []
-        },
-        {
             "label": "Allow X11 Access for docker",
             "type": "shell",
             "command": "wsl",
@@ -209,6 +150,37 @@
                 "reveal": "silent", // Не открывать терминал, если всё ок
                 "close": true
             }
+        },
+        {
+            "label": "Run on target OS",
+            "dependsOn": "Allow X11 Access for docker",
+            "type": "shell",
+            "command": "wsl",
+            "args": [
+                "docker-compose",
+                "-f",
+                "docker/docker-compose.yml",
+                "run",
+                "--rm",
+                "${input:serviceSelect}" // Выбор из списка
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        }
+    ],
+    "inputs": [
+        {
+            "id": "serviceSelect",
+            "type": "pickString",
+            "description": "Выберите систему для отладки",
+            "options": [
+                "astra17-gui",
+                "astra17-console",
+                "astra18-gui",
+                "astra18-console"
+            ]
         }
     ]
 }

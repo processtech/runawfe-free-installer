@@ -1,0 +1,59 @@
+# Общие настройки для всех сервисов (шаблон)
+x-common: &common
+  build:
+    context: .. # Чтобы видеть install.jar в корне
+  stdin_open: true
+  tty: true
+  volumes:
+    - ../install.jar:/installer/install.jar:ro
+
+# Настройки только для GUI сервисов
+x-gui: &gui
+  <<: *common
+  shm_size: '256m'
+  volumes:
+    - /tmp/.X11-unix:/tmp/.X11-unix
+    - /mnt/wslg:/mnt/wslg
+    - ../install.jar:/installer/install.jar:ro
+  environment:
+    - DISPLAY=:0
+    - WAYLAND_DISPLAY=wayland-0
+    - XDG_RUNTIME_DIR=/mnt/wslg/runtime-dir
+    - QT_X11_NO_MITSHM=1
+    - GDK_BACKEND=x11
+    - NO_AT_BRIDGE=1
+
+services:
+  astra17-gui:
+    <<: *gui
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.astra17-gui
+    image: astra17-for-izpack-gui
+    command: java -jar -DTRACE=true /installer/install.jar
+
+  astra17-console:
+    <<: *common
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.astra17-console
+    image: astra17-for-izpack-console
+    command: >
+      java -Dfile.encoding=UTF-8  -Duser.language=ru -Duser.country=RU  -DTRACE=true -jar /installer/install.jar -console
+
+  astra18-gui:
+    <<: *gui
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.astra18-gui
+    image: astra18-for-izpack-gui
+    command: java -jar -DTRACE=true /installer/install.jar
+
+  astra18-console:
+    <<: *common
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.astra18-console
+    image: astra18-for-izpack-console
+    command: >
+      java -Dfile.encoding=UTF-8  -Duser.language=ru -Duser.country=RU  -DTRACE=true -jar /installer/install.jar -console
