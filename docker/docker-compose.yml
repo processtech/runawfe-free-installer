@@ -79,4 +79,18 @@ services:
     build:
       context: ..
       dockerfile: docker/Dockerfile.altp11-console
-    image: altp11-for-izpack-console  
+    image: altp11-for-izpack-console
+
+  redos8-gui:
+    <<: *gui
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.redos8-gui
+    image: redos8-for-izpack-gui
+
+  redos8-console:
+    <<: *common
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.redos8-console
+    image: redos8-for-izpack-console      

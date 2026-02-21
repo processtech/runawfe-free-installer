@@ -183,7 +183,9 @@
                 "altp10-gui",
                 "altp10-console",
                 "altp11-gui",
-                "altp11-console"
+                "altp11-console",
+                "redos8-gui",
+                "redos8-console"
             ]
         }
     ]

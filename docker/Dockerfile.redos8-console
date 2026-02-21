@@ -1,0 +1,7 @@
+FROM registry.red-soft.ru/ubi8/ubi:latest
+
+RUN dnf clean all && dnf makecache && dnf install -y \
+    java-11-openjdk \
+    && dnf clean all
+
+WORKDIR /installer

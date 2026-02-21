@@ -1,0 +1,16 @@
+FROM registry.red-soft.ru/ubi8/ubi:latest
+
+RUN dnf clean all && dnf makecache && dnf install -y \
+    java-11-openjdk-devel \
+    libX11 \
+    libXext \
+    libXrender \
+    libXtst \
+    libXi \
+    freetype \
+    fontconfig \
+    dejavu-sans-fonts \
+    webkit2gtk4.1 \
+    && dnf clean all
+
+WORKDIR /installer
