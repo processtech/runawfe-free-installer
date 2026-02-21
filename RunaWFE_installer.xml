@@ -246,14 +246,17 @@
         <variable name="jboss.http.port" value="8080"/>
         <variable name="platform" value="${SYSTEM[os.arch]}" checkonce="true"/>
         <variable name="webkit.installed" checkonce="true"
-            executable="/sbin/ldconfig"
+            executable="ldconfig"
             type="process"
             condition="izpack.linuxinstall">
             <arg>-p</arg>
             <filters>
-                <regex regexp=".*libwebkit2gtk-4.0\.so\.37.*" select="true" defaultvalue="false"/>
+                <regex regexp=".*libwebkit2gtk-4\.([1-9]\.so|0\.so\.(3[7-9]|[4-9][0-9])|0\.so\.[1-9][0-9]{2,}).*"
+                    select="true"
+                    defaultvalue="false"/>
             </filters>
         </variable>
+
         <variable name="is.root" checkonce="true"
             executable="id"
             type="process"
