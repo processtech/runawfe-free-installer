@@ -1,0 +1,16 @@
+FROM alt:p11
+
+RUN apt-get update && apt-get install -y \
+    java-11-openjdk-devel \
+    libX11 \
+    libXext \
+    libXrender \
+    libXtst \
+    libXi \
+    libfreetype \
+    fontconfig \
+    fonts-ttf-dejavu \
+    libwebkit2gtk \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /installer

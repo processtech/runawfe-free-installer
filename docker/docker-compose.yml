@@ -6,7 +6,7 @@ x-common: &common
   tty: true
   volumes:
     - ../install.jar:/installer/install.jar:ro
-  command: java -Dfile.encoding=UTF-8 -jar -DTRACE=true /installer/install.jar  
+  command: java -Dfile.encoding=UTF-8 -jar /installer/install.jar  
 
 # Настройки только для GUI сервисов
 x-gui: &gui
@@ -66,3 +66,17 @@ services:
       context: ..
       dockerfile: docker/Dockerfile.altp10-console
     image: altp10-for-izpack-console
+
+  altp11-gui:
+    <<: *gui
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.altp11-gui
+    image: altp11-for-izpack-gui
+
+  altp11-console:
+    <<: *common
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.altp11-console
+    image: altp11-for-izpack-console  

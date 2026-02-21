@@ -181,7 +181,9 @@
                 "astra18-gui",
                 "astra18-console",
                 "altp10-gui",
-                "altp10-console"
+                "altp10-console",
+                "altp11-gui",
+                "altp11-console"
             ]
         }
     ]
