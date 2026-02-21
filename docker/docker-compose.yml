@@ -6,6 +6,7 @@ x-common: &common
   tty: true
   volumes:
     - ../install.jar:/installer/install.jar:ro
+  command: java -Dfile.encoding=UTF-8 -jar -DTRACE=true /installer/install.jar  
 
 # Настройки только для GUI сервисов
 x-gui: &gui
@@ -30,7 +31,6 @@ services:
       context: ..
       dockerfile: docker/Dockerfile.astra17-gui
     image: astra17-for-izpack-gui
-    command: java -jar -DTRACE=true /installer/install.jar
 
   astra17-console:
     <<: *common
@@ -38,8 +38,6 @@ services:
       context: ..
       dockerfile: docker/Dockerfile.astra17-console
     image: astra17-for-izpack-console
-    command: >
-      java -Dfile.encoding=UTF-8  -Duser.language=ru -Duser.country=RU  -DTRACE=true -jar /installer/install.jar -console
 
   astra18-gui:
     <<: *gui
@@ -47,7 +45,6 @@ services:
       context: ..
       dockerfile: docker/Dockerfile.astra18-gui
     image: astra18-for-izpack-gui
-    command: java -jar -DTRACE=true /installer/install.jar
 
   astra18-console:
     <<: *common
@@ -55,5 +52,17 @@ services:
       context: ..
       dockerfile: docker/Dockerfile.astra18-console
     image: astra18-for-izpack-console
-    command: >
-      java -Dfile.encoding=UTF-8  -Duser.language=ru -Duser.country=RU  -DTRACE=true -jar /installer/install.jar -console
+
+  altp10-gui:
+    <<: *gui
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.altp10-gui
+    image: altp10-for-izpack-gui
+
+  altp10-console:
+    <<: *common
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.altp10-console
+    image: altp10-for-izpack-console
