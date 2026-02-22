@@ -108,8 +108,11 @@
 
 
     <dynamicvariables>
-        <variable name="installed.version" checkonce="true"
-            file="${DEFAULT_INSTALL_PATH}/properties"
+        <variable name="installed.version" checkonce="true" condition="izpack.windowsinstall"
+            file="${TargetPanel.dir.windows}/properties"
+            key="WFE.version"/>
+        <variable name="installed.version" checkonce="true" condition="izpack.linuxinstall"
+            file="${TargetPanel.dir.unix}/properties"
             key="WFE.version"/>
         <variable name="installed.version" condition="install.path.set"
             file="${INSTALL_PATH}/properties"
