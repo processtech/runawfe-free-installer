@@ -46,7 +46,8 @@
             <updatecheck>
                 <include name="$server.subpath\standalone\wfe.custom\wfe.custom.installation.properties"/>
                 <include name="$server.subpath\standalone\wfe.custom\wfe.custom.system.properties"/>
-                <!-- При апдейте не удаляем ничего из папки wfe.custom, кроме свойств отправки статистики, если они не устанавливаются -->
+                <!-- При апдейте не удаляем ничего из папки wfe.custom, кроме свойств отправки статистики, если они не
+                устанавливаются -->
             </updatecheck>
         </pack>
 
@@ -84,7 +85,10 @@
             <description>
                 Сервер-симулятор - адаптированная для для рабочей станции версия RunaWFE сервера. Предназначена для знакомства с системой, тестироваия и работы одного пользователя. Логин администратора по умолчанию - "Administrator", пароль - "wf".
             </description>
-            <updatecheck/>
+            <updatecheck>
+                <exclude name="$java.subpath/**"/>
+            </updatecheck>
+
         </pack>
 
         <pack name="Сервер приложений" parent="Серверные компоненты" hidden="true"
@@ -133,7 +137,9 @@
                 targetdir="$standalone.path\data\demo-db">
             </fileset>
             <description>База данных с демонстрационными пользователями и процессами. Недоступна для установки, если база данных уже существует.</description>
-            <updatecheck/>
+            <updatecheck>
+                <exclude name="$java.subpath/**"/>
+            </updatecheck>
         </pack>
 
         <pack name="Отправка статистики" required="no" parent="Серверные компоненты"
@@ -181,7 +187,9 @@
             </file>
             <parsable targetfile="$INSTALL_PATH/$gpd.subpath/runa-gpd.ini"/>
             <description>Приложение, предназначенное для разработки процессов</description>
-            <updatecheck/>
+            <updatecheck>
+                <exclude name="$java.subpath/**"/>
+            </updatecheck>
         </pack>
 
         <pack name="Оповещаетель задач" required="no" preselected="no"
@@ -207,7 +215,9 @@
             <description>
                 Приложение, предназначенное для проверки новых задач пользователей. Для установки этого компонента вам потребуется адрес основного RunaWFE сервера (хост и порт). Возьмите его у вашего системного администратора, прежде чем продолжать установку.
             </description>
-            <updatecheck/>
+            <updatecheck>
+                <exclude name="$java.subpath/**"/>
+            </updatecheck>
         </pack>
 
         <pack name="Ярлык веб-интерфейса RunaWFE сервера" required="no" preselected="no"
@@ -222,7 +232,9 @@
             <description>
                 Ссылка на веб-интерфейс основного RunaWFE сервера. Для установки этого компонента вам потребуется адрес основного RunaWFE сервера (хост и порт). Возьмите его у вашего системного администратора, прежде чем продолжать установку. Далее можно будет выбрать создание ярлыка на рабочем столе и в главном меню.
             </description>
-            <updatecheck/>
+            <updatecheck>
+                <exclude name="$java.subpath/**"/>
+            </updatecheck>
         </pack>
 
         <pack name="Обязательные компоненты" hidden="true" required="yes">
