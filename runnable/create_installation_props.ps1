@@ -11,12 +11,19 @@ if (-not (Test-Path $SetupPath)) {
 $referrerLine = "ReferrerUrl="
 
 if (Test-Path $SetupPath) {
-    $zoneContent = & powershell -Command "(Get-Content '$SetupPath' -Stream Zone.Identifier -ErrorAction SilentlyContinue)"
-    if ($zoneContent -and $zoneContent.Length -gt 2) {
-        $line = $zoneContent[2].Trim()
-        if ($line -like "ReferrerUrl:*") {
-            $urlPart = $line.Substring("ReferrerUrl:".Length).Trim()
-            $referrerLine = "ReferrerUrl=$urlPart"
+    # Приводим путь к абсолютному виду для [System.IO.File]
+    $fullPath = [System.IO.Path]::GetFullPath($SetupPath)
+    $zoneStreamPath = "$fullPath:Zone.Identifier"
+
+    if ([System.IO.File]::Exists($zoneStreamPath)) {
+        $zoneContent = [System.IO.File]::ReadAllLines($zoneStreamPath)
+        
+        if ($zoneContent -and $zoneContent.Count -ge 3) {
+            $refLine = $zoneContent | Where-Object { $_ -like "ReferrerUrl=*" }
+            if ($refLine) {
+                 $urlPart = $refLine.Split('=')[1].Trim()
+                 $referrerLine = "ReferrerUrl=$urlPart"
+            }
         }
     }
 }
