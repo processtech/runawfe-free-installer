@@ -16,6 +16,9 @@
             <file os="windows" src="resources\images\windows\Cs_20x20_256.ico"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
+            <file os="unix" src="resources\images\unix\Cs_20x20_256.png"
+                targetdir="$INSTALL_PATH/$images.subpath">
+            </file>
             <fileset dir="@{ENV[BUILD_ROOT]}\wfe-server-config\standalone\deployments"
                 override="true"
                 targetdir="$INSTALL_PATH\$server.subpath\standalone\deployments">
@@ -54,6 +57,9 @@
         <pack name="RunaWFE симулятор" required="no" parent="Серверные компоненты"
             installGroups="Аналитик" condition="Usertype.Analyst">
             <file os="windows" src="resources\images\windows\Si_20x20_256.ico"
+                targetdir="$INSTALL_PATH/$images.subpath">
+            </file>
+            <file os="unix" src="resources\images\unix\Si_20x20_256.png"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
             <file os="windows" src="runnable\simulator_install_cleanup.bat" override="true"
@@ -169,6 +175,9 @@
             <file os="windows" src="resources\images\windows\e_20x20_256.ico"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
+            <file os="unix" src="resources\images\unix\e_20x20_256.png"
+                targetdir="$INSTALL_PATH/$images.subpath">
+            </file>
             <file os="windows" src="runnable\studio_install_cleanup.bat"
                 targetdir="$INSTALL_PATH/$gpd.subpath">
             </file>
@@ -195,6 +204,9 @@
         <pack name="Оповещаетель задач" required="no" preselected="no"
             installGroups="Пользователь,Аналитик" condition="!Usertype.Administrator">
             <file os="windows" src="resources\images\windows\t_20x20_256.ico"
+                targetdir="$INSTALL_PATH/$images.subpath">
+            </file>
+            <file os="unix" src="resources\images\unix\t_20x20_256.png"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
             <fileset dir="@{ENV[BUILD_ROOT]}\rtn-${WFE.version}\64" override="true"
@@ -225,6 +237,9 @@
             <file os="windows" src="resources\images\windows\C_20x20_256.ico"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
+            <file os="unix" src="resources\images\unix\C_20x20_256.png"
+                targetdir="$INSTALL_PATH/$images.subpath">
+            </file>
             <file os="windows" src="resources\runawfe.html" override="true"
                 targetdir="$INSTALL_PATH/$web.interface.subpath">
             </file>
@@ -239,6 +254,9 @@
 
         <pack name="Обязательные компоненты" hidden="true" required="yes">
             <file os="windows" src="resources\images\windows\wf_48x128.ico"
+                targetdir="$INSTALL_PATH/$images.subpath">
+            </file>
+            <file os="unix" src="resources\images\unix\wf_48x128.png"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
             <file src="properties" targetdir="$INSTALL_PATH" override="true"/>
