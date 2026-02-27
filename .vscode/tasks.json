@@ -162,6 +162,7 @@
                 "docker/docker-compose.yml",
                 "run",
                 "--rm",
+                "--service-ports",
                 "${input:serviceSelect}" // Выбор из списка
             ],
             "options": {
@@ -185,7 +186,8 @@
                 "altp11-gui",
                 "altp11-console",
                 "redos8-gui",
-                "redos8-console"
+                "redos8-console",
+                "macos-gui"
             ]
         }
     ]

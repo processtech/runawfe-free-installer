@@ -93,4 +93,26 @@ services:
     build:
       context: ..
       dockerfile: docker/Dockerfile.redos8-console
-    image: redos8-for-izpack-console      
+    image: redos8-for-izpack-console
+
+  macos-gui:
+    image: dockurr/macos
+    container_name: macos
+    environment:
+      VERSION: "14"
+      RAM_SIZE: "8G"
+      CPU_CORES: "4"
+      WIDTH: 1280
+      HEIGHT: 800
+    devices:
+      - /dev/kvm
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - 8006:8006
+      - 5900:5900/tcp
+      - 5900:5900/udp
+    volumes:
+      - ./macos:/storage
+    stop_grace_period: 2m    
