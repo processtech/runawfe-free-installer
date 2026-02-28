@@ -14,7 +14,7 @@ set IZPACK_WRAPPER=C:\Program Files\IzPack\utils\wrappers\izpack2exe
 
 cd /d "%~dp0izpack2exe"
 
-python izpack2exe.py ^
+py izpack2exe.py ^
   --file="%INSTALL_JAR%" ^
   --output="%PROJECT_ROOT%\%INSTALLER_EXE%" ^
   --with-7z="%IZPACK_WRAPPER%\7za.exe" ^
