@@ -280,14 +280,6 @@
             <description></description>
         </pack>
 
-        <pack name="Java" hidden="true" required="yes"
-            uninstall="false">
-            <fileset dir="@{ENV[WFE_JRE]}" override="true"
-                targetdir="$java.path">
-            </fileset>
-            <description/>
-        </pack>
-
     </packs>
 
 </izpack:installation>

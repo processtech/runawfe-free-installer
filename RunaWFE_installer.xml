@@ -67,6 +67,7 @@
         <res id="customicons.xml" src="customicons.xml"/>
         <res id="userInputSpec.xml" src="userInputSpec.xml"/>
         <res id="InfoPanel.info" src="resources\need_reboot.txt"/>
+        <res id="ProcessPanel.Spec.xml" src="ProcessPanel.Spec.xml"/>
     </resources>
 
     <variables>
@@ -376,6 +377,7 @@
             <validator classname="com.izforge.izpack.installer.validator.ConditionValidator"/>
         </panel>
         <panel classname="InstallPanel"/>
+        <panel classname="ProcessPanel"/>
         <panel classname="ShortcutPanel"/>
         <panel classname="InfoPanel" condition="izpack.selected.RunaWFE сервер" allowClose="false"/>
         <panel classname="SimpleFinishPanel"/>
