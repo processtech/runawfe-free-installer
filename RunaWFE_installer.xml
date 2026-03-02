@@ -104,6 +104,7 @@
         <variable name="statistic.report.url" value="@{ENV[STATISTIC_REPORT_URL]}"/>
         <variable name="statistic.report.days.after.error"
             value="@{ENV[STATISTIC_REPORT_DAYS_AFTER_ERROR]}"/>
+        <variable name="INSTALLER_EXE" value="@{ENV[INSTALLER_EXE]}"/>
         <variable name="DesktopShortcutCheckboxEnabled" value="true"/>
     </variables>
 
