@@ -187,7 +187,8 @@
                 "altp11-console",
                 "redos8-gui",
                 "redos8-console",
-                "macos-gui"
+                "macos-gui",
+                "win7-gui"
             ]
         }
     ]

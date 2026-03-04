@@ -3,3 +3,5 @@ install.jar
 
 !resources/launch_jre/**/*
 docker/macos/
+docker/win7/
+dist
