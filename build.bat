@@ -27,7 +27,7 @@ if not exist %XML_FILE% (
 )
 
 powershell -Command "Write-Host 'Компилирую %XML_FILE%...' -ForegroundColor Cyan"
-call %COMPILER_PATH% %XML_FILE%
+call %COMPILER_PATH% %XML_FILE% -o dist\install.jar
 
 if %errorlevel% == 0 (
     echo.

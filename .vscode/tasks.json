@@ -53,7 +53,7 @@
             "command": "cmd",
             "args": [
                 "/c",
-                "wrappers\\build_exe.cmd"
+                "wrappers\\izpack2exe\\build_exe.cmd"
             ],
             "group": "build",
             "presentation": {

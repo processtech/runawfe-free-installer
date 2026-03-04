@@ -1,3 +1,3 @@
 @echo off
 call setenv.bat
-start "" "%INSTALLER_EXE%"
+start "" "dist\%INSTALLER_EXE%"
