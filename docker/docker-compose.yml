@@ -128,7 +128,7 @@ services:
       # ОТКЛЮЧАЕМ предварительное выделение места (создаст экономный qcow2)
       ALLOCATE: "N"
       RAM_SIZE: "4G"
-      CPU_CORES: "2"
+      CPU_CORES: "4"
     devices:
       - /dev/kvm
       - /dev/net/tun
