@@ -2,6 +2,5 @@ install.jar
 *.exe
 *.run
 
-!resources/launch_jre/**/*
 docker/macos/
 docker/win7/
