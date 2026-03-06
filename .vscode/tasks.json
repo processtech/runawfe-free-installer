@@ -31,6 +31,27 @@
             }
         },
         {
+            "label": "Create installer.run (Linux)",
+            "type": "shell",
+            "command": "cmd",
+            "args": [
+                "/c",
+                "wrappers\\izpack2app\\build_linux.cmd"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "dedicated",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
             "label": "Run jar in Windows",
             "type": "shell",
             "command": "run-installer.bat",
@@ -92,7 +113,7 @@
                 "+local:docker"
             ],
             "presentation": {
-                "reveal": "silent", // Не открывать терминал, если всё ок
+                "reveal": "silent",
                 "close": true
             }
         },
@@ -108,7 +129,7 @@
                 "run",
                 "--rm",
                 "--service-ports",
-                "${input:serviceSelect}" // Выбор из списка
+                "${input:serviceSelect}"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"

@@ -1,5 +1,6 @@
 install.jar
 *.exe
+*.run
 
 !resources/launch_jre/**/*
 docker/macos/

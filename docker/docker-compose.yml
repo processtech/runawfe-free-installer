@@ -1,12 +1,12 @@
-# Общие настройки для всех сервисов (шаблон)
+# Общие настройки для всех сервисов (шаблон) - теперь только для installer.run
 x-common: &common
   build:
-    context: .. # Чтобы видеть install.jar в корне
+    context: .. # Чтобы видеть dist/installer.run
   stdin_open: true
   tty: true
   volumes:
-    - ../install.jar:/installer/install.jar:ro
-  command: java -Dfile.encoding=UTF-8 -jar /installer/install.jar
+    - ../dist:/installer/dist:ro
+  command: sh -c "/installer/dist/*.run"
 
 # Настройки только для GUI сервисов
 x-gui: &gui
@@ -15,7 +15,7 @@ x-gui: &gui
   volumes:
     - /tmp/.X11-unix:/tmp/.X11-unix
     - /mnt/wslg:/mnt/wslg
-    - ../install.jar:/installer/install.jar:ro
+    - ../dist:/installer/dist:ro
   environment:
     - DISPLAY=:0
     - WAYLAND_DISPLAY=wayland-0
