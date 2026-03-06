@@ -84,61 +84,6 @@
             }
         },
         {
-            "label": "Create docker image for Linux console",
-            "type": "shell",
-            "command": "docker",
-            "args": [
-                "build",
-                "-f",
-                "docker/Dockerfile.ubuntu-java",
-                "-t",
-                "linux-for-izpack",
-                "."
-            ],
-            "group": "build",
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": true,
-                "panel": "dedicated",
-                "showReuseMessage": true,
-                "clear": true
-            },
-            "options": {
-                "cwd": "${workspaceFolder}"
-            }
-        },
-        {
-            "label": "Run jar in Linux console",
-            "type": "shell",
-            "command": "docker",
-            "args": [
-                "run",
-                "--rm",
-                "-it",
-                "-v",
-                "${workspaceFolder}/install.jar:/installer/install.jar:ro",
-                "linux-for-izpack",
-                "java",
-                "-Dfile.encoding=UTF-8",
-                "-jar",
-                "/installer/install.jar"
-            ],
-            "group": "test",
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": true,
-                "panel": "dedicated",
-                "showReuseMessage": true,
-                "clear": true
-            },
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "problemMatcher": []
-        },
-        {
             "label": "Allow X11 Access for docker",
             "type": "shell",
             "command": "wsl",
