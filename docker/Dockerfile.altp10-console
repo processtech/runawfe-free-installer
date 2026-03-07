@@ -1,7 +1,6 @@
 FROM alt:p10
 
 RUN apt-get update && apt-get install -y \
-    java-11-openjdk \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /installer

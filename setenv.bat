@@ -9,4 +9,6 @@ set BUILD_ROOT=C:\runawfe-free-autobuild\build\source\projects\installer\windows
 set SVCNAME=JBAS50SVC
 set STATISTIC_REPORT_URL=https://usagereport.runawfe.org
 set STATISTIC_REPORT_DAYS_AFTER_ERROR=11
-set LAUNCHER_JRE=C:\Users\plete\.jdks\jdk-11.0.29+7-jre
+set WINDOWS_JRE=C:\Users\plete\.jdks\jdk-11.0.29+7-jre
+set LINUX_X64_JRE=C:\Users\plete\.jdks\jre11_x64_linux
+set LINUX_AARCH64_JRE=C:\Users\plete\.jdks\jre11_aarch64_linux

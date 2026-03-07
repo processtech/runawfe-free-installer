@@ -20,7 +20,7 @@ py izpack2exe.py ^
   --output="%PROJECT_ROOT%\dist\%INSTALLER_EXE%" ^
   --with-7z="%IZPACK_WRAPPER%\7za.exe" ^
   --no-upx ^
-  --with-jdk=%LAUNCHER_JRE% ^
+  --with-jdk=%WINDOWS_JRE% ^
   --jvm-args="-Dfile.encoding=UTF-8 -Dconsole.encoding=UTF-8"
 
 if %errorlevel% == 0 (

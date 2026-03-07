@@ -6,7 +6,7 @@ x-common: &common
   tty: true
   volumes:
     - ../dist:/installer/dist:ro
-  command: sh -c "/installer/dist/*.run"
+  command: sh -c "/installer/dist/*x64.run"
 
 # Настройки только для GUI сервисов
 x-gui: &gui
