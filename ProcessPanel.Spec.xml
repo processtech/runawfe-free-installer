@@ -11,6 +11,14 @@
         </executefile>
     </job>
     
+    <job name="Copy JRE Linux">
+        <os family="unix"/>
+        <executefile name="sh">
+            <arg>-c</arg>
+            <arg><![CDATA[mkdir -p "$java.path" && cp -Rp "${JAVA_HOME}/"* "$java.path/"]]></arg>
+        </executefile>
+    </job>
+    
     <onSuccess previous="false" next="true"/>
 
 </izpack:processing>
