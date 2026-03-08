@@ -118,8 +118,34 @@
             }
         },
         {
+            "label": "Prepare for target OS",
+            "type": "shell",
+            "command": "cmd",
+            "args": [
+                "/c",
+                "prepare_for_target_os.cmd",
+                "${input:serviceSelect}"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "dedicated",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        },
+        {
             "label": "Run on target OS",
-            "dependsOn": "Allow X11 Access for docker",
+            "dependsOn": [
+                "Allow X11 Access for docker",
+                "Prepare for target OS"
+            ],
             "type": "shell",
             "command": "wsl",
             "args": [
