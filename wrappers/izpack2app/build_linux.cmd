@@ -62,7 +62,11 @@ if not exist "%JRE_PATH%" (
     exit /b 1
 )
 
-set OUTPUT_RUN=%PROJECT_ROOT%\dist\%WFE_APPNAME%-%WFE_EDITION%-%WFE_VERSION%-%ARCH%.run
+if "%ARCH%"=="x64" (
+    set OUTPUT_RUN=%PROJECT_ROOT%\dist\%INSTALLER_X64RUN%
+) else (
+    set OUTPUT_RUN=%PROJECT_ROOT%\dist\%INSTALLER_AARCH64RUN%
+)
 
 echo.
 powershell -Command "Write-Host 'Создание .run для архитектуры %ARCH%...' -ForegroundColor Cyan"

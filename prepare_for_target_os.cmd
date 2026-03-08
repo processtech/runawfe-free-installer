@@ -2,6 +2,8 @@
 chcp 65001 >nul
 setlocal enabledelayedexpansion
 
+call setenv.bat
+
 set "SERVICE=%~1"
 if "%SERVICE%"=="" (echo ОШИБКА: Не указан сервис. & exit /b 1)
 
@@ -10,9 +12,13 @@ set "TARGET_OS=linux"
 if /i "%SERVICE%"=="win7-gui" set "TARGET_OS=windows"
 if /i "%SERVICE%"=="macos-gui" set "TARGET_OS=macos"
 
-if /i "!TARGET_OS!"=="windows" ( set "TARGET_INSTALLER_PATH=dist\RunaWFE_test-Free-4.6.0.exe"
-) else if /i "!TARGET_OS!"=="macos" ( set "TARGET_INSTALLER_PATH=dist\RunaWFE_test-Free-4.6.0-aarch64.run"
-) else ( set "TARGET_INSTALLER_PATH=dist\RunaWFE_test-Free-4.6.0-x64.run" )
+if /i "!TARGET_OS!"=="windows" (
+    set "TARGET_INSTALLER_PATH=dist\%INSTALLER_EXE%"
+) else if /i "!TARGET_OS!"=="macos" (
+    set "TARGET_INSTALLER_PATH=dist\%INSTALLER_AARCH64RUN%"
+) else (
+    set "TARGET_INSTALLER_PATH=dist\%INSTALLER_X64RUN%"
+)
 
 echo Целевая ОС: !TARGET_OS!
 
