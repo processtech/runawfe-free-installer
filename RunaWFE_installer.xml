@@ -77,7 +77,7 @@
         <variable name="appdata.install.path" value="$appdata\$APP_NAME @{ENV[WFE_EDITION]}"/>
         <variable name="empty" value="значение не может быть пустым."/>
         <variable name="port.invalid"
-            value="указанный адрес не существует. Значение долнжно быть в интервале от 0 до 65535."/>
+            value="Указанный адрес не существует. Значение должно быть в интервале от 0 до 65535."/>
         <variable name="host" value="Хост"/>
         <variable name="port" value="Порт"/>
         <variable name="management.http.port" value="Порт HTTP‑управления"/>
