@@ -154,6 +154,7 @@
                 "docker/docker-compose.yml",
                 "run",
                 "--rm",
+                "--build",
                 "--service-ports",
                 "${input:serviceSelect}"
             ],
