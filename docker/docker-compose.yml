@@ -23,6 +23,8 @@ x-gui: &gui
     - QT_X11_NO_MITSHM=1
     - GDK_BACKEND=x11
     - NO_AT_BRIDGE=1
+  # Сначала инсталлятор, потом mc
+  command: sh -c "/installer/dist/*x64.run; xterm -geometry 140x45 -fa 'Monospace' -fs 12 -e mc /opt /usr/share/applications"
 
 services:
   astra17-gui:
