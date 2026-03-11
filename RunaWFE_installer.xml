@@ -249,7 +249,6 @@
         <variable name="xa.datasource.class" condition="DBMS.Oracle"
             value="oracle.jdbc.driver.OracleDriver"/>
         <variable name="java.path" value="$INSTALL_PATH\$java.subpath"/>
-        <variable name="jboss.http.port" value="8080"/>
         <variable name="platform" value="${SYSTEM[os.arch]}" checkonce="true"/>
         <variable name="webkit.installed" checkonce="true"
             executable="ldconfig"
