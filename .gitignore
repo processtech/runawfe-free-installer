@@ -1,6 +1,3 @@
-install.jar
-*.exe
-*.run
-
+dist
 docker/macos/
 docker/win7/
