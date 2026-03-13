@@ -47,12 +47,14 @@ if not exist %XML_FILE% (
     exit /b 1
 )
 
+set OUTPUT_JAR=dist\install_%TARGET_OS%_%TARGET_ARCH%.jar
+
 powershell -Command "Write-Host 'Компилирую %XML_FILE%...' -ForegroundColor Cyan"
-call %COMPILER_PATH% %XML_FILE% -o dist\install.jar
+call %COMPILER_PATH% %XML_FILE% -o %OUTPUT_JAR%
 
 if %errorlevel% == 0 (
     echo.
-    powershell -Command "Write-Host 'SUCCESS: Компиляция завершена. Файл install.jar создан.' -ForegroundColor Green"
+    powershell -Command "Write-Host 'SUCCESS: Компиляция завершена. Файл %OUTPUT_JAR% создан.' -ForegroundColor Green"
     echo.
     exit /b 0
 ) else (

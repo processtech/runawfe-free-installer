@@ -9,14 +9,6 @@ REM Загрузка переменных окружения
 call "%~dp0..\..\setenv.bat"
 
 set PROJECT_ROOT=%~dp0..\..
-set INPUT_JAR=%PROJECT_ROOT%\dist\install.jar
-
-REM Проверка наличия входного файла
-if not exist "%INPUT_JAR%" (
-    powershell -Command "Write-Host 'ОШИБКА: Файл %INPUT_JAR% не найден!' -ForegroundColor Red"
-    echo Сначала выполните сборку: build.bat
-    exit /b 1
-)
 
 REM Проверка наличия Python
 where python >nul 2>nul
@@ -33,21 +25,30 @@ if not exist "%IZPACK2RUN%" (
     exit /b 1
 )
 
-REM Определение архитектуры (по умолчанию x64)
-set ARCH=x64
+REM Определение архитектуры (по умолчанию x86_64)
+set ARCH=x86_64
 if not "%~1"=="" (
     set ARCH=%~1
 )
 
 REM Проверка допустимости архитектуры
-if not "%ARCH%"=="x64" if not "%ARCH%"=="aarch64" (
+if not "%ARCH%"=="x86_64" if not "%ARCH%"=="aarch64" (
     powershell -Command "Write-Host 'ОШИБКА: Неизвестная архитектура: %ARCH%' -ForegroundColor Red"
     exit /b 1
 )
 
+set INPUT_JAR=%PROJECT_ROOT%\dist\install_linux_%ARCH%.jar
+
+REM Проверка наличия входного файла
+if not exist "%INPUT_JAR%" (
+    powershell -Command "Write-Host 'ОШИБКА: Файл %INPUT_JAR% не найден!' -ForegroundColor Red"
+    echo Сначала выполните сборку: build.bat linux %ARCH%
+    exit /b 1
+)
+
 REM Выбор JRE в зависимости от архитектуры
-if "%ARCH%"=="x64" (
-    set JRE_PATH=%LINUX_X64_JRE%
+if "%ARCH%"=="x86_64" (
+    set JRE_PATH=%LINUX_X86_64_JRE%
 ) else (
     set JRE_PATH=%LINUX_AARCH64_JRE%
 )
@@ -62,8 +63,8 @@ if not exist "%JRE_PATH%" (
     exit /b 1
 )
 
-if "%ARCH%"=="x64" (
-    set OUTPUT_RUN=%PROJECT_ROOT%\dist\%INSTALLER_X64RUN%
+if "%ARCH%"=="x86_64" (
+    set OUTPUT_RUN=%PROJECT_ROOT%\dist\%INSTALLER_X86_64RUN%
 ) else (
     set OUTPUT_RUN=%PROJECT_ROOT%\dist\%INSTALLER_AARCH64RUN%
 )

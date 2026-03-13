@@ -7,33 +7,47 @@ call setenv.bat
 set "SERVICE=%~1"
 if "%SERVICE%"=="" (echo ОШИБКА: Не указан сервис. & exit /b 1)
 
-REM 1. Определяем тип ОС и пути
+REM 1. Определяем тип ОС и архитектуру
 set "TARGET_OS=linux"
-if /i "%SERVICE%"=="win7-gui" set "TARGET_OS=windows"
-if /i "%SERVICE%"=="macos-gui" set "TARGET_OS=macos"
+set "TARGET_ARCH=x86_64"
+if /i "%SERVICE%"=="win7-gui" (
+    set "TARGET_OS=windows"
+    set "TARGET_ARCH=x86_64"
+)
+if /i "%SERVICE%"=="macos-gui" (
+    set "TARGET_OS=macos"
+    set "TARGET_ARCH=aarch64"
+)
 
 if /i "!TARGET_OS!"=="windows" (
     set "TARGET_INSTALLER_PATH=dist\%INSTALLER_EXE%"
-) else if /i "!TARGET_OS!"=="macos" (
-    set "TARGET_INSTALLER_PATH=dist\%INSTALLER_AARCH64RUN%"
 ) else (
-    set "TARGET_INSTALLER_PATH=dist\%INSTALLER_X64RUN%"
+    rem Linux (или другие ОС) - выбираем по архитектуре
+    if /i "!TARGET_ARCH!"=="x86_64" (
+        set "TARGET_INSTALLER_PATH=dist\%INSTALLER_X86_64RUN%"
+    ) else (
+        set "TARGET_INSTALLER_PATH=dist\%INSTALLER_AARCH64RUN%"
+    )
 )
 
 echo Целевая ОС: !TARGET_OS!
+echo Целевая архитектура: !TARGET_ARCH!
 
-REM 2. Проверяем нужно ли пересобирать install.jar
+REM 2. Определяем имя JAR для целевой платформы
+set "TARGET_JAR=dist\install_!TARGET_OS!_!TARGET_ARCH!.jar"
+
+REM Проверяем нужно ли пересобирать JAR
 set NEED_BUILD=0
-if not exist "dist\install.jar" (
+if not exist "!TARGET_JAR!" (
     set NEED_BUILD=1
 ) else (
-    rem если есть хоть один XML в корне или любые файлы в resources (рекурсивно) новее install.jar, присваиваем "1"
-    for /f %%A in ('powershell -Command "$files = Get-ChildItem *.xml*, resources -Recurse; $maxDate = ($files | Measure-Object -Property LastWriteTime -Maximum).Maximum; if ($maxDate -gt (Get-Item 'dist\install.jar').LastWriteTime) { 1 } else { 0 }"') do set NEED_BUILD=%%A
+    rem если есть хоть один XML в корне или любые файлы в resources (рекурсивно) новее JAR, присваиваем "1"
+    for /f %%A in ('powershell -Command "$files = Get-ChildItem *.xml*, resources -Recurse; $maxDate = ($files | Measure-Object -Property LastWriteTime -Maximum).Maximum; if ($maxDate -gt (Get-Item '!TARGET_JAR!').LastWriteTime) { 1 } else { 0 }"') do set NEED_BUILD=%%A
 )
 
 if "!NEED_BUILD!"=="1" (
-    echo Сборка инсталлятора...
-    call build.bat
+    echo Сборка инсталлятора для !TARGET_OS! !TARGET_ARCH!...
+    call build.bat !TARGET_OS! !TARGET_ARCH!
     if errorlevel 1 exit /b 1
 ) else (
     echo Сборка не требуется.
@@ -50,7 +64,7 @@ if !NEED_BUILD!==1 (
     set NEED_WRAP=1
 ) else (
     rem Только если JAR не менялся и EXE на месте, проверяем даты через PowerShell
-    for /f %%A in ('powershell -Command "if ((Get-Item 'dist\install.jar').LastWriteTime -gt (Get-Item '!TARGET_INSTALLER_PATH!').LastWriteTime) { 1 } else { 0 }"') do set NEED_WRAP=%%A
+    for /f %%A in ('powershell -Command "if ((Get-Item '!TARGET_JAR!').LastWriteTime -gt (Get-Item '!TARGET_INSTALLER_PATH!').LastWriteTime) { 1 } else { 0 }"') do set NEED_WRAP=%%A
 )
 
 if "!NEED_WRAP!"=="1" (
@@ -58,7 +72,15 @@ if "!NEED_WRAP!"=="1" (
     if /i "!TARGET_OS!"=="windows" (
         call wrappers\izpack2exe\build_exe.cmd
     ) else if /i "!TARGET_OS!"=="linux" (
-        call wrappers\izpack2app\build_linux.cmd x64
+        rem Передаём архитектуру в build_linux.cmd (x86_64 или aarch64)
+        if /i "!TARGET_ARCH!"=="x86_64" (
+            call wrappers\izpack2app\build_linux.cmd x86_64
+        ) else (
+            call wrappers\izpack2app\build_linux.cmd aarch64
+        )
+    ) else if /i "!TARGET_OS!"=="macos" (
+        echo Упаковка для macOS не реализована.
+        exit /b 1
     )
 ) else (
     echo Упаковка не требуется.

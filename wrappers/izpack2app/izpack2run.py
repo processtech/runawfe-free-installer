@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 IzPack2Run - Create a self-extracting Linux .run installer with bundled JRE.
-Usage: python izpack2run.py --jar <install.jar> --jre <jre_dir> --output <output.run> [--arch x64|aarch64]
+Usage: python izpack2run.py --jar <input.jar> --jre <jre_dir> --output <output.run> [--arch x86_64|aarch64]
 """
 import os
 import sys
@@ -11,9 +11,9 @@ import shutil
 import subprocess
 import tarfile
 
-def create_run(jar_path, jre_path, output_path, arch='x64'):
+def create_run(jar_path, jre_path, output_path, arch='x86_64'):
     """
-    Create a self-extracting .run file containing JRE and install.jar.
+    Create a self-extracting .run file containing JRE and the installer JAR.
     """
     # Validate inputs
     if not os.path.isfile(jar_path):
@@ -50,7 +50,7 @@ if [ ! -x "$JAVA_EXEC" ]; then
     echo "Error: Bundled JRE not found or not executable." >&2
     exit 1
 fi
-"$JAVA_EXEC" -Dfile.encoding=UTF-8 -jar "$SCRIPT_DIR/install.jar" "$@"
+"$JAVA_EXEC" -Dfile.encoding=UTF-8 -jar -DTRACE=true "$SCRIPT_DIR/install.jar" "$@"
 """)
         os.chmod(launch_script, 0o755)
         
@@ -89,10 +89,10 @@ __ARCHIVE__
 
 def main():
     parser = argparse.ArgumentParser(description='Create Linux .run installer with bundled JRE')
-    parser.add_argument('--jar', required=True, help='Path to install.jar')
+    parser.add_argument('--jar', required=True, help='Path to input JAR (e.g., install_linux_x86_64.jar)')
     parser.add_argument('--jre', required=True, help='Path to JRE directory')
     parser.add_argument('--output', required=True, help='Output .run file path')
-    parser.add_argument('--arch', default='x64', choices=['x64', 'aarch64'], help='Target architecture')
+    parser.add_argument('--arch', default='x86_64', choices=['x86_64', 'aarch64'], help='Target architecture')
     args = parser.parse_args()
     
     try:
