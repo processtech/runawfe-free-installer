@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<izpack:installation version="5.0"
+    xmlns:izpack="http://izpack.org/schema/installation"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://izpack.org/schema/installation http://izpack.org/schema/5.0/izpack-installation-5.0.xsd">
+
+    <packs>
+
+        <pack name="Серверные компоненты"
+            required="no" installGroups="Администратор,Аналитик" condition="!Usertype.User">
+            <description/>
+        </pack>
+
+        <pack name="RunaWFE сервер" required="yes" parent="Серверные компоненты" preselected="yes"
+            installGroups="Администратор" condition="Usertype.Administrator">
+            <file os="unix" src="resources\images\unix\Cs_20x20_256.png"
+                targetdir="$INSTALL_PATH/$images.subpath">
+            </file>
+            <description>Основной сервер, предназначенный для многопользовательской работы</description>
+            <updatecheck>
+                <include name="$server.subpath\standalone\wfe.custom\wfe.custom.installation.properties"/>
+                <include name="$server.subpath\standalone\wfe.custom\wfe.custom.system.properties"/>
+            </updatecheck>
+        </pack>
+
+        <pack name="RunaWFE симулятор" required="no" parent="Серверные компоненты"
+            installGroups="Аналитик" condition="Usertype.Analyst">
+            <file os="unix" src="resources\images\unix\Si_20x20_256.png"
+                targetdir="$INSTALL_PATH/$images.subpath">
+            </file>
+            <description>
+                Сервер-симулятор - адаптированная для для рабочей станции версия RunaWFE сервера. Предназначена для знакомства с системой, тестироваия и работы одного пользователя. Логин администратора по умолчанию - "Administrator", пароль - "wf".
+            </description>
+            <updatecheck>
+                <exclude name="$java.subpath/**"/>
+            </updatecheck>
+        </pack>
+
+        <pack name="Сервер приложений" parent="Серверные компоненты" hidden="true"
+            condition="izpack.selected.RunaWFE симулятор|izpack.selected.RunaWFE сервер">
+            <file os="unix" src="@{ENV[BUILD_ROOT_LINUX]}/server/runawfe-wildfly-${WFE.version}.zip"
+                targetdir="$INSTALL_PATH/$appserver.subpath" unpack="true" override="true">
+                <archivefileset dir="wildfly" />
+            </file>
+            <file src="resources\standalone.xml" override="true"
+                targetdir="$standalone.path\configuration">
+            </file>
+            <parsable targetfile="$standalone.path\configuration\standalone.xml" type="ant"/>
+            <description/>
+        </pack>
+
+        <pack name="Демо-конфигурация" required="no" parent="Серверные компоненты"
+            installGroups="Аналитик"
+            condition="Usertype.Analyst+izpack.selected.RunaWFE симулятор+!simulator.db.exists">
+            <description>База данных с демонстрационными пользователями и процессами. Недоступна для установки, если база данных уже существует.</description>
+            <updatecheck>
+                <exclude name="$java.subpath/**"/>
+            </updatecheck>
+        </pack>
+
+        <pack name="Отправка статистики" required="no" parent="Серверные компоненты"
+            condition="izpack.selected.RunaWFE симулятор|izpack.selected.RunaWFE сервер">
+            <file
+                src="resources\wfe.custom.system.properties"
+                targetdir="$INSTALL_PATH\$appserver.subpath\standalone\wfe.custom"/>
+            <description>Сообщать техническую информацию о работе системы. Эти данные требуются нам для развития и улучшения системы.</description>
+        </pack>
+
+        <pack name="Среда разработки" required="no" preselected="yes"
+            installGroups="Аналитик" condition="Usertype.Analyst">
+            <file os="unix" src="resources\images\unix\e_20x20_256.png"
+                targetdir="$INSTALL_PATH/$images.subpath">
+            </file>
+            <file os="unix" src="@{ENV[BUILD_ROOT_LINUX]}\gpd\RunaWFE_DeveloperStudio-linux.gtk.${target.arch}.zip"
+                targetdir="$INSTALL_PATH/$gpd.subpath" unpack="true" override="true">
+                <archivefileset dir="." />
+            </file>
+            <file src="resources\runa-gpd.ini"
+                targetdir="$INSTALL_PATH/$gpd.subpath" override="true">
+            </file>
+            <parsable targetfile="$INSTALL_PATH/$gpd.subpath/runa-gpd.ini"/>
+            <description>Приложение, предназначенное для разработки процессов</description>
+            <updatecheck>
+                <exclude name="$java.subpath/**"/>
+            </updatecheck>
+        </pack>
+
+        <pack name="Оповещаетель задач" required="no" preselected="no"
+            installGroups="Пользователь,Аналитик" condition="@!Usertype.Administrator || aarch64">
+            <file os="unix" src="resources\images\unix\t_20x20_256.png"
+                targetdir="$INSTALL_PATH/$images.subpath">
+            </file>
+            <file os="unix" src="@{ENV[BUILD_ROOT_LINUX]}\rtn\runawfe-rtn-linux64-${WFE.version}.zip"
+                targetdir="$INSTALL_PATH/$rtn.subpath" unpack="true" override="true">
+                <archivefileset dir="." />
+            </file>
+            <singlefile src="resources\rtn.properties" target="$USER_HOME\config.properties"
+                override="askfalse">
+            </singlefile>
+            <parsable targetfile="$USER_HOME\config.properties" type="javaprop">
+            </parsable>
+            <description>
+                Приложение, предназначенное для проверки новых задач пользователей. Для установки этого компонента вам потребуется адрес основного RunaWFE сервера (хост и порт). Возьмите его у вашего системного администратора, прежде чем продолжать установку.
+            </description>
+            <updatecheck>
+                <exclude name="$java.subpath/**"/>
+            </updatecheck>
+        </pack>
+
+        <pack name="Ярлык веб-интерфейса RunaWFE сервера" required="no" preselected="no"
+            installGroups="Пользователь,Аналитик" condition="!Usertype.Administrator">
+            <file os="unix" src="resources\images\unix\C_20x20_256.png"
+                targetdir="$INSTALL_PATH/$images.subpath">
+            </file>
+            <file os="unix" src="resources\runawfe.html" override="true"
+                targetdir="$INSTALL_PATH/$web.interface.subpath">
+            </file>
+            <parsable targetfile="$INSTALL_PATH/$web.interface.subpath/runawfe.html"/>
+            <description>
+                Ссылка на веб-интерфейс основного RunaWFE сервера. Для установки этого компонента вам потребуется адрес основного RunaWFE сервера (хост и порт). Возьмите его у вашего системного администратора, прежде чем продолжать установку. Далее можно будет выбрать создание ярлыка на рабочем столе и в главном меню.
+            </description>
+            <updatecheck>
+                <exclude name="$java.subpath/**"/>
+            </updatecheck>
+        </pack>
+
+        <pack name="Обязательные компоненты" hidden="true" required="yes">
+            <file os="unix" src="resources\images\unix\wf_48x128.png"
+                targetdir="$INSTALL_PATH/$images.subpath">
+            </file>
+            <file src="properties" targetdir="$INSTALL_PATH" override="true"/>
+            <parsable targetfile="$INSTALL_PATH/properties"/>
+            <description></description>
+        </pack>
+
+    </packs>
+
+</izpack:installation>

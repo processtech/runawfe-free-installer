@@ -7,7 +7,8 @@ set INSTALLER_AARCH64RUN=%WFE_APPNAME%-%WFE_EDITION%-%WFE_VERSION%-aarch64.run
 set COMPILER_PATH="C:\Program Files\IzPack\bin\compile.bat"
 set XML_FILE=RunaWFE_installer.xml
 set IZPACK_OPTS=-Dfile.encoding=UTF-8
-set BUILD_ROOT=C:\runawfe-free-autobuild\build\source\projects\installer\windows\target\NSIS7\src
+set BUILD_ROOT_WINDOWS=C:\runawfe-free-autobuild\build\source\projects\installer\windows\target\NSIS7\src
+set BUILD_ROOT_LINUX=C:\runawfe-professional-autobuild\results\bin
 set SVCNAME=JBAS50SVC
 set STATISTIC_REPORT_URL=https://usagereport.runawfe.org
 set STATISTIC_REPORT_DAYS_AFTER_ERROR=11

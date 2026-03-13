@@ -16,14 +16,11 @@
             <file os="windows" src="resources\images\windows\Cs_20x20_256.ico"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
-            <file os="unix" src="resources\images\unix\Cs_20x20_256.png"
-                targetdir="$INSTALL_PATH/$images.subpath">
-            </file>
-            <fileset dir="@{ENV[BUILD_ROOT]}\wfe-server-config\standalone\deployments"
+            <fileset dir="@{ENV[BUILD_ROOT_WINDOWS]}\wfe-server-config\standalone\deployments"
                 override="true"
                 targetdir="$INSTALL_PATH\$server.subpath\standalone\deployments">
             </fileset>
-            <fileset dir="@{ENV[BUILD_ROOT]}\wildfly\app-server\standalone\wfe.data-sources"
+            <fileset dir="@{ENV[BUILD_ROOT_WINDOWS]}\wildfly\app-server\standalone\wfe.data-sources"
                 override="true"
                 targetdir="$INSTALL_PATH\$server.subpath\standalone\wfe.data-sources">
             </fileset>
@@ -59,9 +56,6 @@
             <file os="windows" src="resources\images\windows\Si_20x20_256.ico"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
-            <file os="unix" src="resources\images\unix\Si_20x20_256.png"
-                targetdir="$INSTALL_PATH/$images.subpath">
-            </file>
             <file os="windows" src="runnable\simulator_install_cleanup.bat" override="true"
                 targetdir="$INSTALL_PATH/$simulator.subpath">
             </file>
@@ -72,7 +66,7 @@
                 type="bin" stage="postinstall" failure="ignore">
                 <os family="windows"/>
             </executable>
-            <fileset dir="@{ENV[BUILD_ROOT]}\wfe-simulator" override="true"
+            <fileset dir="@{ENV[BUILD_ROOT_WINDOWS]}\wfe-simulator" override="true"
                 excludes="standalone\data\demo-db\**"
                 targetdir="$INSTALL_PATH/$simulator.subpath">
             </fileset>
@@ -99,14 +93,14 @@
 
         <pack name="Сервер приложений" parent="Серверные компоненты" hidden="true"
             condition="izpack.selected.RunaWFE симулятор|izpack.selected.RunaWFE сервер">
-            <fileset dir="@{ENV[BUILD_ROOT]}\wfe-server-jboss" override="true"
+            <fileset dir="@{ENV[BUILD_ROOT_WINDOWS]}\wfe-server-jboss" override="true"
                 excludes="standalone\** bin\standalone.conf.bat"
                 targetdir="$INSTALL_PATH/$appserver.subpath">
             </fileset>
-            <fileset dir="@{ENV[BUILD_ROOT]}\jboss-native" override="true"
+            <fileset dir="@{ENV[BUILD_ROOT_WINDOWS]}\jboss-native" override="true"
                 targetdir="$INSTALL_PATH/$appserver.subpath/bin">
             </fileset>
-            <fileset dir="@{ENV[BUILD_ROOT]}\wfe-server-jboss\standalone\configuration"
+            <fileset dir="@{ENV[BUILD_ROOT_WINDOWS]}\wfe-server-jboss\standalone\configuration"
                 override="true"
                 excludes="standalone.xml"
                 targetdir="$standalone.path\configuration">
@@ -115,7 +109,7 @@
                 targetdir="$standalone.path\configuration">
             </file>
             <parsable targetfile="$standalone.path\configuration\standalone.xml" type="ant"/>
-            <fileset dir="@{ENV[BUILD_ROOT]}\wfe-server-jboss\standalone\deployments"
+            <fileset dir="@{ENV[BUILD_ROOT_WINDOWS]}\wfe-server-jboss\standalone\deployments"
                 override="true"
                 targetdir="$standalone.path\deployments">
             </fileset>
@@ -138,7 +132,7 @@
         <pack name="Демо-конфигурация" required="no" parent="Серверные компоненты"
             installGroups="Аналитик"
             condition="Usertype.Analyst+izpack.selected.RunaWFE симулятор+!simulator.db.exists">
-            <fileset dir="@{ENV[BUILD_ROOT]}\wfe-simulator\standalone\data\demo-db"
+            <fileset dir="@{ENV[BUILD_ROOT_WINDOWS]}\wfe-simulator\standalone\data\demo-db"
                 override="true"
                 targetdir="$standalone.path\data\demo-db">
             </fileset>
@@ -175,9 +169,6 @@
             <file os="windows" src="resources\images\windows\e_20x20_256.ico"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
-            <file os="unix" src="resources\images\unix\e_20x20_256.png"
-                targetdir="$INSTALL_PATH/$images.subpath">
-            </file>
             <file os="windows" src="runnable\studio_install_cleanup.bat"
                 targetdir="$INSTALL_PATH/$gpd.subpath">
             </file>
@@ -185,7 +176,7 @@
                 type="bin" stage="postinstall" failure="ignore">
                 <os family="windows"/>
             </executable>
-            <fileset dir="@{ENV[BUILD_ROOT]}\gpd\64\gpd-${WFE.version}" override="true"
+            <fileset dir="@{ENV[BUILD_ROOT_WINDOWS]}\gpd\64\gpd-${WFE.version}" override="true"
                 targetdir="$INSTALL_PATH/$gpd.subpath">
                 <!-- Не устанавливаем демо-процессы в студию -->
                 <exclude name="demo-workspace/**"/>
@@ -206,10 +197,7 @@
             <file os="windows" src="resources\images\windows\t_20x20_256.ico"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
-            <file os="unix" src="resources\images\unix\t_20x20_256.png"
-                targetdir="$INSTALL_PATH/$images.subpath">
-            </file>
-            <fileset dir="@{ENV[BUILD_ROOT]}\rtn-${WFE.version}\64" override="true"
+            <fileset dir="@{ENV[BUILD_ROOT_WINDOWS]}\rtn-${WFE.version}\64" override="true"
                 targetdir="$INSTALL_PATH/$rtn.subpath">
                 <exclude name="run.bat"/>
             </fileset>
@@ -237,9 +225,6 @@
             <file os="windows" src="resources\images\windows\C_20x20_256.ico"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
-            <file os="unix" src="resources\images\unix\C_20x20_256.png"
-                targetdir="$INSTALL_PATH/$images.subpath">
-            </file>
             <file os="windows" src="resources\runawfe.html" override="true"
                 targetdir="$INSTALL_PATH/$web.interface.subpath">
             </file>
@@ -254,9 +239,6 @@
 
         <pack name="Обязательные компоненты" hidden="true" required="yes">
             <file os="windows" src="resources\images\windows\wf_48x128.ico"
-                targetdir="$INSTALL_PATH/$images.subpath">
-            </file>
-            <file os="unix" src="resources\images\unix\wf_48x128.png"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
             <file src="properties" targetdir="$INSTALL_PATH" override="true"/>

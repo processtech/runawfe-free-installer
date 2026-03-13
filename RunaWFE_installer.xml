@@ -72,6 +72,7 @@
 
     <variables>
         <variable name="WFE.version" value="@{ENV[WFE_VERSION]}"/>
+        <variable name="target.arch" value="@{ENV[TARGET_ARCH]}"/>
         <variable name="TargetPanel.dir.windows" value="${DEFAULT_INSTALL_PATH} @{ENV[WFE_EDITION]}"/>
         <variable name="TargetPanel.dir.unix" value="/opt/${APP_NAME}-@{ENV[WFE_EDITION]}"/>
         <variable name="appdata.install.path" value="$appdata\$APP_NAME @{ENV[WFE_EDITION]}"/>
@@ -249,7 +250,7 @@
         <variable name="xa.datasource.class" condition="DBMS.Oracle"
             value="oracle.jdbc.driver.OracleDriver"/>
         <variable name="java.path" value="$INSTALL_PATH$FILE_SEPARATOR$java.subpath"/>
-        <variable name="platform" value="${SYSTEM[os.arch]}" checkonce="true"/>
+        <variable name="arch" value="${SYSTEM[os.arch]}" checkonce="true"/>
         <variable name="webkit.installed" checkonce="true"
             executable="ldconfig"
             type="process"
@@ -336,15 +337,15 @@
         </condition>
 
         <condition type="variable" id="x86_64">
-            <name>platform</name>
+            <name>arch</name>
             <value>x86_64</value>
         </condition>
         <condition type="variable" id="amd64">
-            <name>platform</name>
+            <name>arch</name>
             <value>amd64</value>
         </condition>
         <condition type="variable" id="aarch64">
-            <name>platform</name>
+            <name>arch</name>
             <value>aarch64</value>
         </condition>
         <condition type="variable" id="webkit.installed">
@@ -384,7 +385,7 @@
     </panels>
 
     <packs>
-        <refpack file="packs.xml"/>
+        <refpack file="packs_@{ENV[TARGET_OS]}.xml"/>
     </packs>
 
 </izpack:installation>
