@@ -52,23 +52,6 @@
             }
         },
         {
-            "label": "Run jar in Windows",
-            "type": "shell",
-            "command": "run-installer.bat",
-            "group": "test",
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": false,
-                "panel": "shared",
-                "showReuseMessage": true,
-                "clear": false
-            },
-            "options": {
-                "cwd": "${workspaceFolder}"
-            }
-        },
-        {
             "label": "Convert to EXE",
             "type": "shell",
             "command": "cmd",
