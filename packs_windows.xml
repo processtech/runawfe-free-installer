@@ -13,7 +13,7 @@
 
         <pack name="RunaWFE сервер" required="yes" parent="Серверные компоненты" preselected="yes"
             installGroups="Администратор" condition="Usertype.Administrator">
-            <file os="windows" src="resources\images\windows\Cs_20x20_256.ico"
+            <file src="resources\images\windows\Cs_20x20_256.ico"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
             <fileset dir="@{ENV[BUILD_ROOT_WINDOWS]}\wfe-server-config\standalone\deployments"
@@ -40,7 +40,7 @@
             <executable
                 targetfile="$INSTALL_PATH\$server.subpath\remove_server_service.bat"
                 type="bin" stage="uninstall" failure="ignore">
-                <os family="windows"/>
+                
             </executable>
             <description>Основной сервер, предназначенный для многопользовательской работы</description>
             <updatecheck>
@@ -53,10 +53,10 @@
 
         <pack name="RunaWFE симулятор" required="no" parent="Серверные компоненты"
             installGroups="Аналитик" condition="Usertype.Analyst">
-            <file os="windows" src="resources\images\windows\Si_20x20_256.ico"
+            <file src="resources\images\windows\Si_20x20_256.ico"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
-            <file os="windows" src="runnable\simulator_install_cleanup.bat" override="true"
+            <file src="runnable\simulator_install_cleanup.bat" override="true"
                 targetdir="$INSTALL_PATH/$simulator.subpath">
             </file>
             <parsable
@@ -64,21 +64,21 @@
             <executable
                 targetfile="$INSTALL_PATH/$simulator.subpath/simulator_install_cleanup.bat"
                 type="bin" stage="postinstall" failure="ignore">
-                <os family="windows"/>
+                
             </executable>
             <fileset dir="@{ENV[BUILD_ROOT_WINDOWS]}\wfe-simulator" override="true"
                 excludes="standalone\data\demo-db\**"
                 targetdir="$INSTALL_PATH/$simulator.subpath">
             </fileset>
-            <file os="windows" src="resources\simulator.html" override="true"
+            <file src="resources\simulator.html" override="true"
                 targetdir="$INSTALL_PATH/$simulator.subpath">
             </file>
             <parsable targetfile="$INSTALL_PATH/$simulator.subpath/simulator.html"/>
-            <file os="windows" src="runnable\run_simulaton.bat"
+            <file src="runnable\run_simulaton.bat"
                 targetdir="$INSTALL_PATH/$simulator.subpath/bin">
             </file>
             <parsable targetfile="$INSTALL_PATH/$simulator.subpath/bin/run_simulaton.bat"/>
-            <file os="windows" src="runnable\stop_simulation.bat"
+            <file src="runnable\stop_simulation.bat"
                 targetdir="$INSTALL_PATH/$simulator.subpath/bin">
             </file>
             <parsable targetfile="$INSTALL_PATH/$simulator.subpath/bin/stop_simulation.bat"/>
@@ -124,7 +124,7 @@
                 <args>
                     <arg value="install"/>
                 </args>
-                <os family="windows"/>
+                
             </executable>
             <description/>
         </pack>
@@ -166,15 +166,15 @@
 
         <pack name="Среда разработки" required="no" preselected="yes"
             installGroups="Аналитик" condition="Usertype.Analyst">
-            <file os="windows" src="resources\images\windows\e_20x20_256.ico"
+            <file src="resources\images\windows\e_20x20_256.ico"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
-            <file os="windows" src="runnable\studio_install_cleanup.bat"
+            <file src="runnable\studio_install_cleanup.bat"
                 targetdir="$INSTALL_PATH/$gpd.subpath">
             </file>
             <executable targetfile="$INSTALL_PATH/$gpd.subpath/studio_install_cleanup.bat"
                 type="bin" stage="postinstall" failure="ignore">
-                <os family="windows"/>
+                
             </executable>
             <fileset dir="@{ENV[BUILD_ROOT_WINDOWS]}\gpd\64\gpd-${WFE.version}" override="true"
                 targetdir="$INSTALL_PATH/$gpd.subpath">
@@ -194,18 +194,18 @@
 
         <pack name="Оповещаетель задач" required="no" preselected="no"
             installGroups="Пользователь,Аналитик" condition="!Usertype.Administrator">
-            <file os="windows" src="resources\images\windows\t_20x20_256.ico"
+            <file src="resources\images\windows\t_20x20_256.ico"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
             <fileset dir="@{ENV[BUILD_ROOT_WINDOWS]}\rtn-${WFE.version}\64" override="true"
                 targetdir="$INSTALL_PATH/$rtn.subpath">
                 <exclude name="run.bat"/>
             </fileset>
-            <file os="windows" src="runnable\rtn.bat" override="true"
+            <file src="runnable\rtn.bat" override="true"
                 targetdir="$INSTALL_PATH/$rtn.subpath">
             </file>
             <parsable targetfile="$INSTALL_PATH\$rtn.subpath\rtn.bat">
-                <os family="windows"/>
+                
             </parsable>
             <singlefile src="resources\rtn.properties" target="$USER_HOME\config.properties"
                 override="askfalse">
@@ -222,10 +222,10 @@
 
         <pack name="Ярлык веб-интерфейса RunaWFE сервера" required="no" preselected="no"
             installGroups="Пользователь,Аналитик" condition="!Usertype.Administrator">
-            <file os="windows" src="resources\images\windows\C_20x20_256.ico"
+            <file src="resources\images\windows\C_20x20_256.ico"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
-            <file os="windows" src="resources\runawfe.html" override="true"
+            <file src="resources\runawfe.html" override="true"
                 targetdir="$INSTALL_PATH/$web.interface.subpath">
             </file>
             <parsable targetfile="$INSTALL_PATH/$web.interface.subpath/runawfe.html"/>
@@ -238,26 +238,26 @@
         </pack>
 
         <pack name="Обязательные компоненты" hidden="true" required="yes">
-            <file os="windows" src="resources\images\windows\wf_48x128.ico"
+            <file src="resources\images\windows\wf_48x128.ico"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
             <file src="properties" targetdir="$INSTALL_PATH" override="true"/>
             <parsable targetfile="$INSTALL_PATH/properties"/>
-            <file os="windows" src="runnable\update_cleanup.bat" override="true"
+            <file src="runnable\update_cleanup.bat" override="true"
                 targetdir="$INSTALL_PATH">
             </file>
             <parsable targetfile="$INSTALL_PATH\update_cleanup.bat">
-                <os family="windows"/>
+                
             </parsable>
             <executable targetfile="$INSTALL_PATH\update_cleanup.bat"
                 type="bin" stage="postinstall" failure="ignore">
-                <os family="windows"/>
+                
             </executable>
-            <file os="windows" src="runnable\uninstall.bat" override="true"
+            <file src="runnable\uninstall.bat" override="true"
                 targetdir="$INSTALL_PATH\Uninstaller">
             </file>
             <parsable targetfile="$INSTALL_PATH\Uninstaller\uninstall.bat">
-                <os family="windows"/>
+                
             </parsable>
             <description></description>
         </pack>
