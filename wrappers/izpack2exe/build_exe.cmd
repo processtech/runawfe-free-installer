@@ -1,5 +1,6 @@
 @echo off
 chcp 65001 >nul
+setlocal enabledelayedexpansion
 
 echo.
 powershell -Command "Write-Host 'Конвертация JAR → EXE...' -ForegroundColor Yellow"
@@ -9,7 +10,9 @@ set PROJECT_ROOT=%~dp0..\..
 
 call "%PROJECT_ROOT%\setenv.bat"
 
-set INSTALL_JAR=%PROJECT_ROOT%\dist\install.jar
+call "%PROJECT_ROOT%\set_output_jar.bat" windows x86_64
+if errorlevel 1 exit /b 1
+set INSTALL_JAR=%PROJECT_ROOT%\%OUTPUT_JAR%
 set IZPACK_WRAPPER=C:\Program Files\IzPack\utils\wrappers\izpack2exe
 cd /d "%~dp0"
 

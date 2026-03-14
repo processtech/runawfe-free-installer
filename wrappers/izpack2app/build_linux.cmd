@@ -37,7 +37,10 @@ if not "%ARCH%"=="x86_64" if not "%ARCH%"=="aarch64" (
     exit /b 1
 )
 
-set INPUT_JAR=%PROJECT_ROOT%\dist\install_linux_%ARCH%.jar
+REM Определяем имя JAR для Linux и указанной архитектуры
+call "%PROJECT_ROOT%\set_output_jar.bat" linux %ARCH%
+if errorlevel 1 exit /b 1
+set INPUT_JAR=%PROJECT_ROOT%\%OUTPUT_JAR%
 
 REM Проверка наличия входного файла
 if not exist "%INPUT_JAR%" (

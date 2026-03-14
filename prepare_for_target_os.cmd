@@ -22,7 +22,6 @@ if /i "%SERVICE%"=="macos-gui" (
 if /i "!TARGET_OS!"=="windows" (
     set "TARGET_INSTALLER_PATH=dist\%INSTALLER_EXE%"
 ) else (
-    rem Linux (или другие ОС) - выбираем по архитектуре
     if /i "!TARGET_ARCH!"=="x86_64" (
         set "TARGET_INSTALLER_PATH=dist\%INSTALLER_X86_64RUN%"
     ) else (
@@ -34,19 +33,20 @@ echo Целевая ОС: !TARGET_OS!
 echo Целевая архитектура: !TARGET_ARCH!
 
 REM 2. Определяем имя JAR для целевой платформы
-set "TARGET_JAR=dist\install_!TARGET_OS!_!TARGET_ARCH!.jar"
+call set_output_jar.bat !TARGET_OS! !TARGET_ARCH!
+if errorlevel 1 exit /b 1
 
 REM Проверяем нужно ли пересобирать JAR
 set NEED_BUILD=0
-if not exist "!TARGET_JAR!" (
+if not exist "%OUTPUT_JAR%" (
     set NEED_BUILD=1
 ) else (
     rem если есть хоть один XML в корне или любые файлы в resources (рекурсивно) новее JAR, присваиваем "1"
-    for /f %%A in ('powershell -Command "$files = Get-ChildItem *.xml*, resources -Recurse; $maxDate = ($files | Measure-Object -Property LastWriteTime -Maximum).Maximum; if ($maxDate -gt (Get-Item '!TARGET_JAR!').LastWriteTime) { 1 } else { 0 }"') do set NEED_BUILD=%%A
+    for /f %%A in ('powershell -Command "$files = Get-ChildItem *.xml*, resources -Recurse; $maxDate = ($files | Measure-Object -Property LastWriteTime -Maximum).Maximum; if ($maxDate -gt (Get-Item '%OUTPUT_JAR%').LastWriteTime) { 1 } else { 0 }"') do set NEED_BUILD=%%A
 )
 
 if "!NEED_BUILD!"=="1" (
-    echo Сборка инсталлятора для !TARGET_OS! !TARGET_ARCH!...
+    echo Компиляция инсталлятора для !TARGET_OS! !TARGET_ARCH!...
     call build.bat !TARGET_OS! !TARGET_ARCH!
     if errorlevel 1 exit /b 1
 ) else (
@@ -64,7 +64,7 @@ if !NEED_BUILD!==1 (
     set NEED_WRAP=1
 ) else (
     rem Только если JAR не менялся и EXE на месте, проверяем даты через PowerShell
-    for /f %%A in ('powershell -Command "if ((Get-Item '!TARGET_JAR!').LastWriteTime -gt (Get-Item '!TARGET_INSTALLER_PATH!').LastWriteTime) { 1 } else { 0 }"') do set NEED_WRAP=%%A
+    for /f %%A in ('powershell -Command "if ((Get-Item '%OUTPUT_JAR%').LastWriteTime -gt (Get-Item '!TARGET_INSTALLER_PATH!').LastWriteTime) { 1 } else { 0 }"') do set NEED_WRAP=%%A
 )
 
 if "!NEED_WRAP!"=="1" (

@@ -47,7 +47,8 @@ if not exist %XML_FILE% (
     exit /b 1
 )
 
-set OUTPUT_JAR=dist\install_%TARGET_OS%_%TARGET_ARCH%.jar
+call set_output_jar.bat %TARGET_OS% %TARGET_ARCH%
+if errorlevel 1 exit /b 1
 
 powershell -Command "Write-Host 'Компилирую %XML_FILE%...' -ForegroundColor Cyan"
 call %COMPILER_PATH% %XML_FILE% -o %OUTPUT_JAR%
