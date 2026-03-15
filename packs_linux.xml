@@ -40,7 +40,7 @@
             condition="izpack.selected.RunaWFE симулятор|izpack.selected.RunaWFE сервер">
             <file src="@{ENV[BUILD_ROOT_LINUX]}/server/runawfe-wildfly-${WFE.version}.zip"
                 targetdir="$INSTALL_PATH/$appserver.subpath" unpack="true" override="true">
-                <archivefileset dir="wildfly" />
+                <archivefileset dir="wildfly"/>
             </file>
             <file src="resources\standalone.xml" override="true"
                 targetdir="$standalone.path\configuration">
@@ -73,7 +73,6 @@
             </file>
             <file src="@{ENV[BUILD_ROOT_LINUX]}\gpd\RunaWFE_DeveloperStudio-linux.gtk.${target.arch}.zip"
                 targetdir="$INSTALL_PATH/$gpd.subpath" unpack="true" override="true">
-                <archivefileset dir="." />
             </file>
             <file src="resources\runa-gpd.ini"
                 targetdir="$INSTALL_PATH/$gpd.subpath" override="true">
@@ -92,7 +91,6 @@
             </file>
             <file src="@{ENV[BUILD_ROOT_LINUX]}\rtn\runawfe-rtn-linux64-${WFE.version}.zip"
                 targetdir="$INSTALL_PATH/$rtn.subpath" unpack="true" override="true">
-                <archivefileset dir="." />
             </file>
             <singlefile src="resources\rtn.properties" target="$USER_HOME\config.properties"
                 override="askfalse">
