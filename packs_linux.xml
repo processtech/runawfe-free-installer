@@ -74,6 +74,10 @@
             <file src="@{ENV[BUILD_ROOT_LINUX]}\gpd\RunaWFE_DeveloperStudio-linux.gtk.${target.arch}.zip"
                 targetdir="$INSTALL_PATH/$gpd.subpath" unpack="true" override="true">
             </file>
+            <executable
+                targetfile="$INSTALL_PATH/$gpd.subpath/runa-gpd"
+                stage="never">
+            </executable>
             <file src="resources\runa-gpd.ini"
                 targetdir="$INSTALL_PATH/$gpd.subpath" override="true">
             </file>
