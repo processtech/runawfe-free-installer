@@ -149,9 +149,9 @@
         <variable name="appserver.subpath" condition="izpack.selected.RunaWFE сервер"
             value="$server.subpath"/>
         <variable name="standalone.path" condition="izpack.selected.RunaWFE симулятор"
-            value="$INSTALL_PATH\$simulator.subpath\standalone"/>
+            value="$INSTALL_PATH$FILE_SEPARATOR$simulator.subpath${FILE_SEPARATOR}standalone"/>
         <variable name="standalone.path" condition="izpack.selected.RunaWFE сервер"
-            value="$INSTALL_PATH\$server.subpath\standalone"/>
+            value="$INSTALL_PATH$FILE_SEPARATOR$server.subpath${FILE_SEPARATOR}standalone"/>
         <variable name="hibernate.dialect" condition="DBMS.H2"
             value="org.hibernate.dialect.H2Dialect"/>
         <variable name="hibernate.dialect" condition="DBMS.PostgreSQL"
