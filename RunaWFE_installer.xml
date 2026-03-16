@@ -65,6 +65,7 @@
         <res id="HTMLLicencePanel.license" src="resources/License.html"/>
         <res id="LicencePanel.license_txt" src="resources/License.txt"/>
         <res id="Win_shortcutSpec.xml" src="win_shortcutSpec.xml"/>
+        <res id="Unix_shortcutSpec.xml" src="unix_shortcutSpec.xml"/>
         <res id="Heading.image"
             src="resources/images/big_logo.png"/>
         <res id="JFrameIcon" src="resources/images/Installer_16.png"/>
@@ -79,7 +80,7 @@
         <variable name="target.arch" value="@{ENV[TARGET_ARCH]}"/>
         <variable name="TargetPanel.dir.windows" value="${DEFAULT_INSTALL_PATH} @{ENV[WFE_EDITION]}"/>
         <variable name="TargetPanel.dir.unix" value="/opt/${APP_NAME}-@{ENV[WFE_EDITION]}"/>
-        <variable name="appdata.install.path" value="$appdata\$APP_NAME @{ENV[WFE_EDITION]}"/>
+        <variable name="appdata.install.path" value="$appdata\$APP_NAME-@{ENV[WFE_EDITION]}"/>
         <variable name="empty" value="значение не может быть пустым."/>
         <variable name="port.invalid"
             value="Указанный адрес не существует. Значение должно быть в интервале от 0 до 65535."/>
@@ -278,6 +279,14 @@
                     defaultvalue="false"/>
             </filters>
         </variable>
+        <variable name="gpd.launcher.library" condition="izpack.windowsinstall" checkonce="true"
+            value="plugins/org.eclipse.equinox.launcher.win32.win32.x86_64_1.2.700.v20221108-1024"/>
+        <variable name="gpd.launcher.library" condition="izpack.linuxinstall" checkonce="true"
+            value="plugins/org.eclipse.equinox.launcher.gtk.linux.x86_64_1.2.700.v20221108-1024"/>
+        <variable name="java.executable" condition="izpack.windowsinstall"
+            value="${java.path}\bin\javaw.exe"/>
+        <variable name="java.executable" condition="izpack.linuxinstall"
+            value="${java.path}/bin/java"/>
     </dynamicvariables>
 
     <conditions>

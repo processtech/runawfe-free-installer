@@ -1,1 +1,1 @@
-"$java.path\bin\javaw.exe" -jar "$INSTALL_PATH\Uninstaller\uninstaller.jar"
+"$java.executable" -jar "$INSTALL_PATH\Uninstaller\uninstaller.jar"
