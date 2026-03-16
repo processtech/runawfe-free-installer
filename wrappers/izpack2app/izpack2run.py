@@ -50,7 +50,7 @@ if [ ! -x "$JAVA_EXEC" ]; then
     echo "Error: Bundled JRE not found or not executable." >&2
     exit 1
 fi
-"$JAVA_EXEC" -Dfile.encoding=UTF-8 -jar -DTRACE=true "$SCRIPT_DIR/install.jar" "$@"
+"$JAVA_EXEC" -Dfile.encoding=UTF-8 -jar "$SCRIPT_DIR/install.jar" "$@"
 """)
         os.chmod(launch_script, 0o755)
         
