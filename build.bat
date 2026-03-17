@@ -51,18 +51,27 @@ call set_output_jar.bat %TARGET_OS% %TARGET_ARCH%
 if errorlevel 1 exit /b 1
 
 powershell -Command "Write-Host 'Компилирую %XML_FILE%...' -ForegroundColor Cyan"
-call %COMPILER_PATH% %XML_FILE% -o %OUTPUT_JAR%
-
-if %errorlevel% == 0 (
+powershell -Command "$compiler = '%COMPILER_PATH%';" ^
+ "$xml = '%XML_FILE%';" ^
+ "$jar = '%OUTPUT_JAR%';" ^
+ "$errorOccurred = $false;" ^
+ "& $compiler $xml -o $jar 2>&1 | ForEach-Object {" ^
+ "    Write-Host $_;" ^
+ "    if ($_ -match 'Fatal error') { $errorOccurred = $true }" ^
+ "};" ^
+ "$exitCode = $LASTEXITCODE;" ^
+ "if ($exitCode -ne 0 -or $errorOccurred) { exit 1 } else { exit 0 }"
+if errorlevel 1 (
+    echo.
+    powershell -Command "Write-Host 'ERROR: Компиляция не удалась. Проверьте лог выше.' -ForegroundColor Red"
+    del /q "%OUTPUT_JAR%" 2>nul
+    echo.
+    exit /b 1
+) else (
     echo.
     powershell -Command "Write-Host 'SUCCESS: Компиляция завершена. Файл %OUTPUT_JAR% создан.' -ForegroundColor Green"
     echo.
     exit /b 0
-) else (
-    echo.
-    powershell -Command "Write-Host 'ERROR: Компиляция не удалась. Проверьте лог выше.' -ForegroundColor Red"
-    echo.
-    exit /b 1
 )
 
 :print_usage
