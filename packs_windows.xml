@@ -166,7 +166,7 @@
 
         <pack name="Среда разработки" required="no" preselected="yes"
             installGroups="Аналитик" condition="Usertype.Analyst">
-            <file src="resources\images\windows\e_20x20_256.ico"
+            <file src="resources\images\windows\D_20x20_256.ico"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
             <file src="runnable\studio_install_cleanup.bat"
