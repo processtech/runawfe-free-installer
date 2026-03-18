@@ -68,7 +68,7 @@
 
         <pack name="Среда разработки" required="no" preselected="yes"
             installGroups="Аналитик" condition="Usertype.Analyst">
-            <file src="resources\images\unix\e_20x20_256.png"
+            <file src="resources\images\unix\D_20x20_256.png"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
             <file src="@{ENV[BUILD_ROOT_LINUX]}\gpd\RunaWFE_DeveloperStudio-linux.gtk.${target.arch}.zip"
