@@ -20,17 +20,22 @@ if /i "%SERVICE%"=="macos-gui" (
 )
 
 if /i "!TARGET_OS!"=="windows" (
-    set "TARGET_INSTALLER_PATH=dist\%INSTALLER_EXE%"
+    set "INSTALLER_FILENAME=%INSTALLER_EXE%"
 ) else (
     if /i "!TARGET_ARCH!"=="x86_64" (
-        set "TARGET_INSTALLER_PATH=dist\%INSTALLER_X86_64RUN%"
+        set "INSTALLER_FILENAME=%INSTALLER_X86_64RUN%"
     ) else (
-        set "TARGET_INSTALLER_PATH=dist\%INSTALLER_AARCH64RUN%"
+        set "INSTALLER_FILENAME=%INSTALLER_AARCH64RUN%"
     )
 )
+set "TARGET_INSTALLER_PATH=dist\%INSTALLER_FILENAME%"
 
 echo Целевая ОС: !TARGET_OS!
 echo Целевая архитектура: !TARGET_ARCH!
+
+REM Запись имени файла в .env для docker-compose
+echo INSTALLER_FILENAME=%INSTALLER_FILENAME% > docker\.env
+echo INSTALLER_FILENAME=%INSTALLER_FILENAME%
 
 REM 2. Определяем имя JAR для целевой платформы
 call set_output_jar.bat !TARGET_OS! !TARGET_ARCH!

@@ -6,7 +6,9 @@ x-common: &common
   tty: true
   volumes:
     - ../dist:/installer/dist:ro
-  command: sh -c "/installer/dist/*x86_64.run"
+  env_file:
+    - .env
+  command: sh -c "/installer/dist/${INSTALLER_FILENAME}"
 
 # Настройки только для GUI сервисов
 x-gui: &gui
@@ -24,7 +26,7 @@ x-gui: &gui
     - GDK_BACKEND=x11
     - NO_AT_BRIDGE=1
   # Сначала инсталлятор, потом mc
-  command: sh -c "/installer/dist/*x86_64.run; xterm -geometry 140x45 -fa 'Monospace' -fs 12 -e mc /opt /usr/share/applications"
+  command: sh -c "/installer/dist/${INSTALLER_FILENAME}; xterm -geometry 140x45 -fa 'Monospace' -fs 12 -e mc /opt /usr/share/applications"
 
 services:
   astra17-gui:
