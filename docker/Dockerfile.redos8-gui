@@ -10,6 +10,7 @@ RUN dnf clean all && dnf makecache && dnf install -y \
     fontconfig \
     dejavu-sans-fonts \
     webkit2gtk4.1 \
+    gtk2 \
     xterm mc shared-mime-info \
     && dnf clean all
 

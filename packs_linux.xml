@@ -95,7 +95,11 @@
             </file>
             <file src="@{ENV[BUILD_ROOT_LINUX]}\rtn\runawfe-rtn-linux64-${WFE.version}.zip"
                 targetdir="$INSTALL_PATH/$rtn.subpath" unpack="true" override="true">
+                <archivefileset dir="rtn"/>
             </file>
+            <singlefile src="resources\unix\rtn_start.sh" target="$INSTALL_PATH/$rtn.subpath/start.sh" override="askfalse"/>
+            <parsable targetfile="$INSTALL_PATH/$rtn.subpath/start.sh" type="at"/>
+            <executable targetfile="$INSTALL_PATH/$rtn.subpath/start.sh" stage="never"/>
             <singlefile src="resources\rtn.properties" target="$USER_HOME\config.properties"
                 override="askfalse">
             </singlefile>

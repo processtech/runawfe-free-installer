@@ -11,7 +11,9 @@ RUN apt-get update && apt-get install -y \
     libfreetype6 \
     fontconfig \
     libwebkit2gtk-4.0-37 \
+    libgtk2.0-0 \
     mc shared-mime-info xterm \ 
+    && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /installer

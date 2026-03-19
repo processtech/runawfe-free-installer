@@ -10,7 +10,9 @@ RUN apt-get update && apt-get install -y \
     fontconfig \
     fonts-ttf-dejavu \
     libwebkit2gtk \
+    libgtk+2 \
     xterm mc shared-mime-info \
+    && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /installer
