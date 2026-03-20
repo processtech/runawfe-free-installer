@@ -1,4 +1,5 @@
 dist
 docker/macos/
 docker/win7/
+docker/linux/
 docker/.env

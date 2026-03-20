@@ -164,7 +164,8 @@
                 "redos8-gui",
                 "redos8-console",
                 "macos-gui",
-                "win7-gui"
+                "win7-gui",
+                "altp10-desktop"
             ]
         },
         {

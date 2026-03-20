@@ -147,3 +147,26 @@ services:
       - ../dist:/shared
     stop_grace_period: 2m
     restart: "no"
+
+  altp10-desktop:
+    image: qemux/qemu
+    container_name: alt-p10-desktop
+    environment:
+      DISK_SIZE: "20G" 
+      RAM_SIZE: "4G"
+      CPU_CORES: "4"
+      ARGUMENTS: "-snapshot"
+    devices:
+      - /dev/kvm
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - 8006:8006
+    volumes:
+      # - ./linux/iso/alt-workstation-10.4-x86_64.iso:/boot.iso
+      - ./linux/data:/storage
+      - ../dist:/shared
+    restart: "no"
+    stop_grace_period: 2m
+    # root password: 123456
