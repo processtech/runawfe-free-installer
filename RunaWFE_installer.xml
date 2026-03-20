@@ -268,6 +268,18 @@
             </filters>
         </variable>
 
+        <variable name="gtk2.installed" checkonce="true"
+            executable="ldconfig"
+            type="process"
+            condition="izpack.linuxinstall">
+            <arg>-p</arg>
+            <filters>
+                <regex regexp="libgtk[-+]?2\.so\.|libgtk-x11-2\.0\.so\.|libgtk\+2\.so\."
+                    select="true"
+                    defaultvalue="false"/>
+            </filters>
+        </variable>
+
         <variable name="is.root" checkonce="true"
             executable="id"
             type="process"
@@ -365,6 +377,10 @@
             <name>webkit.installed</name>
             <value>true</value>
         </condition>
+        <condition type="variable" id="gtk2.installed">
+            <name>gtk2.installed</name>
+            <value>true</value>
+        </condition>
         <condition type="variable" id="is.root">
             <name>is.root</name>
             <value>true</value>
@@ -384,6 +400,7 @@
             <validator classname="com.izforge.izpack.installer.validator.ConditionValidator"/>
         </panel>
         <panel classname="UserInputPanel" id="panel.webkit.warn" condition="izpack.linuxinstall+!webkit.installed"/>
+        <panel classname="UserInputPanel" id="panel.gtk.warn" condition="izpack.linuxinstall+!gtk2.installed"/>
         <panel classname="UserInputPanel" id="panel.database.connection"/>
         <panel classname="UserInputPanel" id="panel.wildfly.connection"/>
         <panel classname="UserInputPanel" id="panel.server.web.interface"/>

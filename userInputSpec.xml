@@ -258,4 +258,12 @@
         <field type="staticText" txt="Установите её до запуска Среды разработки или Нотификатора задач."/>
     </panel>
 
+    <panel id="panel.gtk.warn">
+        <createForPack name="Оповещаетель задач"/>
+        <field type="title" txt="Предупреждение" bold="true"/>
+        <field type="staticText" txt="Библиотека libgtk2 не найдена."/>
+        <field type="staticText" txt="Она необходима для работы нотификатора задач."/>
+        <field type="staticText" txt="Установите пакет libgtk2 до запуска Нотификатора задач."/>
+    </panel>
+
 </izpack:userinput>
