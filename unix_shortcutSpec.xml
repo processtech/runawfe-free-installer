@@ -12,7 +12,7 @@
         createForAll="true"
         categories="Office;Development"
         encoding="UTF-8"
-        commandLine="-data &quot;$appdata.install.path/$gpd.subpath/workspace&quot;"
+        commandLine="-data &quot;$USER_HOME/RunaWFEWorkspace&quot;"
         programGroup="true"
         desktop="true" iconFile="$INSTALL_PATH/$images.subpath/D_20x20_256.png"
         description="Среда разработки - приложение, предназначенное для разработки процессов системы RunaWFE">
