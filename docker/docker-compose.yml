@@ -129,8 +129,6 @@ services:
       REGION: "ru-RU"
       DISK_SIZE: "32G"
       ARGUMENTS: "-vga std -snapshot" 
-      # ОТКЛЮЧАЕМ предварительное выделение места (создаст экономный qcow2)
-      ALLOCATE: "N"
       RAM_SIZE: "4G"
       CPU_CORES: "4"
     devices:
@@ -139,7 +137,7 @@ services:
     cap_add:
       - NET_ADMIN
     ports:
-      - 8007:8006 # Порт 8006 уже занят макосью, используем 8007
+      - 8006:8006
       - 3389:3389/tcp
       - 3389:3389/udp
     volumes:
