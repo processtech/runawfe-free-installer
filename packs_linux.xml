@@ -82,6 +82,8 @@
                 targetdir="$INSTALL_PATH/$gpd.subpath" override="true">
             </file>
             <parsable targetfile="$INSTALL_PATH/$gpd.subpath/runa-gpd.ini"/>
+            <singlefile src="resources\unix\studio_start.sh" target="$INSTALL_PATH/$gpd.subpath/start.sh" override="askfalse"/>
+            <executable targetfile="$INSTALL_PATH/$gpd.subpath/start.sh" stage="never"/>
             <description>Приложение, предназначенное для разработки процессов</description>
             <updatecheck>
                 <exclude name="$java.subpath/**"/>
