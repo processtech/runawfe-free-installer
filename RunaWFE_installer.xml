@@ -328,6 +328,12 @@
             condition="@izpack.linuxinstall &amp;&amp; !free.edition &amp;&amp; !xdg.config.home.exists">
             <value>${unix.user.home}/.config/@rtn.appname/settings.properties</value>
         </variable>
+        <variable name="gpd.host" value="localhost" checkonce="true"/>
+        <variable name="gpd.host" value="$server.host" condition="server.host.exists+!izpack.selected.RunaWFE симулятор" />
+        <variable name="gpd.port" value="8080" checkonce="true"/>
+        <variable name="gpd.port" value="$server.web.port" condition="server.host.exists+!izpack.selected.RunaWFE симулятор" />
+        <variable name="gpd.port" value="$jboss.http.port" condition="izpack.selected.RunaWFE симулятор" />
+
     </dynamicvariables>
 
     <conditions>
@@ -420,6 +426,9 @@
         </condition>
         <condition type="exists" id="xdg.config.home.exists">
             <variable>xdg.config.home</variable>
+        </condition>
+        <condition type="exists" id="server.host.exists">
+            <variable>server.host</variable>
         </condition>
     </conditions>
 
