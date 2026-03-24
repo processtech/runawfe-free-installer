@@ -318,7 +318,7 @@
             value="${java.path}/bin/java"/>
         <variable name="xdg.config.home" environment="XDG_CONFIG_HOME" checkonce="true"/>
         <variable name="rtn.unix.properties.path" condition="izpack.linuxinstall+free.edition">
-            <value>${unix.user.home}/.config/@rtn.appname/config.properties</value>
+            <value>${unix.user.home}/config.properties</value>
         </variable>
         <variable name="rtn.unix.properties.path"
             condition="@izpack.linuxinstall &amp;&amp; !free.edition &amp;&amp; xdg.config.home.exists">
