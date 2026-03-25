@@ -102,10 +102,10 @@
             <singlefile src="resources\unix\rtn_start.sh" target="$INSTALL_PATH/$rtn.subpath/start.sh" override="askfalse"/>
             <parsable targetfile="$INSTALL_PATH/$rtn.subpath/start.sh" type="at"/>
             <executable targetfile="$INSTALL_PATH/$rtn.subpath/start.sh" stage="never"/>
-            <singlefile src="resources\rtn.properties" target="$rtn.unix.properties.path"
+            <singlefile src="resources\rtn.properties" target="$rtn.properties.path"
                 override="askfalse">
             </singlefile>
-            <parsable targetfile="$rtn.unix.properties.path" type="javaprop"/>
+            <parsable targetfile="$rtn.properties.path" type="javaprop"/>
             <description>
                 Приложение, предназначенное для проверки новых задач пользователей. Для установки этого компонента вам потребуется адрес основного RunaWFE сервера (хост и порт). Возьмите его у вашего системного администратора, прежде чем продолжать установку.
             </description>

@@ -297,7 +297,7 @@
             </filters>
         </variable>
 
-        <variable name="unix.user.home" checkonce="true"
+        <variable name="user.home" checkonce="true"
             executable="sh"
             type="process"
             condition="izpack.linuxinstall">
@@ -306,6 +306,11 @@
             <filters>
                 <regex regexp="[\r\n]+$" replace="" global="true"/>
             </filters>
+        </variable>
+
+        <variable name="user.home" checkonce="true"
+            value="$USER_HOME"
+            condition="izpack.windowsinstall">
         </variable>
 
         <variable name="gpd.launcher.library" condition="izpack.windowsinstall" checkonce="true"
@@ -317,16 +322,20 @@
         <variable name="java.executable" condition="izpack.linuxinstall"
             value="${java.path}/bin/java"/>
         <variable name="xdg.config.home" environment="XDG_CONFIG_HOME" checkonce="true"/>
-        <variable name="rtn.unix.properties.path" condition="izpack.linuxinstall+free.edition">
-            <value>${unix.user.home}/config.properties</value>
+        <variable name="rtn.properties.path" condition="free.edition">
+            <value>${user.home}/config.properties</value>
         </variable>
-        <variable name="rtn.unix.properties.path"
-            condition="@izpack.linuxinstall &amp;&amp; !free.edition &amp;&amp; xdg.config.home.exists">
+        <variable name="rtn.properties.path"
+            condition="@!free.edition &amp;&amp; xdg.config.home.exists">
             <value>${xdg.config.home}/.config/@rtn.appname/settings.properties</value>
         </variable>
-        <variable name="rtn.unix.properties.path"
+        <variable name="rtn.properties.path"
             condition="@izpack.linuxinstall &amp;&amp; !free.edition &amp;&amp; !xdg.config.home.exists">
-            <value>${unix.user.home}/.config/@rtn.appname/settings.properties</value>
+            <value>${user.home}/.config/@rtn.appname/settings.properties</value>
+        </variable>
+        <variable name="rtn.properties.path"
+            condition="@izpack.windowsinstall &amp;&amp; !free.edition &amp;&amp; !xdg.config.home.exists">
+            <value>${appdata}\@rtn.appname\settings.properties</value>
         </variable>
         <variable name="gpd.host" value="localhost" checkonce="true"/>
         <variable name="gpd.host" value="$server.host" condition="server.host.exists+!izpack.selected.RunaWFE симулятор" />
