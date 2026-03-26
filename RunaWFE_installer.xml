@@ -136,6 +136,9 @@
         <variable name="appdata" condition="izpack.linuxinstall"
             environment="XDG_DATA_HOME"
             checkonce="true"/>
+        <variable name="local.appdata" condition="izpack.windowsinstall"
+            environment="LOCALAPPDATA"
+            checkonce="true"/>
         <variable name="DBMS.type" condition="izpack.selected.RunaWFE симулятор"
             value="H2"/>
         <variable name="delete.gpd" condition="izpack.selected.Среда разработки"
@@ -334,8 +337,8 @@
             <value>${user.home}/.config/@rtn.appname/settings.properties</value>
         </variable>
         <variable name="rtn.properties.path"
-            condition="@izpack.windowsinstall &amp;&amp; !free.edition &amp;&amp; !xdg.config.home.exists">
-            <value>${appdata}\@rtn.appname\settings.properties</value>
+            condition="izpack.windowsinstall+!free.edition">
+            <value>$local.appdata\@rtn.appname\settings.properties</value>
         </variable>
         <variable name="gpd.host" value="localhost" checkonce="true"/>
         <variable name="gpd.host" value="$server.host" condition="server.host.exists+!izpack.selected.RunaWFE симулятор" />
