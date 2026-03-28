@@ -23,7 +23,7 @@
         <createForPack name="Оповещаетель задач"/>
     </shortcut>
 
-    <shortcut name="Server web interface" target="$INSTALL_PATH/$web.interface.subpath/runawfe.html"
+    <shortcut name="Server web interface" target="http://${server.host}:${server.web.port}/wfe/"
         programGroup="true"
         desktop="true" iconFile="$INSTALL_PATH\$images.subpath\C_20x20_256.ico"
         description="Запуск веб-интерфейса основного RunaWFE сервера">
@@ -31,7 +31,7 @@
     </shortcut>
 
     <shortcut name="Simulator web interface"
-        target="$INSTALL_PATH/${simulator.subpath}/simulator.html"
+        target="http://localhost:${jboss.http.port}/wfe/"
         programGroup="true"
         desktop="true" iconFile="$INSTALL_PATH\$images.subpath\Si_20x20_256.ico"
         description="Запуск веб-интерфейса сервера-симулятора">
