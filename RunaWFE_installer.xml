@@ -465,8 +465,8 @@
             <validator classname="com.izforge.izpack.installer.validator.ConditionValidator"/>
         </panel>
         <panel classname="InstallPanel"/>
-        <panel classname="ProcessPanel"/>
         <panel classname="ShortcutPanel"/>
+        <panel classname="ProcessPanel"/>
         <panel classname="InfoPanel" condition="izpack.selected.RunaWFE сервер" allowClose="false"/>
         <panel classname="SimpleFinishPanel"/>
     </panels>

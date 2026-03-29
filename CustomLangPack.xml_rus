@@ -42,7 +42,7 @@
     <str id="InfoPanel.info" txt="Внимание:"/>
 
     <!-- ProcessPanel strings -->
-    <str id="ProcessPanel.heading" txt="Установка Java"/>
+    <str id="ProcessPanel.heading" txt="Завершение установки"/>
 
     <!-- General installer strings -->
     <str id="installer.error" txt="Ошибка"/>

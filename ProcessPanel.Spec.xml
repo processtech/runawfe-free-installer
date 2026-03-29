@@ -10,7 +10,7 @@
             <arg><![CDATA[ xcopy "${JAVA_HOME}\*.*" "$java.path" /E /I /Y /Q >nul 2>&1 ]]></arg>
         </executefile>
     </job>
-    
+
     <job name="Copy JRE Linux">
         <os family="unix"/>
         <executefile name="sh">
@@ -18,7 +18,18 @@
             <arg><![CDATA[mkdir -p "$java.path" && cp -Rp "${JAVA_HOME}/"* "$java.path/"]]></arg>
         </executefile>
     </job>
-    
+
+    <job name="Add notifier to autostart" condition="izpack.selected.Оповещаетель задач">
+        <os family="unix"/>
+        <executefile name="sh">
+            <arg>-c</arg>
+            <arg><![CDATA[if [ -f "/usr/share/applications/Task notifier.desktop" ]; then
+    mkdir -p /etc/xdg/autostart
+    cp "/usr/share/applications/Task notifier.desktop" /etc/xdg/autostart/
+fi]]></arg>
+        </executefile>
+    </job>
+
     <onSuccess previous="false" next="true"/>
 
 </izpack:processing>
