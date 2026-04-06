@@ -13,7 +13,7 @@
         categories="Office;Development"
         encoding="UTF-8"
         programGroup="true"
-        desktop="true" iconFile="$INSTALL_PATH/$images.subpath/D_20x20_256.png"
+        iconFile="$INSTALL_PATH/$images.subpath/D_20x20_256.png"
         description="Среда разработки - приложение, предназначенное для разработки процессов системы RunaWFE">
         <createForPack name="Среда разработки"/>
     </shortcut>
@@ -25,7 +25,7 @@
         categories="Office;Development"
         encoding="UTF-8"
         programGroup="true"
-        desktop="true" iconFile="$INSTALL_PATH/$images.subpath/t_20x20_256.png"
+        iconFile="$INSTALL_PATH/$images.subpath/t_20x20_256.png"
         description="Оповещатель задачи - приложение, предназначенное для автоматической проверки новых задач пользователя">
         <createForPack name="Оповещаетель задач"/>
     </shortcut>
