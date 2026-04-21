@@ -58,6 +58,15 @@
             </updatecheck>
         </pack>
 
+        <pack name="Ссылки для входа" required="no" parent="Серверные компоненты"
+            installGroups="Аналитик"
+            condition="Usertype.Analyst+izpack.selected.RunaWFE симулятор">
+            <description>На странице входа симулятора будут отображаться ссылки для автоматического логина без пароля. Опция предназначена для упрощения знакомства с системой.</description>
+            <updatecheck>
+                <exclude name="$java.subpath/**"/>
+            </updatecheck>
+        </pack>
+
         <pack name="Отправка статистики" required="no" parent="Серверные компоненты"
             condition="izpack.selected.RunaWFE симулятор|izpack.selected.RunaWFE сервер">
             <file

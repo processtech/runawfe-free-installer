@@ -111,6 +111,11 @@
                 targetdir="$INSTALL_PATH/$appserver.subpath/bin">
             </file>
             <parsable targetfile="$INSTALL_PATH/$appserver.subpath/bin/standalone.conf.bat" type="ant"/>
+            <file
+                src="resources\wfe.custom.securitycheck.properties"
+                targetdir="$INSTALL_PATH\$appserver.subpath\standalone\wfe.custom"/>
+            <parsable
+                targetfile="$INSTALL_PATH\$appserver.subpath\standalone\wfe.custom\wfe.custom.securitycheck.properties"/>
             <executable
                 targetfile="$INSTALL_PATH\$server.subpath\bin\service.bat"
                 condition="izpack.selected.RunaWFE сервер" keep="true"
@@ -130,6 +135,15 @@
                 targetdir="$standalone.path\data\demo-db">
             </fileset>
             <description>База данных с демонстрационными пользователями и процессами. Недоступна для установки, если база данных уже существует.</description>
+            <updatecheck>
+                <exclude name="$java.subpath/**"/>
+            </updatecheck>
+        </pack>
+
+        <pack name="Ссылки для входа" required="no" parent="Серверные компоненты"
+            installGroups="Аналитик"
+            condition="Usertype.Analyst+izpack.selected.RunaWFE симулятор">
+            <description>На странице входа симулятора будут отображаться ссылки для автоматического логина без пароля. Опция предназначена для упрощения знакомства с системой.</description>
             <updatecheck>
                 <exclude name="$java.subpath/**"/>
             </updatecheck>
