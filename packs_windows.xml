@@ -40,7 +40,6 @@
             <executable
                 targetfile="$INSTALL_PATH\$server.subpath\remove_server_service.bat"
                 type="bin" stage="uninstall" failure="ignore">
-                
             </executable>
             <description>Основной сервер, предназначенный для многопользовательской работы</description>
             <updatecheck>
@@ -64,7 +63,6 @@
             <executable
                 targetfile="$INSTALL_PATH/$simulator.subpath/simulator_install_cleanup.bat"
                 type="bin" stage="postinstall" failure="ignore">
-                
             </executable>
             <fileset dir="@{ENV[BUILD_ROOT_WINDOWS]}\wfe-simulator" override="true"
                 excludes="standalone\data\demo-db\**"
@@ -120,7 +118,6 @@
                 <args>
                     <arg value="install"/>
                 </args>
-                
             </executable>
             <description/>
         </pack>
@@ -170,7 +167,6 @@
             </file>
             <executable targetfile="$INSTALL_PATH/$gpd.subpath/studio_install_cleanup.bat"
                 type="bin" stage="postinstall" failure="ignore">
-                
             </executable>
             <fileset dir="@{ENV[BUILD_ROOT_WINDOWS]}\gpd\64\gpd-${WFE.version}" override="true"
                 targetdir="$INSTALL_PATH/$gpd.subpath">
@@ -201,7 +197,6 @@
                 targetdir="$INSTALL_PATH/$rtn.subpath">
             </file>
             <parsable targetfile="$INSTALL_PATH\$rtn.subpath\rtn.bat">
-                
             </parsable>
             <singlefile src="resources\rtn.properties" target="$rtn.properties.path"
                 override="askfalse">
@@ -239,17 +234,14 @@
                 targetdir="$INSTALL_PATH">
             </file>
             <parsable targetfile="$INSTALL_PATH\update_cleanup.bat">
-                
             </parsable>
             <executable targetfile="$INSTALL_PATH\update_cleanup.bat"
                 type="bin" stage="postinstall" failure="ignore">
-                
             </executable>
             <file src="runnable\uninstall.bat" override="true"
                 targetdir="$INSTALL_PATH\Uninstaller">
             </file>
             <parsable targetfile="$INSTALL_PATH\Uninstaller\uninstall.bat">
-                
             </parsable>
             <description></description>
         </pack>
