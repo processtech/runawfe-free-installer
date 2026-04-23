@@ -45,7 +45,23 @@
             <file src="resources\standalone.xml" override="true"
                 targetdir="$standalone.path\configuration">
             </file>
-            <parsable targetfile="$standalone.path\configuration\standalone.xml" type="ant"/>
+            <parsable targetfile="$standalone.path/configuration/standalone.xml" type="ant"/>
+            <file src="resources/unix/standalone.conf" override="true"
+                targetdir="$INSTALL_PATH/$appserver.subpath/bin">
+            </file>
+            <parsable targetfile="$INSTALL_PATH/$appserver.subpath/bin/standalone.conf" type="ant"/>
+            <file
+                src="resources/wfe.custom.securitycheck.properties"
+                targetdir="$INSTALL_PATH/$appserver.subpath/standalone/wfe.custom"/>
+            <parsable
+                targetfile="$INSTALL_PATH/$appserver.subpath/standalone/wfe.custom/wfe.custom.securitycheck.properties"/>
+            <file src="resources/unix/standalone.sh"
+                targetdir="$INSTALL_PATH/$appserver.subpath/bin" override="true">
+            </file>
+            <executable
+                targetfile="$INSTALL_PATH/$appserver.subpath/bin/standalone.sh"
+                stage="never">
+            </executable>
             <description/>
         </pack>
 
