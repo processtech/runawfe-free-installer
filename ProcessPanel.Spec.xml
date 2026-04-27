@@ -30,6 +30,11 @@ fi]]></arg>
         </executefile>
     </job>
 
+    <job name="Add server to autostart">
+        <os family="unix"/>
+        <executeForPack name="RunaWFE сервер"/>
+        <executefile name="$INSTALL_PATH/$appserver.subpath/init_systemd.sh"/>
+    </job>
     <onSuccess previous="false" next="true"/>
 
 </izpack:processing>

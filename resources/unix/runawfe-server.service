@@ -1,0 +1,14 @@
+[Unit]
+Description=WildFly AS for RunaWFE Server $WFE.version
+After=network.target
+
+[Service]
+Type=idle
+Environment=JBOSS_HOME=$INSTALL_PATH/$appserver.subpath JBOSS_LOG_DIR=/var/log/runawfe-server-$WFE.version
+User=runawfe
+ExecStart=$INSTALL_PATH/$appserver.subpath/bin/standalone.sh
+TimeoutStartSec=600
+TimeoutStopSec=600
+
+[Install]
+WantedBy=multi-user.target

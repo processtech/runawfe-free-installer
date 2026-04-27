@@ -471,7 +471,7 @@
         <panel classname="InstallPanel"/>
         <panel classname="ShortcutPanel"/>
         <panel classname="ProcessPanel"/>
-        <panel classname="InfoPanel" condition="izpack.selected.RunaWFE сервер" allowClose="false"/>
+        <panel classname="InfoPanel" condition="izpack.selected.RunaWFE сервер+izpack.windowsinstall" allowClose="false"/>
         <panel classname="SimpleFinishPanel"/>
     </panels>
 

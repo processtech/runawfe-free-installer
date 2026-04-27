@@ -63,6 +63,21 @@
                 stage="never">
             </executable>
             <description/>
+            <!-- Systemd service installation for RunaWFE server -->
+            <singlefile src="resources/unix/runawfe-server.service"
+                target="/etc/systemd/system/runawfe-server-${WFE.version}.service"
+                override="true"
+                condition="izpack.selected.RunaWFE сервер"/>
+            <parsable targetfile="/etc/systemd/system/runawfe-server-${WFE.version}.service"
+                condition="izpack.selected.RunaWFE сервер"/>
+            <file src="runnable/unix/init_systemd.sh"
+                targetdir="$INSTALL_PATH/$appserver.subpath"
+                override="true"
+                condition="izpack.selected.RunaWFE сервер"/>
+            <parsable targetfile="$INSTALL_PATH/$appserver.subpath/init_systemd.sh" type="ant"
+                condition="izpack.selected.RunaWFE сервер"/>
+            <executable targetfile="$INSTALL_PATH/$appserver.subpath/init_systemd.sh" stage="never" keep="true"
+                condition="izpack.selected.RunaWFE сервер"/>
         </pack>
 
         <pack name="Демо-конфигурация" required="no" parent="Серверные компоненты"
