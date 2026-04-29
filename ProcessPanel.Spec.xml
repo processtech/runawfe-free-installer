@@ -19,7 +19,7 @@
         </executefile>
     </job>
 
-    <job name="Add notifier to autostart" condition="izpack.selected.Оповещаетель задач">
+    <job name="Add notifier to autostart" condition="izpack.selected.Оповещатель задач">
         <os family="unix"/>
         <executefile name="sh">
             <arg>-c</arg>

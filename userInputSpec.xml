@@ -224,7 +224,7 @@
     </panel>
 
     <panel id="panel.server.web.interface">
-        <createForPack name="Оповещаетель задач"/>
+        <createForPack name="Оповещатель задач"/>
         <createForPack name="Ярлык веб-интерфейса RunaWFE сервера"/>
         <field type="staticText" txt="Адрес основного RunaWFE сервера"/>
 
@@ -251,7 +251,7 @@
 
     <panel id="panel.webkit.warn">
         <createForPack name="Среда разработки"/>
-        <createForPack name="Оповещаетель задач"/>
+        <createForPack name="Оповещатель задач"/>
         <field type="title" txt="Предупреждение" bold="true"/>
         <field type="staticText" txt="Библиотека libwebkit2gtk-4.0.so.37 не найдена."/>
         <field type="staticText" txt="Она необходима для работы устанавливаемых компонентов."/>
@@ -259,7 +259,7 @@
     </panel>
 
     <panel id="panel.gtk.warn">
-        <createForPack name="Оповещаетель задач"/>
+        <createForPack name="Оповещатель задач"/>
         <field type="title" txt="Предупреждение" bold="true"/>
         <field type="staticText" txt="Библиотека libgtk2 не найдена."/>
         <field type="staticText" txt="Она необходима для работы нотификатора задач."/>

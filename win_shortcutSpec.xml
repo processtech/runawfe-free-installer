@@ -20,7 +20,7 @@
         programGroup="true"
         desktop="true" startup="true" iconFile="$INSTALL_PATH\$images.subpath\t_20x20_256.ico"
         description="Оповещатель задачи - приложение, предназначенное для автоматической проверки новых задач пользователя">
-        <createForPack name="Оповещаетель задач"/>
+        <createForPack name="Оповещатель задач"/>
     </shortcut>
 
     <shortcut name="Server web interface" target="http://${server.host}:${server.web.port}/wfe/"

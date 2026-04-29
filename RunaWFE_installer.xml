@@ -145,9 +145,9 @@
             value="false"/>
         <variable name="delete.gpd" condition="!izpack.selected.Среда разработки"
             value="true"/>
-        <variable name="delete.rtn" condition="izpack.selected.Оповещаетель задач"
+        <variable name="delete.rtn" condition="izpack.selected.Оповещатель задач"
             value="false"/>
-        <variable name="delete.rtn" condition="!izpack.selected.Оповещаетель задач"
+        <variable name="delete.rtn" condition="!izpack.selected.Оповещатель задач"
             value="true"/>
         <variable name="delete.simulator" condition="izpack.selected.RunaWFE симулятор"
             value="false"/>
@@ -371,7 +371,7 @@
             <condition type="ref" refid="izpack.selected.RunaWFE симулятор"/>
             <condition type="ref" refid="izpack.selected.Демо-конфигурация"/>
             <condition type="ref" refid="izpack.selected.Среда разработки"/>
-            <condition type="ref" refid="izpack.selected.Оповещаетель задач"/>
+            <condition type="ref" refid="izpack.selected.Оповещатель задач"/>
             <condition type="ref" refid="izpack.selected.Ярлык веб-интерфейса RunaWFE сервера"/>
         </condition>
 

@@ -77,7 +77,7 @@
             </file>
             <parsable targetfile="$INSTALL_PATH/$simulator.subpath/bin/stop_simulation.bat"/>
             <description>
-                Сервер-симулятор - адаптированная для для рабочей станции версия RunaWFE сервера. Предназначена для знакомства с системой, тестироваия и работы одного пользователя. Логин администратора по умолчанию - "Administrator", пароль - "wf".
+                Сервер-симулятор - адаптированная для рабочей станции версия RunaWFE сервера. Предназначена для знакомства с системой, тестироваия и работы одного пользователя. Логин администратора по умолчанию - "Administrator", пароль - "wf".
             </description>
             <updatecheck>
                 <exclude name="$java.subpath/**"/>
@@ -198,7 +198,7 @@
             </updatecheck>
         </pack>
 
-        <pack name="Оповещаетель задач" required="no" preselected="no"
+        <pack name="Оповещатель задач" required="no" preselected="no"
             installGroups="Пользователь,Аналитик" condition="!Usertype.Administrator">
             <file src="resources\images\windows\t_20x20_256.ico"
                 targetdir="$INSTALL_PATH/$images.subpath">
