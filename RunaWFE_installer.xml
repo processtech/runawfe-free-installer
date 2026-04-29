@@ -325,19 +325,16 @@
         <variable name="java.executable" condition="izpack.linuxinstall"
             value="${java.path}/bin/java"/>
         <variable name="xdg.config.home" environment="XDG_CONFIG_HOME" checkonce="true"/>
-        <variable name="rtn.properties.path" condition="free.edition">
-            <value>${user.home}/config.properties</value>
-        </variable>
         <variable name="rtn.properties.path"
-            condition="@!free.edition &amp;&amp; xdg.config.home.exists">
+            condition="xdg.config.home.exists">
             <value>${xdg.config.home}/.config/@rtn.appname/settings.properties</value>
         </variable>
         <variable name="rtn.properties.path"
-            condition="@izpack.linuxinstall &amp;&amp; !free.edition &amp;&amp; !xdg.config.home.exists">
+            condition="@izpack.linuxinstall &amp;&amp; !xdg.config.home.exists">
             <value>${user.home}/.config/@rtn.appname/settings.properties</value>
         </variable>
         <variable name="rtn.properties.path"
-            condition="izpack.windowsinstall+!free.edition">
+            condition="izpack.windowsinstall">
             <value>$local.appdata\@rtn.appname\settings.properties</value>
         </variable>
         <variable name="gpd.host" value="localhost" checkonce="true"/>
@@ -435,10 +432,6 @@
         <condition type="variable" id="is.root">
             <name>is.root</name>
             <value>true</value>
-        </condition>
-        <condition type="variable" id="free.edition">
-            <name>wfe.edition</name>
-            <value>Free</value>
         </condition>
         <condition type="exists" id="xdg.config.home.exists">
             <variable>xdg.config.home</variable>
