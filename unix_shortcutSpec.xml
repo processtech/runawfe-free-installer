@@ -25,6 +25,7 @@
         categories="Office;Development"
         encoding="UTF-8"
         programGroup="true"
+        terminal="false"
         iconFile="$INSTALL_PATH/$images.subpath/t_20x20_256.png"
         description="Оповещатель задачи - приложение, предназначенное для автоматической проверки новых задач пользователя">
         <createForPack name="Оповещатель задач"/>
