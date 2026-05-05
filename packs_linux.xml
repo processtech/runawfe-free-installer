@@ -28,6 +28,16 @@
             <file src="resources\images\unix\Si_20x20_256.png"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
+            <file src="runnable/unix/run_simulation.sh"
+                targetdir="$INSTALL_PATH/$simulator.subpath/bin">
+            </file>
+            <parsable targetfile="$INSTALL_PATH/$simulator.subpath/bin/run_simulation.sh" type="at"/>
+            <executable targetfile="$INSTALL_PATH/$simulator.subpath/bin/run_simulation.sh" stage="never"/>
+            <file src="runnable/unix/stop_simulation.sh"
+                targetdir="$INSTALL_PATH/$simulator.subpath/bin">
+            </file>
+            <parsable targetfile="$INSTALL_PATH/$simulator.subpath/bin/stop_simulation.sh" type="at"/>
+            <executable targetfile="$INSTALL_PATH/$simulator.subpath/bin/stop_simulation.sh" stage="never"/>
             <description>
                 Сервер-симулятор - адаптированная для рабочей станции версия RunaWFE сервера. Предназначена для знакомства с системой, тестироваия и работы одного пользователя. Логин администратора по умолчанию - "Administrator", пароль - "wf".
             </description>

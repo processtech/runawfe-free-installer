@@ -19,6 +19,14 @@
         </executefile>
     </job>
 
+    <job name="Set executable permissions for shell scripts" condition="izpack.selected.RunaWFE симулятор|izpack.selected.RunaWFE сервер">
+        <os family="unix"/>
+        <executefile name="sh">
+            <arg>-c</arg>
+            <arg><![CDATA[chmod +x "$INSTALL_PATH/$appserver.subpath/bin/"*.sh 2>/dev/null; chmod +x "$INSTALL_PATH/$simulator.subpath/bin/"*.sh 2>/dev/null]]></arg>
+        </executefile>
+    </job>
+
     <job name="Add notifier to autostart" condition="izpack.selected.Оповещатель задач">
         <os family="unix"/>
         <executefile name="sh">

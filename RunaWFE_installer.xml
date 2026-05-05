@@ -84,7 +84,7 @@
         <variable name="target.arch" value="@{ENV[TARGET_ARCH]}"/>
         <variable name="TargetPanel.dir.windows" value="${DEFAULT_INSTALL_PATH} @{ENV[WFE_EDITION]}"/>
         <variable name="TargetPanel.dir.unix" value="/opt/${APP_NAME}-@{ENV[WFE_EDITION]}"/>
-        <variable name="appdata.install.path" value="$appdata\${APP_NAME}-@{ENV[WFE_EDITION]}"/>
+        <variable name="appdata.install.path" value="${appdata}\${APP_NAME}-@{ENV[WFE_EDITION]}"/>
         <variable name="empty" value="значение не может быть пустым."/>
         <variable name="port.invalid"
             value="Указанный адрес не существует. Значение должно быть в интервале от 0 до 65535."/>
@@ -133,8 +133,11 @@
         <variable name="appdata" condition="izpack.windowsinstall"
             environment="APPDATA"
             checkonce="true"/>
-        <variable name="appdata" condition="izpack.linuxinstall"
+        <variable name="appdata" condition="izpack.linuxinstall+xdg.data.home.exists"
             environment="XDG_DATA_HOME"
+            checkonce="true"/>
+        <variable name="appdata" condition="izpack.linuxinstall+!xdg.data.home.exists"
+            value="$HOME/.local/share"
             checkonce="true"/>
         <variable name="local.appdata" condition="izpack.windowsinstall"
             environment="LOCALAPPDATA"
@@ -325,6 +328,7 @@
         <variable name="java.executable" condition="izpack.linuxinstall"
             value="${java.path}/bin/java"/>
         <variable name="xdg.config.home" environment="XDG_CONFIG_HOME" checkonce="true"/>
+        <variable name="xdg.data.home" environment="XDG_DATA_HOME" checkonce="true"/>
         <variable name="rtn.properties.path"
             condition="xdg.config.home.exists">
             <value>${xdg.config.home}/.config/@rtn.appname/settings.properties</value>
@@ -435,6 +439,9 @@
         </condition>
         <condition type="exists" id="xdg.config.home.exists">
             <variable>xdg.config.home</variable>
+        </condition>
+        <condition type="exists" id="xdg.data.home.exists">
+            <variable>xdg.data.home</variable>
         </condition>
         <condition type="exists" id="server.host.exists">
             <variable>server.host</variable>
