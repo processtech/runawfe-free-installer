@@ -84,7 +84,7 @@
         <variable name="target.arch" value="@{ENV[TARGET_ARCH]}"/>
         <variable name="TargetPanel.dir.windows" value="${DEFAULT_INSTALL_PATH} @{ENV[WFE_EDITION]}"/>
         <variable name="TargetPanel.dir.unix" value="/opt/${APP_NAME}-@{ENV[WFE_EDITION]}"/>
-        <variable name="appdata.install.path" value="${appdata}\${APP_NAME}-@{ENV[WFE_EDITION]}"/>
+        <variable name="appdata.install.path" value="${appdata}$FILE_SEPARATOR${APP_NAME}-@{ENV[WFE_EDITION]}"/>
         <variable name="empty" value="значение не может быть пустым."/>
         <variable name="port.invalid"
             value="Указанный адрес не существует. Значение должно быть в интервале от 0 до 65535."/>
