@@ -4,6 +4,12 @@ JAVA_HOME="@java.path"
 JBOSS_LOG_DIR="$XDG_RUNTIME_DIR/@APP_NAME/jboss/log"
 JBOSS_TEMP_DIR="$XDG_RUNTIME_DIR/@APP_NAME/jboss/tmp"
 
+if [ -f "@INSTALL_PATH/install_desktop_shortcut.sh" ]; then
+    "@INSTALL_PATH/install_desktop_shortcut.sh" "Start simulation"
+    "@INSTALL_PATH/install_desktop_shortcut.sh" "Stop simulation"
+    "@INSTALL_PATH/install_desktop_shortcut.sh" "Simulator web interface"
+fi
+
 mkdir -p "@appdata.install.path/jboss"
 mkdir -p "$JBOSS_LOG_DIR"
 mkdir -p "$JBOSS_TEMP_DIR"
