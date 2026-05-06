@@ -93,6 +93,10 @@
         <pack name="Демо-конфигурация" required="no" parent="Серверные компоненты"
             installGroups="Аналитик"
             condition="Usertype.Analyst+izpack.selected.RunaWFE симулятор+!simulator.db.exists">
+            <fileset dir="@{ENV[BUILD_ROOT_WINDOWS]}\wfe-simulator\standalone\data\demo-db"
+                override="true"
+                targetdir="$standalone.path\data\demo-db">
+            </fileset>
             <description>База данных с демонстрационными пользователями и процессами. Недоступна для установки, если база данных уже существует.</description>
             <updatecheck>
                 <exclude name="$java.subpath/**"/>
