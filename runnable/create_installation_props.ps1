@@ -57,7 +57,7 @@ try {
 }
 
 # Путь к выходному файлу
-$OUTPUT_PATH = "%{INSTALL_PATH}\%{appserver.subpath}\standalone\wfe.custom\wfe.custom.installation.properties"
+$OUTPUT_PATH = "%{standalone.path}\wfe.custom\wfe.custom.installation.properties"
 
 # === Формируем содержимое installation.properties ===
 $installationProps = @"
