@@ -31,6 +31,19 @@
         <createForPack name="Оповещатель задач"/>
     </shortcut>
 
+    <shortcut name="Server web interface"
+        target="xdg-open http://${server.host}:${server.web.port}/wfe/"
+        type="Application"
+        createForAll="true"
+        categories="Office;Development"
+        encoding="UTF-8"
+        programGroup="true"
+        terminal="false"
+        iconFile="$INSTALL_PATH/$images.subpath/C_20x20_256.png"
+        description="Запуск веб-интерфейса основного RunaWFE сервера">
+        <createForPack name="Ярлык веб-интерфейса RunaWFE сервера"/>
+    </shortcut>
+
     <shortcut name="Simulator web interface"
         target="xdg-open http://localhost:${jboss.http.port}/wfe/"
         type="Application"

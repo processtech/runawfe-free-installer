@@ -2,6 +2,7 @@
 cd "$(dirname "$0")"
 if [ -f "../install_desktop_shortcut.sh" ]; then
     ../install_desktop_shortcut.sh "Task notifier"
+    ../install_desktop_shortcut.sh "Server web interface"
 fi
 LOGDIR="\$HOME/.local/runawfe-notifier"
 mkdir -p "\$LOGDIR"
