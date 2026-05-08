@@ -23,7 +23,7 @@
         <os family="unix"/>
         <executefile name="sh">
             <arg>-c</arg>
-            <arg><![CDATA[chmod +x "$INSTALL_PATH/$appserver.subpath/bin/"*.sh 2>/dev/null; chmod +x "$INSTALL_PATH/$simulator.subpath/bin/"*.sh 2>/dev/null]]></arg>
+            <arg><![CDATA[chmod +x "$INSTALL_PATH/$appserver.subpath/bin/"*.sh 2>/dev/null]]></arg>
         </executefile>
     </job>
 
