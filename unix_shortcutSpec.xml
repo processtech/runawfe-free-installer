@@ -85,4 +85,15 @@
         <createForPack name="RunaWFE симулятор"/>
     </shortcut>
 
+    <shortcut name="Uninstall" target="$INSTALL_PATH/Uninstaller/uninstall.sh"
+        type="Application"
+        createForAll="true"
+        categories="Utility"
+        encoding="UTF-8"
+        programGroup="true"
+        terminal="true"
+        iconFile="$INSTALL_PATH/$images.subpath/wf_48x128.png"
+        description="Деинсталляция продуктов RunaWFE">
+    </shortcut>
+
 </izpack:shortcuts>
