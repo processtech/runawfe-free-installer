@@ -36,7 +36,7 @@
             "command": "cmd",
             "args": [
                 "/c",
-                "wrappers\\izpack2app\\build_linux.cmd"
+                "wrappers\\izpack2run\\build_linux.cmd"
             ],
             "group": "build",
             "presentation": {

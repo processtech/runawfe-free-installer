@@ -79,9 +79,9 @@ if "!NEED_WRAP!"=="1" (
     ) else if /i "!TARGET_OS!"=="linux" (
         rem Передаём архитектуру в build_linux.cmd (x86_64 или aarch64)
         if /i "!TARGET_ARCH!"=="x86_64" (
-            call wrappers\izpack2app\build_linux.cmd x86_64
+            call wrappers\izpack2run\build_linux.cmd x86_64
         ) else (
-            call wrappers\izpack2app\build_linux.cmd aarch64
+            call wrappers\izpack2run\build_linux.cmd aarch64
         )
     ) else if /i "!TARGET_OS!"=="macos" (
         echo Упаковка для macOS не реализована.
