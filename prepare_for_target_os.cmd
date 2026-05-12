@@ -16,11 +16,13 @@ if /i "%SERVICE%"=="win7-gui" (
 )
 if /i "%SERVICE%"=="macos-gui" (
     set "TARGET_OS=macos"
-    set "TARGET_ARCH=aarch64"
+    set "TARGET_ARCH=x86_64"
 )
 
 if /i "!TARGET_OS!"=="windows" (
     set "INSTALLER_FILENAME=%INSTALLER_EXE%"
+) else if /i "!TARGET_OS!"=="macos" (
+    set "INSTALLER_FILENAME=%INSTALLER_X86_64APP%"
 ) else (
     if /i "!TARGET_ARCH!"=="x86_64" (
         set "INSTALLER_FILENAME=%INSTALLER_X86_64RUN%"
@@ -84,8 +86,7 @@ if "!NEED_WRAP!"=="1" (
             call wrappers\izpack2run\build_linux.cmd aarch64
         )
     ) else if /i "!TARGET_OS!"=="macos" (
-        echo Упаковка для macOS не реализована.
-        exit /b 1
+        call wrappers\izpack2mac\build_mac.cmd
     )
 ) else (
     echo Упаковка не требуется.

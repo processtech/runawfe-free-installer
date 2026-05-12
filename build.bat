@@ -16,7 +16,7 @@ if not "%~2"=="" (
 )
 
 @REM Проверка допустимых значений target_os и target_arch
-if not "%TARGET_OS%"=="windows" if not "%TARGET_OS%"=="linux" (
+if not "%TARGET_OS%"=="windows" if not "%TARGET_OS%"=="linux" if not "%TARGET_OS%"=="macos" (
     echo ОШИБКА: Недопустимое значение target_os: %TARGET_OS%
     goto print_usage
 )
@@ -80,6 +80,7 @@ echo Использование: build.bat [target_os] [target_arch]
 echo Пример:    build.bat windows x86_64
 echo Пример:    build.bat linux x86_64
 echo Пример:    build.bat linux aarch64
+echo Пример:    build.bat macos x86_64
 echo Если target_os не указан, используется windows.
 echo Если target_arch не указан, используется x86_64.
 exit /b 1

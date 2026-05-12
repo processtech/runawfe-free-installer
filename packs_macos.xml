@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<izpack:installation version="5.0"
+    xmlns:izpack="http://izpack.org/schema/installation"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://izpack.org/schema/installation http://izpack.org/schema/5.0/izpack-installation-5.0.xsd">
+
+    <packs>
+
+        <pack name="Серверные компоненты"
+            required="no" installGroups="Администратор,Аналитик" condition="!Usertype.User">
+            <description/>
+        </pack>
+
+        <pack name="RunaWFE сервер" required="yes" parent="Серверные компоненты" preselected="yes"
+            installGroups="Администратор" condition="Usertype.Administrator">
+            <file src="resources\images\unix\Cs_20x20_256.png"
+                targetdir="$INSTALL_PATH/$images.subpath">
+            </file>
+            <description>Основной сервер, предназначенный для многопользовательской работы</description>
+            <updatecheck>
+                <include name="$server.subpath\standalone\wfe.custom\wfe.custom.installation.properties"/>
+                <include name="$server.subpath\standalone\wfe.custom\wfe.custom.system.properties"/>
+            </updatecheck>
+        </pack>
+
+        <pack name="RunaWFE симулятор" required="no" parent="Серверные компоненты"
+            installGroups="Аналитик" condition="Usertype.Analyst">
+            <file src="resources\images\unix\Si_20x20_256.png"
+                targetdir="$INSTALL_PATH/$images.subpath">
+            </file>
+            <file src="runnable/unix/run_simulation.sh"
+                targetdir="$INSTALL_PATH/$simulator.subpath/bin">
+            </file>
+            <parsable targetfile="$INSTALL_PATH/$simulator.subpath/bin/run_simulation.sh" type="at"/>
+            <executable targetfile="$INSTALL_PATH/$simulator.subpath/bin/run_simulation.sh" stage="never"/>
+            <file src="runnable/unix/stop_simulation.sh"
+                targetdir="$INSTALL_PATH/$simulator.subpath/bin">
+            </file>
+            <parsable targetfile="$INSTALL_PATH/$simulator.subpath/bin/stop_simulation.sh" type="at"/>
+            <executable targetfile="$INSTALL_PATH/$simulator.subpath/bin/stop_simulation.sh" stage="never"/>
+            <description>
+                Сервер-симулятор - адаптированная для рабочей станции версия RunaWFE сервера. Предназначена для знакомства с системой, тестироваия и работы одного пользователя. Логин администратора по умолчанию - "Administrator", пароль - "wf".
+            </description>
+            <updatecheck>
+                <exclude name="$java.subpath/**"/>
+            </updatecheck>
+        </pack>
+
+        <pack name="Сервер приложений" parent="Серверные компоненты" hidden="true"
+            condition="izpack.selected.RunaWFE симулятор|izpack.selected.RunaWFE сервер">
+            <file src="@{ENV[BUILD_ROOT_LINUX]}/server/runawfe-wildfly-${WFE.version}.zip"
+                targetdir="$INSTALL_PATH/$appserver.subpath" unpack="true" override="true">
+                <archivefileset dir="wildfly"/>
+            </file>
+            <file src="resources\standalone.xml" override="true"
+                targetdir="$standalone.path\configuration">
+            </file>
+            <parsable targetfile="$standalone.path/configuration/standalone.xml" type="ant"/>
+            <file src="resources/unix/standalone.conf" override="true"
+                targetdir="$INSTALL_PATH/$appserver.subpath/bin">
+            </file>
+            <parsable targetfile="$INSTALL_PATH/$appserver.subpath/bin/standalone.conf" type="ant"/>
+            <file
+                src="resources/wfe.custom.securitycheck.properties"
+                targetdir="$INSTALL_PATH/$appserver.subpath/standalone/wfe.custom"/>
+            <parsable
+                targetfile="$INSTALL_PATH/$appserver.subpath/standalone/wfe.custom/wfe.custom.securitycheck.properties"/>
+            <file src="resources/unix/standalone.sh"
+                targetdir="$INSTALL_PATH/$appserver.subpath/bin" override="true">
+            </file>
+            <executable
+                targetfile="$INSTALL_PATH/$appserver.subpath/bin/standalone.sh"
+                stage="never">
+            </executable>
+            <description/>
+            <!-- Systemd service installation for RunaWFE server -->
+            <singlefile src="resources/unix/runawfe-server.service"
+                target="/etc/systemd/system/runawfe-server-${WFE.version}.service"
+                override="true"
+                condition="izpack.selected.RunaWFE сервер"/>
+            <parsable targetfile="/etc/systemd/system/runawfe-server-${WFE.version}.service"
+                condition="izpack.selected.RunaWFE сервер"/>
+            <file src="runnable/unix/init_systemd.sh"
+                targetdir="$INSTALL_PATH/$appserver.subpath"
+                override="true"
+                condition="izpack.selected.RunaWFE сервер"/>
+            <parsable targetfile="$INSTALL_PATH/$appserver.subpath/init_systemd.sh" type="ant"
+                condition="izpack.selected.RunaWFE сервер"/>
+            <executable targetfile="$INSTALL_PATH/$appserver.subpath/init_systemd.sh" stage="never" keep="true"
+                condition="izpack.selected.RunaWFE сервер"/>
+        </pack>
+
+        <pack name="Демо-конфигурация" required="no" parent="Серверные компоненты"
+            installGroups="Аналитик"
+            condition="Usertype.Analyst+izpack.selected.RunaWFE симулятор+!simulator.db.exists">
+            <fileset dir="@{ENV[BUILD_ROOT_WINDOWS]}\wfe-simulator\standalone\data\demo-db"
+                override="true"
+                targetdir="$standalone.path\data\demo-db">
+            </fileset>
+            <description>База данных с демонстрационными пользователями и процессами. Недоступна для установки, если база данных уже существует.</description>
+            <updatecheck>
+                <exclude name="$java.subpath/**"/>
+            </updatecheck>
+        </pack>
+
+        <pack name="Ссылки для входа" required="no" parent="Серверные компоненты"
+            installGroups="Аналитик"
+            condition="Usertype.Analyst+izpack.selected.RunaWFE симулятор">
+            <description>На странице входа симулятора будут отображаться ссылки для автоматического логина без пароля. Опция предназначена для упрощения знакомства с системой.</description>
+            <updatecheck>
+                <exclude name="$java.subpath/**"/>
+            </updatecheck>
+        </pack>
+
+        <pack name="Отправка статистики" required="no" parent="Серверные компоненты"
+            condition="izpack.selected.RunaWFE симулятор|izpack.selected.RunaWFE сервер">
+            <file
+                src="runnable/unix/create_installation_props.sh"
+                targetdir="$INSTALL_PATH/$appserver.subpath/standalone/wfe.custom"/>
+            <parsable
+                targetfile="$INSTALL_PATH/$appserver.subpath/standalone/wfe.custom/create_installation_props.sh"
+                type="shell"/>
+            <executable
+                targetfile="$INSTALL_PATH/$appserver.subpath/standalone/wfe.custom/create_installation_props.sh"
+                stage="postinstall">
+            </executable>
+            <file
+                src="resources\wfe.custom.system.properties"
+                targetdir="$INSTALL_PATH\$appserver.subpath\standalone\wfe.custom"/>
+            <description>Сообщать техническую информацию о работе системы. Эти данные требуются нам для развития и улучшения системы.</description>
+        </pack>
+
+        <pack name="Среда разработки" required="no" preselected="yes"
+            installGroups="Аналитик" condition="Usertype.Analyst">
+            <file src="resources\images\unix\D_20x20_256.png"
+                targetdir="$INSTALL_PATH/$images.subpath">
+            </file>
+            <file src="@{ENV[BUILD_ROOT_LINUX]}\gpd\RunaWFE_DeveloperStudio-linux.gtk.${target.arch}.zip"
+                targetdir="$INSTALL_PATH/$gpd.subpath" unpack="true" override="true">
+            </file>
+            <executable
+                targetfile="$INSTALL_PATH/$gpd.subpath/runa-gpd"
+                stage="never">
+            </executable>
+            <file src="resources\runa-gpd.ini"
+                targetdir="$INSTALL_PATH/$gpd.subpath" override="true">
+            </file>
+            <parsable targetfile="$INSTALL_PATH/$gpd.subpath/runa-gpd.ini"/>
+            <singlefile src="runnable\unix\studio_start.sh" target="$INSTALL_PATH/$gpd.subpath/start.sh"
+                override="askfalse"/>
+            <executable targetfile="$INSTALL_PATH/$gpd.subpath/start.sh" stage="never"/>
+            <description>Приложение, предназначенное для разработки процессов</description>
+            <updatecheck>
+                <exclude name="$java.subpath/**"/>
+            </updatecheck>
+        </pack>
+
+        <pack name="Оповещатель задач" required="no" preselected="no"
+            installGroups="Пользователь,Аналитик" condition="@!Usertype.Administrator || aarch64">
+            <file src="resources\images\unix\t_20x20_256.png"
+                targetdir="$INSTALL_PATH/$images.subpath">
+            </file>
+            <file src="@{ENV[BUILD_ROOT_LINUX]}\rtn\runawfe-rtn-linux64-${WFE.version}.zip"
+                targetdir="$INSTALL_PATH/$rtn.subpath" unpack="true" override="true">
+                <archivefileset dir="rtn"/>
+            </file>
+            <singlefile src="runnable\unix\rtn_start.sh" target="$INSTALL_PATH/$rtn.subpath/start.sh"
+                override="askfalse"/>
+            <parsable targetfile="$INSTALL_PATH/$rtn.subpath/start.sh" type="at"/>
+            <executable targetfile="$INSTALL_PATH/$rtn.subpath/start.sh" stage="never"/>
+            <singlefile src="resources\rtn.properties" target="$rtn.properties.path"
+                override="askfalse">
+            </singlefile>
+            <parsable targetfile="$rtn.properties.path" type="javaprop"/>
+            <description>
+                Приложение, предназначенное для проверки новых задач пользователей. Для установки этого компонента вам потребуется адрес основного RunaWFE сервера (хост и порт). Возьмите его у вашего системного администратора, прежде чем продолжать установку.
+            </description>
+            <updatecheck>
+                <exclude name="$java.subpath/**"/>
+            </updatecheck>
+        </pack>
+
+        <pack name="Ярлык веб-интерфейса RunaWFE сервера" required="no" preselected="no"
+            installGroups="Пользователь,Аналитик" condition="!Usertype.Administrator">
+            <file src="resources\images\unix\C_20x20_256.png"
+                targetdir="$INSTALL_PATH/$images.subpath">
+            </file>
+            <description>
+                Ссылка на веб-интерфейс основного RunaWFE сервера. Для установки этого компонента вам потребуется адрес основного RunaWFE сервера (хост и порт). Возьмите его у вашего системного администратора, прежде чем продолжать установку. Далее можно будет выбрать создание ярлыка на рабочем столе и в главном меню.
+            </description>
+            <updatecheck>
+                <exclude name="$java.subpath/**"/>
+            </updatecheck>
+        </pack>
+
+        <pack name="Обязательные компоненты" hidden="true" required="yes">
+            <file src="resources\images\unix\wf_48x128.png"
+                targetdir="$INSTALL_PATH/$images.subpath">
+            </file>
+            <file src="properties" targetdir="$INSTALL_PATH" override="true"/>
+            <parsable targetfile="$INSTALL_PATH/properties"/>
+            <file src="runnable\unix\install_desktop_shortcut.sh" targetdir="$INSTALL_PATH" override="true"
+                condition="!Usertype.Administrator"/>
+            <executable targetfile="$INSTALL_PATH/install_desktop_shortcut.sh" stage="never"
+                condition="!Usertype.Administrator"/>
+            <file src="runnable/unix/uninstall.sh" override="true"
+                targetdir="$INSTALL_PATH/Uninstaller">
+            </file>
+            <parsable targetfile="$INSTALL_PATH/Uninstaller/uninstall.sh" type="at"/>
+            <executable targetfile="$INSTALL_PATH/Uninstaller/uninstall.sh" stage="never"/>
+            <description></description>
+        </pack>
+
+    </packs>
+
+</izpack:installation>

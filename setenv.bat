@@ -4,6 +4,7 @@ set WFE_VERSION=4.6.0
 set INSTALLER_EXE=%WFE_APPNAME%-%WFE_EDITION%-%WFE_VERSION%.exe
 set INSTALLER_X86_64RUN=%WFE_APPNAME%-%WFE_EDITION%-%WFE_VERSION%-x86_64.run
 set INSTALLER_AARCH64RUN=%WFE_APPNAME%-%WFE_EDITION%-%WFE_VERSION%-aarch64.run
+set INSTALLER_X86_64APP=%WFE_APPNAME%-%WFE_EDITION%-%WFE_VERSION%-x86_64.zip
 set COMPILER_PATH="C:\Program Files\IzPack\bin\compile.bat"
 set XML_FILE=RunaWFE_installer.xml
 set IZPACK_OPTS=-Dfile.encoding=UTF-8
@@ -15,3 +16,4 @@ set STATISTIC_REPORT_DAYS_AFTER_ERROR=11
 set WINDOWS_JRE=C:\Users\plete\.jdks\jdk-11.0.29+7-jre
 set LINUX_X86_64_JRE=C:\Users\plete\.jdks\jre11_x86_64_linux
 set LINUX_AARCH64_JRE=C:\Users\plete\.jdks\jre11_aarch64_linux
+set MACOS_JRE=C:\Users\plete\.jdks\OpenJDK11U-jre_x64_mac_hotspot_11.0.31_11.tar.gz
