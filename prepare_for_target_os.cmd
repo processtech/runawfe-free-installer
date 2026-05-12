@@ -37,7 +37,7 @@ echo Целевая архитектура: !TARGET_ARCH!
 
 REM Запись имени файла в .env для docker-compose
 echo INSTALLER_FILENAME=%INSTALLER_FILENAME% > docker\.env
-echo INSTALLER_FILENAME=%INSTALLER_FILENAME%
+echo Файл инсталлятора:%INSTALLER_FILENAME%
 
 REM 2. Определяем имя JAR для целевой платформы
 call set_output_jar.bat !TARGET_OS! !TARGET_ARCH!
@@ -70,23 +70,23 @@ if !NEED_BUILD!==1 (
     rem Упакованный файл отсутствует.
     set NEED_WRAP=1
 ) else (
-    rem Только если JAR не менялся и EXE на месте, проверяем даты через PowerShell
+    rem Только если JAR не менялся и дистрибутив на месте, проверяем даты через PowerShell
     for /f %%A in ('powershell -Command "if ((Get-Item '%OUTPUT_JAR%').LastWriteTime -gt (Get-Item '!TARGET_INSTALLER_PATH!').LastWriteTime) { 1 } else { 0 }"') do set NEED_WRAP=%%A
 )
 
 if "!NEED_WRAP!"=="1" (
     echo Упаковка инсталлятора...
     if /i "!TARGET_OS!"=="windows" (
-        call wrappers\izpack2exe\build_exe.cmd
+        call wrappers\izpack2exe\build_exe.cmd || exit /b 1
     ) else if /i "!TARGET_OS!"=="linux" (
         rem Передаём архитектуру в build_linux.cmd (x86_64 или aarch64)
         if /i "!TARGET_ARCH!"=="x86_64" (
-            call wrappers\izpack2run\build_linux.cmd x86_64
+            call wrappers\izpack2run\build_linux.cmd x86_64 || exit /b 1
         ) else (
-            call wrappers\izpack2run\build_linux.cmd aarch64
+            call wrappers\izpack2run\build_linux.cmd aarch64 || exit /b 1
         )
     ) else if /i "!TARGET_OS!"=="macos" (
-        call wrappers\izpack2mac\build_mac.cmd
+        call wrappers\izpack2mac\build_mac.cmd || exit /b 1
     )
 ) else (
     echo Упаковка не требуется.
