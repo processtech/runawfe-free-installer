@@ -61,18 +61,22 @@ powershell -Command "$compiler = '%COMPILER_PATH%';" ^
  "};" ^
  "$exitCode = $LASTEXITCODE;" ^
  "if ($exitCode -ne 0 -or $errorOccurred) { exit 1 } else { exit 0 }"
-if errorlevel 1 (
-    echo.
-    powershell -Command "Write-Host 'ERROR: Компиляция не удалась. Проверьте лог выше.' -ForegroundColor Red"
-    del /q "%OUTPUT_JAR%" 2>nul
-    echo.
-    exit /b 1
-) else (
-    echo.
-    powershell -Command "Write-Host 'SUCCESS: Компиляция завершена. Файл %OUTPUT_JAR% создан.' -ForegroundColor Green"
-    echo.
-    exit /b 0
-)
+if errorlevel 1 goto fail_compilation
+if not exist "%OUTPUT_JAR%" goto fail
+
+echo.
+powershell -Command "Write-Host 'SUCCESS: Компиляция завершена. Файл %OUTPUT_JAR% создан.' -ForegroundColor Green"
+echo.
+exit /b 0
+
+:fail_compilation
+del /q "%OUTPUT_JAR%" 2>nul
+
+:fail
+echo.
+powershell -Command "Write-Host 'ERROR: Компиляция не удалась. Проверьте лог выше.' -ForegroundColor Red"
+echo.
+exit /b 1
 
 :print_usage
 echo.
