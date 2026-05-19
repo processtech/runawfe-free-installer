@@ -57,7 +57,7 @@
         <createForPack name="RunaWFE симулятор"/>
     </shortcut>
 
-    <shortcut name="Uninstall" target="$INSTALL_PATH\Uninstaller\uninstall.bat"
+    <shortcut name="Uninstall Uninstall $APP_NAME $wfe.edition $WFE.version" target="$INSTALL_PATH\Uninstaller\uninstall.bat"
         initialState="noShow"
         programGroup="true"
         iconFile="$INSTALL_PATH\$images.subpath\wf_48x128.ico" runAsAdministrator="true"

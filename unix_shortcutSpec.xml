@@ -85,7 +85,7 @@
         <createForPack name="RunaWFE симулятор"/>
     </shortcut>
 
-    <shortcut name="Uninstall" target="$INSTALL_PATH/Uninstaller/uninstall.sh"
+    <shortcut name="Uninstall $APP_NAME $wfe.edition $WFE.version" target="$INSTALL_PATH/Uninstaller/uninstall.sh"
         type="Application"
         createForAll="true"
         categories="Utility"
