@@ -8,7 +8,6 @@ import sys
 import argparse
 import tempfile
 import shutil
-import subprocess
 import tarfile
 
 def create_run(jar_path, jre_path, output_path, arch='x86_64'):
@@ -65,16 +64,20 @@ fi
             # Write header script
             header = f"""#!/bin/sh
 # Self-extracting IzPack installer with JRE ({arch})
-# This script will extract bundled files and run the installer.
 set -e
+
 TMPDIR="$(mktemp -d /tmp/izpack.XXXXXX)"
-ARCHIVE_START=$(awk 'NR<=30 && /^__ARCHIVE__$/ {{print NR; exit}}' "$0")
+trap 'RC=$?; rm -rf "$TMPDIR"; exit $RC' EXIT INT TERM HUP
+
+ARCHIVE_START=$(awk 'NR<=35 && /^__ARCHIVE__$/ {{print NR; exit}}' "$0")
 tail -n +$((ARCHIVE_START + 1)) "$0" | tar -xz -C "$TMPDIR"
+
 cd "$TMPDIR"
 chmod +x ./launch.sh
-exec ./launch.sh "$@"
-# Exit before archive
+./launch.sh "$@"
 exit 0
+
+# Exit before archive
 __ARCHIVE__
 """
             out.write(header.encode('utf-8'))
