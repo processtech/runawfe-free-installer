@@ -113,7 +113,7 @@
         <createForPack name="RunaWFE симулятор"/>
         <field type="staticText" txt="Настройки сервера приложений Wildfly"/>
 
-        <field type="rule" variable="wildfly.p1">
+        <field type="rule" variable="default.jboss.management.http.port">
             <spec txt="${management.http.port}" default="9990" layout="N:5:5">
                 <processor class="com.izforge.izpack.panels.userinput.processor.PortProcessor"
                     toVariable="jboss.management.http.port"/>
@@ -125,7 +125,7 @@
                 txt="${management.http.port}: ${port.invalid}"/>
         </field>
 
-        <field type="rule" variable="wildfly.p2">
+        <field type="rule" variable="default.jboss.management.https.port">
             <spec txt="${management.https.port}" default="9993" layout="N:5:5">
                 <processor class="com.izforge.izpack.panels.userinput.processor.PortProcessor"
                     toVariable="jboss.management.https.port"/>
@@ -137,7 +137,7 @@
                 txt="${management.https.port}: ${port.invalid}"/>
         </field>
 
-        <field type="rule" variable="wildfly.p3">
+        <field type="rule" variable="default.jboss.ajp.port">
             <spec txt="${ajp.port}" default="8009" layout="N:5:5">
                 <processor class="com.izforge.izpack.panels.userinput.processor.PortProcessor"
                     toVariable="jboss.ajp.port"/>
@@ -149,7 +149,7 @@
                 txt="${ajp.port}: ${port.invalid}"/>
         </field>
 
-        <field type="rule" variable="wildfly.p4">
+        <field type="rule" variable="default.jboss.http.port">
             <spec txt="${http.port}" default="8080" layout="N:5:5">
                 <processor class="com.izforge.izpack.panels.userinput.processor.PortProcessor"
                     toVariable="jboss.http.port"/>
@@ -161,7 +161,7 @@
                 txt="${http.port}: ${port.invalid}"/>
         </field>
 
-        <field type="rule" variable="wildfly.p5">
+        <field type="rule" variable="default.jboss.https.port">
             <spec txt="${https.port}" default="8443" layout="N:5:5">
                 <processor class="com.izforge.izpack.panels.userinput.processor.PortProcessor"
                     toVariable="jboss.https.port"/>
@@ -173,7 +173,7 @@
                 txt="${https.port}: ${port.invalid}"/>
         </field>
 
-        <field type="rule" variable="wildfly.p6">
+        <field type="rule" variable="default.jboss.iiop.port">
             <spec txt="${iiop.port}" default="3528" layout="N:5:5">
                 <processor class="com.izforge.izpack.panels.userinput.processor.PortProcessor"
                     toVariable="jboss.iiop.port"/>
@@ -185,7 +185,7 @@
                 txt="${iiop.port}: ${port.invalid}"/>
         </field>
 
-        <field type="rule" variable="wildfly.p7">
+        <field type="rule" variable="default.jboss.iiop-ssl.port">
             <spec txt="${iiop-ssl.port}" default="3533" layout="N:5:5">
                 <processor class="com.izforge.izpack.panels.userinput.processor.PortProcessor"
                     toVariable="jboss.iiop-ssl.port"/>
@@ -197,7 +197,7 @@
                 txt="${iiop-ssl.port}: ${port.invalid}"/>
         </field>
 
-        <field type="rule" variable="wildfly.p8">
+        <field type="rule" variable="default.jboss.txn-recovery-environment.port">
             <spec txt="${txn-recovery-environment.port}" default="4712" layout="N:5:5">
                 <processor class="com.izforge.izpack.panels.userinput.processor.PortProcessor"
                     toVariable="jboss.txn-recovery-environment.port"/>
@@ -209,7 +209,7 @@
                 txt="${txn-recovery-environment.port}: ${port.invalid}"/>
         </field>
 
-        <field type="rule" variable="wildfly.p9">
+        <field type="rule" variable="default.jboss.txn-status-manager.port">
             <spec txt="${txn-status-manager.port}" default="4717" layout="N:5:5">
                 <processor class="com.izforge.izpack.panels.userinput.processor.PortProcessor"
                     toVariable="jboss.txn-status-manager.port"/>
@@ -221,6 +221,36 @@
                 txt="${txn-status-manager.port}: ${port.invalid}"/>
         </field>
 
+    </panel>
+
+    <panel id="panel.port.changed.info">
+        <createForPack name="RunaWFE сервер"/>
+        <createForPack name="RunaWFE симулятор"/>
+        <field type="title" txt="Изменение портов Wildfly" bold="true"/>
+        <field type="staticText" txt="Некоторые из выбранных портов были заняты и автоматически изменены на свободные."/>
+        <field type="space"/>
+        <field type="staticText" txt="Список измененных портов:"/>
+        <field type="space"/>
+        <field type="staticText" conditionid="port.management.http.changed"
+            txt="Порт HTTP управления: ${default.jboss.management.http.port} → ${jboss.management.http.port}"/>
+        <field type="staticText" conditionid="port.management.https.changed"
+            txt="Порт HTTPS управления: ${default.jboss.management.https.port} → ${jboss.management.https.port}"/>
+        <field type="staticText" conditionid="port.ajp.changed"
+            txt="Порт AJP подключения: ${default.jboss.ajp.port} → ${jboss.ajp.port}"/>
+        <field type="staticText" conditionid="port.http.changed"
+            txt="Основной HTTP порт: ${default.jboss.http.port} → ${jboss.http.port}"/>
+        <field type="staticText" conditionid="port.https.changed"
+            txt="Основной HTTPS порт: ${default.jboss.https.port} → ${jboss.https.port}"/>
+        <field type="staticText" conditionid="port.iiop.changed"
+            txt="Порт IIOP (незащищённый): ${default.jboss.iiop.port} → ${jboss.iiop.port}"/>
+        <field type="staticText" conditionid="port.iiop-ssl.changed"
+            txt="Порт IIOP с SSL: ${default.jboss.iiop-ssl.port} → ${jboss.iiop-ssl.port}"/>
+        <field type="staticText" conditionid="port.txn-recovery.changed"
+            txt="Порт восстановления транзакций: ${default.jboss.txn-recovery-environment.port} → ${jboss.txn-recovery-environment.port}"/>
+        <field type="staticText" conditionid="port.txn-status.changed"
+            txt="Порт менеджера статусов транзакций: ${default.jboss.txn-status-manager.port} → ${jboss.txn-status-manager.port}"/>
+        <field type="space"/>
+        <field type="staticText" txt="Если вас не устраивает автоматический выбор, вы можете вернуться назад и указать другие  порты."/>
     </panel>
 
     <panel id="panel.server.web.interface">
