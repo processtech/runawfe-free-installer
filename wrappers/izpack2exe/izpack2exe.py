@@ -1,22 +1,4 @@
 #!/usr/bin/env python
-# ........................................................................... #
-#
-# IzPack - Copyright 2007, 2010 Julien Ponge, All Rights Reserved.
-#
-# http://izpack.org/
-# http://izpack.codehaus.org/
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-# ........................................................................... #
 
 import os
 import sys
@@ -32,7 +14,7 @@ def parse_options():
                       default="setup.exe",
                       help="The executable file")
     parser.add_option("--with-jdk", action="store", dest="with_jre", default="",
-      help="The bundled JRE to run the exe independently of the system resources. ")  # choosen JDK that may came with the package
+      help="The bundled JRE to run the exe independently of the system resources. ")
     parser.add_option("--with-7z", action="store", dest="p7z",
                       default="7za",
                       help="Path to the 7-Zip executable")
@@ -69,48 +51,99 @@ def create_exe(settings):
         filename = ''
     
     if len(settings.with_jre) > 0:
-        jdk = os.path.basename(settings.with_jre) #inside the jdk/jre that was given, there must be a bin/java.exe file
+        jdk = os.path.basename(settings.with_jre)
         jdk = jdk + "\\bin\\javaw.exe"
-        print(jdk)
-        settings.file.append(settings.with_jre) #jdk/jre is going in the package
+        print(f"Using bundled JRE: {jdk}")
+        settings.file.append(settings.with_jre)
     else:
-        jdk = 'javaw' #java is added somehow to the PATH
+        jdk = 'javaw'
     
+    current_dir = os.path.dirname(os.path.abspath(__file__))
     if settings.p7z == '7za':
-        p7z = os.path.join(os.path.dirname(sys.argv[0]), '7za')
+        p7z = os.path.join(current_dir, '7za')
     else:
         p7z = settings.p7z
     
     use_shell = sys.platform != 'win32'
     
+    # Нормализуем аргументы
+    jvm_args_clean = settings.jvm_args.strip()
+    launch_args_clean = settings.launchargs.strip() if settings.launchargs else ""
+
+    # 1. ГЕНЕРИРУЕМ КЛАССИЧЕСКИЙ run.vbs, СОВМЕСТИМЫЙ С WINDOWS 7
+    jvm_args_clean = settings.jvm_args.strip()
+    launch_args_clean = settings.launchargs.strip() if settings.launchargs else ""
+
+    vbs_content = (
+        'Set WshShell = CreateObject("WScript.Shell")\n'
+        'Set fso = CreateObject("Scripting.FileSystemObject")\n'
+        '\n'
+        '\' КЛАССИЧЕСКИЙ СПОСОБ ДЛЯ WINDOWS 7: Получаем путь к папке, где лежит скрипт\n'
+        'currentDir = fso.GetParentFolderName(WScript.ScriptFullName)\n'
+        '\n'
+        'javaPath = currentDir & "\\{jdk}"\n'
+        'jarPath = currentDir & "\\{filename}"\n'
+        'quote = chr(34)\n'
+        'argsJvm = "{jvm_args}"\n'
+        'argsLaunch = "{launchargs}"\n'
+        '\n'
+        '{vbs_logic}'
+        '\n'
+        'If argsLaunch <> "" Then\n'
+        '    cmdLine = cmdLine & " " & argsLaunch\n'
+        'End If\n'
+        '\n'
+        '\' Флаг 1 показывает окно инсталлятора, True — заставляет ждать его закрытия\n'
+        'WshShell.Run cmdLine, 1, True\n'
+        'WScript.Sleep 2000\n'
+        'On Error Resume Next\n'
+        'fso.DeleteFolder currentDir, True\n'
+    )
+
+    # Развилка логики (Java или сторонний файл)
+    if settings.launch == '':
+        vbs_logic = 'cmdLine = quote & javaPath & quote & " " & argsJvm & " -jar " & quote & jarPath & quote\n'
+    else:
+        vbs_logic = 'cmdLine = quote & currentDir & "\\{launch}" & quote\n'.format(launch=settings.launch)
+
+    # Форматируем финальный текст
+    vbs_content = vbs_content.format(
+        jvm_args=jvm_args_clean,
+        launchargs=launch_args_clean,
+        vbs_logic=vbs_logic,
+        jdk=jdk,
+        filename=filename
+    )
+
+    with open('run.vbs', 'w', encoding='cp1251') as vbs_file:
+        vbs_file.write(vbs_content)
+
+
+    # 2. УПАКОВЫВАЕМ все файлы в архив installer.7z
     if (os.access('installer.7z', os.F_OK)):
         os.remove('installer.7z')
-    files = '" "'.join(settings.file)
-    p7zcmd = '"%s" a -mmt -t7z -mx=0 installer.7z "%s"' % (p7z, files)
+    
+    pack_files = list(settings.file) + ['run.vbs']
+    files_str = '" "'.join(pack_files)
+    p7zcmd = '"%s" a -mmt -t7z -mx=0 installer.7z "%s"' % (p7z, files_str)
     subprocess.call(p7zcmd, shell=use_shell)
     
-    config = open('config.txt', 'w')
+    # 3. ГЕНЕРИРУЕМ КОНФИГУРАЦИЮ 7-Zip
+    config = open('config.txt', 'w', encoding='utf-8')
     config.write(';!@Install@!UTF-8!\n')
     config.write('Title="%s"\n' % settings.name)
     if settings.prompt:
         config.write('BeginPrompt="Install %s?"\n' % settings.name)
     config.write('Progress="yes"\n')
     
-    if settings.launch == '':
-        config.write('ExecuteFile="%s"\n' % jdk)
-        jar_part = '\\"%s\\"' % filename
-        params = '%s -jar %s' % (settings.jvm_args, jar_part)
-        if settings.launchargs != '':
-            params += ' %s' % settings.launchargs
-        config.write('ExecuteParameters="%s"\n' % params)
-    else:
-        config.write('ExecuteFile="%s"\n' % settings.launch)
-        if settings.launchargs != '':
-            config.write('ExecuteParameters="%s"\n' % settings.launchargs)
-
+    # Изменено: Используем ExecuteFile и ExecuteParameters строго по документации Игоря Павлова
+    config.write('ExecuteFile="wscript.exe"\n')
+    config.write('ExecuteParameters="//B run.vbs"\n')
+    
     config.write(';!@InstallEnd@!\n')
     config.close()
     
+    # 4. СОБИРАЕМ ФИНАЛЬНЫЙ EXE
     sfx = os.path.join(os.path.dirname(p7z), '7zSD.sfx')
     files = [sfx, 'config.txt', 'installer.7z']
     
@@ -121,16 +154,19 @@ def create_exe(settings):
         in_file.close()
     output.close()
     
+    # 5. СЖАТИЕ ЧЕРЕЗ UPX
     if (not settings.no_upx):
         if settings.upx == 'upx':
-            upx = os.path.join(os.path.dirname(sys.argv[0]), 'upx')
+            upx = os.path.join(current_dir, 'upx')
         else:
             upx = settings.upx
-        upx = '"%s" --ultra-brute "%s"' % (upx, settings.output)
-        subprocess.call(upx, shell=use_shell)
+        upx_cmd = '"%s" --ultra-brute "%s"' % (upx, settings.output)
+        subprocess.call(upx_cmd, shell=use_shell)
     
+    # Очистка рабочего каталога сборщика
     os.remove('config.txt')
     os.remove('installer.7z')
+    os.remove('run.vbs')
 
 def main():
     create_exe(parse_options())
