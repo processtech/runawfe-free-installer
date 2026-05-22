@@ -111,7 +111,7 @@ def create_exe(settings):
     config.write(';!@InstallEnd@!\n')
     config.close()
     
-    sfx = os.path.join(os.path.dirname(p7z), '7zS.sfx')
+    sfx = os.path.join(os.path.dirname(p7z), '7zSD.sfx')
     files = [sfx, 'config.txt', 'installer.7z']
     
     output = open(settings.output, 'wb')
