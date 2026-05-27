@@ -1,8 +1,11 @@
 #!/bin/sh
 
 JAVA_HOME="@java.path"
-JBOSS_LOG_DIR="$XDG_RUNTIME_DIR/@APP_NAME/jboss/log"
-JBOSS_TEMP_DIR="$XDG_RUNTIME_DIR/@APP_NAME/jboss/tmp"
+XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
+XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
+
+JBOSS_LOG_DIR="$XDG_STATE_HOME/@APP_NAME/jboss/log"
+JBOSS_TEMP_DIR="$XDG_CACHE_HOME/@APP_NAME/jboss/tmp"
 
 if [ -f "@INSTALL_PATH/install_desktop_shortcut.sh" ]; then
     "@INSTALL_PATH/install_desktop_shortcut.sh" "Start simulation"
