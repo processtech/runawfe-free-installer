@@ -446,6 +446,62 @@
         <condition type="exists" id="server.host.exists">
             <variable>server.host</variable>
         </condition>
+        <condition type="comparenumerics" id="port.management.http.changed">
+            <arg1>${default.jboss.management.http.port}</arg1>
+            <arg2>${jboss.management.http.port}</arg2>
+            <operator>ne</operator>
+        </condition>
+        <condition type="comparenumerics" id="port.management.https.changed">
+            <arg1>${default.jboss.management.https.port}</arg1>
+            <arg2>${jboss.management.https.port}</arg2>
+            <operator>ne</operator>
+        </condition>
+        <condition type="comparenumerics" id="port.ajp.changed">
+            <arg1>${default.jboss.ajp.port}</arg1>
+            <arg2>${jboss.ajp.port}</arg2>
+            <operator>ne</operator>
+        </condition>
+        <condition type="comparenumerics" id="port.http.changed">
+            <arg1>${default.jboss.http.port}</arg1>
+            <arg2>${jboss.http.port}</arg2>
+            <operator>ne</operator>
+        </condition>
+        <condition type="comparenumerics" id="port.https.changed">
+            <arg1>${default.jboss.https.port}</arg1>
+            <arg2>${jboss.https.port}</arg2>
+            <operator>ne</operator>
+        </condition>
+        <condition type="comparenumerics" id="port.iiop.changed">
+            <arg1>${default.jboss.iiop.port}</arg1>
+            <arg2>${jboss.iiop.port}</arg2>
+            <operator>ne</operator>
+        </condition>
+        <condition type="comparenumerics" id="port.iiop-ssl.changed">
+            <arg1>${default.jboss.iiop-ssl.port}</arg1>
+            <arg2>${jboss.iiop-ssl.port}</arg2>
+            <operator>ne</operator>
+        </condition>
+        <condition type="comparenumerics" id="port.txn-recovery.changed">
+            <arg1>${default.jboss.txn-recovery-environment.port}</arg1>
+            <arg2>${jboss.txn-recovery-environment.port}</arg2>
+            <operator>ne</operator>
+        </condition>
+        <condition type="comparenumerics" id="port.txn-status.changed">
+            <arg1>${default.jboss.txn-status-manager.port}</arg1>
+            <arg2>${jboss.txn-status-manager.port}</arg2>
+            <operator>ne</operator>
+        </condition>
+        <condition type="or" id="any.port.changed">
+            <condition type="ref" refid="port.management.http.changed"/>
+            <condition type="ref" refid="port.management.https.changed"/>
+            <condition type="ref" refid="port.ajp.changed"/>
+            <condition type="ref" refid="port.http.changed"/>
+            <condition type="ref" refid="port.https.changed"/>
+            <condition type="ref" refid="port.iiop.changed"/>
+            <condition type="ref" refid="port.iiop-ssl.changed"/>
+            <condition type="ref" refid="port.txn-recovery.changed"/>
+            <condition type="ref" refid="port.txn-status.changed"/>
+        </condition>
     </conditions>
 
     <panels>
@@ -468,6 +524,7 @@
         <panel classname="TargetPanel">
             <validator classname="com.izforge.izpack.installer.validator.ConditionValidator"/>
         </panel>
+        <panel classname="UserInputPanel" id="panel.port.changed.info" condition="any.port.changed"/>
         <panel classname="InstallPanel"/>
         <panel classname="ShortcutPanel"/>
         <panel classname="ProcessPanel"/>
