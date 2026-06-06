@@ -108,6 +108,7 @@ services:
       CPU_CORES: "4"
       WIDTH: 1280
       HEIGHT: 800
+      ARGUMENTS: "-snapshot"
     devices:
       - /dev/kvm
       - /dev/net/tun
@@ -119,6 +120,7 @@ services:
       - 5900:5900/udp
     volumes:
       - ./macos:/storage
+      - ../dist:/shared
     stop_grace_period: 2m
 
   win7-gui:
