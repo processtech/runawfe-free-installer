@@ -6,7 +6,7 @@
 
     <programGroup defaultName="$APP_NAME $APP_VER"/>
 
-    <shortcut name="Developer studio" target="$INSTALL_PATH\$gpd.subpath\runa-gpd.exe"
+    <shortcut name="Developer studio $wfe.edition" target="$INSTALL_PATH\$gpd.subpath\runa-gpd.exe"
         workingDirectory="$INSTALL_PATH\$gpd.subpath"
         commandLine="-data &quot;$appdata.install.path\$gpd.subpath\workspace&quot;"
         programGroup="true"
@@ -15,7 +15,7 @@
         <createForPack name="Среда разработки"/>
     </shortcut>
 
-    <shortcut name="Task notifier" target="$INSTALL_PATH\$rtn.subpath\rtn.bat"
+    <shortcut name="Task notifier $wfe.edition" target="$INSTALL_PATH\$rtn.subpath\rtn.bat"
         workingDirectory="$INSTALL_PATH\$rtn.subpath"
         programGroup="true"
         desktop="true" startup="true" iconFile="$INSTALL_PATH\$images.subpath\t_20x20_256.ico"
@@ -23,14 +23,14 @@
         <createForPack name="Оповещатель задач"/>
     </shortcut>
 
-    <shortcut name="Server web interface" target="http://${server.host}:${server.web.port}/wfe/"
+    <shortcut name="Server web interface $wfe.edition" target="http://${server.host}:${server.web.port}/wfe/"
         programGroup="true"
         desktop="true" iconFile="$INSTALL_PATH\$images.subpath\C_20x20_256.ico"
         description="Запуск веб-интерфейса основного RunaWFE сервера">
         <createForPack name="Ярлык веб-интерфейса RunaWFE сервера"/>
     </shortcut>
 
-    <shortcut name="Simulator web interface"
+    <shortcut name="Simulator web interface $wfe.edition"
         target="http://localhost:${jboss.http.port}/wfe/"
         programGroup="true"
         desktop="true" iconFile="$INSTALL_PATH\$images.subpath\Si_20x20_256.ico"
@@ -38,7 +38,7 @@
         <createForPack name="RunaWFE симулятор"/>
     </shortcut>
 
-    <shortcut name="Start simulation"
+    <shortcut name="Start simulation $wfe.edition"
         target="$INSTALL_PATH\$simulator.subpath\bin\run_simulaton.bat"
         workingDirectory="$INSTALL_PATH\$simulator.subpath\bin"
         programGroup="true"
@@ -47,7 +47,7 @@
         <createForPack name="RunaWFE симулятор"/>
     </shortcut>
 
-    <shortcut name="Stop simulation"
+    <shortcut name="Stop simulation $wfe.edition"
         target="$INSTALL_PATH/${simulator.subpath}/bin/stop_simulation.bat"
         workingDirectory="$INSTALL_PATH\$simulator.subpath\bin"
         initialState="noShow"
@@ -57,7 +57,7 @@
         <createForPack name="RunaWFE симулятор"/>
     </shortcut>
 
-    <shortcut name="Uninstall Uninstall $APP_NAME $wfe.edition $WFE.version" target="$INSTALL_PATH\Uninstaller\uninstall.bat"
+    <shortcut name="Uninstall $APP_NAME $wfe.edition $WFE.version" target="$INSTALL_PATH\Uninstaller\uninstall.bat"
         initialState="noShow"
         programGroup="true"
         iconFile="$INSTALL_PATH\$images.subpath\wf_48x128.ico" runAsAdministrator="true"
