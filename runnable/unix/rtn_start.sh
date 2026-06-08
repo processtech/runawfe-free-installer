@@ -1,8 +1,8 @@
 #!/bin/sh
 cd "$(dirname "$0")"
 if [ -f "../install_desktop_shortcut.sh" ]; then
-    ../install_desktop_shortcut.sh "Task notifier"
-    ../install_desktop_shortcut.sh "Server web interface"
+    ../install_desktop_shortcut.sh "@rtn.shortcut.name"
+    ../install_desktop_shortcut.sh "@server.shortcut.name"
 fi
 LOGDIR="\$HOME/.local/@rtn.appname"
 mkdir -p "\$LOGDIR"

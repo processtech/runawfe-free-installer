@@ -31,9 +31,9 @@
         <os family="unix"/>
         <executefile name="sh">
             <arg>-c</arg>
-            <arg><![CDATA[if [ -f "/usr/share/applications/Task notifier.desktop" ]; then
+            <arg><![CDATA[if [ -f "/usr/share/applications/@{rtn.shortcut.name}.desktop" ]; then
     mkdir -p /etc/xdg/autostart
-    cp "/usr/share/applications/Task notifier.desktop" /etc/xdg/autostart/
+    cp "/usr/share/applications/@{rtn.shortcut.name}.desktop" /etc/xdg/autostart/
 fi]]></arg>
         </executefile>
     </job>

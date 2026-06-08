@@ -148,6 +148,7 @@
             <parsable targetfile="$INSTALL_PATH/$gpd.subpath/runa-gpd.ini"/>
             <singlefile src="runnable\unix\studio_start.sh" target="$INSTALL_PATH/$gpd.subpath/start.sh"
                 override="askfalse"/>
+            <parsable targetfile="$INSTALL_PATH/$gpd.subpath/start.sh" type="at"/>
             <executable targetfile="$INSTALL_PATH/$gpd.subpath/start.sh" stage="never"/>
             <description>Приложение, предназначенное для разработки процессов</description>
             <updatecheck>

@@ -6,7 +6,7 @@
 
     <programGroup defaultName="$APP_NAME $APP_VER"/>
 
-    <shortcut name="Developer studio" target="$INSTALL_PATH/$gpd.subpath/start.sh"
+    <shortcut name="$ds.shortcut.name" target="$INSTALL_PATH/$gpd.subpath/start.sh"
         workingDirectory="$INSTALL_PATH/$gpd.subpath"
         type="Application"
         createForAll="true"
@@ -18,7 +18,7 @@
         <createForPack name="Среда разработки"/>
     </shortcut>
 
-    <shortcut name="Task notifier" target="$INSTALL_PATH/$rtn.subpath/start.sh"
+    <shortcut name="$rtn.shortcut.name" target="$INSTALL_PATH/$rtn.subpath/start.sh"
         workingDirectory="$INSTALL_PATH/$rtn.subpath"
         type="Application"
         createForAll="true"
@@ -31,7 +31,7 @@
         <createForPack name="Оповещатель задач"/>
     </shortcut>
 
-    <shortcut name="Server web interface"
+    <shortcut name="$server.shortcut.name"
         target="xdg-open http://${server.host}:${server.web.port}/wfe/"
         type="Application"
         createForAll="true"
@@ -44,7 +44,7 @@
         <createForPack name="Ярлык веб-интерфейса RunaWFE сервера"/>
     </shortcut>
 
-    <shortcut name="Simulator web interface"
+    <shortcut name="$simulator.shortcut.name"
         target="xdg-open http://localhost:${jboss.http.port}/wfe/"
         type="Application"
         createForAll="true"
@@ -57,7 +57,7 @@
         <createForPack name="RunaWFE симулятор"/>
     </shortcut>
 
-    <shortcut name="Start simulation"
+    <shortcut name="$simstart.shortcut.name"
         target="$INSTALL_PATH/$simulator.subpath/bin/run_simulation.sh"
         workingDirectory="$INSTALL_PATH/$simulator.subpath/bin"
         type="Application"
@@ -71,7 +71,7 @@
         <createForPack name="RunaWFE симулятор"/>
     </shortcut>
 
-    <shortcut name="Stop simulation"
+    <shortcut name="$simstop.shortcut.name"
         target="$INSTALL_PATH/$simulator.subpath/bin/stop_simulation.sh"
         workingDirectory="$INSTALL_PATH/$simulator.subpath/bin"
         type="Application"
@@ -85,7 +85,7 @@
         <createForPack name="RunaWFE симулятор"/>
     </shortcut>
 
-    <shortcut name="Uninstall $APP_NAME $wfe.edition $WFE.version" target="$INSTALL_PATH/Uninstaller/uninstall.sh"
+    <shortcut name="$uninstall.shortcut.name" target="$INSTALL_PATH/Uninstaller/uninstall.sh"
         type="Application"
         createForAll="true"
         categories="Utility"

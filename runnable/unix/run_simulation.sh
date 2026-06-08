@@ -8,9 +8,9 @@ JBOSS_LOG_DIR="$XDG_STATE_HOME/@APP_NAME/jboss/log"
 JBOSS_TEMP_DIR="$XDG_CACHE_HOME/@APP_NAME/jboss/tmp"
 
 if [ -f "@INSTALL_PATH/install_desktop_shortcut.sh" ]; then
-    "@INSTALL_PATH/install_desktop_shortcut.sh" "Start simulation"
-    "@INSTALL_PATH/install_desktop_shortcut.sh" "Stop simulation"
-    "@INSTALL_PATH/install_desktop_shortcut.sh" "Simulator web interface"
+    "@INSTALL_PATH/install_desktop_shortcut.sh" "@simstart.shortcut.name"
+    "@INSTALL_PATH/install_desktop_shortcut.sh" "@simstop.shortcut.name"
+    "@INSTALL_PATH/install_desktop_shortcut.sh" "@simulator.shortcut.name"
 fi
 
 mkdir -p "@appdata.install.path/jboss"
