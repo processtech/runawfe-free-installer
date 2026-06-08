@@ -76,7 +76,7 @@
     </resources>
 
     <properties>
-        <property name="rtn.appname" value="runawfe-notifier"/>
+        <property name="rtn.appname" value="runawfe-notifier-$wfe.edition"/>
     </properties>
 
     <variables>
