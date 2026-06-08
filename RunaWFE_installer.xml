@@ -117,6 +117,13 @@
         <variable name="INSTALLER_EXE" value="@{ENV[INSTALLER_EXE]}"/>
         <variable name="DesktopShortcutCheckboxEnabled" value="true"/>
         <variable name="wfe.edition" value="@{ENV[WFE_EDITION]}"/>
+        <variable name="ds.shortcut.name" value="Developer studio $wfe.edition"/>
+        <variable name="rtn.shortcut.name" value="Task notifier $wfe.edition"/>
+        <variable name="server.shortcut.name" value="Server web interface $wfe.edition"/>
+        <variable name="simulator.shortcut.name" value="Simulator web interface $wfe.edition"/>
+        <variable name="simstart.shortcut.name" value="Start simulation $wfe.edition"/>
+        <variable name="simstop.shortcut.name" value="Stop simulation $wfe.edition"/>
+        <variable name="uninstall.shortcut.name" value="Uninstall $APP_NAME $wfe.edition $WFE.version"/>
     </variables>
 
 
