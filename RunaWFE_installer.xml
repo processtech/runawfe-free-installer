@@ -4,6 +4,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://izpack.org/schema/installation http://izpack.org/schema/5.0/izpack-installation-5.0.xsd">
 
+    <jar src="custom/processors/custom-processors.jar"/>
+
     <installerrequirements>
         <installerrequirement condition="!is.downgrade"
             message="На данном компьютере уже установлена более поздняя версия приложения. Если вы хотите установить более раннюю версию, удалите полностью текущую."/>
@@ -88,7 +90,7 @@
         <variable name="empty" value="значение не может быть пустым."/>
         <variable name="port.invalid"
             value="Указанный адрес не существует. Значение должно быть в интервале от 0 до 65535."/>
-        <variable name="host" value="Хост"/>
+        <variable name="host" value="Адрес"/>
         <variable name="port" value="Порт"/>
         <variable name="management.http.port" value="Порт HTTP‑управления"/>
         <variable name="management.https.port" value="Порт HTTPS‑управления"/>
@@ -358,6 +360,10 @@
             value="false"/>
         <variable name="securitycheck" condition="!izpack.selected.Ссылки для входа"
             value="true"/>
+        <variable name="server.web.port" value="$server.web.port.auto"
+            condition="server.web.port.manual.isempty"/>
+        <variable name="server.web.port" value="$server.web.port.manual"
+            condition="!server.web.port.manual.isempty"/>
     </dynamicvariables>
 
     <conditions>
@@ -508,6 +514,9 @@
             <condition type="ref" refid="port.iiop-ssl.changed"/>
             <condition type="ref" refid="port.txn-recovery.changed"/>
             <condition type="ref" refid="port.txn-status.changed"/>
+        </condition>
+        <condition type="empty" id="server.web.port.manual.isempty">
+            <variable>server.web.port.manual</variable>
         </condition>
     </conditions>
 

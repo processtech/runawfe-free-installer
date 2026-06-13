@@ -1,4 +1,6 @@
 dist
+*.jar
+*.class
 docker/macos/
 docker/win7/
 docker/linux/

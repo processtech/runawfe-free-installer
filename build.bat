@@ -27,6 +27,8 @@ if not "%TARGET_ARCH%"=="x86_64" if not "%TARGET_ARCH%"=="aarch64" (
 
 call setenv.bat
 
+set COMPILER_PATH="%IZPACK_HOME%\bin\compile.bat"
+
 @REM  Проверяем обязательные аргументы
 if "%WFE_EDITION%"=="" (
     echo ОШИБКА: Не указана редакция. Например: Free.
@@ -47,8 +49,9 @@ if not exist %XML_FILE% (
     exit /b 1
 )
 
-call set_output_jar.bat %TARGET_OS% %TARGET_ARCH%
-if errorlevel 1 exit /b 1
+call set_output_jar.bat %TARGET_OS% %TARGET_ARCH% || exit /b 1
+
+call custom\processors\build-processors.bat || exit /b 1
 
 powershell -Command "Write-Host 'Компилирую %XML_FILE%...' -ForegroundColor Cyan"
 powershell -Command "$compiler = '%COMPILER_PATH%';" ^

@@ -5,7 +5,7 @@ set INSTALLER_EXE=%WFE_APPNAME%-%WFE_EDITION%-%WFE_VERSION%.exe
 set INSTALLER_X86_64RUN=%WFE_APPNAME%-%WFE_EDITION%-%WFE_VERSION%-x86_64.run
 set INSTALLER_AARCH64RUN=%WFE_APPNAME%-%WFE_EDITION%-%WFE_VERSION%-aarch64.run
 set INSTALLER_X86_64APP=%WFE_APPNAME%-%WFE_EDITION%-%WFE_VERSION%-x86_64.zip
-set COMPILER_PATH="C:\Program Files\IzPack\bin\compile.bat"
+set IZPACK_HOME=C:\Program Files\IzPack
 set XML_FILE=RunaWFE_installer.xml
 set IZPACK_OPTS=-Dfile.encoding=UTF-8
 set BUILD_ROOT_WINDOWS=D:\runawfe-free-autobuild\build\source\projects\installer\windows\target\NSIS7\src

@@ -261,22 +261,22 @@
         <field type="space"/>
 
         <field type="text" variable="server.host">
-            <spec size="30" txt="Хост"/>
+            <spec size="30" txt="${host}">
+                <processor class="com.izforge.izpack.panels.userinput.processor.ServerPortDetectorProcessor"
+                    toVariable="server.web.port.auto"/>
+            </spec>
             <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
                 txt="${host}: ${empty}"/>
         </field>
 
         <field type="space"/>
 
-        <field type="rule" variable="server.web.port">
-            <spec layout="N:5:5" txt="${port}" default="8080">
+        <field type="rule" variable="server.web.port.manual">
+            <spec layout="N:5:5" txt="${port}">
             </spec>
-            <validator
-                class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator"
-                txt="${port}: ${empty}"/>
-            <validator class="com.izforge.izpack.panels.userinput.validator.IsPortValidator"
-                txt="${port}: ${port.invalid}"/>
         </field>
+
+        <field type="staticText" txt="Если порт не указан, он будет определён автоматически."/>
     </panel>
 
     <panel id="panel.webkit.warn">
