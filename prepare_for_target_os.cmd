@@ -49,7 +49,7 @@ if not exist "%OUTPUT_JAR%" (
     set NEED_BUILD=1
 ) else (
     rem если есть хоть один XML в корне или любые файлы в resources, runnable (рекурсивно) новее JAR, присваиваем "1"
-    for /f %%A in ('powershell -Command "$files = Get-ChildItem *.xml*, *.bat, resources, runnable -Recurse; $maxDate = ($files | Measure-Object -Property LastWriteTime -Maximum).Maximum; if ($maxDate -gt (Get-Item '%OUTPUT_JAR%').LastWriteTime) { 1 } else { 0 }"') do set NEED_BUILD=%%A
+    for /f %%A in ('powershell -Command "$files = Get-ChildItem *.xml*, *.bat, *.java, resources, runnable -Recurse; $maxDate = ($files | Measure-Object -Property LastWriteTime -Maximum).Maximum; if ($maxDate -gt (Get-Item '%OUTPUT_JAR%').LastWriteTime) { 1 } else { 0 }"') do set NEED_BUILD=%%A
 )
 
 if "!NEED_BUILD!"=="1" (
