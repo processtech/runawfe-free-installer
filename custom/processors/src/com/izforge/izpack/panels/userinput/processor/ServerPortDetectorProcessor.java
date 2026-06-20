@@ -21,7 +21,7 @@ import com.izforge.izpack.panels.userinput.processorclient.ProcessingClient;
  */
 public class ServerPortDetectorProcessor implements Processor {
 
-    private static final int[] PORTS = { 8080, 80, 8180, 8081 };
+    private static final int[] PORTS = { 80, 8080, 8081, 8082, 8083, 8084, 8085, 8180 };
     private static final int TCP_TIMEOUT_MS = 500;
     private static final int HTTP_TIMEOUT_MS = 5000;
     private static final String FALLBACK_PORT = "8080";
