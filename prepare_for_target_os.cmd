@@ -10,11 +10,11 @@ if "%SERVICE%"=="" (echo ОШИБКА: Не указан сервис. & exit /b
 REM 1. Определяем тип ОС и архитектуру
 set "TARGET_OS=linux"
 set "TARGET_ARCH=x86_64"
-if /i "%SERVICE%"=="win7-gui" (
+if /i "%SERVICE%"=="win7-vm" (
     set "TARGET_OS=windows"
     set "TARGET_ARCH=x86_64"
 )
-if /i "%SERVICE%"=="macos-gui" (
+if /i "%SERVICE%"=="macos-vm" (
     set "TARGET_OS=macos"
     set "TARGET_ARCH=x86_64"
 )

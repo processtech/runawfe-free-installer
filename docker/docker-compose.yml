@@ -99,7 +99,7 @@ services:
       dockerfile: docker/Dockerfile.redos8-console
     image: redos8-for-izpack-console
 
-  macos-gui:
+  macos-vm:
     image: dockurr/macos
     container_name: macos
     environment:
@@ -123,7 +123,7 @@ services:
       - ../dist:/shared
     stop_grace_period: 2m
 
-  win7-gui:
+  win7-vm:
     image: dockurr/windows
     container_name: win7
     environment:
@@ -148,7 +148,7 @@ services:
     stop_grace_period: 2m
     restart: "no"
 
-  altp10-desktop:
+  altp10-vm:
     image: qemux/qemu
     container_name: alt-p10-desktop
     environment:
