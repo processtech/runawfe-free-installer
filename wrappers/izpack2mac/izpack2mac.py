@@ -70,6 +70,14 @@ def create_mac_app(jar_path, jre_tar_path, output_zip):
             launcher_content = (
                 "#!/bin/bash\n"
                 "set -e\n"
+                "\n"
+                '# Если не root, перезапускаем с правами администратора через AppleScript\n'
+                'if [ "$(id -u)" != "0" ]; then\n'
+                '    SCRIPT_PATH="$(cd "$(dirname "$0")" && pwd)/$(basename "$0")"\n'
+                '    exec osascript -e "do shell script \\"bash \\\\\\"$SCRIPT_PATH\\\\\\"\\" with administrator privileges"\n'
+                '    exit 1\n'
+                'fi\n'
+                "\n"
                 'DIR="$(cd "$(dirname "$0")" && pwd)"\n'
                 'export JAVA_HOME="$DIR/../PlugIns/JRE.bundle/Contents/Home"\n'
                 'exec "$JAVA_HOME/bin/java" -Dfile.encoding=UTF-8 -jar "$DIR/../Resources/Java/install.jar" "$@"\n'
