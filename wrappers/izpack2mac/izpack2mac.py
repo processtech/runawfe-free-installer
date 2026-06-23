@@ -21,7 +21,7 @@ def create_mac_app(jar_path, jre_tar_path, output_zip):
 
     try:
         with zipfile.ZipFile(
-            output_zip, "w", zipfile.ZIP_DEFLATED, compresslevel=9
+            output_zip, "w", zipfile.ZIP_DEFLATED, compresslevel=0
         ) as zf:
 
             # 1. Копируем JRE из tar.gz в ZIP
