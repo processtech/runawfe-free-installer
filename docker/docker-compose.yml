@@ -105,6 +105,7 @@ services:
     environment:
       VERSION: "14"
       RAM_SIZE: "8G"
+      # для процессоров AMD установить CPU_CORES: "1"
       CPU_CORES: "4"
       WIDTH: 1280
       HEIGHT: 800
@@ -122,6 +123,7 @@ services:
       - ./macos:/storage
       - ../dist:/shared
     stop_grace_period: 2m
+    # root password: 1234
 
   win7-vm:
     image: dockurr/windows
