@@ -361,8 +361,20 @@
         <variable name="securitycheck" condition="!izpack.selected.Ссылки для входа"
             value="true"/>
         <variable name="server.web.port" value="$server.web.port.auto"
-            condition="server.web.port.manual.isempty"/>
+            condition="server.web.port.manual.isempty">
+            <filters>
+                <regex regexp="^(\d+)\|.*$" select="\1" defaultvalue="8080"/>
+            </filters>
+        </variable>
         <variable name="server.web.port" value="$server.web.port.manual"
+            condition="!server.web.port.manual.isempty"/>
+        <variable name="server.web.protocol" value="$server.web.port.auto"
+            condition="server.web.port.manual.isempty">
+            <filters>
+                <regex regexp="^\d+\|(.*)$" select="\1" defaultvalue="http"/>
+            </filters>
+        </variable>
+        <variable name="server.web.protocol" value="https"
             condition="!server.web.port.manual.isempty"/>
     </dynamicvariables>
 

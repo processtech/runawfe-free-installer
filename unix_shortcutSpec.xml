@@ -32,7 +32,7 @@
     </shortcut>
 
     <shortcut name="$server.shortcut.name"
-        target="xdg-open http://${server.host}:${server.web.port}/wfe/"
+        target="xdg-open ${server.web.protocol}://${server.host}:${server.web.port}/wfe/"
         type="Application"
         createForAll="true"
         categories="Office;Development"

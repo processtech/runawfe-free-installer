@@ -23,7 +23,7 @@
         <createForPack name="Оповещатель задач"/>
     </shortcut>
 
-    <shortcut name="$server.shortcut.name" target="http://${server.host}:${server.web.port}/wfe/"
+    <shortcut name="$server.shortcut.name" target="${server.web.protocol}://${server.host}:${server.web.port}/wfe/"
         programGroup="true"
         desktop="true" iconFile="$INSTALL_PATH\$images.subpath\C_20x20_256.ico"
         description="Запуск веб-интерфейса основного RunaWFE сервера">
