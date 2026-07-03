@@ -38,6 +38,14 @@ fi]]></arg>
         </executefile>
     </job>
 
+    <job name="Set notifier config permissions" condition="izpack.selected.Оповещатель задач">
+        <os family="unix"/>
+        <executefile name="sh">
+            <arg>-c</arg>
+            <arg><![CDATA[chmod 666 "$rtn.properties.path" 2>/dev/null || true]]></arg>
+        </executefile>
+    </job>
+
     <job name="Add server to autostart">
         <os family="unix"/>
         <executeForPack name="RunaWFE сервер"/>
