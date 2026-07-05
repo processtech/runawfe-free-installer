@@ -338,17 +338,20 @@
             value="${java.path}/bin/java"/>
         <variable name="xdg.config.home" environment="XDG_CONFIG_HOME" checkonce="true"/>
         <variable name="xdg.data.home" environment="XDG_DATA_HOME" checkonce="true"/>
-        <variable name="rtn.properties.path"
-            condition="xdg.config.home.exists">
-            <value>${xdg.config.home}/.config/@rtn.appname/settings.properties</value>
-        </variable>
-        <variable name="rtn.properties.path"
-            condition="@izpack.linuxinstall &amp;&amp; !xdg.config.home.exists">
-            <value>${user.home}/.config/@rtn.appname/settings.properties</value>
-        </variable>
-        <variable name="rtn.properties.path"
+        <variable name="rtn.properties.folder"
             condition="izpack.windowsinstall">
-            <value>$local.appdata\@rtn.appname\settings.properties</value>
+            <value>$local.appdata\@rtn.appname</value>
+        </variable>
+        <variable name="rtn.properties.folder"
+            condition="xdg.config.home.exists">
+            <value>${xdg.config.home}/.config/@rtn.appname</value>
+        </variable>
+        <variable name="rtn.properties.folder"
+            condition="@izpack.linuxinstall &amp;&amp; !xdg.config.home.exists">
+            <value>${user.home}/.config/@rtn.appname</value>
+        </variable>
+        <variable name="rtn.properties.path">
+            <value>$rtn.properties.folder\settings.properties</value>
         </variable>
         <variable name="gpd.host" value="localhost" checkonce="true"/>
         <variable name="gpd.host" value="$server.host"

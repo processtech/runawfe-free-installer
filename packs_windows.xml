@@ -217,6 +217,13 @@
             </singlefile>
             <parsable targetfile="$rtn.properties.path" type="javaprop">
             </parsable>
+            <file src="runnable\cleanup_notifier.bat" override="true"
+                targetdir="$INSTALL_PATH\$rtn.subpath">
+            </file>
+            <parsable targetfile="$INSTALL_PATH\$rtn.subpath\cleanup_notifier.bat"/>
+            <executable targetfile="$INSTALL_PATH\$rtn.subpath\cleanup_notifier.bat"
+                stage="uninstall" failure="ignore">
+            </executable>
             <description>
                 Приложение, предназначенное для проверки новых задач пользователей. Для установки этого компонента вам потребуется адрес основного RunaWFE сервера (хост и порт). Возьмите его у вашего системного администратора, прежде чем продолжать установку.
             </description>
