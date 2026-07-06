@@ -345,24 +345,30 @@
             condition="xdg.config.home.exists">
             <value>${xdg.config.home}/.config/@rtn.appname</value>
         </variable>
-        <variable name="rtn.properties.folder"
+        <variable
+            name="rtn.properties.folder"
             condition="@izpack.linuxinstall &amp;&amp; !xdg.config.home.exists">
             <value>${user.home}/.config/@rtn.appname</value>
         </variable>
         <variable name="rtn.properties.path">
             <value>$rtn.properties.folder${FILE_SEPARATOR}settings.properties</value>
         </variable>
-        <variable name="gpd.host" value="localhost" checkonce="true"/>
+        <variable
+            name="gpd.host" value="localhost" checkonce="true"/>
         <variable name="gpd.host" value="$server.host"
             condition="server.host.exists+!izpack.selected.RunaWFE симулятор"/>
-        <variable name="gpd.port" value="8080" checkonce="true"/>
+        <variable name="gpd.port" value="8080"
+            checkonce="true"/>
         <variable name="gpd.port" value="$server.web.port"
             condition="server.host.exists+!izpack.selected.RunaWFE симулятор"/>
-        <variable name="gpd.port" value="$jboss.http.port" condition="izpack.selected.RunaWFE симулятор"/>
-        <variable name="gpd.protocol" value="http" checkonce="true"/>
+        <variable name="gpd.port"
+            value="$jboss.http.port" condition="izpack.selected.RunaWFE симулятор"/>
+        <variable name="gpd.protocol"
+            value="http" checkonce="true"/>
         <variable name="gpd.protocol" value="$server.web.protocol"
             condition="server.host.exists+!izpack.selected.RunaWFE симулятор"/>
-        <variable name="securitycheck" condition="izpack.selected.Ссылки для входа"
+        <variable name="securitycheck"
+            condition="izpack.selected.Ссылки для входа"
             value="false"/>
         <variable name="securitycheck" condition="!izpack.selected.Ссылки для входа"
             value="true"/>
@@ -372,15 +378,18 @@
                 <regex regexp="^(\d+)\|.*$" select="\1" defaultvalue="8080"/>
             </filters>
         </variable>
-        <variable name="server.web.port" value="$server.web.port.manual"
+        <variable
+            name="server.web.port" value="$server.web.port.manual"
             condition="!server.web.port.manual.isempty"/>
-        <variable name="server.web.protocol" value="$server.web.port.auto"
+        <variable name="server.web.protocol"
+            value="$server.web.port.auto"
             condition="server.web.port.manual.isempty">
             <filters>
                 <regex regexp="^\d+\|(.*)$" select="\1" defaultvalue="http"/>
             </filters>
         </variable>
-        <variable name="server.web.protocol" value="https"
+        <variable
+            name="server.web.protocol" value="https"
             condition="!server.web.port.manual.isempty"/>
 
         <variable name="jboss.servicename" condition="izpack.windowsinstall" value="JBAS50SVC"/>
