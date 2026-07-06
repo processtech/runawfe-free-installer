@@ -111,7 +111,6 @@
         <variable name="rtn.subpath" value="rtn"/>
         <variable name="server.subpath" value="server"/>
         <variable name="java.subpath" value="java"/>
-        <variable name="jboss.servicename" value="@{ENV[SVCNAME]}"/>
         <variable name="InfoPanel.font" value="Arial"/>
         <variable name="statistic.report.url" value="@{ENV[STATISTIC_REPORT_URL]}"/>
         <variable name="statistic.report.days.after.error"
@@ -383,6 +382,12 @@
         </variable>
         <variable name="server.web.protocol" value="https"
             condition="!server.web.port.manual.isempty"/>
+
+        <variable name="jboss.servicename" condition="izpack.windowsinstall" value="JBAS50SVC"/>
+        <variable name="jboss.servicename" condition="izpack.linuxinstall" value="runawfe-server-${WFE.version}"/>
+        <variable name="jboss.log.dir" condition="izpack.linuxinstall" value="/var/log/${jboss.servicename}"/>
+        <variable name="jboss.service.file" condition="izpack.linuxinstall"
+            value="/etc/systemd/system/${jboss.servicename}.service"/>
     </dynamicvariables>
 
     <conditions>

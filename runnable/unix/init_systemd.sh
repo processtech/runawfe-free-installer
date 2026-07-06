@@ -1,9 +1,9 @@
 #!/bin/sh
 set -e
 
-SERVICE_NAME="runawfe-server-@WFE.version@"
-LOG_DIR="/var/log/$SERVICE_NAME"
-SERVICE_FILE="/etc/systemd/system/$SERVICE_NAME.service"
+SERVICE_NAME="@jboss.servicename@"
+LOG_DIR="@jboss.log.dir@"
+SERVICE_FILE="@jboss.service.file@"
 
 if ! pidof systemd > /dev/null; then
     echo "Systemd not found, skipping service setup."

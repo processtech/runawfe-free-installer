@@ -11,7 +11,6 @@ set TEMP=D:\Temp
 set IZPACK_OPTS=-Dfile.encoding=UTF-8 -Djava.io.tmpdir=%TEMP%
 set BUILD_ROOT_WINDOWS=D:\runawfe-free-autobuild\build\source\projects\installer\windows\target\NSIS7\src
 set BUILD_ROOT_LINUX=D:\runawfe-free-autobuild\results\bin
-set SVCNAME=JBAS50SVC
 set STATISTIC_REPORT_URL=https://usagereport.runawfe.org
 set STATISTIC_REPORT_DAYS_AFTER_ERROR=11
 set WINDOWS_JRE=D:\Tools\.jdks\jdk-11.0.29+7-jre

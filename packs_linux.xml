@@ -75,10 +75,10 @@
             <description/>
             <!-- Systemd service installation for RunaWFE server -->
             <singlefile src="resources/unix/runawfe-server.service"
-                target="/etc/systemd/system/runawfe-server-${WFE.version}.service"
+                target="$jboss.service.file"
                 override="true"
                 condition="izpack.selected.RunaWFE сервер"/>
-            <parsable targetfile="/etc/systemd/system/runawfe-server-${WFE.version}.service"
+            <parsable targetfile="$jboss.service.file"
                 condition="izpack.selected.RunaWFE сервер"/>
             <file src="runnable/unix/init_systemd.sh"
                 targetdir="$INSTALL_PATH/$appserver.subpath"
@@ -87,6 +87,16 @@
             <parsable targetfile="$INSTALL_PATH/$appserver.subpath/init_systemd.sh" type="ant"
                 condition="izpack.selected.RunaWFE сервер"/>
             <executable targetfile="$INSTALL_PATH/$appserver.subpath/init_systemd.sh" stage="never" keep="true"
+                condition="izpack.selected.RunaWFE сервер"/>
+            <file src="runnable/unix/cleanup_systemd_service.sh"
+                targetdir="$INSTALL_PATH/$appserver.subpath"
+                override="true"
+                condition="izpack.selected.RunaWFE сервер"/>
+            <parsable targetfile="$INSTALL_PATH/$appserver.subpath/cleanup_systemd_service.sh"
+                type="ant"
+                condition="izpack.selected.RunaWFE сервер"/>
+            <executable targetfile="$INSTALL_PATH/$appserver.subpath/cleanup_systemd_service.sh"
+                stage="uninstall" failure="ignore"
                 condition="izpack.selected.RunaWFE сервер"/>
         </pack>
 
