@@ -351,7 +351,7 @@
             <value>${user.home}/.config/@rtn.appname</value>
         </variable>
         <variable name="rtn.properties.path">
-            <value>$rtn.properties.folder\settings.properties</value>
+            <value>$rtn.properties.folder${FILE_SEPARATOR}settings.properties</value>
         </variable>
         <variable name="gpd.host" value="localhost" checkonce="true"/>
         <variable name="gpd.host" value="$server.host"
