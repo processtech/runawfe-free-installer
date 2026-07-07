@@ -160,6 +160,13 @@
                 override="askfalse"/>
             <parsable targetfile="$INSTALL_PATH/$gpd.subpath/start.sh" type="at"/>
             <executable targetfile="$INSTALL_PATH/$gpd.subpath/start.sh" stage="never"/>
+            <file src="runnable/unix/cleanup_studio.sh" override="true"
+                targetdir="$INSTALL_PATH/$gpd.subpath">
+            </file>
+            <parsable targetfile="$INSTALL_PATH/$gpd.subpath/cleanup_studio.sh" type="at"/>
+            <executable targetfile="$INSTALL_PATH/$gpd.subpath/cleanup_studio.sh"
+                stage="uninstall" failure="ignore">
+            </executable>
             <description>Приложение, предназначенное для разработки процессов</description>
             <updatecheck>
                 <exclude name="$java.subpath/**"/>
