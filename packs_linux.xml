@@ -217,6 +217,13 @@
             <file src="resources\images\unix\C_20x20_256.png"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
+            <file src="runnable/unix/cleanup_server_shortcut.sh" override="true"
+                targetdir="$INSTALL_PATH">
+            </file>
+            <parsable targetfile="$INSTALL_PATH/cleanup_server_shortcut.sh" type="at"/>
+            <executable targetfile="$INSTALL_PATH/cleanup_server_shortcut.sh"
+                stage="uninstall" failure="ignore">
+            </executable>
             <description>
                 Ссылка на веб-интерфейс основного RunaWFE сервера. Для установки этого компонента вам потребуется адрес основного RunaWFE сервера (хост и порт). Возьмите его у вашего системного администратора, прежде чем продолжать установку. Далее можно будет выбрать создание ярлыка на рабочем столе и в главном меню.
             </description>
