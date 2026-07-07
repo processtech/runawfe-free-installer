@@ -38,6 +38,13 @@
             </file>
             <parsable targetfile="$INSTALL_PATH/$simulator.subpath/bin/stop_simulation.sh" type="at"/>
             <executable targetfile="$INSTALL_PATH/$simulator.subpath/bin/stop_simulation.sh" stage="never"/>
+            <file src="runnable/unix/cleanup_simulator.sh" override="true"
+                targetdir="$INSTALL_PATH/$simulator.subpath">
+            </file>
+            <parsable targetfile="$INSTALL_PATH/$simulator.subpath/cleanup_simulator.sh" type="at"/>
+            <executable targetfile="$INSTALL_PATH/$simulator.subpath/cleanup_simulator.sh"
+                stage="uninstall" failure="ignore">
+            </executable>
             <description>
                 Сервер-симулятор - адаптированная для рабочей станции версия RunaWFE сервера. Предназначена для знакомства с системой, тестироваия и работы одного пользователя. Логин администратора по умолчанию - "Administrator", пароль - "wf".
             </description>
