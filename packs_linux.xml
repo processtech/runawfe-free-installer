@@ -186,7 +186,7 @@
             <file src="runnable/unix/cleanup_notifier.sh" override="true"
                 targetdir="$INSTALL_PATH/$rtn.subpath">
             </file>
-            <parsable targetfile="$INSTALL_PATH/$rtn.subpath/cleanup_notifier.sh"/>
+            <parsable targetfile="$INSTALL_PATH/$rtn.subpath/cleanup_notifier.sh" type="at"/>
             <executable targetfile="$INSTALL_PATH/$rtn.subpath/cleanup_notifier.sh"
                 stage="uninstall" failure="ignore">
             </executable>
