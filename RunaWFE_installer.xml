@@ -353,6 +353,12 @@
         <variable name="rtn.properties.path">
             <value>$rtn.properties.folder${FILE_SEPARATOR}settings.properties</value>
         </variable>
+        <variable name="rtn.log.dir" condition="izpack.windowsinstall">
+            <value>$local.appdata\@rtn.appname</value>
+        </variable>
+        <variable name="rtn.log.dir" condition="izpack.linuxinstall">
+            <value>.local/@rtn.appname</value>
+        </variable>
         <variable
             name="gpd.host" value="localhost" checkonce="true"/>
         <variable name="gpd.host" value="$server.host"
