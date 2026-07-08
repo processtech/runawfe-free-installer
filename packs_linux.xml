@@ -242,6 +242,13 @@
                 condition="!Usertype.Administrator"/>
             <executable targetfile="$INSTALL_PATH/install_desktop_shortcut.sh" stage="never"
                 condition="!Usertype.Administrator"/>
+            <file src="runnable/unix/cleanup_appdata.sh" override="true"
+                targetdir="$INSTALL_PATH">
+            </file>
+            <parsable targetfile="$INSTALL_PATH/cleanup_appdata.sh" type="at"/>
+            <executable targetfile="$INSTALL_PATH/cleanup_appdata.sh"
+                stage="uninstall" failure="ignore">
+            </executable>
             <file src="runnable/unix/uninstall.sh" override="true"
                 targetdir="$INSTALL_PATH/Uninstaller">
             </file>
