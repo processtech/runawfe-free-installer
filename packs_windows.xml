@@ -259,6 +259,14 @@
             <executable targetfile="$INSTALL_PATH\update_cleanup.bat"
                 type="bin" stage="postinstall" failure="ignore">
             </executable>
+            <file src="runnable\cleanup_appdata.bat" override="true"
+                targetdir="$INSTALL_PATH">
+            </file>
+            <parsable targetfile="$INSTALL_PATH\cleanup_appdata.bat">
+            </parsable>
+            <executable targetfile="$INSTALL_PATH\cleanup_appdata.bat"
+                type="bin" stage="uninstall" failure="ignore">
+            </executable>
             <file src="runnable\uninstall.bat" override="true"
                 targetdir="$INSTALL_PATH\Uninstaller">
             </file>
