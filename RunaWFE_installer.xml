@@ -400,7 +400,10 @@
 
         <variable name="jboss.servicename" condition="izpack.windowsinstall" value="JBAS50SVC"/>
         <variable name="jboss.servicename" condition="izpack.linuxinstall" value="runawfe-server-${WFE.version}"/>
-        <variable name="jboss.log.dir" condition="izpack.linuxinstall" value="/var/log/${jboss.servicename}"/>
+        <variable name="server.jboss.log.dir" condition="izpack.linuxinstall"
+            value="/var/log/${jboss.servicename}"/>
+        <variable name="server.jboss.log.dir" condition="izpack.windowsinstall"
+            value="$INSTALL_PATH\$appserver.subpath\standalone\log"/>
         <variable name="jboss.service.file" condition="izpack.linuxinstall"
             value="/etc/systemd/system/${jboss.servicename}.service"/>
     </dynamicvariables>

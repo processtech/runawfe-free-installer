@@ -2,7 +2,7 @@
 set -e
 
 SERVICE_NAME="@jboss.servicename@"
-LOG_DIR="@jboss.log.dir@"
+LOG_DIR="@server.jboss.log.dir@"
 SERVICE_FILE="@jboss.service.file@"
 
 if ! pidof systemd > /dev/null; then

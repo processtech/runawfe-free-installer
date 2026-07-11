@@ -1,7 +1,7 @@
 #!/bin/sh
 
 SERVICE_NAME="@jboss.servicename@"
-LOG_DIR="@jboss.log.dir@"
+LOG_DIR="@server.jboss.log.dir@"
 SERVICE_FILE="@jboss.service.file@"
 
 systemctl stop "$SERVICE_NAME" 2>/dev/null || true

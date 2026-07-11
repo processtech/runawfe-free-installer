@@ -23,3 +23,8 @@ sc delete $jboss.servicename >> "%LOGFILE%" 2>&1
 
 echo [4/4] Поиск и завершение java.exe, связанного с сервером >> "%LOGFILE%"
 taskkill /F /IM java.exe /FI "MODULES eq jboss-modules.jar" >> "%LOGFILE%" 2>&1
+
+echo [5] Очистка логов сервера >> "%LOGFILE%"
+if exist "$server.jboss.log.dir" (
+    rmdir /s /q "$server.jboss.log.dir" >nul 2>&1
+)
