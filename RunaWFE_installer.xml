@@ -406,6 +406,9 @@
             value="$INSTALL_PATH\$appserver.subpath\standalone\log"/>
         <variable name="jboss.service.file" condition="izpack.linuxinstall"
             value="/etc/systemd/system/${jboss.servicename}.service"/>
+        <variable name="simulator.jboss.log.subdir">
+            <value>${APP_NAME}</value>
+        </variable>
     </dynamicvariables>
 
     <conditions>

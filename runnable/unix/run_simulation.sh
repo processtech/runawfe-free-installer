@@ -4,7 +4,7 @@ JAVA_HOME="@java.path"
 XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
 
-JBOSS_LOG_DIR="$XDG_STATE_HOME/@APP_NAME/jboss/log"
+JBOSS_LOG_DIR="$XDG_STATE_HOME/@simulator.jboss.log.subdir"
 JBOSS_TEMP_DIR="$XDG_CACHE_HOME/@APP_NAME/jboss/tmp"
 
 if [ -f "@INSTALL_PATH/install_desktop_shortcut.sh" ]; then
