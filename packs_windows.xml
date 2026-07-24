@@ -37,10 +37,6 @@
             <parsable
                 targetfile="$INSTALL_PATH\$server.subpath\remove_server_service.bat"
                 type="plain"/>
-            <executable
-                targetfile="$INSTALL_PATH\$server.subpath\remove_server_service.bat"
-                type="bin" stage="uninstall" failure="ignore">
-            </executable>
             <description>Основной сервер, предназначенный для многопользовательской работы</description>
             <updatecheck>
                 <include name="$server.subpath\standalone\wfe.custom\wfe.custom.installation.properties"/>

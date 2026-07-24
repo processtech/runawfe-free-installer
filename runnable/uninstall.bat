@@ -16,5 +16,9 @@ echo WScript.Sleep 20000 >> "%VBS%"
 echo On Error Resume Next >> "%VBS%"
 echo fso.DeleteFolder "%TEMP_DIR%", True >> "%VBS%"
 
+if exist "$INSTALL_PATH\$server.subpath\remove_server_service.bat" (
+    call "$INSTALL_PATH\$server.subpath\remove_server_service.bat" >nul 2>&1
+)
+
 start "" /b wscript.exe //B "%VBS%" "%TEMP_DIR%\java\bin\javaw.exe" "$INSTALL_PATH\Uninstaller\uninstaller.jar"
 exit /b 0
