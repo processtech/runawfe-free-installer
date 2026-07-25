@@ -264,12 +264,12 @@
             <executable targetfile="$INSTALL_PATH\cleanup_update.bat"
                 type="bin" stage="postinstall" failure="ignore">
             </executable>
-            <file src="runnable\cleanup_appdata.bat" override="true"
+            <file src="runnable\cleanup_uninstall.bat" override="true"
                 targetdir="$INSTALL_PATH">
             </file>
-            <parsable targetfile="$INSTALL_PATH\cleanup_appdata.bat">
+            <parsable targetfile="$INSTALL_PATH\cleanup_uninstall.bat">
             </parsable>
-            <executable targetfile="$INSTALL_PATH\cleanup_appdata.bat"
+            <executable targetfile="$INSTALL_PATH\cleanup_uninstall.bat"
                 type="bin" stage="uninstall" failure="ignore">
             </executable>
             <file src="runnable\uninstall.bat" override="true"
