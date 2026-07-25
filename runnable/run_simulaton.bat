@@ -15,4 +15,4 @@ if not exist "$appdata.install.path\jboss\data" (
   xcopy "$standalone.path\data\demo-db" "$appdata.install.path\jboss\data\h2" /D /I /S /Y /R
 )
 
-call standalone.bat "-Djboss.server.log.dir=%JBOSS_LOG_DIR%" "-Djboss.server.temp.dir=%TEMP%\$APP_NAME\jboss\tmp" "-Djboss.server.base.dir=$appdata.install.path\jboss"
+call standalone.bat "-Djboss.server.log.dir=%JBOSS_LOG_DIR%" "-Djboss.server.temp.dir=%TEMP%\$APP_NAME\jboss" "-Djboss.server.base.dir=$appdata.install.path\jboss"
