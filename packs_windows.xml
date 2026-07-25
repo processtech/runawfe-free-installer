@@ -181,10 +181,10 @@
             <file src="resources\images\windows\D_20x20_256.ico"
                 targetdir="$INSTALL_PATH/$images.subpath">
             </file>
-            <file src="runnable\studio_install_cleanup.bat"
+            <file src="runnable\cleanup_studio_install.bat"
                 targetdir="$INSTALL_PATH/$gpd.subpath">
             </file>
-            <executable targetfile="$INSTALL_PATH/$gpd.subpath/studio_install_cleanup.bat"
+            <executable targetfile="$INSTALL_PATH/$gpd.subpath/cleanup_studio_install.bat"
                 type="bin" stage="postinstall" failure="ignore">
             </executable>
             <fileset dir="@{ENV[BUILD_ROOT_WINDOWS]}\gpd\64\gpd-${WFE.version}" override="true"
@@ -256,12 +256,12 @@
             </file>
             <file src="properties" targetdir="$INSTALL_PATH" override="true"/>
             <parsable targetfile="$INSTALL_PATH/properties"/>
-            <file src="runnable\update_cleanup.bat" override="true"
+            <file src="runnable\cleanup_update.bat" override="true"
                 targetdir="$INSTALL_PATH">
             </file>
-            <parsable targetfile="$INSTALL_PATH\update_cleanup.bat">
+            <parsable targetfile="$INSTALL_PATH\cleanup_update.bat">
             </parsable>
-            <executable targetfile="$INSTALL_PATH\update_cleanup.bat"
+            <executable targetfile="$INSTALL_PATH\cleanup_update.bat"
                 type="bin" stage="postinstall" failure="ignore">
             </executable>
             <file src="runnable\cleanup_appdata.bat" override="true"
