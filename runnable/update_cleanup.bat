@@ -10,6 +10,7 @@ if "$delete.rtn" == "true" (
 if "$delete.simulator" == "true" (
   rmdir /s /q "$INSTALL_PATH\$simulator.subpath"
   rmdir /s /q "$appdata.install.path\jboss"
-  rmdir /s /q "%TEMP%\$APP_NAME"
+  del "%TEMP%\$simulator.jboss.log.subdir\server.log"
+  rmdir /s /q "%TEMP%\$APP_NAME\jboss\tmp"
 )
 exit /b 0

@@ -60,6 +60,15 @@
                 targetfile="$INSTALL_PATH/$simulator.subpath/simulator_install_cleanup.bat"
                 type="bin" stage="postinstall" failure="ignore">
             </executable>
+            <file src="runnable\cleanup_simulator.cmd" override="true"
+                targetdir="$INSTALL_PATH/$simulator.subpath">
+            </file>
+            <parsable
+                targetfile="$INSTALL_PATH/$simulator.subpath/cleanup_simulator.cmd"/>
+            <executable
+                targetfile="$INSTALL_PATH/$simulator.subpath/cleanup_simulator.cmd"
+                type="bin" stage="uninstall" failure="ignore">
+            </executable>
             <fileset dir="@{ENV[BUILD_ROOT_WINDOWS]}\wfe-simulator" override="true"
                 excludes="standalone\data\demo-db\**"
                 targetdir="$INSTALL_PATH/$simulator.subpath">
