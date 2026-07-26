@@ -12,7 +12,7 @@ echo jarPath = quote ^& args(1) ^& quote >> "%VBS%"
 echo jvmArgs = "-Dfile.encoding=UTF-8 -Dconsole.encoding=UTF-8" >> "%VBS%"
 echo cmdLine = javaPath ^& " " ^& jvmArgs ^& " -jar " ^& jarPath >> "%VBS%"
 echo WshShell.Run cmdLine, 0, True >> "%VBS%"
-echo WScript.Sleep 20000 >> "%VBS%"
+echo WScript.Sleep 40000 >> "%VBS%"
 echo On Error Resume Next >> "%VBS%"
 echo fso.DeleteFolder "%TEMP_DIR%", True >> "%VBS%"
 
