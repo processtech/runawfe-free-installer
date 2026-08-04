@@ -1,13 +1,13 @@
-set WFE_APPNAME=RunaWFE_test
+set WFE_APPNAME=RunaWFE
 set WFE_EDITION=Free
-set WFE_VERSION=4.6.0
+set WFE_VERSION=4.6.2
 set INSTALLER_EXE=%WFE_APPNAME%-%WFE_EDITION%-%WFE_VERSION%.exe
 set INSTALLER_X86_64RUN=%WFE_APPNAME%-%WFE_EDITION%-%WFE_VERSION%-x86_64.run
 set INSTALLER_AARCH64RUN=%WFE_APPNAME%-%WFE_EDITION%-%WFE_VERSION%-aarch64.run
 set INSTALLER_X86_64APP=%WFE_APPNAME%-%WFE_EDITION%-%WFE_VERSION%-x86_64.zip
 set IZPACK_HOME=C:\Program Files\IzPack
 set XML_FILE=RunaWFE_installer.xml
-set TEMP=D:\Temp
+set TEMP=D:\Cache\Temp
 set IZPACK_OPTS=-Dfile.encoding=UTF-8 -Djava.io.tmpdir=%TEMP%
 set BUILD_ROOT_WINDOWS=D:\runawfe-free-autobuild\build\source\projects\installer\windows\target\NSIS7\src
 set BUILD_ROOT_LINUX=D:\runawfe-free-autobuild\results\bin
