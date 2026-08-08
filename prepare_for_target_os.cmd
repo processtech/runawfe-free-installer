@@ -10,11 +10,11 @@ if "%SERVICE%"=="" (echo ОШИБКА: Не указан сервис. & exit /b
 REM 1. Определяем тип ОС и архитектуру
 set "TARGET_OS=linux"
 set "TARGET_ARCH=x86_64"
-if /i "%SERVICE%"=="win7-vm" (
+if /i "%SERVICE%"=="windows" (
     set "TARGET_OS=windows"
     set "TARGET_ARCH=x86_64"
 )
-if /i "%SERVICE%"=="macos-vm" (
+if /i "%SERVICE%"=="macos" (
     set "TARGET_OS=macos"
     set "TARGET_ARCH=x86_64"
 )
@@ -92,5 +92,5 @@ if "!NEED_WRAP!"=="1" (
     echo Упаковка не требуется.
 )
 
-echo [prepare_for_target_os] Завершено.
+echo Сборка инсталлятора завершена.
 exit /b 0

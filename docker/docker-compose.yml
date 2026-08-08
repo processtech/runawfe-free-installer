@@ -99,7 +99,7 @@ services:
       dockerfile: docker/Dockerfile.redos8-console
     image: redos8-for-izpack-console
 
-  macos-vm:
+  macos:
     image: dockurr/macos
     container_name: macos
     environment:
@@ -125,7 +125,7 @@ services:
     stop_grace_period: 2m
     # root password: 1234
 
-  win7-vm:
+  windows:
     image: dockurr/windows
     container_name: win7
     environment:
@@ -150,7 +150,7 @@ services:
     stop_grace_period: 2m
     restart: "no"
 
-  altp10-vm:
+  linux:
     image: qemux/qemu
     container_name: alt-p10-desktop
     environment:
