@@ -31,8 +31,15 @@ def create_mac_app(jar_path, jre_tar_path, output_zip):
                 if not members:
                     raise Exception("JRE tar.gz пуст")
 
-                # Ищем корень (обычно это первая папка в списке)
-                common_root = members[0].name.split("/")[0]
+                # Находим имя корневой папки JRE в архиве
+                common_root = None
+                for m in members:
+                    if '/' in m.name:
+                        common_root = m.name.split('/')[0]
+                        break
+                if not common_root:
+                    # Если папок нет, берем имя первого элемента до косой черты
+                    common_root = members[0].name.split('/')[0]
 
                 for member in members:
                     if member.isfile():
