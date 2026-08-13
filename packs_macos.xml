@@ -39,7 +39,7 @@
             <parsable targetfile="$INSTALL_PATH/$simulator.subpath/bin/stop_simulation.sh" type="at"/>
             <executable targetfile="$INSTALL_PATH/$simulator.subpath/bin/stop_simulation.sh" stage="never"/>
             <description>
-                Сервер-симулятор - адаптированная для рабочей станции версия RunaWFE сервера. Предназначена для знакомства с системой, тестироваия и работы одного пользователя. Логин администратора по умолчанию - "Administrator", пароль - "wf".
+                Сервер-симулятор - адаптированная для рабочей станции версия RunaWFE сервера. Предназначена для знакомства с системой, тестирования и работы одного пользователя. Логин администратора по умолчанию - "Administrator", пароль - "wf".
             </description>
             <updatecheck>
                 <exclude name="$java.subpath/**"/>
