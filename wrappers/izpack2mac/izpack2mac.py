@@ -8,7 +8,7 @@ import tarfile
 
 def create_mac_app(jar_path, jre_tar_path, output_zip):
     """
-    Создает macOS .app внутри ZIP.
+    Создает валидный macOS .app внутри ZIP с явной регистрацией папок.
     """
     app_name = os.path.basename(output_zip).replace(".zip", "")
     app_root = f"{app_name}.app"
@@ -17,52 +17,87 @@ def create_mac_app(jar_path, jre_tar_path, output_zip):
     java_dir = f"{app_root}/Contents/Resources/Java"
     jre_target_prefix = f"{app_root}/Contents/PlugIns/JRE.bundle/Contents/Home/"
 
-    print(f"Начало сборки...")
+    print("Начало сборки...")
+
+    created_dirs = set()
+
+    def ensure_zip_dir(zf, path):
+        """Явно добавляет запись папки в ZIP с Unix-правами директории (755)"""
+        norm_path = path.replace('\\', '/').strip('/') + '/'
+        if norm_path in created_dirs or norm_path == './' or norm_path == '/':
+            return
+        
+        # Рекурсивно создаем родительские папки
+        parts = norm_path.split('/')[:-1]
+        if len(parts) > 1:
+            parent = '/'.join(parts[:-1])
+            if parent:
+                ensure_zip_dir(zf, parent)
+            
+        zinfo = zipfile.ZipInfo(norm_path)
+        zinfo.external_attr = 0o40755 << 16  # drwxr-xr-x
+        zf.writestr(zinfo, '')
+        created_dirs.add(norm_path)
 
     try:
-        with zipfile.ZipFile(
-            output_zip, "w", zipfile.ZIP_DEFLATED, compresslevel=0
-        ) as zf:
+        with zipfile.ZipFile(output_zip, "w", zipfile.ZIP_DEFLATED, compresslevel=0) as zf:
+            
+            # Принудительно создаем корень бандла и основные папки в самом начале архива
+            ensure_zip_dir(zf, app_root)
+            ensure_zip_dir(zf, f"{app_root}/Contents")
 
-            # 1. Копируем JRE из tar.gz в ZIP
+            # 1. Извлекаем и упаковываем JRE из tar.gz
             print(f"Извлечение JRE из {os.path.basename(jre_tar_path)}...")
             with tarfile.open(jre_tar_path, "r:gz") as tar:
                 members = tar.getmembers()
                 if not members:
                     raise Exception("JRE tar.gz пуст")
 
-                # Находим имя корневой папки JRE в архиве
-                common_root = None
+                # Безопасно определяем имя корневой папки JRE
+                common_root = ""
                 for m in members:
-                    if '/' in m.name:
-                        common_root = m.name.split('/')[0]
+                    parts = m.name.replace('\\', '/').split('/')
+                    if len(parts) > 1 and parts[0]:
+                        common_root = parts[0]
                         break
+                
                 if not common_root:
-                    # Если папок нет, берем имя первого элемента до косой черты
-                    common_root = members[0].name.split('/')[0]
+                    common_root = members[0].name.replace('\\', '/').split('/')[0]
+
+                print(f"Определен корень JRE в архиве: '{common_root}'")
 
                 for member in members:
                     if member.isfile():
+                        if "__MACOSX" in member.name or "._" in os.path.basename(member.name):
+                            continue
+
                         f_data = tar.extractfile(member).read()
-
-                        # Убираем оригинальный корень из tar (напр. jdk-11.0.x+y-jre/)
-                        rel_path = member.name[len(common_root) :].lstrip("/")
-
-                        # Если внутри архива путь уже начинается с Contents/Home,
-                        # то копируем содержимое ВНУТРЬ JRE.bundle напрямую
-                        if rel_path.startswith("Contents/Home/"):
-                            # Убираем лишние Contents/Home/ из начала rel_path
-                            rel_path = rel_path[len("Contents/Home/") :]
-                            # Целевой префикс теперь просто до JRE.bundle/Contents/Home/
-                            arcname = jre_target_prefix + rel_path
+                        norm_name = member.name.replace('\\', '/')
+                        
+                        if norm_name.startswith(common_root + "/"):
+                            rel_path = norm_name[len(common_root) + 1:]
                         else:
-                            # Если структура иная, оставляем как было
-                            arcname = jre_target_prefix + rel_path
+                            rel_path = norm_name.lstrip("/")
+
+                        if rel_path.startswith("Contents/Home/"):
+                            rel_path = rel_path[len("Contents/Home/"):]
+                        
+                        arcname = jre_target_prefix + rel_path
+
+                        # Гарантируем создание папки для файла
+                        file_dir = '/'.join(arcname.split('/')[:-1])
+                        ensure_zip_dir(zf, file_dir)
 
                         zinfo = zipfile.ZipInfo(arcname)
                         zinfo.compress_type = zipfile.ZIP_DEFLATED
-                        # ПЕРЕНОС ПРАВ: сохраняем оригинальные Unix-права (вкл. бит исполнения)
+                        zinfo.file_size = len(f_data)
                         zinfo.external_attr = (member.mode | 0o100000) << 16
+                        
+                        try:
+                            zinfo.date_time = member.mtime_to_tuple()[:6]
+                        except Exception:
+                            pass
+
                         zf.writestr(zinfo, f_data)
 
             # 2. Добавляем основной JAR
@@ -72,23 +107,20 @@ def create_mac_app(jar_path, jre_tar_path, output_zip):
             with open(jar_path, "rb") as f:
                 zf.writestr(zinfo_jar, f.read())
 
-            # 3. Создаем Launcher Script
-            print("Создание Bash-лаунчера...")
-            launcher_content = (
-                "#!/bin/bash\n"
-                "set -e\n"
-                "\n"
-                '# Если не root, перезапускаем с правами администратора через AppleScript\n'
-                'if [ "$(id -u)" != "0" ]; then\n'
-                '    SCRIPT_PATH="$(cd "$(dirname "$0")" && pwd)/$(basename "$0")"\n'
-                '    exec osascript -e "do shell script \\"bash \\\\\\"$SCRIPT_PATH\\\\\\"\\" with administrator privileges"\n'
-                '    exit 1\n'
-                'fi\n'
-                "\n"
-                'DIR="$(cd "$(dirname "$0")" && pwd)"\n'
-                'export JAVA_HOME="$DIR/../PlugIns/JRE.bundle/Contents/Home"\n'
-                'exec "$JAVA_HOME/bin/java" -Dfile.encoding=UTF-8 -jar "$DIR/../Resources/Java/install.jar" "$@"\n'
-            ).encode("utf-8")
+            # 3. Добавляем Launcher Script из внешнего файла-шаблона
+            print("Добавление Bash-лаунчера...")
+            ensure_zip_dir(zf, macos_dir)
+            
+            # Путь к файлу-шаблону рядом со скриптом автоматизации
+            template_path = os.path.join(os.path.dirname(__file__), "launcher.sh.template")
+            
+            if not os.path.exists(template_path):
+                raise FileNotFoundError(f"Шаблон лаунчера не найден по пути: {template_path}")
+                
+            with open(template_path, "r", encoding="utf-8") as f:
+                # Читаем текст, принудительно заменяя Windows-переводы строк на Unix (LF)
+                launcher_text = f.read().replace("\r\n", "\n")
+                launcher_content = launcher_text.encode("utf-8")
 
             zinfo_launcher = zipfile.ZipInfo(f"{macos_dir}/{app_name}")
             zinfo_launcher.compress_type = zipfile.ZIP_DEFLATED

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ "$EUID" -ne 0 ]; then
+    if [ -t 0 ] || [ -n "$SSH_CLIENT" ]; then
+        exec sudo "$0" "$@"
+    else
+        exec osascript -e "tell application \"Terminal\" to do script \"sudo \\\"$0\\\"\""
+        exit 0
+    fi
+fi
+
+DIR="$(cd "$(dirname "$0")" && pwd)"
+export JAVA_HOME="$DIR/../PlugIns/JRE.bundle/Contents/Home"
+
+exec "$JAVA_HOME/bin/java" -Djava.awt.headless=false -Dfile.encoding=UTF-8 -jar "$DIR/../Resources/Java/install.jar" "$@"
