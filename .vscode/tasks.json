@@ -31,7 +31,7 @@
             }
         },
         {
-            "label": "Create installer.run (Linux)",
+            "label": "Wrap for Linux",
             "type": "shell",
             "command": "cmd",
             "args": [
@@ -52,12 +52,33 @@
             }
         },
         {
-            "label": "Convert to EXE",
+            "label": "Wrap for Windows",
             "type": "shell",
             "command": "cmd",
             "args": [
                 "/c",
                 "wrappers\\izpack2exe\\build_exe.cmd"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "dedicated",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Wrap for macOS",
+            "type": "shell",
+            "command": "cmd",
+            "args": [
+                "/c",
+                "wrappers\\izpack2mac\\build_mac.cmd"
             ],
             "group": "build",
             "presentation": {
