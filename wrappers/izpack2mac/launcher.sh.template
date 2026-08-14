@@ -2,9 +2,12 @@
 
 if [ "$EUID" -ne 0 ]; then
     if [ -t 0 ] || [ -n "$SSH_CLIENT" ]; then
+        # Если Терминал уже открыт вручную, запускаем стандартный sudo
         exec sudo "$0" "$@"
     else
-        exec osascript -e "tell application \"Terminal\" to do script \"sudo \\\"$0\\\"\""
+        # Если запуск из Finder — открываем Терминал, выводим на передний план,
+        # запускаем команду и закрываем лишнее пустое окно, если оно создалось.
+        exec osascript -e "tell application \"Terminal\"" -e "activate" -e "do script \"sudo \\\"$0\\\"\"" -e "if (count of windows) > 1 then close window 2" -e "end tell"
         exit 0
     fi
 fi
@@ -12,4 +15,4 @@ fi
 DIR="$(cd "$(dirname "$0")" && pwd)"
 export JAVA_HOME="$DIR/../PlugIns/JRE.bundle/Contents/Home"
 
-exec "$JAVA_HOME/bin/java" -Djava.awt.headless=false -Dfile.encoding=UTF-8 -jar "$DIR/../Resources/Java/install.jar" "$@"
+exec "$JAVA_HOME/bin/java" -Djava.awt.headless=false -Dfile.encoding=UTF-8 -jar "$DIR/../Resources/Java/install.jar" "$@" 2>/dev/null
