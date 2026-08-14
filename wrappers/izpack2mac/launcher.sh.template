@@ -1,18 +1,26 @@
 #!/bin/bash
 
 if [ "$EUID" -ne 0 ]; then
-    if [ -t 0 ] || [ -n "$SSH_CLIENT" ]; then
-        # Если Терминал уже открыт вручную, запускаем стандартный sudo
-        exec sudo "$0" "$@"
-    else
-        # Если запуск из Finder — открываем Терминал, выводим на передний план,
-        # запускаем команду и закрываем лишнее пустое окно, если оно создалось.
-        exec osascript -e "tell application \"Terminal\"" -e "activate" -e "do script \"sudo \\\"$0\\\"\"" -e "if (count of windows) > 1 then close window 2" -e "end tell"
-        exit 0
+    # Вызываем нативное графическое окно ввода пароля macOS
+    USER_PASS=$(osascript -e 'tell application "System Events" to display dialog "Программе '"$(basename "$0")"' необходимы права администратора для установки компонентов.\n\nВведите пароль:" default answer "" with hidden answer with icon caution buttons {"Отмена", "Продолжить"} default button "Продолжить"' -e 'text returned of result' 2>/dev/null)
+    
+    if [ -z "$USER_PASS" ]; then
+        exit 1
     fi
+
+    # Перезапускаем этот же скрипт от имени root, передавая полученный пароль в sudo через стандартный ввод (-S)
+    # Флаг -p "" убирает текстовое приглашение sudo
+    echo "$USER_PASS" | sudo -S -p "" "$0" "$@" 2>/dev/null
+    
+    # Проверяем, успешно ли прошел sudo
+    if [ $? -ne 0 ]; then
+        osascript -e 'tell application "System Events" to display alert "Ошибка авторизации" message "Введен неверный пароль администратора. Пожалуйста, попробуйте снова." as critical' 2>/dev/null
+        exit 1
+    fi
+    exit 0
 fi
 
 DIR="$(cd "$(dirname "$0")" && pwd)"
 export JAVA_HOME="$DIR/../PlugIns/JRE.bundle/Contents/Home"
 
-exec "$JAVA_HOME/bin/java" -Djava.awt.headless=false -Dfile.encoding=UTF-8 -jar "$DIR/../Resources/Java/install.jar" "$@" 2>/dev/null
+exec "$JAVA_HOME/bin/java" -Djava.awt.headless=false -Dfile.encoding=UTF-8 -jar "$DIR/../Resources/Java/install.jar" "$@" >/dev/null 2>&1
