@@ -166,6 +166,12 @@ def create_mac_app(jar_path, jre_tar_path, output_zip):
 
         print(f"\nФайл создан -> {output_zip}")
 
+        debug_dir = os.path.dirname(os.path.abspath(output_zip))
+        print(f"Распаковка папки '{app_root}' для отладки...")
+        with zipfile.ZipFile(output_zip, "r") as zf_read:
+            zf_read.extractall(debug_dir)
+        print("Папка .app развернута.")
+
     except Exception as e:
         if os.path.exists(output_zip):
             os.remove(output_zip)
