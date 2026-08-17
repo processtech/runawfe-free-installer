@@ -139,6 +139,7 @@ def create_mac_app(jar_path, jre_tar_path, output_zip):
                 "CFBundleInfoDictionaryVersion": "6.0",
                 "CFBundleShortVersionString": version_val,
                 "CFBundleVersion": version_val,
+                "CFBundleIconFile": "icon.icns",
                 "LSMinimumSystemVersion": "10.10",
                 "NSHumanReadableCopyright": f"Copyright © 2026 Процессные технологии. All rights reserved."
             }
@@ -152,6 +153,16 @@ def create_mac_app(jar_path, jre_tar_path, output_zip):
             zinfo_pkg.compress_type = zipfile.ZIP_DEFLATED
             zinfo_pkg.file_size = 8
             zf.writestr(zinfo_pkg, b"APPL????")
+
+            project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+            icon_path = os.path.join(project_root, "resources", "images", "macos", "icon.icns")
+            print("Добавление иконки приложения...")
+            zinfo_icon = zipfile.ZipInfo(f"{app_root}/Contents/Resources/icon.icns")
+            zinfo_icon.compress_type = zipfile.ZIP_DEFLATED
+            with open(icon_path, "rb") as f:
+                icon_data = f.read()
+                zinfo_icon.file_size = len(icon_data)
+                zf.writestr(zinfo_icon, icon_data)
 
         print(f"\nФайл создан -> {output_zip}")
 
