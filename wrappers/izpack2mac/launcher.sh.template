@@ -23,4 +23,8 @@ fi
 DIR="$(cd "$(dirname "$0")" && pwd)"
 export JAVA_HOME="$DIR/../PlugIns/JRE.bundle/Contents/Home"
 
-exec "$JAVA_HOME/bin/java" -Djava.awt.headless=false -Dfile.encoding=UTF-8 -jar "$DIR/../Resources/Java/install.jar" "$@" >/dev/null 2>&1
+exec "$JAVA_HOME/bin/java" \
+    -Djava.awt.headless=false \
+    -Dfile.encoding=UTF-8 \
+    -Xdock:icon="$DIR/../Resources/icon.icns" \
+    -jar "$DIR/../Resources/Java/install.jar" "$@" >/dev/null 2>&1
