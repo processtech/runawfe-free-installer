@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import os
 import sys
+import shutil
 import argparse
 import plistlib
 import zipfile
@@ -28,6 +29,23 @@ def create_mac_app(jar_path, jre_tar_path, output_zip):
     
     app_filename = f"{app_name_val} {edition_val} {version_val}".strip()
     app_root = f"{app_filename}.app"
+
+    output_dir = os.path.dirname(os.path.abspath(output_zip))
+    target_app_path = os.path.join(output_dir, app_root)
+    
+    if os.path.exists(target_app_path):
+        print(f"Очистка: удаление старой папки {app_root}...")
+        try:
+            shutil.rmtree(target_app_path)
+        except Exception as e:
+            print(f"[ПРЕДУПРЕЖДЕНИЕ] Не удалось удалить старую папку: {e}")
+            print("Возможно, она заблокирована процессом.")
+            
+    if os.path.exists(output_zip):
+        try:
+            os.remove(output_zip)
+        except Exception:
+            pass
 
     macos_dir = f"{app_root}/Contents/MacOS"
     java_dir = f"{app_root}/Contents/Resources/Java"
